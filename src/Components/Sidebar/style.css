@@ -79,7 +79,7 @@
         }
     }
     .div{
-        margin-top: 15px;
+        margin-top: 5px;
     }
 }
 @media screen and (max-width:1366px) {
@@ -88,25 +88,14 @@
     }
     .main-div{
         & .MuiTypography-root{
-            font-size: 16px;
+            font-size: 14px;
         }
     }
     .div{
-        margin-top: 10px;
+        margin-top: 5px;
     }
 }
 @media screen and (max-width:1280px) {
-    .main-div{
-        & .MuiTypography-root{
-            font-size: 16px;
-        }
-    }
-    .div{
-        margin-top: 10px;
-    }
-}
-
-@media screen and (max-width:1120px) {
     .main-div{
         & .MuiTypography-root{
             font-size: 14px;
@@ -114,5 +103,16 @@
     }
     .div{
         margin-top: 5px;
+    }
+}
+
+@media screen and (max-width:1120px) {
+    .main-div{
+        & .MuiTypography-root{
+            font-size: 12px;
+        }
+    }
+    .div{
+        margin-top: 0px;
     }
 }

@@ -336,8 +336,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                     <Box sx={{ margin: '100px 20px 50px 300px' }}>
                         <Grid container>
                             <Grid xs={9}>
-                                <div className='links'>
-                                    <Grid>
+                                <div>
+                                    <Grid className='links'>
                                         <Breadcrumbs
                                             separator={<NavigateNextIcon fontSize="small" />}
                                             aria-label="breadcrumb"
@@ -461,7 +461,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                         </Grid>
                                     </div>
                                     {eventGroup && eventName ? (
-                                        <Grid container spacing={2} sx={{ paddingBottom: 2 }}>
+                                        <Grid container spacing={2}>
                                             <Grid item xs={6}>
                                                 <Box className='textfields'>
                                                     <TextField
@@ -703,12 +703,12 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                             <Button variant='outlined' className='three-buttons' sx={{ mr: 1, color: "#2B9348", border: "2px solid #2B9348" }} onClick={() => {
                                 setformVisible(false); setsubmitbutton(false); setisDraft(false);
                                 setEventGroup(null); setEventName(null)
-                            }}>Discard</Button>
+                            }}><Typography>Discard</Typography></Button>
 
-                            <Button variant='contained' className='three-buttons' sx={{ mr: 1, backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348" }} onClick={() => handleDraftForm()}>Add to Draft</Button>
+                            <Button variant='contained' className='three-buttons' sx={{ mr: 1, backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348" }} onClick={() => handleDraftForm()}><Typography>Add to Draft</Typography></Button>
 
                             <Button variant='contained' className='three-buttons' sx={{ backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", display: submitbutton ? 'none' : "", }}
-                                onClick={() => handleEventForm()}>Create a new event</Button>
+                                onClick={() => handleEventForm()}><Typography>Create a new event</Typography></Button>
 
                             {submitbutton ? (<>
                                 {/* <Link href='/dashboard'> */}

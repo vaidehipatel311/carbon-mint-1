@@ -99,76 +99,101 @@
 }
 
 @media screen and (max-width:2200px) {
-    
     .table {
         & .MuiTableCell-root {
             font-size: 22px;
         }
     }
-    .right-part-landowner .add-landowner-btn{
-        width: 100%;
-    }
-    .grid-item{
-        margin-left: 100px;
-
-    }
-    .grid-item-card .typo1{
-        font-size: 20px;
-    }
-
-    .grid-item-card .avatar{
-        margin-left: 130px;
-    }
-    .grid-item-card .name,
-    .grid-item-card .grid-button,
-    .grid-item-card .contact{
-        font-size: 24px;
-        left: 100px;
-        position: relative;
-    }
-}
-
-@media screen and (max-width:1920px) {
-    .table {
-        & .MuiTableCell-root {
-            font-size: 28px;
+    .tr{
+        .MuiTypography-root{
+            margin-top: 10px;
+            margin-left: 15px;
         }
     }
-    .right-part-landowner .add-landowner-btn{
-        width: 100%;
+    .landowner-avatar{
+        width: 90%;
+        margin-top: 10px;
     }
     .grid-item{
-        margin-left: 100px;
+        margin-left: 0px;
+        
 
     }
+    .grid-item .grid-item-card{
+        width: 90%;
+    }
     .grid-item-card .typo1{
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .grid-item-card .avatar{
-        margin-left: 100px;
+        
+        margin-left: 120px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 22px;
-        left: 60px;
+        left: 80px;
         position: relative;
     }
+}
 
+
+@media screen and (max-width:1920px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 20px;
+        }
+    }
+    .tr{
+        .MuiTypography-root{
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+    }
+    .landowner-avatar{
+        width: 80%;
+        margin-top: 10px;
+    }
+    .grid-item{
+        margin-left: 50px;
+
+    }
+    .grid-item-card .typo1{
+        font-size: 20px;
+    }
+
+    .grid-item-card .avatar{
+        
+        margin-left: 0px;
+    }
+    .grid-item-card .name,
+    .grid-item-card .grid-button,
+    .grid-item-card .contact{
+        font-size: 20px;
+        left: 0px;
+        position: relative;
+    }
 }
 
 @media screen and (max-width:1660px) {
     .table {
         & .MuiTableCell-root {
-            font-size: 23px;
+            font-size: 18px;
         }
     }
-    .right-part-landowner .add-landowner-btn{
-        width: 100%;
+    .tr{
+        .MuiTypography-root{
+            margin-top: 15px;
+        }
+    }
+    .landowner-avatar{
+        width: 70%;
+        margin-top: 15px;
     }
     .grid-item{
-        margin-left: 80px;
+        margin-left: 50px;
 
     }
     .grid-item-card .typo1{
@@ -176,13 +201,14 @@
     }
 
     .grid-item-card .avatar{
-        margin-left: 70px;
+        
+        margin-left: 0px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
-        font-size: 22px;
-        left: 30px;
+        font-size: 18px;
+        left: 0px;
         position: relative;
     }
 }
@@ -190,28 +216,35 @@
 @media screen and (max-width:1520px) {
     .table {
         & .MuiTableCell-root {
-            font-size: 19px;
+            font-size: 16px;
         }
     }
-    .right-part-landowner .add-landowner-btn{
-        width: 100%;
+    .tr{
+        .MuiTypography-root{
+            margin-top: 15px;
+        }
+    }
+    .landowner-avatar{
+        width: 60%;
+        margin-top: 15px;
     }
     .grid-item{
-        margin-left: 80px;
+        margin-left: 50px;
 
     }
     .grid-item-card .typo1{
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .grid-item-card .avatar{
-        margin-left: 70px;
+        
+        margin-left: 0px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
-        font-size: 22px;
-        left: 30px;
+        font-size: 16px;
+        left: 0px;
         position: relative;
     }
 }
@@ -219,98 +252,17 @@
 @media screen and (max-width:1440px) {
     .table {
         & .MuiTableCell-root {
-            font-size: 17px;
-        }
-    }
-    .right-part-landowner .add-landowner-btn{
-        width: 100%;
-    }
-    .grid-item{
-        margin-left: 80px;
-
-    }
-    .grid-item-card .typo1{
-        font-size: 16px;
-    }
-
-    .grid-item-card .avatar{
-        margin-left: 40px;
-    }
-    .grid-item-card .name,
-    .grid-item-card .grid-button,
-    .grid-item-card .contact{
-        font-size: 18px;
-        left: 20px;
-        position: relative;
-    }
-}
-
-@media screen and (max-width:1366px) {
-    .table {
-        & .MuiTableCell-root {
             font-size: 14px;
         }
     }
-    .right-part-landowner .add-landowner-btn{
-        width: 100%;
-    }
-    .grid-item{
-        margin-left: 80px;
-
-    }
-    .grid-item-card .typo1{
-        font-size: 16px;
-    }
-
-    .grid-item-card .avatar{
-        margin-left: 20px;
-    }
-    .grid-item-card .name
-    
-    {
-        font-size: 18px;
-        left: 20px;
-        position: relative;
-    }
-    .grid-item-card .contact,.grid-item-card .grid-button{
-        font-size: 18px;
-        left: 5px;
-        position: relative;
-    }
-    
-}
-
-@media screen and (max-width:1280px) {
-    .table {
-        & .MuiTableCell-root {
-            font-size: 13px;
+    .tr{
+        .MuiTypography-root{
+            margin-top: 15px;
         }
     }
-    .grid-item{
-        margin-left: 50px;
-
-    }
-    .grid-item-card .typo1{
-        font-size: 14px;
-    }
-
-    .grid-item-card .avatar{
-        margin-left: 20px;
-    }
-    .grid-item-card .name,
-    .grid-item-card .grid-button,
-    .grid-item-card .contact{
-        font-size: 14px;
-        left: 20px;
-        position: relative;
-    }
-}
-
-@media screen and (max-width:1120px) {
-    .table {
-        & .MuiTableCell-root {
-            font-size: 8px;
-        }
+    .landowner-avatar{
+        width: 60%;
+        margin-top: 15px;
     }
     .grid-item{
         margin-left: 50px;
@@ -331,4 +283,116 @@
         left: 0px;
         position: relative;
     }
+}
+
+@media screen and (max-width:1366px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 14px;
+        }
+    }
+    .tr{
+        .MuiTypography-root{
+            margin-top: 15px;
+        }
+    }
+    .landowner-avatar{
+        width: 60%;
+        margin-top: 15px;
+    }
+    .grid-item{
+        margin-left: 50px;
+
+    }
+    .grid-item-card .typo1{
+        font-size: 14px;
+    }
+
+    .grid-item-card .avatar{
+        
+        margin-left: 0px;
+    }
+    .grid-item-card .name,
+    .grid-item-card .grid-button,
+    .grid-item-card .contact{
+        font-size: 14px;
+        left: 0px;
+        position: relative;
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 13px;
+        }
+    }
+    .tr{
+        .MuiTypography-root{
+            margin-top: 21px;
+        }
+    }
+    .landowner-avatar{
+        width: 60%;
+        margin-top: 20px;
+    }
+    .grid-item{
+        margin-left: 50px;
+
+    }
+    .grid-item-card .typo1{
+        font-size: 14px;
+    }
+
+    .grid-item-card .avatar{
+        
+        margin-left: 0px;
+    }
+    .grid-item-card .name,
+    .grid-item-card .grid-button,
+    .grid-item-card .contact{
+        font-size: 14px;
+        left: 0px;
+        position: relative;
+    }
+}
+
+@media screen and (max-width:1120px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 12px;
+        }
+    }
+    .tr{
+        .MuiTypography-root{
+            margin-top: 22px;
+        }
+    }
+    .status-button{
+        width: 10%;
+    }
+    .landowner-avatar{
+        width: 50%;
+        margin-top: 20px;
+    }
+    .grid-item{
+        margin-left: 50px;
+
+    }
+    .grid-item-card .typo1{
+        font-size: 14px;
+    }
+
+    .grid-item-card .avatar{
+        
+        margin-left: 0px;
+    }
+    .grid-item-card .name,
+    .grid-item-card .grid-button,
+    .grid-item-card .contact{
+        font-size: 14px;
+        left: 0px;
+        position: relative;
+    }
+    
 }

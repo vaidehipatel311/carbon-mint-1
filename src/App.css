@@ -62,8 +62,11 @@ input{
   .search-icon{
     margin-left: 200px;
   }
+  .links{
+    .MuiTypography-root{font-size: 20px;}
+  }
   .title{
-    font-size: 38px;
+    font-size: 34px;
   }
   .crops,.events{
     gap: 20px;
@@ -100,8 +103,11 @@ input{
   .search-icon{
     margin-left: 140px;
   }
+  .links{
+    .MuiTypography-root{font-size: 18px;}
+  }
   .title{
-    font-size: 36px;
+    font-size: 32px;
   }
   .crops,.events{
     gap: 10px;
@@ -138,8 +144,11 @@ input{
   .search-icon{
     margin-left: 70px;
   }
+  .links{
+    .MuiTypography-root{font-size: 16px;}
+  }
   .title{
-    font-size: 32px;
+    font-size: 30px;
   }
   .crops,.events{
     gap: 10px;
@@ -176,8 +185,11 @@ input{
   .search-icon{
     margin-left: 40px;
   }
+  .links{
+    .MuiTypography-root{font-size: 16px;}
+  }
   .title{
-    font-size: 32px;
+    font-size: 28px;
   }
   .crops,.events{
     gap: 10px;
@@ -214,8 +226,11 @@ input{
   .search-icon{
     margin-left: 20px;
   }
+  .links{
+    .MuiTypography-root{font-size: 14px;}
+  }
   .title{
-    font-size: 30px;
+    font-size: 26px;
   }
   .crops,.events{
     gap: 10px;
@@ -252,8 +267,11 @@ input{
   .search-icon{
     margin-left: 0px;
   }
+  .links{
+    .MuiTypography-root{font-size: 14px;}
+  }
   .title{
-    font-size: 28px;
+    font-size: 24px;
   }
   .crops,.events{
     gap: 10px;
@@ -287,8 +305,11 @@ input{
 }
 
 @media screen and (max-width:1280px) {
+  .links{
+    .MuiTypography-root{font-size: 14px;}
+  }
   .title{
-    font-size: 26px;
+    font-size: 22px;
   }
   .operators-text,
   .yields-text,
@@ -319,9 +340,11 @@ input{
 }
 
 @media screen and (max-width:1120px) {
-  
+  .links{
+    .MuiTypography-root{font-size: 14px;}
+  }
   .title{
-    font-size: 24px;
+    font-size: 20px;
   }
   .operators-text,
   .yields-text,

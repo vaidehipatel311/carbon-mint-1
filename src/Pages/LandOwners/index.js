@@ -72,8 +72,8 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
             <TableBody>
                 <TableRow className='tr'>
                     <TableCell align='center' sx={{ display: 'flex' }}>
-                        <Avatar sx={{ background: 'none' }}><img src={avatar}></img></Avatar>
-                        <Typography variant='p' sx={{ mt: 1, ml: 1 }}>{owners.name}</Typography>
+                        <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
+                        <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
                     <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerId}</TableCell>
                     <TableCell align='center'>{owners.passbookrefno}</TableCell>
@@ -91,7 +91,7 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
             <TableBody>
                 <TableRow className='tr'>
                     <TableCell align='center' sx={{ display: 'flex' }}>
-                        <Avatar sx={{ background: 'none' }}><img src={avatar}></img></Avatar>
+                        <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
                         <Typography variant='p' sx={{ mt: 1, ml: 1 }}>{owners.name}</Typography>
                     </TableCell>
                     <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerId}</TableCell>
