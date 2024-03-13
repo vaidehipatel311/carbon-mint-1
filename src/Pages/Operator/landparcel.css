@@ -1,0 +1,403 @@
+.chennaiah-polam-details {
+    display: grid;
+    justify-items: center;
+
+}
+
+.chennaiah-polam-details img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.chennaiah-polam-details .name {
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.chennaiah-polam-details .address {
+    padding: 10px 40px;
+    color: rgb(180, 178, 178);
+    font-weight: bold;
+}
+
+
+
+.details {
+
+    padding: 10px;
+}
+
+
+.details .title {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+
+.details .content {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0px 10px;
+}
+
+
+.crops-heading {
+    margin-left: 20px;
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.crops-grid-upper img{
+    width: 100%;
+    margin-left: 20px;
+    border: 2px;
+    margin-top: 40px;
+}
+
+.crops-grid-lower {
+
+    border: 2px;
+    padding: 14px;
+    margin-left: 20px;
+}
+
+/* .crops-grid-lower .crops {
+    margin-left: 0px;
+    width: 230px;
+    height: 50px;
+    box-shadow: 0px 0px 12px 0px #0000001F;
+}
+
+.crops-grid-lower .crops .title {
+    font-size: 15px;
+    margin-top: -10px;
+}
+
+.crops-grid-lower .crops .text {
+    font-size: 15px;
+    margin-left: 10px;
+    margin-top: -15px;
+} */
+
+@media screen and (max-width:2200px) {
+    .chennaiah-polam-details .name {
+        font-size: 26px;
+    }
+
+    .chennaiah-polam-details .address {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .chennaiah-polam-details .n,
+    .crops-grid-lower .n {
+        font-size: 24px;
+    }
+
+    .chennaiah-polam-details .t,
+    .crops-grid-lower .t{
+        font-size: 22px;
+    }
+    .details{
+        font-size: 20px;
+    }
+    .details .title{
+        font-size: 22px;
+    }
+    .crops-heading{
+        font-size: 30px;
+    }
+    .crops-grid-upper{
+        margin-top: 10px;
+        width: 90%;
+    }
+    .crops-grid-lower{
+        width: 85%;
+        & .MuiTypography-root{
+            font-size: 24px;
+        }
+    }
+}
+
+@media screen and (max-width:1920px) {
+    .chennaiah-polam-details .name {
+        font-size: 26px;
+    }
+
+    .chennaiah-polam-details .address {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .chennaiah-polam-details .n,
+    .crops-grid-lower .n {
+        font-size: 24px;
+    }
+
+    .chennaiah-polam-details .t,
+    .crops-grid-lower .t{
+        font-size: 22px;
+    }
+    .details{
+        font-size: 20px;
+    }
+    .details .title{
+        font-size: 22px;
+    }
+    .crops-heading{
+        font-size: 30px;
+    }
+    .crops-grid-upper{
+        margin-top: 10px;
+        width: 90%;
+    }
+    .crops-grid-lower{
+        width: 85%;
+        & .MuiTypography-root{
+            font-size: 24px;
+        }
+    }
+}
+
+@media screen and (max-width:1660px) {
+    .chennaiah-polam-details .name {
+        font-size: 26px;
+    }
+
+    .chennaiah-polam-details .address {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .chennaiah-polam-details .n,
+    .crops-grid-lower .n {
+        font-size: 24px;
+    }
+
+    .chennaiah-polam-details .t,
+    .crops-grid-lower .t{
+        font-size: 22px;
+    }
+    .details{
+        font-size: 20px;
+    }
+    .details .title{
+        font-size: 22px;
+    }
+    .crops-heading{
+        font-size: 28px;
+    }
+    .crops-grid-upper{
+        margin-top: 10px;
+        width: 90%;
+    }
+    .crops-grid-lower{
+        width: 83%;
+        & .MuiTypography-root{
+            font-size: 24px;
+        }
+    }
+}
+
+@media screen and (max-width:1520px) {
+    .chennaiah-polam-details .name {
+        font-size: 24px;
+    }
+
+    .chennaiah-polam-details .address {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .chennaiah-polam-details .n,
+    .crops-grid-lower .n {
+        font-size: 22px;
+    }
+
+    .chennaiah-polam-details .t,
+    .crops-grid-lower .t{
+        font-size: 20px;
+    }
+    .details{
+        font-size: 16px;
+    }
+    .details .title{
+        font-size: 20px;
+    }
+    .crops-heading{
+        font-size: 24px;
+    }
+    .crops-grid-upper{
+        margin-top: 10px;
+        width: 90%;
+    }
+    .crops-grid-lower{
+        width: 83%;
+        & .MuiTypography-root{
+            font-size: 20px;
+        }
+    }
+}
+
+@media screen and (max-width:1440px) {
+    .chennaiah-polam-details .name {
+        font-size: 26px;
+    }
+
+    .chennaiah-polam-details .address {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .chennaiah-polam-details .n,
+    .crops-grid-lower .n {
+        font-size: 22px;
+    }
+
+    .chennaiah-polam-details .t,
+    .crops-grid-lower .t{
+        font-size: 20px;
+    }
+    .details{
+        font-size: 18px;
+    }
+    .details .title{
+        font-size: 22px;
+    }
+    .crops-heading{
+        font-size: 26px;
+    }
+    .crops-grid-upper{
+        margin-top: 10px;
+        width: 90%;
+    }
+    .crops-grid-lower{
+        width: 83%;
+        & .MuiTypography-root{
+            font-size: 20px;
+        }
+    }
+}
+
+@media screen and (max-width:1366px) {
+    .chennaiah-polam-details .name {
+        font-size: 20px;
+    }
+
+    .chennaiah-polam-details .address {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .chennaiah-polam-details .n,
+    .crops-grid-lower .n {
+        font-size: 18px;
+    }
+
+    .chennaiah-polam-details .t,
+    .crops-grid-lower .t{
+        font-size: 16px;
+    }
+    .details{
+        font-size: 16px;
+    }
+    .details .title{
+        font-size: 18px;
+    }
+    .crops-heading{
+        font-size: 24px;
+    }
+    .crops-grid-upper{
+        margin-top: 10px;
+        width: 90%;
+    }
+    .crops-grid-lower{
+        width: 82%;
+        & .MuiTypography-root{
+            font-size: 14px;
+        }
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .chennaiah-polam-details .name {
+        font-size: 22px;
+    }
+
+    .chennaiah-polam-details .address {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .chennaiah-polam-details .n,
+    .crops-grid-lower .n {
+        font-size: 18px;
+    }
+
+    .chennaiah-polam-details .t,
+    .crops-grid-lower .t{
+        font-size: 16px;
+    }
+    .details{
+        font-size: 16px;
+    }
+    .details .title{
+        font-size: 20px;
+    }
+    .crops-heading{
+        font-size: 24px;
+    }
+    .crops-grid-upper{
+        margin-top: 10px;
+        width: 90%;
+    }
+    .crops-grid-lower{
+        width: 81%;
+        & .MuiTypography-root{
+            font-size: 16px;
+        }
+    }
+}
+
+@media screen and (max-width:1120px) {
+    .chennaiah-polam-details .name {
+        font-size: 20px;
+    }
+
+    .chennaiah-polam-details .address {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .chennaiah-polam-details .n,
+    .crops-grid-lower .n {
+        font-size: 16px;
+    }
+
+    .chennaiah-polam-details .t,
+    .crops-grid-lower .t{
+        font-size: 14px;
+    }
+    .details{
+        font-size: 14px;
+    }
+    .details .title{
+        font-size: 18px;
+    }
+    .crops-heading{
+        font-size: 22px;
+    }
+    .crops-grid-upper{
+        margin-top: 10px;
+        width: 90%;
+    }
+    .crops-grid-lower{
+        width: 80%;
+        & .MuiTypography-root{
+            font-size: 14px;
+        }
+    }
+}

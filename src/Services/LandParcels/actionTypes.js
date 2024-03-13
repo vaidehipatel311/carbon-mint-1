@@ -1,0 +1,1 @@
+export const FETCH_LAND_PARCELS = 'FETCH_LAND_PARCELS';

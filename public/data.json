@@ -1,0 +1,340 @@
+{
+    "users": [
+        {
+            "id": 1
+        }
+    ],
+    "landOwners": [
+        {
+            "id": 1,
+            "ownerId": "KFP/MT/01 ",
+            "name": "Kethavath Laxmanna",
+            "passbookrefno": "T04130091706",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "crops": [
+                "Sorghum",
+                "Finger Millet"
+            ]
+        },
+        {
+            "id": 2,
+            "ownerId": "KFP/MT/01 ",
+            "name": "Kethavath Laxmanna",
+            "passbookrefno": "T04130091706",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "crops": [
+                "Sorghum",
+                "Finger Millet"
+            ]
+        },
+        {
+            "id": 3,
+            "ownerId": "KFP/MT/01 ",
+            "name": "Kethavath Laxmanna",
+            "passbookrefno": "T04130091706",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "crops": [
+                "Sorghum",
+                "Finger Millet"
+            ]
+        },
+        {
+            "id": 4,
+            "ownerId": "KFP/MT/01 ",
+            "name": "Kethavath Laxmanna",
+            "passbookrefno": "T04130091706",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "crops": [
+                "Sorghum",
+                "Finger Millet"
+            ]
+        },
+        {
+            "id": 5,
+            "ownerId": "KFP/MT/01 ",
+            "name": "Kethavath Laxmanna",
+            "passbookrefno": "T04130091706",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "crops": [
+                "Sorghum",
+                "Finger Millet"
+            ]
+        }
+    ],
+    "onboardingLandOwners": [
+        {
+            "id": 1,
+            "ownerId": "KFP/MT/01 ",
+            "name": "Kethavath Laxmanna",
+            "aadhar": "847064392663",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "type": "Land Parcel",
+            "status": [
+                "Pending"
+            ]
+        },
+        {
+            "id": 2,
+            "ownerId": "KFP/MT/01 ",
+            "name": "Kethavath Laxmanna",
+            "aadhar": "847064392663",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "type": "Land Parcel",
+            "status": [
+                "Pending"
+            ]
+        },
+        {
+            "id": 3,
+            "ownerId": "KFP/MT/01 ",
+            "name": "Kethavath Laxmanna",
+            "aadhar": "847064392663",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "type": "Operator",
+            "status": [
+                "Pending"
+            ]
+        },
+        {
+            "id": 4,
+            "ownerId": "KFP/MT/01 ",
+            "name": "Kethavath Laxmanna",
+            "aadhar": "847064392663",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "type": "Land Parcel",
+            "status": [
+                "Pending"
+            ]
+        },
+        {
+            "id": 5,
+            "ownerId": "KFP/MT/01 ",
+            "name": "Kethavath Laxmanna",
+            "aadhar": "847064392663",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "type": "Land Parcel",
+            "status": [
+                "Pending"
+            ]
+        }
+    ],
+    "landParcels": [
+        {
+            "id": 1,
+            "SyNo": "33/95",
+            "name": "Chennaiah Polam",
+            "acres": "10",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "status": "Pending",
+            "crops": [
+                "Sorghum",
+                "Finger Millet"
+            ]
+        },
+        {
+            "id": 2,
+            "SyNo": "33/95",
+            "name": "Chennaiah Polam",
+            "acres": "10",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "status": "Pending",
+            "crops": [
+                "Sorghum",
+                "Finger Millet"
+            ]
+        },
+        {
+            "id": 3,
+            "SyNo": "33/95",
+            "name": "Chennaiah Polam",
+            "acres": "10",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "status": "Pending",
+            "crops": [
+                "Sorghum",
+                "Finger Millet"
+            ]
+        },
+        {
+            "id": 4,
+            "SyNo": "33/95",
+            "name": "Chennaiah Polam",
+            "acres": "10",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "status": "Pending",
+            "crops": [
+                "Sorghum",
+                "Finger Millet"
+            ]
+        },
+        {
+            "id": 5,
+            "SyNo": "33/95",
+            "name": "Chennaiah Polam",
+            "acres": "10",
+            "contactno": "+91 8889998989",
+            "village": "Megya Thanda",
+            "status": "Pending",
+            "crops": [
+                "Sorghum",
+                "Finger Millet"
+            ]
+        }
+    ],
+    "operator": [
+        {
+            "id": 1,
+            "name": "Paragolla Thirupathaiah",
+            "co": "Father name",
+            "father_name": "Paragolla Narayana",
+            "ownerID":"KFP/MT/01",
+            "contact_number_2": "+91 8887776565",
+            "contact_number_1": "+91 8889998989",
+            "house_no":"301",
+            "street_name": "S.G. Highway",
+            "village":"Gota",
+            "block":"A",
+            "district":"Ahmedabad",
+            "state":"Gujarat",
+            "country":"India",
+            "postal_code":"380059",
+            "website_addr":"A-101,ABC Building,Ahmedabad",
+            "email_id":"abc@gmail.com",
+            "aadhar_no":"111122223333",
+            "unique_id":"W29iamVjdCBGaWxlXQ==",
+            "panCard_id":"W29iamVjdCBGaWxlXQ==",
+            "edu_qualification": "B.TECH in CSE",
+            "passbook_refno":"T04130091706",
+            "total_farming_exp_year":"20",
+            "organic_farming_exp_year":"5",
+            "exp_in_crops":"5",
+            "exp_in_livestock":"3",
+            "exp_in_other":"4",
+            "landparcel_name":"Chennaiah Polam",
+            "ownership":"Own",
+            "owner_name":"Paragolla Thirupathaiah",
+            "leased_doc_id":"W29iamVjdCBGaWxlXQ==",
+            "survey_no":"123",
+            "area":"500 sqft",
+            "crops": "Sorghum, Finger Millet"
+
+        },
+        {
+            "id": 2,
+            "name": "Paragolla Thirupathaiah",
+            "co": "Father name",
+            "father_name": "Paragolla Narayana",
+            "ownerID":"KFP/MT/02",
+            "contact_number_2": "+91 8887776565",
+            "contact_number_1": "+91 8889998989",
+            "house_no":"301",
+            "street_name": "S.G. Highway",
+            "village":"Gota",
+            "block":"A",
+            "district":"Ahmedabad",
+            "state":"Gujarat",
+            "country":"India",
+            "postal_code":"380059",
+            "website_addr":"A-101,ABC Building,Ahmedabad",
+            "emal_id":"abc@gmail.com",
+            "aadhar_no":"111122223333",
+            "unique_id":"W29iamVjdCBGaWxlXQ==",
+            "panCard_id":"W29iamVjdCBGaWxlXQ==",
+            "edu_qualification": "B.TECH in CSE",
+            "passbook_refno":"T04130091706",
+            "total_farming_exp_year":"20",
+            "organic_farming_exp_year":"5",
+            "exp_in_crops":"5",
+            "exp_in_livestock":"3",
+            "exp_in_other":"4",
+            "landparcel_name":"Chennaiah Polam",
+            "ownership":"Own",
+            "owner_name":"Paragolla Thirupathaiah",
+            "leased_doc_id":"W29iamVjdCBGaWxlXQ==",
+            "survey_no":"123",
+            "area":"500 sqft",
+            "crops": "Sorghum, Finger Millet"
+            
+            
+        }
+    ],
+    "events": [
+        {
+            "id": 1,
+            "field": "Corner Field",
+            "name": "Shorgam",
+            "date": "22/04/2023",
+            "time": "2:10 pm"
+        },
+        {
+            "id": 2,
+            "field": "Lake Edge ",
+            "name": "Finger Millet",
+            "date": "22/04/2023",
+            "time": "2:10 pm"
+        },
+        {
+            "id": 3,
+            "field": "Corner Field",
+            "name": "Shorgam",
+            "date": "22/04/2023",
+            "time": "2:10 pm"
+        },
+        {
+            "id": 4,
+            "field": "Lake Edge",
+            "name": "Finger Millet",
+            "date": "22/04/2023",
+            "time": "2:10 pm"
+        },
+        {
+            "id": 5,
+            "field": "Corner Field",
+            "name": "Shorgam",
+            "date": "22/04/2023",
+            "time": "2:10 pm"
+        },
+        {
+            "id": 6,
+            "field": "Lake Edge",
+            "name": "Finger Millet",
+            "date": "22/04/2023",
+            "time": "2:10 pm"
+        }
+    ],
+    "addedEvents": [
+        {
+            "id": 1,
+            "seedlings": "On Farm Nursery",
+            "nursery": "Wet nursery",
+            "nursery_bed": "Raised Bed",
+            "house":"Open nursery",
+            "soil_treatment": "Soil treatment by chemicals",
+            "chemicals": "Chlorpyriphos",
+            "quantity":"200",
+            "seed_treatment": "soaking in hot water",
+            "variety":"ABC",
+            "crop_duration":"90",
+            "seed_rate":"15",
+            "sowing_method":"Sowing in pro-trays",
+            "irrigation_method":"Flooding",
+            "intercultural_operations":"Gap Filling",
+            "recommended_competent":"Chlorpyriphos",
+            "evidence":["../../assets/Events/Image1.png","../../assets/Events/Image2.png"]
+        }
+    ]
+}

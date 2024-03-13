@@ -1,0 +1,562 @@
+.header {
+    background: #F9F9F9;
+    left: 276px;
+    height: 71px;
+    position: fixed;
+    z-index: 1201;
+    width: calc(100% - 300px);
+    display: flex;
+    padding: 10px 20px 0px 20px;
+
+}
+
+
+.icon {
+    width: 24px;
+    height: 24px;
+    padding: 6.66px 0px 6.66px 0px;
+
+}
+
+
+.user {
+    margin-left: 10px;
+}
+
+.user-image {
+    width: 100%;
+    height: 100%;
+}
+
+.user-name {
+    font-family: Barlow;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+}
+
+.agent {
+    font-family: Manrope;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+    color: #2B9348;
+
+}
+
+.user-image-drawer {
+    height: 70px;
+}
+
+.user-in-drawer {
+    margin-top: 10px;
+}
+
+.user-in-drawer .user-name {
+    font-family: Barlow;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+}
+
+.user-in-drawer .agent {
+    font-family: Manrope;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 0em;
+    color: #2B9348;
+}
+
+.contact {
+    padding: 5px 0px;
+}
+
+.contact .title {
+    font-size: 15px;
+}
+
+.contact .contact-details,
+.contact .email-details,
+.contact .address-details {
+    margin-top: 20px;
+    display: flex;
+    font-size: 12px;
+}
+
+.actions {
+    padding: 5px 0px;
+}
+
+.actions .title {
+    font-size: 15px;
+}
+
+.actions .logout-details {
+    margin-top: 10px;
+    display: flex;
+    font-size: 12px;
+}
+
+
+.notification {
+    display: flex;
+}
+
+.notification .title {
+    font-size: 18px;
+}
+
+.corner-field {
+    margin: 30px 0px 0px 20px;
+    padding: 10px;
+    width: 325px;
+
+}
+
+.corner-field .title,
+.lake-edge-field .title,
+.operator-approved .title,
+.desha .title,
+.operator-processing .title {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.corner-field .text,
+.lake-edge-field .text,
+.operator-approved .text,
+.desha .text,
+.operator-processing .text {
+    font-size: 11px;
+    display: inline;
+    text-align: center;
+}
+
+.corner-field .photo,
+.lake-edge-field .photo,
+.operator-approved .photo,
+.desha .photo,
+.operator-processing .photo {
+    width: 30px;
+    height: 30px;
+}
+
+.lake-edge-field,
+.operator-approved,
+.desha,
+.operator-processing {
+    margin: 10px 0px 0px 20px;
+    padding: 10px;
+}
+
+@media screen and (max-width:2200px) {
+    .drawer{
+        width: 320px;
+    }
+    .user-name,
+    .agent {
+        font-size: 26px;
+    }
+
+    .user-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .user-in-drawer .user-name,
+    .user-in-drawer .agent {
+        font-size: 24px;
+    }
+    .user-image-drawer{
+        margin-left: 130px;
+    }
+
+    .contact .address-details,.actions .logout-details{
+        & .MuiTypography-root {
+            font-size: 18px;
+        }
+    }
+    .actions .title{
+            font-size: 20px;
+    }
+    .arrowforward-icon{
+        margin-left: 140px;
+    }
+    .close-icon{
+        margin-left: 300px;
+    }
+    .notification .title{
+        font-size: 20px;
+    }
+    .corner-field,
+    .lake-edge-field,
+    .operator-approved,
+    .operator-processing,
+    .desha{
+        font-size: 20px;
+        & .MuiTypography-root {
+            font-size: 12px;
+        }
+    }
+}
+
+@media screen and (max-width:1920px) {
+    .drawer{
+        width: 320px;
+    }
+    .user-name,
+    .agent {
+        font-size: 22px;
+    }
+
+    .user-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .user-in-drawer .user-name,
+    .user-in-drawer .agent {
+        font-size: 20px;
+    }
+    .user-image-drawer{
+        margin-left: 130px;
+    }
+
+    .contact .address-details,.actions .logout-details{
+        & .MuiTypography-root {
+            font-size: 18px;
+        }
+    }
+    .actions .title{
+            font-size: 20px;
+    }
+    .arrowforward-icon{
+        margin-left: 150px;
+    }
+    .close-icon{
+        margin-left: 300px;
+    }
+    .notification .title{
+        font-size: 18px;
+    }
+    .corner-field,
+    .lake-edge-field,
+    .operator-approved,
+    .operator-processing,
+    .desha{
+        font-size: 20px;
+        & .MuiTypography-root {
+            font-size: 12px;
+        }
+    }
+}
+
+@media screen and (max-width:1660px) {
+    .drawer{
+        width: 320px;
+    }
+    .user-name,
+    .agent {
+        font-size: 22px;
+    }
+
+    .user-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .user-in-drawer .user-name,
+    .user-in-drawer .agent {
+        font-size: 20px;
+    }
+    .user-image-drawer{
+        margin-left: 130px;
+    }
+
+    .contact .address-details,.actions .logout-details{
+        & .MuiTypography-root {
+            font-size: 18px;
+        }
+    }
+    .actions .title{
+            font-size: 20px;
+    }
+    .arrowforward-icon{
+        margin-left: 150px;
+    }
+    .close-icon{
+        margin-left: 300px;
+    }
+    .notification .title{
+        font-size: 18px;
+    }
+    .corner-field,
+    .lake-edge-field,
+    .operator-approved,
+    .operator-processing,
+    .desha{
+        font-size: 20px;
+        & .MuiTypography-root {
+            font-size: 14px;
+        }
+    }
+}
+
+@media screen and (max-width:1520px) {
+    .drawer{
+        width: 320px;
+    }
+    .user-name,
+    .agent {
+        font-size: 22px;
+    }
+
+    .user-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .user-in-drawer .user-name,
+    .user-in-drawer .agent {
+        font-size: 20px;
+    }
+    .user-image-drawer{
+        margin-left: 130px;
+    }
+
+    .contact .address-details,.actions .logout-details{
+        & .MuiTypography-root {
+            font-size: 16px;
+        }
+    }
+    .actions .title{
+            font-size: 20px;
+    }
+    .arrowforward-icon{
+        margin-left: 150px;
+    }
+    .close-icon{
+        margin-left: 300px;
+    }
+    .notification .title{
+        font-size: 18px;
+    }
+    .corner-field,
+    .lake-edge-field,
+    .operator-approved,
+    .operator-processing,
+    .desha{
+        font-size: 20px;
+        & .MuiTypography-root {
+            font-size: 14px;
+        }
+    }
+}
+
+@media screen and (max-width:1440px) {
+    .drawer{
+        width: 320px;
+    }
+    .user-name,
+    .agent {
+        font-size: 20px;
+    }
+
+    .user-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .user-in-drawer .user-name,
+    .user-in-drawer .agent {
+        font-size: 20px;
+    }
+    .user-image-drawer{
+        margin-left: 130px;
+    }
+
+    .contact .address-details,.actions .logout-details{
+        & .MuiTypography-root {
+            font-size: 16px;
+        }
+     }
+    .actions .title{
+            font-size: 18px;
+    }
+    .arrowforward-icon{
+        margin-left: 150px;
+    }
+    .close-icon{
+        margin-left: 300px;
+    }
+    .notification .title{
+        font-size: 18px;
+    }
+    .corner-field,
+    .lake-edge-field,
+    .operator-approved,
+    .operator-processing,
+    .desha{
+        font-size: 20px;
+        & .MuiTypography-root {
+            font-size: 14px;
+        }
+    }
+}
+
+@media screen and (max-width:1366px) {
+    .drawer{
+        width: 310px;
+    }
+    .user-name,
+    .agent {
+        font-size: 20px;
+    }
+
+    .user-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .user-in-drawer .user-name,
+    .user-in-drawer .agent {
+        font-size: 20px;
+    }
+    .user-image-drawer{
+        margin-left: 130px;
+    }
+
+    .contact .address-details,.actions .logout-details{
+        & .MuiTypography-root {
+            font-size: 14px;
+        }
+     }
+    .actions .title{
+            font-size: 16px;
+    }
+    .arrowforward-icon{
+        margin-left: 150px;
+    }
+    .close-icon{
+        margin-left: 290px;
+    }
+    .notification .title{
+        font-size: 18px;
+    }
+    .corner-field,
+    .lake-edge-field,
+    .operator-approved,
+    .operator-processing,
+    .desha{
+        font-size: 20px;
+        & .MuiTypography-root {
+            font-size: 12px;
+        }
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .drawer{
+        width: 300px;
+    }
+    .user-name,
+    .agent {
+        font-size: 20px;
+    }
+
+    .user-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .user-in-drawer .user-name,
+    .user-in-drawer .agent {
+        font-size: 20px;
+    }
+    .user-image-drawer{
+        margin-left: 120px;
+    }
+
+    .contact .address-details,.actions .logout-details{
+        & .MuiTypography-root {
+            font-size: 14px;
+        }
+     }
+    .actions .title{
+            font-size: 14px;
+    }
+    .arrowforward-icon{
+        margin-left: 150px;
+    }
+    .close-icon{
+        margin-left: 280px;
+    }
+    .notification .title{
+        font-size: 16px;
+    }
+    .corner-field,
+    .lake-edge-field,
+    .operator-approved,
+    .operator-processing,
+    .desha{
+        font-size: 20px;
+        & .MuiTypography-root {
+            font-size: 12px;
+        }
+    }
+}
+
+@media screen and (max-width:1120px) {
+    .drawer{
+        width: 270px;
+    }
+    .user-name,
+    .agent {
+        font-size: 18px;
+    }
+
+    .user-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .user-in-drawer .user-name,
+    .user-in-drawer .agent {
+        font-size: 20px;
+    }
+    .user-image-drawer{
+        margin-left: 100px;
+    }
+
+    .contact .address-details,.actions .logout-details{
+        & .MuiTypography-root {
+            font-size: 12px;
+        }
+     }
+    .actions .title{
+            font-size: 12px;
+    }
+    .arrowforward-icon{
+        margin-left: 130px;
+    }
+    .close-icon{
+        margin-left: 240px;
+    }
+    .notification .title{
+        font-size: 16px;
+    }
+    .corner-field,
+    .lake-edge-field,
+    .operator-approved,
+    .operator-processing,
+    .desha{
+        font-size: 20px;
+        & .MuiTypography-root {
+            font-size: 12px;
+        }
+    }
+}

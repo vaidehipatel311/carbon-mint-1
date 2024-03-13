@@ -1,0 +1,314 @@
+.graphicSide {
+    width: 50vw;
+    height: 100vh;
+}
+.signin-form {
+    padding: 100px 130px 0px 130px;
+}
+
+.logo {
+    margin-bottom: 30px;
+}
+.signintext {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 42.9px;
+}
+
+.login-textfield{
+    width: 100%;
+}
+
+.button {
+    width: 50%;
+    height: 35px;
+    top: 15px;
+}
+
+.otheracc {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21.86px;
+    color: #232D42;
+    top: 10px;
+    position: relative;
+}
+.googleicon{
+    margin-top: 10px;
+}
+
+
+
+
+@media screen and (max-width:2200px) {
+    .graphicSide {
+        height: 100vh;
+        width: 50vw;
+    }
+    .signin-form {
+        padding: 200px 200px 0px 200px;
+    }
+    .finalLogo {
+        width: 50%;
+        height: 50%;
+    }
+    .logo{
+        width: 100%;
+        margin-bottom: 150px;
+    }
+    .signintext {
+        font-size: 60px;
+    }
+    .login-textfield{
+        top: 30px;
+    }
+    .button{
+        top: 50px;
+        width: 40%;
+    }
+    .otheracc{
+        font-size: 26px;
+        top: 80px;
+    }
+    .googleicon{
+        margin-top: 80px;
+    }
+}
+
+@media screen and (max-width:1920px) {
+    .graphicSide {
+        height: 100vh;
+        width: 50vw;
+    }
+    .signin-form {
+        padding: 200px 200px 0px 200px;
+    }
+    .finalLogo {
+        width: 48%;
+        height: 48%;
+    }
+    .logo{
+        width: 100%;
+        margin-bottom: 130px;
+    }
+    .signintext {
+        font-size: 56px;
+    }
+    .login-textfield{
+        top: 30px;
+    }
+    .button{
+        top: 50px;
+    }
+    .otheracc{
+        font-size: 24px;
+        top: 70px;
+    }
+    .googleicon{
+        margin-top: 70px;
+    }
+}
+
+@media screen and (max-width:1660px) {
+    .graphicSide {
+        height: 100vh;
+        width: 50vw;
+    }
+    .signin-form {
+        padding: 200px 200px 0px 200px;
+    }
+    .finalLogo {
+        width: 46%;
+        height: 46%;
+    }
+    .logo{
+        width: 100%;
+        margin-bottom: 100px;
+    }
+    .signintext {
+        font-size: 48px;
+    }
+    .login-textfield{
+        top: 30px;
+    }
+    .button{
+        top: 50px;
+    }
+    .otheracc{
+        font-size: 22px;
+        top: 70px;
+    }
+    .googleicon{
+        margin-top: 70px;
+    }
+}
+
+@media screen and (max-width:1520px) {
+    .graphicSide {
+        height: 100vh;
+        width: 50vw;
+    }
+    .signin-form {
+        padding: 200px 170px 0px 170px;
+    }
+    .finalLogo {
+        width: 44%;
+        height: 44%;
+    }
+    .logo{
+        width: 100%;
+        margin-bottom: 80px;
+    }
+    .signintext {
+        font-size: 44px;
+    }
+    .login-textfield{
+        top: 20px;
+    }
+    .button{
+        top: 40px;
+    }
+    .otheracc{
+        font-size: 20px;
+        top: 60px;
+    }
+    .googleicon{
+        margin-top: 60px;
+    }
+}
+
+@media screen and (max-width:1440px) {
+    .graphicSide {
+        height: 100vh;
+        width: 50vw;
+    }
+    .signin-form {
+        padding: 200px 170px 0px 170px;
+    }
+    .finalLogo {
+        width: 44%;
+        height: 44%;
+    }
+    .logo{
+        width: 100%;
+        margin-bottom: 70px;
+    }
+    .signintext {
+        font-size: 40px;
+    }
+    .login-textfield{
+        top: 10px;
+    }
+    .button{
+        top: 30px;
+    }
+    .otheracc{
+        font-size: 18px;
+        top: 50px;
+    }
+    .googleicon{
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width:1366px) {
+    .graphicSide {
+        height: 100vh;
+        width: 50vw;
+    }
+    .signin-form {
+        padding: 150px 150px 0px 150px;
+    }
+    .finalLogo {
+        width: 44%;
+        height: 44%;
+    }
+    .logo{
+        width: 100%;
+        margin-bottom: 50px;
+    }
+    .signintext {
+        font-size: 36px;
+    }
+    .login-textfield{
+        top: 10px;
+    }
+    .button{
+        top: 30px;
+    }
+    .otheracc{
+        font-size: 16px;
+        top: 30px;
+    }
+    .googleicon{
+        margin-top: 30px;
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .graphicSide {
+        height: 100vh;
+        width: 50vw;
+    }
+    .signin-form {
+        padding: 200px 150px 0px 150px;
+    }
+    .finalLogo {
+        width: 44%;
+        height: 44%;
+    }
+    .logo{
+        width: 100%;
+        margin-bottom: 50px;
+    }
+    .signintext {
+        font-size: 34px;
+    }
+    .login-textfield{
+        top: 10px;
+    }
+    .button{
+        top: 20px;
+    }
+    .otheracc{
+        font-size: 16px;
+        top: 30px;
+    }
+    .googleicon{
+        margin-top: 30px;
+    }
+}
+
+@media screen and (max-width:1120px) {
+    .graphicSide {
+        height: 100vh;
+        width: 50vw;
+    }
+    .signin-form {
+        padding: 150px 120px 0px 120px;
+    }
+    .finalLogo {
+        width: 44%;
+        height: 44%;
+    }
+    .logo{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .signintext {
+        font-size: 30px;
+    }
+    .login-textfield{
+        top: 0px;
+    }
+    .button{
+        top: 10px;
+    }
+    .otheracc{
+        font-size: 14px;
+        top: 20px;
+    }
+    .googleicon{
+        margin-top: 20px;
+    }
+}

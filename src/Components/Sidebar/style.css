@@ -1,0 +1,78 @@
+.sidebar-finalLogo {
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.main-div {
+    width: 275px;
+    border: 0;
+    height: 100vh;
+    display: flex;
+    box-sizing: border-box;
+    background-color: #EFEFF0;
+    padding-left: 15px;
+    /* padding-right: 10px; */
+}
+
+.main-div .div {
+    height: 40px;
+    width: 215px;
+    padding: 8px 16px 8px 16px;
+    border-radius: 4px;
+    display: flex;
+}
+
+
+.div .icon {
+    margin-right: 20px;
+    margin-left: 30px;
+    top: 3px;
+    left: 3px;
+    display: flex;
+}
+
+@media screen and (max-width:2200px) {
+    .main-div{
+        & .MuiTypography-root{
+            font-size: 22px;
+        }
+    }
+    .div{
+        margin-top: 20px;
+    }
+}
+@media screen and (max-width:1366px) {
+    .sidebar-finalLogo{
+        width: 45%;
+    }
+    .main-div{
+        & .MuiTypography-root{
+            font-size: 16px;
+        }
+    }
+    .div{
+        margin-top: 10px;
+    }
+}
+@media screen and (max-width:1280px) {
+    .main-div{
+        & .MuiTypography-root{
+            font-size: 16px;
+        }
+    }
+    .div{
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width:1120px) {
+    .main-div{
+        & .MuiTypography-root{
+            font-size: 14px;
+        }
+    }
+    .div{
+        margin-top: 5px;
+    }
+}

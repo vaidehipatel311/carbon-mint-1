@@ -1,0 +1,2 @@
+export const ADD_OPERATOR = 'ADD_OPERATOR';
+export const FETCH_OPERATOR = 'FETCH_OPERATOR';

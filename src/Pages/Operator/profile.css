@@ -1,0 +1,921 @@
+.profile-grid {
+    padding: 20px 10px;
+    display: grid;
+    justify-items: center;
+
+}
+
+.profile-grid .badge {
+    position: relative;
+    top: 90px;
+    left: 35px;
+}
+
+.profile-grid .avatar {
+    width: 80px;
+    height: 80px;
+    background: none;
+}
+
+.profile-grid .name {
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.profile-grid .n,
+.profile-grid .t {
+    font-size: 16px;
+}
+
+.profile-grid .id {
+    color: green;
+    font-weight: bold;
+}
+
+
+.contact,
+.documents,
+.details {
+    padding: 0px 10px;
+}
+
+.contact .title,
+.documents .title,
+.details .title {
+    font-size: 15px;
+}
+
+.contact .contact-details,
+.contact .email-details,
+.contact .address-details,
+.documents .aadhar {
+    margin-top: 20px;
+    display: flex;
+    font-size: 12px;
+}
+
+.details .fathername,
+.familysize,
+.farming,
+.organic-farming {
+    padding: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    line-height: 30px;
+}
+
+
+.no-of-landparcels,
+.no-of-crops,
+.no-of-events {
+    height: 50px;
+    padding: 10px;
+    display: flex;
+}
+
+.no-of-landparcels .content,
+.no-of-crops .content,
+.no-of-events .content {
+    margin-left: 10px;
+    display: grid;
+    font-size: 14px;
+}
+
+.landparcels-cards {
+    position: absolute;
+    margin-left: 370px;
+    margin-top: 100px;
+}
+
+.landparcel {
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.grid-upper-profile img {
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.grid-lower-profile {
+    border: 2px;
+    padding: 14px;
+    margin-left: 20px;
+}
+
+.grid-lower-profile .crops-operators {
+    display: flex;
+    text-align: center;
+    box-shadow: 0px 0px 12px 0px #0000001F;
+}
+
+.grid-lower-profile .crops-operators .title {
+    font-size: 15px;
+}
+
+.grid-lower-profile .crops-operators .text {
+    font-size: 15px;
+    margin-left: 10px;
+    margin-top: -15px;
+}
+
+@media screen and (max-width:2200px) {
+    .cards3 {
+        gap: 20px;
+    }
+
+    .profile-grid .avatar {
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-grid .name {
+        font-size: 28px;
+    }
+
+    .profile-grid .id,
+    .profile-grid .t,
+    .contact .title,
+    .documents .title,
+    .details .title,
+    .grid-lower-profile .t {
+        font-size: 20px;
+    }
+
+    .contact .contact-details,
+    .contact .email-details,
+    .contact .address-details,
+    .documents .aadhar {
+        font-size: 16px;
+    }
+
+    .profile-grid .n,
+    .grid-lower-profile .n {
+        font-size: 24px;
+    }
+
+    .details .fathername,
+    .details .familysize,
+    .details .farming,
+    .details .organic-farming {
+        font-size: 18px;
+    }
+
+    .no-of-landparcels .content,
+    .no-of-crops .content,
+    .no-of-events .content {
+        font-size: 20px;
+    }
+
+    .no-of-crops,
+    .no-of-events,
+    .no-of-landparcels {
+        gap: 20px;
+        margin-left: 20px;
+    }
+
+    .no-of-crops img,
+    .no-of-events img,
+    .no-of-landparcels img {
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+
+    .landparcels-cards {
+        margin-left: 680px;
+    }
+
+    .landparcel {
+        margin-left: 50px;
+        font-size: 24px;
+    }
+
+    .grid-upper-profile {
+        width: 85%;
+        margin-left: 30px;
+    }
+
+    .grid-lower-profile {
+        width: 80%;
+        margin-left: 50px;
+        font-size: 20px;
+    }
+
+    .grid-lower-profile .crops-operators {
+        font-size: 20px;
+        gap: 30px;
+        padding: 10px;
+    }
+    
+    .grid-lower-profile .crops-operators .text {
+        font-size: 20px;
+        margin-left: 10px;
+        margin-top: -15px;
+    }
+    .grid-lower-profile .crops-operators .no-of-events{
+        margin-left: 100px;
+    }
+}
+
+@media screen and (max-width:1920px) {
+    .cards3 {
+        gap: 20px;
+    }
+
+    .profile-grid .avatar {
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-grid .name {
+        font-size: 28px;
+    }
+
+    .profile-grid .id,
+    .profile-grid .t,
+    .contact .title,
+    .documents .title,
+    .details .title,
+    .grid-lower-profile .t {
+        font-size: 20px;
+    }
+
+    .contact .contact-details,
+    .contact .email-details,
+    .contact .address-details,
+    .documents .aadhar {
+        font-size: 16px;
+    }
+
+    .profile-grid .n,
+    .grid-lower-profile .n {
+        font-size: 24px;
+    }
+
+    .details .fathername,
+    .details .familysize,
+    .details .farming,
+    .details .organic-farming {
+        font-size: 18px;
+    }
+
+    .no-of-landparcels .content,
+    .no-of-crops .content,
+    .no-of-events .content {
+        font-size: 20px;
+    }
+
+    .no-of-crops,
+    .no-of-events,
+    .no-of-landparcels {
+        gap: 20px;
+        margin-left: 20px;
+    }
+
+    .no-of-crops img,
+    .no-of-events img,
+    .no-of-landparcels img {
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+
+    .landparcels-cards {
+        margin-left: 570px;
+    }
+
+    .landparcel {
+        margin-left: 50px;
+        font-size: 24px;
+    }
+
+    .grid-upper-profile {
+        width: 85%;
+        margin-left: 30px;
+    }
+
+    .grid-lower-profile {
+        width: 80%;
+        margin-left: 50px;
+        font-size: 20px;
+    }
+
+    .grid-lower-profile .crops-operators {
+        font-size: 20px;
+        gap: 0px;
+        padding: 10px;
+    }
+    
+    .grid-lower-profile .crops-operators .text {
+        font-size: 20px;
+        margin-left: 0px;
+        margin-top: -15px;
+    }
+    .grid-lower-profile .crops-operators .no-of-events{
+        margin-left: 100px;
+    }
+}
+
+@media screen and (max-width:1660px) {
+    .cards3 {
+        gap: 20px;
+    }
+
+    .profile-grid .avatar {
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-grid .name {
+        font-size: 26px;
+    }
+
+    .profile-grid .id,
+    .profile-grid .t,
+    .contact .title,
+    .documents .title,
+    .details .title,
+    .grid-lower-profile .t {
+        font-size: 20px;
+    }
+
+    .contact .contact-details,
+    .contact .email-details,
+    .contact .address-details,
+    .documents .aadhar {
+        font-size: 16px;
+    }
+
+    .profile-grid .n,
+    .grid-lower-profile .n {
+        font-size: 24px;
+    }
+
+    .details .fathername,
+    .details .familysize,
+    .details .farming,
+    .details .organic-farming {
+        font-size: 18px;
+    }
+
+    .no-of-landparcels .content,
+    .no-of-crops .content,
+    .no-of-events .content {
+        font-size: 20px;
+    }
+
+    .no-of-crops,
+    .no-of-events,
+    .no-of-landparcels {
+        gap: 20px;
+        margin-left: 15px;
+    }
+
+    .no-of-crops img,
+    .no-of-events img,
+    .no-of-landparcels img {
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+
+    .landparcels-cards {
+        margin-left: 470px;
+    }
+
+    .landparcel {
+        margin-left: 50px;
+        font-size: 24px;
+    }
+
+    .grid-upper-profile {
+        width: 85%;
+        margin-left: 30px;
+    }
+
+    .grid-lower-profile {
+        width: 79%;
+        margin-left: 50px;
+        font-size: 20px;
+    }
+
+    .grid-lower-profile .crops-operators {
+        font-size: 20px;
+        gap: 2px;
+        padding: 10px;
+    }
+    
+    .grid-lower-profile .crops-operators .text {
+        font-size: 20px;
+        margin-left: 0px;
+        margin-top: -15px;
+    }
+    .grid-lower-profile .crops-operators .no-of-events{
+        margin-left: 30px;
+    }
+}
+
+@media screen and (max-width:1520px) {
+    .cards3 {
+        gap: 20px;
+    }
+
+    .profile-grid .avatar {
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-grid .name {
+        font-size: 26px;
+    }
+
+    .profile-grid .id,
+    .profile-grid .t,
+    .contact .title,
+    .documents .title,
+    .details .title,
+    .grid-lower-profile .t {
+        font-size: 20px;
+    }
+
+    .contact .contact-details,
+    .contact .email-details,
+    .contact .address-details,
+    .documents .aadhar {
+        font-size: 16px;
+    }
+
+    .profile-grid .n,
+    .grid-lower-profile .n {
+        font-size: 24px;
+    }
+
+    .details .fathername,
+    .details .familysize,
+    .details .farming,
+    .details .organic-farming {
+        font-size: 16px;
+    }
+
+    .no-of-landparcels .content,
+    .no-of-crops .content,
+    .no-of-events .content {
+        font-size: 20px;
+    }
+
+    .no-of-crops,
+    .no-of-events,
+    .no-of-landparcels {
+        gap: 0px;
+        margin-left: 0px;
+    }
+
+    .no-of-crops img,
+    .no-of-events img,
+    .no-of-landparcels img {
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+
+    .landparcels-cards {
+        margin-left: 420px;
+    }
+
+    .landparcel {
+        margin-left: 50px;
+        font-size: 24px;
+    }
+
+    .grid-upper-profile {
+        width: 85%;
+        margin-left: 30px;
+    }
+
+    .grid-lower-profile {
+        width: 79%;
+        margin-left: 50px;
+        font-size: 20px;
+    }
+
+    .grid-lower-profile .crops-operators {
+        font-size: 20px;
+        gap: 0px;
+        padding: 10px;
+    }
+    
+    .grid-lower-profile .crops-operators .text {
+        font-size: 18px;
+        margin-left: 0px;
+        margin-top: -15px;
+    }
+    .grid-lower-profile .crops-operators .no-of-events{
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width:1440px) {
+    .cards3 {
+        gap: 15px;
+    }
+
+    .profile-grid .avatar {
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-grid .name {
+        font-size: 24px;
+    }
+
+    .profile-grid .id,
+    .profile-grid .t,
+    .contact .title,
+    .documents .title,
+    .details .title,
+    .grid-lower-profile .t {
+        font-size: 18px;
+    }
+
+    .contact .contact-details,
+    .contact .email-details,
+    .contact .address-details,
+    .documents .aadhar {
+        font-size: 16px;
+    }
+
+    .profile-grid .n,
+    .grid-lower-profile .n {
+        font-size: 22px;
+    }
+
+    .details .fathername,
+    .details .familysize,
+    .details .farming,
+    .details .organic-farming {
+        font-size: 18px;
+    }
+
+    .no-of-landparcels .content,
+    .no-of-crops .content,
+    .no-of-events .content {
+        font-size: 18px;
+    }
+
+    .no-of-crops,
+    .no-of-events,
+    .no-of-landparcels {
+        gap: 0px;
+        margin-left: 0px;
+    }
+
+    .no-of-crops img,
+    .no-of-events img,
+    .no-of-landparcels img {
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+
+    .landparcels-cards {
+        margin-left: 380px;
+    }
+
+    .landparcel {
+        margin-left: 50px;
+        font-size: 24px;
+    }
+
+    .grid-upper-profile {
+        width: 85%;
+        margin-left: 30px;
+    }
+
+    .grid-lower-profile {
+        width: 78%;
+        margin-left: 50px;
+        font-size: 20px;
+    }
+
+    .grid-lower-profile .crops-operators {
+        font-size: 18px;
+        gap: 0px;
+        padding: 10px;
+    }
+    
+    .grid-lower-profile .crops-operators .text {
+        font-size: 16px;
+        margin-left: 0px;
+        margin-top: -15px;
+    }
+    .grid-lower-profile .crops-operators .no-of-events{
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width:1366px) {
+    .cards3 {
+        gap: 15px;
+    }
+
+    .profile-grid .avatar {
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-grid .name {
+        font-size: 20px;
+    }
+
+    .profile-grid .id,
+    .profile-grid .t,
+    .contact .title,
+    .documents .title,
+    .grid-lower-profile .t {
+        font-size: 14px;
+    }
+
+    .contact .contact-details,
+    .contact .email-details,
+    .contact .address-details,
+    .documents .aadhar,
+    .details .title {
+        font-size: 14px;
+    }
+
+    .profile-grid .n,
+    .grid-lower-profile .n {
+        font-size: 20px;
+    }
+
+    .details .fathername,
+    .details .familysize,
+    .details .farming,
+    .details .organic-farming {
+        font-size: 14px;
+    }
+
+    .no-of-landparcels .content,
+    .no-of-crops .content,
+    .no-of-events .content {
+        font-size: 16px;
+    }
+
+    .no-of-crops,
+    .no-of-events,
+    .no-of-landparcels {
+        gap: 0px;
+        margin-left: 0px;
+    }
+
+    .no-of-crops img,
+    .no-of-events img,
+    .no-of-landparcels img {
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+
+    .landparcels-cards {
+        margin-left: 365px;
+    }
+
+    .landparcel {
+        margin-left: 50px;
+        font-size: 24px;
+    }
+
+    .grid-upper-profile {
+        width: 85%;
+        margin-left: 20px;
+    }
+
+    .grid-lower-profile {
+        width: 77%;
+        margin-left: 40px;
+        font-size: 18px;
+    }
+
+    .grid-lower-profile .crops-operators {
+        font-size: 14px;
+        gap: 0px;
+        margin-top: 10px;
+        padding: 10px;
+    }
+    
+    .grid-lower-profile .crops-operators .text {
+        font-size: 14px;
+        margin-left: 0px;
+        margin-top: -15px;
+    }
+    .grid-lower-profile .crops-operators .no-of-events{
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .cards3 {
+        gap: 15px;
+    }
+
+    .profile-grid .avatar {
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-grid .name {
+        font-size: 20px;
+    }
+
+    .profile-grid .id,
+    .profile-grid .t,
+    .contact .title,
+    .documents .title,
+    .details .title,
+    .grid-lower-profile .t {
+        font-size: 14px;
+    }
+
+    .contact .contact-details,
+    .contact .email-details,
+    .contact .address-details,
+    .documents .aadhar {
+        font-size: 16px;
+    }
+
+    .profile-grid .n,
+    .grid-lower-profile .n {
+        font-size: 18px;
+    }
+
+    .details .fathername,
+    .details .familysize,
+    .details .farming,
+    .details .organic-farming {
+        font-size: 18px;
+    }
+
+    .no-of-landparcels .content,
+    .no-of-crops .content,
+    .no-of-events .content {
+        font-size: 14px;
+    }
+
+    .no-of-crops,
+    .no-of-events,
+    .no-of-landparcels {
+        gap: 0px;
+        margin-left: 0px;
+    }
+
+    .no-of-crops img,
+    .no-of-events img,
+    .no-of-landparcels img {
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+
+    .landparcels-cards {
+        margin-left: 345px;
+    }
+
+    .landparcel {
+        margin-left: 40px;
+        font-size: 22px;
+    }
+
+    .grid-upper-profile {
+        width: 85%;
+        margin-left: 10px;
+    }
+
+    .grid-lower-profile {
+        width: 77%;
+        margin-left: 30px;
+        font-size: 20px;
+    }
+
+    .grid-lower-profile .crops-operators {
+        font-size: 14px;
+        gap: 0px;
+        padding: 10px;
+    }
+    
+    .grid-lower-profile .crops-operators .text {
+        font-size: 12px;
+        margin-left: 0px;
+        margin-top: -15px;
+    }
+    .grid-lower-profile .crops-operators .no-of-events{
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width:1120px) {
+    .cards3 {
+        gap: 10px;
+    }
+
+    .profile-grid .avatar {
+        width: 30%;
+        height: 90%;
+    }
+    .profile-grid .badge{
+        top: 75px;
+    }
+
+    .profile-grid .name {
+        font-size: 20px;
+    }
+
+    .profile-grid .id,
+    .profile-grid .t,
+    .contact .title,
+    .documents .title,
+    .details .title,
+    .grid-lower-profile .t {
+        font-size: 12px;
+    }
+
+    .contact .contact-details,
+    .contact .email-details,
+    .contact .address-details,
+    .documents .aadhar {
+        font-size: 14px;
+    }
+
+    .profile-grid .n,
+    .grid-lower-profile .n {
+        font-size: 16px;
+    }
+
+    .details .fathername,
+    .details .familysize,
+    .details .farming,
+    .details .organic-farming {
+        font-size: 16px;
+    }
+
+    .no-of-landparcels .content,
+    .no-of-crops .content,
+    .no-of-events .content {
+        font-size: 14px;
+    }
+
+    .no-of-crops,
+    .no-of-events,
+    .no-of-landparcels {
+        gap: 0px;
+        margin-left: 0px;
+    }
+
+    .no-of-crops img,
+    .no-of-events img,
+    .no-of-landparcels img {
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+
+    .landparcels-cards {
+        margin-left: 290px;
+    }
+
+    .landparcel {
+        margin-left: 25px;
+        font-size: 20px;
+    }
+
+    .grid-upper-profile {
+        width: 85%;
+        margin-left: 0px;
+    }
+
+    .grid-lower-profile {
+        width: 75%;
+        margin-left: 20px;
+        font-size: 16px;
+    }
+
+    .grid-lower-profile .crops-operators {
+        font-size: 12px;
+        gap: 0px;
+        padding: 10px;
+    }
+    
+    .grid-lower-profile .crops-operators .text {
+        font-size: 10px;
+        margin-left: 0px;
+        margin-top: -15px;
+    }
+    .grid-lower-profile .crops-operators .no-of-events{
+        margin-left: 10px;
+    }
+}

@@ -1,0 +1,193 @@
+.add-operator-topbar .create-operator-title {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.add-operator-topbar {
+    display: flex;
+}
+
+.first-part {
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+.first-part .operator-name {
+    display: grid;
+    gap: 15px;
+}
+
+.first-part .address-contact-details {
+    display: grid;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.first-part .address-contact-details .chosen-file-image,
+.second-part .pancard .chosen-file-image,
+.second-part .leased-document .chosen-file-image {
+    margin-top: -90px;
+    margin-left: 380px;
+}
+
+.first-part .address-contact-details .chosen-file-image img,
+.second-part .pancard .chosen-file-image img,
+.second-part .leased-document .chosen-file-image img {
+    width: 50px;
+    height: 50px;
+}
+
+.first-part .address-contact-details .choose-files-btn,
+.second-part .choose-files-btn {
+    font-size: 12px;
+    margin-top: -105px;
+    margin-left: 160px;
+    height: 40px;
+    width: 130px;
+    color: black;
+    background: rgba(140, 216, 103, 1);
+    border: 1px solid green;
+    border-radius: 5px;
+}
+
+.second-part {
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.second-part .pancard {
+    display: grid;
+    gap: 10px;
+}
+
+.second-part .pancard .choose-files-btn {
+    font-size: 12px;
+    margin-top: -60px;
+    margin-left: 160px;
+    height: 40px;
+    width: 130px;
+    color: black;
+    background: rgba(140, 216, 103, 1);
+    border: 1px solid green;
+    border-radius: 5px;
+}
+
+.second-part .farming-experience,
+.second-part .land-information,
+.second-part .leased-document {
+    display: grid;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.second-part .leased-document .choose-files-btn {
+    font-size: 12px;
+    margin-top: -65px;
+    margin-left: 160px;
+    height: 40px;
+    width: 130px;
+    color: black;
+    background: rgba(140, 216, 103, 1);
+    border: 1px solid green;
+    border-radius: 5px;
+}
+
+.second-part .submit-cancel-btn {
+    display: flex;
+    margin-top: 70px;
+    gap: 20px;
+    margin-left: 250px;
+}
+
+.second-part .submit-cancel-btn .submit-btn {
+    font-size: 12px;
+    height: 40px;
+    width: 120px;
+    color: black;
+    background: rgba(140, 216, 103, 1);
+    border: 1px solid green;
+    border-radius: 5px;
+}
+
+.second-part .submit-cancel-btn .cancel-btn {
+    font-size: 12px;
+    height: 40px;
+    width: 130px;
+    color: green;
+    background: white;
+    border: 1px solid rgba(140, 216, 103, 1);
+    border-radius: 5px;
+}
+
+.close-img {
+    margin-bottom: 75px;
+    margin-left: -40px;
+    color: black;
+}
+
+@media screen and (max-width:2200px) {
+
+    .first-part,
+    .second-part {
+        & .MuiTypography-root {
+            font-size: 20px;
+        }
+
+        & .MuiInputBase-root {
+            font-size: 22px;
+        }
+
+    }
+
+    .second-part {
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width:1366px) {
+
+    .first-part,
+    .second-part {
+        & .MuiTypography-root {
+            font-size: 18px;
+        }
+
+        & .MuiInputBase-root {
+            font-size: 16px;
+        }
+
+    }
+
+    .second-part {
+        margin-left: 0px;
+    }
+
+    .close-img {
+        margin-bottom: 75px;
+        margin-left: -40px;
+        color: black;
+    }
+
+}
+
+@media screen and (max-width:1120px) {
+
+    .first-part,
+    .second-part {
+        & .MuiTypography-root {
+            font-size: 20px;
+        }
+
+        & .MuiInputBase-root {
+            font-size: 14px;
+        }
+
+    }
+
+    .second-part {
+        margin-right: 0px;
+    }
+}

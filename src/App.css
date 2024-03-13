@@ -1,0 +1,352 @@
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 28px;
+}
+.cards{
+  gap: 0px;
+}
+.operators,
+.no-acrs,
+.yields,
+.crops,
+.events {
+    padding: 16px 0px 16px 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+    display: flex;
+    box-shadow: 0px 0px 12px 0px #0000001F;
+
+}
+
+.information {
+    margin-left: 20px;
+}
+.operators img,.no-acrs img,.yields img,.events img{
+
+    height: 90%;
+}
+.operators-text,
+.no-acrs-text,
+.yields-text,
+.crops-text,
+.events-text {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    color: #79787A;
+}
+.numbers{
+  font-size: 18px;
+}
+input{
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: 1px solid rgb(190, 189, 189);
+}
+.search-icon{
+  right: -30px;
+  top: 8px;
+  position: relative;
+  color: gray;
+}
+
+/* body{
+  & .MuiButton-root:hover{
+    color: black;
+    background: rgba(140, 216, 103, 1);
+  }
+} */
+
+@media screen and (max-width:2200px) {
+  .search-icon{
+    margin-left: 200px;
+  }
+  .title{
+    font-size: 38px;
+  }
+  .crops,.events{
+    gap: 20px;
+  }
+  .operators-text,
+  .yields-text,
+  .events-text,
+  .crops-text,
+  .no-acrs-text{
+    font-size: 26px;
+  }
+  .information{
+    margin-left: 50px;
+  }
+  .numbers{
+    font-size: 30px;
+  }
+  .cards{
+    gap: 18px;
+  }
+  .operators img,
+  .yields img,
+  .crops img,
+  .events img,
+  .no-acrs img{
+    margin-left: 10px;
+    height: 20%;
+    width: 20%;
+  }
+  
+}
+
+ @media screen and (max-width:1920px) {
+  .search-icon{
+    margin-left: 140px;
+  }
+  .title{
+    font-size: 36px;
+  }
+  .crops,.events{
+    gap: 10px;
+  }
+  .operators-text,
+  .yields-text,
+  .events-text,
+  .crops-text,
+  .no-acrs-text{
+    font-size: 24px;
+  }
+  .information{
+    margin-left: 50px;
+  }
+  .numbers{
+    font-size: 28px;
+  }
+  .cards{
+    gap: 15px;
+  }
+  .operators img,
+  .yields img,
+  .crops img,
+  .events img,
+  .no-acrs img{
+    margin-left: 10px;
+    height: 20%;
+    width: 20%;
+  }
+  
+} 
+
+@media screen and (max-width:1660px) {
+  .search-icon{
+    margin-left: 70px;
+  }
+  .title{
+    font-size: 32px;
+  }
+  .crops,.events{
+    gap: 10px;
+  }
+  .operators-text,
+  .yields-text,
+  .events-text,
+  .crops-text,
+  .no-acrs-text{
+    font-size: 22px;
+  }
+  .information{
+    margin-left: 20px;
+  }
+  .numbers{
+    font-size: 26px;
+  }
+  .cards{
+    gap: 13px;
+  }
+  .operators img,
+  .yields img,
+  .crops img,
+  .events img,
+  .no-acrs img{
+    margin-left: 10px;
+    height: 20%;
+    width: 20%;
+  }
+  
+}
+
+@media screen and (max-width:1520px) {
+  .search-icon{
+    margin-left: 40px;
+  }
+  .title{
+    font-size: 32px;
+  }
+  .crops,.events{
+    gap: 10px;
+  }
+  .operators-text,
+  .yields-text,
+  .events-text,
+  .crops-text,
+  .no-acrs-text{
+    font-size: 20px;
+  }
+  .information{
+    margin-left: 20px;
+  }
+  .numbers{
+    font-size: 26px;
+  }
+  .cards{
+    gap: 12px;
+  }
+  .operators img,
+  .yields img,
+  .crops img,
+  .events img,
+  .no-acrs img{
+    margin-left: 10px;
+    height: 20%;
+    width: 20%;
+  }
+  
+}
+
+@media screen and (max-width:1440px) {
+  .search-icon{
+    margin-left: 20px;
+  }
+  .title{
+    font-size: 30px;
+  }
+  .crops,.events{
+    gap: 10px;
+  }
+  .operators-text,
+  .yields-text,
+  .events-text,
+  .crops-text,
+  .no-acrs-text{
+    font-size: 20px;
+  }
+  .information{
+    margin-left: 20px;
+  }
+  .numbers{
+    font-size: 24px;
+  }
+  .cards{
+    gap: 11px;
+  }
+  .operators img,
+  .yields img,
+  .crops img,
+  .events img,
+  .no-acrs img{
+    margin-left: 0px;
+    height: 20%;
+    width: 20%;
+  }
+  
+}
+
+@media screen and (max-width:1366px) {
+  .search-icon{
+    margin-left: 0px;
+  }
+  .title{
+    font-size: 28px;
+  }
+  .crops,.events{
+    gap: 10px;
+  }
+  .operators-text,
+  .yields-text,
+  .events-text,
+  .crops-text,
+  .no-acrs-text{
+    font-size: 16px;
+  }
+  .information{
+    margin-left: 20px;
+  }
+  .numbers{
+    font-size: 20px;
+  }
+  .cards{
+    gap: 10px;
+  }
+  .operators img,
+  .yields img,
+  .crops img,
+  .events img,
+  .no-acrs img{
+    margin-left: 0px;
+    height: 20%;
+    width: 20%;
+  }
+  
+}
+
+@media screen and (max-width:1280px) {
+  .title{
+    font-size: 26px;
+  }
+  .operators-text,
+  .yields-text,
+  .events-text,
+  .crops-text,
+  .no-acrs-text{
+    font-size: 16px;
+  }
+  .information{
+    margin-left: 20px;
+  }
+  .numbers{
+    font-size: 20px;
+  }
+  .cards{
+    gap: 9px;
+  }
+  .operators img,
+  .yields img,
+  .crops img,
+  .events img,
+  .no-acrs img{
+    margin-left: 0px;
+    height: 20%;
+    width: 20%;
+  }
+  
+}
+
+@media screen and (max-width:1120px) {
+  
+  .title{
+    font-size: 24px;
+  }
+  .operators-text,
+  .yields-text,
+  .events-text,
+  .crops-text,
+  .no-acrs-text{
+    font-size: 14px;
+  }
+  .information{
+    margin-left: 10px;
+  }
+  .numbers{
+    font-size: 18px;
+  }
+  .cards{
+    gap: 7px;
+  }
+  .operators img,
+  .yields img,
+  .crops img,
+  .events img,
+  .no-acrs img{
+    margin-left: 0px;
+    height: 20%;
+    width: 20%;
+  }
+  
+}

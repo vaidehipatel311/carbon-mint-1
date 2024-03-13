@@ -1,0 +1,1 @@
+export const FETCH_LAND_OWNERS = 'FETCH_LAND_OWNERS';

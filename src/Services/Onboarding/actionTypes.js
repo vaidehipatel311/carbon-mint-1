@@ -1,0 +1,1 @@
+export const FETCH_ONBOARDING = 'FETCH_ONBOARDING';

@@ -1,0 +1,1341 @@
+
+
+.operator-chart,
+.event-chart,
+.crops-chart,
+.upcoming,
+.yield-chart,
+.status-chart,
+.onboarding,
+.events-lists,
+.todo {
+    margin-top: 20px;
+    height: 100%;
+}
+
+.operator-chart .title,
+.event-chart .title,
+.crops-chart .title,
+.upcoming .title,
+.yield-chart .title,
+.status-chart .title,
+.events-lists .title,
+.todo .title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 16px;
+}
+
+.operator-chart .year_month_img,
+.event-chart .year_month_img,
+.upcoming .year_month_img,
+.yield-chart .year_month_img {
+    margin-left: 10px;
+    top: 5px;
+    position: relative;
+}
+
+.operator-chart .chart-img,
+.event-chart .chart-img,
+.crops-chart .chart-img {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.yield-chart .chart-img {
+    margin-top: 30px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.operator-chart .country-dropdown {
+    height: 18px;
+    width: auto;
+    margin-left: 90px;
+    border: none;
+    color: #79787A;
+
+}
+
+.operator-chart .date,
+.upcoming .date {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0em;
+    margin-left: 10px;
+    color: #79787A;
+
+}
+
+.operator-chart .lists {
+    margin: 10px 0px 0px 15px;
+    font-size: 12px;
+}
+
+.event-chart .states-dropdown,
+.crops-chart .states-dropdown,
+.status-chart .operator-dropdown {
+    width: auto;
+    margin-left: 20px;
+    border: none;
+    color: #79787A;
+
+}
+.yield-chart .states-dropdown{
+    width: auto;
+    margin-left: 150px;
+    border: none;
+    color: #79787A;
+}
+.all-dropdown,
+.status-chart .country-dropdown {
+    margin-left: 10px;
+    width: 20%;
+    border: none;
+    color: #79787A;
+
+}
+
+.event-chart .lists {
+    margin: 5px 0px 0px 15px;
+    font-size: 12px;
+}
+
+.crops-chart .lists {
+    margin-left: 10px;
+    margin-top: 70px;
+    font-size: 14px;
+    margin-bottom: 110px;
+}
+
+
+
+
+.upcoming .days {
+    display: flex;
+    margin-left: 15px;
+    margin-top: 48px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+    letter-spacing: 0em;
+    color: #BCBCBC;
+    gap: 18px;
+}
+
+.upcoming .numbers {
+    display: flex;
+    padding: 40px 10px 20px 0px;
+    border-radius: 8px;
+    gap: 12px;
+    font-size: 14px;
+
+}
+
+.upcoming .numbers .num-background {
+    height: 34px;
+    padding: 20px 5px 20px 5px;
+    border-radius: 8px;
+    background: #EFEFF0;
+}
+
+.upcoming .lists {
+    margin-left: 15px;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.upcoming .upcoming-event {
+    color: black;
+    position: relative;
+    display: inline;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.upcoming .upcoming-datetime {
+    color: #79787A;
+    position: relative;
+    display: inline;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.yield-chart .lists {
+    margin-top: 30px;
+    font-size: 12px;
+}
+
+.status-chart .india-img {
+    margin-top: 10px;
+    margin-left: 16px;
+}
+
+.status-chart .india-dotted-img {
+    margin-top: 90px;
+    margin-left: 40px;
+    position: absolute;
+}
+
+.status-chart .person-location-img {
+    margin-top: 60px;
+    margin-left: 105px;
+    position: absolute;
+
+}
+
+.status-chart .lists {
+    margin-top: 170px;
+    font-size: 12px;
+    position: absolute;
+    margin-left: 200px;
+
+}
+
+
+.onboarding .person-icon {
+    width: 20px;
+    height: 20px;
+}
+
+
+.events-lists .viewall .title {
+    color: rgb(52, 156, 52);
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.events-lists .content,
+.events-lists .viewall .content {
+    margin-left: 10px;
+    display: grid;
+    font-size: 13px;
+    line-height: 55px;
+
+}
+
+
+
+.todo .checkbox {
+    font-size: 14px;
+    margin-top: 25px;
+    line-height: 66px;
+}
+
+
+@media screen and (max-width:2200px) {
+    
+    .dashboard .search-icon {
+        margin-left: 210px;
+    }
+
+    .operator-chart .title,
+    .event-chart .title,
+    .crops-chart .title,
+    .upcoming .title,
+    .yield-chart .title,
+    .status-chart .title,
+    .events-lists .title,
+    .todo .title,
+    .todo .checkbox {
+        font-size: 28px;
+    }
+
+    .events-lists .content,
+    .events-lists .viewall .content {
+        font-size: 24px;
+        line-height: 55px;
+    }
+
+    .operator-chart .country-dropdown,
+    .operator-chart .date,
+    .event-chart .states-dropdown,
+    .crops-chart .states-dropdown,
+    .crops-chart .all-dropdown,
+    .upcoming .date,
+    .yield-chart .states-dropdown,
+    .status-chart .operator-dropdown,
+    .status-chart .country-dropdown,
+    .events-lists .viewall .title,
+    .todo .viewall {
+        font-size: 22px;
+    }
+    .onboarding{
+        & .MuiTableCell-root{
+            font-size: 22px;
+        }
+    }
+    .upcoming .days {
+        font-size: 20px;
+        margin-top: 100px;
+    }
+
+    .upcoming .numbers {
+        font-size: 20px;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .operator-chart .country-dropdown,
+    .yield-chart .states-dropdown {
+        margin-left: 300px;
+    }
+
+    .operator-chart .lists {
+        margin-top: 25px;
+    }
+
+    .event-chart .states-dropdown,
+    .crops-chart .states-dropdown,
+    .upcoming .date {
+        margin-left: 150px;
+    }
+
+    .crops-chart .all-dropdown {
+        text-align: right;
+    }
+
+    .yield-chart .states-dropdown {
+        margin-left: 400px;
+    }
+
+
+    .crops-chart .chart-img {
+        margin-top: 70px;
+    }
+
+    .status-chart .india-img {
+        margin-left: 80px;
+        width: 48%;
+    }
+
+    .status-chart .india-dotted-img {
+        margin-top: 200px;
+        margin-left: 120px;
+    }
+
+    .status-chart .person-location-img {
+        margin-top: 150px;
+        margin-left: 200px;
+    }
+
+    .operator-chart .lists,
+    .event-chart .lists,
+    .status-chart .lists,
+    .yield-chart .lists {
+        font-size: 22px;
+    }
+
+    .upcoming .lists {
+        font-size: 22px;
+        margin-top: 50px;
+    }
+
+    .yield-chart .lists {
+        margin-left: 10px;
+    }
+
+    .status-chart .lists {
+        margin-left: 400px;
+        margin-top: 260px;
+    }
+
+    .crops-chart .lists {
+        font-size: 24px;
+        margin-bottom: 170px;
+        margin-top: 150px;
+        margin-left: 50px;
+    }
+
+
+}
+
+@media screen and (max-width:1920px) {
+    .dashboard .search-icon {
+        margin-left: 140px;
+    }
+
+    .operator-chart .title,
+    .event-chart .title,
+    .crops-chart .title,
+    .upcoming .title,
+    .yield-chart .title,
+    .status-chart .title,
+    .events-lists .title,
+    .todo .title {
+        font-size: 28px;
+    }
+
+    .todo .checkbox {
+        font-size: 18px;
+    }
+
+    .events-lists .content,
+    .events-lists .viewall .content {
+        font-size: 18px;
+        line-height: 55px;
+    }
+
+    .operator-chart .country-dropdown,
+    .operator-chart .date,
+    .event-chart .states-dropdown,
+    .crops-chart .states-dropdown,
+    .crops-chart .all-dropdown,
+    .upcoming .date,
+    .yield-chart .states-dropdown,
+    .status-chart .operator-dropdown,
+    .status-chart .country-dropdown,
+    .events-lists .viewall .title,
+    .todo .viewall {
+        font-size: 20px;
+    }
+
+    .upcoming .days {
+        font-size: 20px;
+        margin-top: 70px;
+    }
+
+    .upcoming .numbers {
+        font-size: 20px;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .operator-chart .country-dropdown,
+    .yield-chart .states-dropdown {
+        margin-left: 200px;
+    }
+
+    .operator-chart .lists {
+        margin-top: 25px;
+    }
+
+    .event-chart .states-dropdown {
+        margin-left: 100px;
+    }
+
+    .upcoming .date {
+        margin-left: 80px;
+    }
+
+    .crops-chart .states-dropdown {
+        margin-left: 50px;
+    }
+
+    .crops-chart .all-dropdown {
+        text-align: right;
+    }
+
+    .yield-chart .states-dropdown {
+        margin-left: 300px;
+    }
+
+
+    .crops-chart .chart-img {
+        margin-top: 40px;
+    }
+
+    .status-chart .india-img {
+        margin-left: 50px;
+        width: 48%;
+    }
+
+    .status-chart .india-dotted-img {
+        margin-top: 160px;
+        margin-left: 80px;
+    }
+
+    .status-chart .person-location-img {
+        margin-top: 120px;
+        margin-left: 150px;
+    }
+
+    .operator-chart .lists,
+    .event-chart .lists,
+    .status-chart .lists,
+    .yield-chart .lists {
+        font-size: 20px;
+    }
+
+    .upcoming .lists {
+        font-size: 20px;
+        margin-top: 40px;
+    }
+
+    .yield-chart .lists {
+        margin-left: 8px;
+    }
+
+    .status-chart .lists {
+        margin-left: 320px;
+        margin-top: 220px;
+    }
+
+    .crops-chart .lists {
+        font-size: 22px;
+        margin-bottom: 140px;
+        margin-top: 120px;
+        margin-left: 20px;
+    }
+
+
+}
+
+@media screen and (max-width:1660px) {
+    .dashboard .search-icon {
+        margin-left: 80px;
+    }
+
+    .operator-chart .title,
+    .event-chart .title,
+    .crops-chart .title,
+    .upcoming .title,
+    .yield-chart .title,
+    .status-chart .title,
+    .events-lists .title,
+    .todo .title {
+        font-size: 24px;
+    }
+
+    .todo .checkbox {
+        font-size: 18px;
+    }
+
+    .events-lists .content,
+    .events-lists .viewall .content {
+        font-size: 18px;
+        line-height: 55px;
+    }
+
+    .operator-chart .country-dropdown,
+    .operator-chart .date,
+    .event-chart .states-dropdown,
+    .crops-chart .states-dropdown,
+    .crops-chart .all-dropdown,
+    .upcoming .date,
+    .yield-chart .states-dropdown,
+    .status-chart .operator-dropdown,
+    .status-chart .country-dropdown,
+    .events-lists .viewall .title,
+    .todo .viewall {
+        font-size: 18px;
+    }
+
+    .upcoming .days {
+        font-size: 18px;
+        margin-top: 50px;
+    }
+
+    .upcoming .numbers {
+        font-size: 18px;
+        gap: 21px;
+        margin-top: 0px;
+    }
+
+    .operator-chart .country-dropdown {
+        margin-left: 120px;
+    }
+
+    .operator-chart .lists {
+        margin-top: 25px;
+    }
+
+    .event-chart .states-dropdown {
+        margin-left: 50px;
+    }
+
+    .upcoming .date {
+        margin-left: 30px;
+    }
+
+    .crops-chart .states-dropdown {
+        margin-left: 50px;
+    }
+
+    .crops-chart .all-dropdown {
+        text-align: right;
+    }
+
+    .yield-chart .states-dropdown {
+        margin-left: 220px;
+    }
+
+
+    .crops-chart .chart-img {
+        margin-top: 40px;
+    }
+
+    .status-chart .india-img {
+        margin-left: 20px;
+        width: 48%;
+    }
+
+    .status-chart .india-dotted-img {
+        margin-top: 110px;
+        margin-left: 40px;
+    }
+
+    .status-chart .person-location-img {
+        margin-top: 100px;
+        margin-left: 100px;
+    }
+
+    .operator-chart .lists,
+    .event-chart .lists,
+    .status-chart .lists,
+    .yield-chart .lists {
+        font-size: 18px;
+    }
+
+    .event-chart .lists {
+        margin-top: 15px;
+    }
+
+    .upcoming .lists {
+        font-size: 20px;
+        margin-top: 40px;
+    }
+
+    .yield-chart .lists {
+        font-size: 16px;
+        margin-left: 8px;
+    }
+
+    .status-chart .lists {
+        margin-left: 260px;
+        margin-top: 190px;
+    }
+
+    .crops-chart .lists {
+        font-size: 18px;
+        margin-bottom: 120px;
+        margin-top: 120px;
+        margin-left: 20px;
+    }
+
+
+}
+
+@media screen and (max-width:1520px) {
+    .dashboard .search-icon {
+        margin-left: 45px;
+    }
+
+    .operator-chart .title,
+    .event-chart .title,
+    .crops-chart .title,
+    .upcoming .title,
+    .yield-chart .title,
+    .status-chart .title,
+    .events-lists .title,
+    .todo .title {
+        font-size: 20px;
+    }
+
+    .todo .checkbox {
+        font-size: 16px;
+    }
+
+    .events-lists .content,
+    .events-lists .viewall .content {
+        font-size: 16px;
+        line-height: 55px;
+    }
+
+    .operator-chart .country-dropdown,
+    .operator-chart .date,
+    .event-chart .states-dropdown,
+    .crops-chart .states-dropdown,
+    .crops-chart .all-dropdown,
+    .upcoming .date,
+    .yield-chart .states-dropdown,
+    .status-chart .operator-dropdown,
+    .status-chart .country-dropdown,
+    .events-lists .viewall .title,
+    .todo .viewall {
+        font-size: 16px;
+    }
+
+    .upcoming .days {
+        font-size: 16px;
+        margin-top: 50px;
+    }
+
+    .upcoming .numbers {
+        font-size: 16px;
+        gap: 17px;
+        margin-top: 0px;
+    }
+
+    .operator-chart .country-dropdown {
+        margin-left: 100px;
+    }
+
+    .operator-chart .lists {
+        margin-top: 25px;
+    }
+
+    .event-chart .states-dropdown {
+        margin-left: 30px;
+    }
+
+    .upcoming .date {
+        margin-left: 20px;
+    }
+
+    .crops-chart .states-dropdown {
+        margin-left: 50px;
+    }
+
+    .crops-chart .all-dropdown {
+        text-align: right;
+    }
+
+    .yield-chart .states-dropdown {
+        margin-left: 190px;
+    }
+
+
+    .crops-chart .chart-img {
+        margin-top: 40px;
+    }
+
+    .status-chart .india-img {
+        margin-left: 20px;
+        width: 48%;
+    }
+
+    .status-chart .india-dotted-img {
+        margin-top: 90px;
+        margin-left: 35px;
+    }
+
+    .status-chart .person-location-img {
+        margin-top: 80px;
+        margin-left: 80px;
+    }
+
+    .operator-chart .lists,
+    .event-chart .lists,
+    .status-chart .lists {
+        font-size: 16px;
+    }
+
+    .event-chart .lists {
+        margin-top: 15px;
+    }
+
+    .upcoming .lists {
+        font-size: 16px;
+        margin-top: 30px;
+    }
+
+    .yield-chart .lists {
+        font-size: 15px;
+        margin-left: 3px;
+    }
+
+    .status-chart .lists {
+        margin-left: 220px;
+        margin-top: 170px;
+    }
+
+    .crops-chart .lists {
+        font-size: 16px;
+        margin-bottom: 100px;
+        margin-top: 120px;
+        margin-left: 20px;
+    }
+
+
+}
+
+@media screen and (max-width:1440px) {
+    .dashboard .search-icon {
+        margin-left: 20px;
+    }
+
+    .operator-chart .title,
+    .event-chart .title,
+    .crops-chart .title,
+    .upcoming .title,
+    .yield-chart .title,
+    .status-chart .title,
+    .events-lists .title,
+    .todo .title {
+        font-size: 20px;
+    }
+
+    .todo .checkbox {
+        font-size: 16px;
+    }
+
+    .events-lists .content,
+    .events-lists .viewall .content {
+        font-size: 14px;
+        line-height: 55px;
+    }
+
+    .operator-chart .country-dropdown,
+    .operator-chart .date,
+    .event-chart .states-dropdown,
+    .crops-chart .states-dropdown,
+    .crops-chart .all-dropdown,
+    .upcoming .date,
+    .yield-chart .states-dropdown,
+    .status-chart .operator-dropdown,
+    .status-chart .country-dropdown,
+    .events-lists .viewall .title,
+    .todo .viewall {
+        font-size: 16px;
+    }
+
+    .upcoming .days {
+        font-size: 14px;
+        margin-top: 50px;
+    }
+
+    .upcoming .numbers {
+        font-size: 16px;
+        gap: 14px;
+        margin-top: 0px;
+    }
+
+    .operator-chart .country-dropdown {
+        margin-left: 70px;
+    }
+
+    .operator-chart .lists {
+        margin-top: 25px;
+    }
+
+    .event-chart .states-dropdown {
+        margin-left: 15px;
+    }
+
+    .upcoming .date {
+        margin-left: 0px;
+    }
+
+    .crops-chart .states-dropdown {
+        margin-left: 30px;
+    }
+
+    .crops-chart .all-dropdown {
+        text-align: right;
+    }
+
+    .yield-chart .states-dropdown {
+        margin-left: 160px;
+    }
+
+    .yield-chart .chart-img {
+        margin-bottom: 10px;
+    }
+
+    .crops-chart .chart-img {
+        margin-top: 40px;
+    }
+
+    .status-chart .india-img {
+        margin-left: 20px;
+        width: 55%;
+    }
+
+    .status-chart .india-dotted-img {
+        margin-top: 90px;
+        margin-left: 35px;
+    }
+
+    .status-chart .person-location-img {
+        margin-top: 80px;
+        margin-left: 80px;
+    }
+
+    .operator-chart .lists,
+    .event-chart .lists,
+    .status-chart .lists {
+        font-size: 16px;
+    }
+
+    .event-chart .lists {
+        margin-top: 15px;
+    }
+
+    .upcoming .lists {
+        font-size: 16px;
+        margin-top: 30px;
+    }
+
+    .yield-chart .lists {
+        font-size: 14px;
+        margin-left: 0px;
+    }
+
+    .status-chart .lists {
+        margin-left: 220px;
+        margin-top: 170px;
+    }
+
+    .crops-chart .lists {
+        font-size: 16px;
+        margin-bottom: 105px;
+        margin-top: 100px;
+        margin-left: 10px;
+    }
+
+
+}
+
+@media screen and (max-width:1366px) {
+    .search-icon {
+        margin-left: 0px;
+    }
+
+    .operator-chart .title,
+    .event-chart .title,
+    .crops-chart .title,
+    .upcoming .title,
+    .yield-chart .title,
+    .status-chart .title,
+    .events-lists .title,
+    .todo .title {
+        font-size: 18px;
+    }
+
+    .todo .checkbox {
+        font-size: 13px;
+        line-height: 58px;
+    }
+
+    .events-lists .content,
+    .events-lists .viewall .content {
+        font-size: 13px;
+        line-height: 49px;
+    }
+
+    .operator-chart .country-dropdown,
+    .operator-chart .date,
+    .event-chart .states-dropdown,
+    .crops-chart .states-dropdown,
+    .crops-chart .all-dropdown,
+    .upcoming .date,
+    .yield-chart .states-dropdown,
+    .status-chart .operator-dropdown,
+    .status-chart .country-dropdown,
+    .events-lists .viewall .title,
+    .todo .viewall {
+        font-size: 14px;
+    }
+
+    .upcoming .days {
+        font-size: 13px;
+        margin-top: 50px;
+        margin-left: 0px;
+    }
+
+    .upcoming .numbers {
+        font-size: 14px;
+        gap: 14px;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+
+    .operator-chart .country-dropdown {
+        margin-left: 60px;
+    }
+
+    .operator-chart .lists {
+        margin-top: 25px;
+    }
+
+    .event-chart .states-dropdown {
+        margin-left: 10px;
+    }
+
+    .upcoming .date {
+        margin-left: 0px;
+    }
+
+    .crops-chart .states-dropdown {
+        margin-left: 30px;
+    }
+
+    .crops-chart .all-dropdown {
+        text-align: right;
+    }
+
+    .yield-chart .states-dropdown {
+        margin-left: 140px;
+    }
+
+    .yield-chart .chart-img {
+        margin-bottom: 20px;
+    }
+
+    .crops-chart .chart-img {
+        margin-top: 40px;
+    }
+
+    .status-chart .india-img {
+        margin-left: 20px;
+        width: 58%;
+    }
+
+    .status-chart .india-dotted-img {
+        margin-top: 90px;
+        margin-left: 35px;
+    }
+
+    .status-chart .person-location-img {
+        margin-top: 80px;
+        margin-left: 90px;
+    }
+
+    .operator-chart .lists,
+    .event-chart .lists,
+    .status-chart .lists {
+        font-size: 14px;
+    }
+
+    .event-chart .lists {
+        margin-top: 15px;
+    }
+
+    .upcoming .lists {
+        font-size: 16px;
+        margin-top: 30px;
+    }
+
+    .yield-chart .lists {
+        font-size: 13px;
+        margin-left: 0px;
+    }
+
+    .status-chart .lists {
+        margin-left: 200px;
+        margin-top: 160px;
+    }
+
+    .crops-chart .lists {
+        font-size: 14px;
+        margin-bottom: 95px;
+        margin-top: 100px;
+        margin-left: 10px;
+    }
+    .onboarding{
+        & .MuiTableCell-root{
+            font-size: 12px;
+        }
+    }
+    .onboarding .person-icon{
+        margin-left: -10px;
+    }
+
+
+}
+
+@media screen and (max-width:1280px) {
+    .search-icon {
+        margin-left: -20px;
+    }
+
+    .operator-chart .title,
+    .event-chart .title,
+    .crops-chart .title,
+    .upcoming .title,
+    .yield-chart .title,
+    .status-chart .title,
+    .events-lists .title,
+    .todo .title {
+        font-size: 18px;
+    }
+
+    .todo .checkbox {
+        font-size: 12px;
+    }
+
+    .events-lists .content,
+    .events-lists .viewall .content {
+        font-size: 12px;
+        line-height: 55px;
+    }
+
+    .operator-chart .country-dropdown,
+    .operator-chart .date,
+    .crops-chart .states-dropdown,
+    .crops-chart .all-dropdown,
+    .yield-chart .states-dropdown,
+    .status-chart .operator-dropdown,
+    .status-chart .country-dropdown,
+    .events-lists .viewall .title,
+    .todo .viewall {
+        font-size: 13px;
+    }
+
+    .upcoming .days {
+        font-size: 11px;
+        margin-left: 5px;
+        margin-top: 45px;
+    }
+
+    .upcoming .numbers {
+        font-size: 12px;
+        margin-left: -10px;
+        gap: 13px;
+        margin-top: 0px;
+    }
+
+    .operator-chart .country-dropdown {
+        margin-left: 30px;
+    }
+
+    .operator-chart .lists {
+        margin-top: 20px;
+    }
+    .event-chart .states-dropdown{
+        font-size: 13px;
+    }
+
+    .event-chart .states-dropdown {
+        margin-left: 0px;
+    }
+    .event-chart .year_month_img{
+        margin-left: 1px;
+    }
+
+    .upcoming .date {
+        font-size: 12px;
+        margin-left: -5px;
+    }
+    .upcoming .year_month_img{
+        margin-left: 0px;
+    }
+
+    .crops-chart .states-dropdown {
+        margin-left: 10px;
+    }
+
+    .crops-chart .all-dropdown {
+        text-align: right;
+    }
+
+    .yield-chart .states-dropdown {
+        margin-left: 110px;
+    }
+
+    .yield-chart .chart-img {
+        margin-bottom: 20px;
+    }
+
+    .crops-chart .chart-img {
+        margin-top: 40px;
+    }
+
+    .status-chart .india-img {
+        margin-left: 20px;
+        width: 54%;
+    }
+
+    .status-chart .india-dotted-img {
+        margin-top: 70px;
+        margin-left: 30px;
+    }
+
+    .status-chart .person-location-img {
+        margin-top: 60px;
+        margin-left: 90px;
+    }
+
+    .operator-chart .lists,
+    .event-chart .lists,
+    .status-chart .lists {
+        font-size: 14px;
+    }
+
+    .event-chart .lists {
+        margin-top: 15px;
+    }
+
+    .upcoming .lists {
+        font-size: 12px;
+        margin-top: 30px;
+    }
+
+    .yield-chart .lists {
+        font-size: 12px;
+        margin-left: 0px;
+    }
+
+    .status-chart .lists {
+        margin-left: 180px;
+        margin-top: 150px;
+    }
+
+    .crops-chart .lists {
+        font-size: 13px;
+        margin-bottom: 95px;
+        margin-top: 90px;
+        margin-left: 10px;
+    }
+
+
+}
+
+@media screen and (max-width:1120px) {
+    .search-icon {
+        margin-left: -55px;
+    }
+
+    .operator-chart .title,
+    .event-chart .title,
+    .crops-chart .title,
+    .upcoming .title,
+    .yield-chart .title,
+    .status-chart .title,
+    .events-lists .title,
+    .todo .title {
+        font-size: 18px;
+    }
+
+    .todo .checkbox {
+        font-size: 10px;
+        line-height: 60px;
+    }
+
+    .events-lists .content,
+    .events-lists .viewall .content {
+        font-size: 10px;
+        line-height: 40px;
+    }
+
+    .operator-chart .country-dropdown,
+    .operator-chart .date,
+    .crops-chart .states-dropdown,
+    .crops-chart .all-dropdown,
+    .yield-chart .states-dropdown,
+    .status-chart .operator-dropdown,
+    .status-chart .country-dropdown,
+    .events-lists .viewall .title,
+    .todo .viewall {
+        font-size: 13px;
+    }
+
+    .upcoming .days {
+        font-size: 9px;
+        margin-left: -5px;
+        margin-top: 15px;
+    }
+
+    .upcoming .numbers {
+        font-size: 12px;
+        margin-left: -20px;
+        gap: 9px;
+        margin-top: -10px;
+    }
+    .onboarding{
+        & .MuiTableCell-root{
+            font-size: 10px;
+        }
+    }
+    .operator-chart .country-dropdown {
+        margin-left: 30px;
+    }
+
+    .operator-chart .lists {
+        margin-top: 20px;
+    }
+    .event-chart .states-dropdown{
+        font-size: 13px;
+    }
+
+    .event-chart .states-dropdown {
+        margin-left: 0px;
+    }
+    .event-chart .year_month_img{
+        margin-left: 1px;
+    }
+
+    .upcoming .date {
+        font-size: 12px;
+        margin-left: -5px;
+    }
+    .upcoming .year_month_img{
+        margin-left: 0px;
+    }
+
+    .crops-chart .states-dropdown {
+        margin-left: -10px;
+    }
+
+    .crops-chart .all-dropdown {
+        margin-left: -5px;
+        text-align: right;
+    }
+
+    .yield-chart .states-dropdown {
+        margin-left: 50px;
+    }
+
+    .yield-chart .chart-img {
+        margin-bottom: 20px;
+    }
+
+    .crops-chart .chart-img {
+        margin-top: 40px;
+    }
+
+    .status-chart .india-img {
+        margin-left: 20px;
+        width: 54%;
+    }
+
+    .status-chart .india-dotted-img {
+        width: 6%;
+        margin-top: 65px;
+        margin-left: 25px;
+    }
+
+    .status-chart .person-location-img {
+        width: 6%;
+        margin-top: 60px;
+        margin-left: 90px;
+    }
+
+    .operator-chart .lists,
+    .event-chart .lists,
+    .status-chart .lists {
+        font-size: 12px;
+    }
+
+    .event-chart .lists {
+        margin-top: 15px;
+    }
+
+    .upcoming .lists {
+        width: 100%;
+        font-size: 5px;
+        margin-top: 10px;
+        margin-left: -10px;
+    }
+
+    .yield-chart .lists {
+        font-size: 12px;
+        margin-left: 0px;
+    }
+
+    .status-chart .lists {
+        margin-left: 140px;
+        margin-top: 130px;
+    }
+
+    .crops-chart .lists {
+        font-size: 10px;
+        margin-bottom: 105px;
+        margin-top: 80px;
+        margin-left: 10px;
+    }
+
+
+}

@@ -1,0 +1,138 @@
+.landparcel-grid {
+    margin-top: 30px;
+    margin-left: 70px;
+}
+
+.grid-upper {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.grid-lower {
+    /* width: 82%; */
+    padding: 14px;
+}
+
+
+@media screen and (max-width:2200px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 30px;
+        }
+    }
+
+    .landparcel-grid {
+        margin-left: 120px;
+    }
+
+    .grid-lower .num,
+    .grid-lower .text {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width:1920px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 26px;
+        }
+    }
+
+    .landparcel-grid {
+        margin-left: 100px;
+    }
+
+    .grid-lower .num,
+    .grid-lower .text {
+        font-size: 22px;
+    }
+
+}
+
+@media screen and (max-width:1660px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 22px;
+        }
+    }
+
+    .landparcel-grid {
+        margin-left: 80px;
+    }
+
+    .grid-lower .num,
+    .grid-lower .text {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width:1440px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 16px;
+        }
+    }
+
+    .landparcel-grid {
+        margin-left: 70px;
+    }
+
+    .grid-lower .num,
+    .grid-lower .text {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width:1366px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 15px;
+        }
+    }
+
+    .landparcel-grid {
+        margin-left: 70px;
+    }
+
+    .grid-lower .num {
+        font-size: 16px;
+    }
+
+    .grid-lower .text {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 12px;
+        }
+    }
+
+    .landparcel-grid {
+        margin-left: 60px;
+    }
+
+    .grid-lower .num,
+    .grid-lower .text {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width:1120px) {
+    .table {
+        & .MuiTableCell-root {
+            font-size: 8px;
+        }
+    }
+
+    .landparcel-grid {
+        margin-left: 40px;
+    }
+
+    .grid-lower .num,
+    .grid-lower .text {
+        font-size: 12px;
+    }
+}

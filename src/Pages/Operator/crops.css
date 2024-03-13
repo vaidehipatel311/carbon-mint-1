@@ -1,0 +1,484 @@
+.sourgham-details {
+    display: grid;
+    justify-items: center;
+
+}
+
+.sourgham-details img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.sourgham-details .name {
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.sourgham-details .address {
+    padding: 10px 40px;
+    color: rgb(180, 178, 178);
+    font-weight: bold;
+}
+
+
+
+.details {
+    padding: 10px;
+}
+
+
+.details .title {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+
+.details .content {
+    padding: 10px 10px 0px 10px;
+    justify-content: space-between;
+}
+
+
+.irrigation {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+    padding: 10px;
+    box-shadow: 0px 0px 12px 0px #0000001F
+}
+
+.irrigation img {
+    width: 50px;
+}
+
+
+.submitted-events-title {
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 40px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.seed,
+.land-preparation {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+    padding: 10px;
+    box-shadow: 0px 0px 12px 0px #0000001F
+}
+
+@media screen and (max-width:2200px) {
+    .sourgham-details .name {
+        font-size: 30px;
+    }
+
+    .sourgham-details .address {
+        font-size: 26px;
+    }
+
+    .sourgham-details {
+        font-size: 24px;
+    }
+
+    .details .title {
+        font-size: 24px;
+    }
+
+    .details {
+        font-size: 26px;
+    }
+
+    .crops-heading {
+        margin-top: 20px;
+        font-size: 30px;
+    }
+
+    .irrigation {
+        margin-top: 60px;
+
+        & .MuiTypography-root {
+            font-size: 22px;
+        }
+    }
+
+    .submitted-events-title {
+        margin-top: 30px;
+        font-size: 28px;
+    }
+
+    .seed,
+    .land-preparation {
+        width: 85%;
+        margin-top: 70px;
+        margin-right: 280px;
+        display: flex;
+        gap: 100px;
+
+        & .MuiTypography-root {
+            font-size: 22px;
+        }
+
+    }
+
+    .seed .doneicon,
+    .land-preparation .doneicon {
+        margin-top: 20px;
+
+    }
+}
+
+@media screen and (max-width:1920px) {
+    .sourgham-details .name {
+        font-size: 30px;
+    }
+
+    .sourgham-details .address {
+        font-size: 26px;
+    }
+
+    .sourgham-details {
+        font-size: 24px;
+    }
+
+    .details .title {
+        font-size: 24px;
+    }
+
+    .details {
+        font-size: 26px;
+    }
+
+    .crops-heading {
+        margin-top: 20px;
+        font-size: 30px;
+    }
+
+    .irrigation {
+        margin-top: 60px;
+
+        & .MuiTypography-root {
+            font-size: 22px;
+        }
+    }
+
+    .submitted-events-title {
+        margin-top: 30px;
+        font-size: 28px;
+    }
+
+    .seed,
+    .land-preparation {
+        width: 85%;
+        margin-top: 70px;
+        margin-right: 280px;
+        display: flex;
+        gap: 100px;
+
+        & .MuiTypography-root {
+            font-size: 22px;
+        }
+
+    }
+
+    .seed .doneicon,
+    .land-preparation .doneicon {
+        margin-top: 20px;
+
+    }
+}
+
+@media screen and (max-width:1660px) {
+    .sourgham-details .name {
+        font-size: 28px;
+    }
+
+    .sourgham-details .address {
+        font-size: 22px;
+    }
+
+    .sourgham-details {
+        font-size: 22px;
+    }
+
+    .details .title {
+        font-size: 20px;
+    }
+
+    .details {
+        font-size: 20px;
+    }
+
+    .crops-heading {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .irrigation {
+        margin-top: 60px;
+
+        & .MuiTypography-root {
+            font-size: 20px;
+        }
+    }
+
+    .submitted-events-title {
+        margin-top: 30px;
+        font-size: 20px;
+    }
+
+    .seed,
+    .land-preparation {
+        width: 85%;
+        margin-top: 70px;
+        margin-right: 280px;
+        display: flex;
+        gap: 100px;
+
+        & .MuiTypography-root {
+            font-size: 18px;
+        }
+
+    }
+
+    .seed .doneicon,
+    .land-preparation .doneicon {
+        margin-top: 20px;
+
+    }
+}
+
+@media screen and (max-width:1440px) {
+    .sourgham-details .name {
+        font-size: 28px;
+    }
+
+    .sourgham-details .address {
+        font-size: 22px;
+    }
+
+    .sourgham-details,
+    .details .title {
+        font-size: 22px;
+    }
+
+    .details {
+        font-size: 22px;
+    }
+
+    .crops-heading {
+        margin-top: 20px;
+        font-size: 28px;
+    }
+
+    .irrigation {
+        margin-top: 60px;
+
+        & .MuiTypography-root {
+            font-size: 18px;
+        }
+    }
+
+    .submitted-events-title {
+        margin-top: 30px;
+        font-size: 24px;
+    }
+
+    .seed,
+    .land-preparation {
+        width: 85%;
+        margin-top: 70px;
+        margin-right: 280px;
+        display: flex;
+        gap: 100px;
+
+        & .MuiTypography-root {
+            font-size: 18px;
+        }
+
+    }
+
+    .seed .doneicon,
+    .land-preparation .doneicon {
+        margin-top: 20px;
+
+    }
+}
+
+@media screen and (max-width:1366px) {
+    .sourgham-details .name {
+        font-size: 22px;
+    }
+
+    .right-part-landowner .add-landowner-btn{
+        width: 100%;
+    }
+
+    .sourgham-details .address {
+        font-size: 18px;
+    }
+
+    .sourgham-details,
+    .details .title {
+        font-size: 18px;
+    }
+
+    .details {
+        font-size: 16px;
+    }
+
+    .crops-heading {
+        margin-top: 20px;
+        font-size: 22px;
+    }
+
+    .irrigation {
+        margin-top: 60px;
+
+        & .MuiTypography-root {
+            font-size: 14px;
+        }
+    }
+
+    .submitted-events-title {
+        margin-top: 30px;
+        font-size: 18px;
+    }
+
+    .seed,
+    .land-preparation {
+        width: 85%;
+        margin-top: 70px;
+        margin-right: 280px;
+        display: flex;
+        gap: 100px;
+
+        & .MuiTypography-root {
+            font-size: 12px;
+        }
+
+    }
+
+    .seed .doneicon,
+    .land-preparation .doneicon {
+        margin-top: 20px;
+
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .sourgham-details .name {
+        font-size: 24px;
+    }
+
+    .sourgham-details .address {
+        font-size: 18px;
+    }
+
+    .sourgham-details,
+    .details .title {
+        font-size: 18px;
+    }
+
+    .details {
+        font-size: 18px;
+    }
+
+    .crops-heading {
+        margin-top: 20px;
+        font-size: 24px;
+    }
+
+    .irrigation {
+        margin-top: 60px;
+
+        & .MuiTypography-root {
+            font-size: 14px;
+        }
+    }
+
+    .submitted-events-title {
+        margin-top: 30px;
+        font-size: 20px;
+    }
+
+    .seed,
+    .land-preparation {
+        width: 85%;
+        margin-top: 70px;
+        margin-right: 280px;
+        display: flex;
+        gap: 100px;
+
+        & .MuiTypography-root {
+            font-size: 12px;
+        }
+
+    }
+
+    .seed .doneicon,
+    .land-preparation .doneicon {
+        margin-top: 20px;
+
+    }
+}
+
+@media screen and (max-width:1120px) {
+    .sourgham-details .name {
+        font-size: 20px;
+    }
+
+    .sourgham-details .address {
+        font-size: 14px;
+    }
+
+    .sourgham-details,
+    .details .title {
+        font-size: 14px;
+    }
+
+    .details {
+        font-size: 14px;
+    }
+
+    .crops-heading {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .irrigation {
+        margin-top: 60px;
+
+        & .MuiTypography-root {
+            font-size: 12px;
+        }
+    }
+
+    .submitted-events-title {
+        margin-top: 30px;
+        font-size: 16px;
+    }
+
+    .seed,
+    .land-preparation {
+        width: 85%;
+        margin-top: 70px;
+        margin-right: 280px;
+        display: flex;
+        gap: 100px;
+
+        & .MuiTypography-root {
+            font-size: 9px;
+        }
+
+    }
+
+    .seed .doneicon,
+    .land-preparation .doneicon {
+        margin-top: 20px;
+
+    }
+}
