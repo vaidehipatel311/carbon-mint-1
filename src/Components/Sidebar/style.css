@@ -42,6 +42,46 @@
         margin-top: 20px;
     }
 }
+@media screen and (max-width:1920px) {
+    .main-div{
+        & .MuiTypography-root{
+            font-size: 20px;
+        }
+    }
+    .div{
+        margin-top: 20px;
+    }
+}
+@media screen and (max-width:1660px) {
+    .main-div{
+        & .MuiTypography-root{
+            font-size: 18px;
+        }
+    }
+    .div{
+        margin-top: 15px;
+    }
+}
+@media screen and (max-width:1520px) {
+    .main-div{
+        & .MuiTypography-root{
+            font-size: 16px;
+        }
+    }
+    .div{
+        margin-top: 10px;
+    }
+}
+@media screen and (max-width:1440px) {
+    .main-div{
+        & .MuiTypography-root{
+            font-size: 14px;
+        }
+    }
+    .div{
+        margin-top: 15px;
+    }
+}
 @media screen and (max-width:1366px) {
     .sidebar-finalLogo{
         width: 45%;

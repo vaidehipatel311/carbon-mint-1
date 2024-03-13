@@ -10,12 +10,6 @@ import { Button, Menu, MenuItem, Badge, TextField, Breadcrumbs } from '@mui/mate
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Paper from '@mui/material/Paper';
-// import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
-// import ellipse8 from '../../assets/LandOwners/Ellipse 8.png'
-// import eventCharts from '../../assets/LandOwners/EventCharts.png'
-// import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-// import LandscapeIcon from '@mui/icons-material/Landscape';
-// import cropsicon from '../../assets/LandOwners/crops-icon.png'
 import { connect } from 'react-redux';
 import vector from '../../assets/images/LandOwners/vector.png';
 import Sidebar from '../../Components/Sidebar';
@@ -381,7 +375,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                         </Grid>
 
                         <Grid container>
-                            <Grid item xs={8} className='event-images'>
+                            <Grid item xs={8} className='event-images' sx={{mt:2}}>
                                 <Typography variant='p' fontWeight='bold'>Event images</Typography>
                                 <Grid container className='images4'>
                                     <Grid xs={3}>
@@ -410,7 +404,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={4} sx={{mt:2}}>
                                 <Typography variant='p' fontWeight='bold' className='notes-title'>Notes</Typography>
                                 <div className='notes'>
                                     {isDraft ?
@@ -430,14 +424,15 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                 <div className='event-form'>
                                     <div className='formheader' >
                                         <Grid container>
-                                            <Grid xs={4}>
+                                            <Grid xs={3.5}>
                                                 <Typography variant='p' className='event-selection' fontWeight='bold'>Crop Event Selection
                                                 </Typography>
 
 
 
                                             </Grid>
-                                            <Grid xs={4} >
+                                            <Grid xs={0.5}></Grid>
+                                            <Grid xs={3.5} >
                                                 <TextField
                                                     sx={{ width: '100%' }}
                                                     type='text'
@@ -449,7 +444,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                     <MenuItem value='Seed & Seedlings'>Seed & Seedlings</MenuItem>
                                                 </TextField>
                                             </Grid>
-                                            <Grid xs={4}>
+                                            <Grid xs={0.5}></Grid>
+                                            <Grid xs={3.5}>
                                                 <TextField
                                                     sx={{ width: '100%' }}
                                                     type='text'
@@ -461,6 +457,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                     <MenuItem value='Seed'>Seed</MenuItem>
                                                 </TextField>
                                             </Grid>
+                                            <Grid xs={0.5}></Grid>
                                         </Grid>
                                     </div>
                                     {eventGroup && eventName ? (

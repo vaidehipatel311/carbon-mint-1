@@ -277,8 +277,8 @@
         margin-top: 20px;
     }
 
-    .operator-chart .country-dropdown,
-    .yield-chart .states-dropdown {
+    .operator-chart .country-dropdown
+    {
         margin-left: 300px;
     }
 
@@ -300,14 +300,13 @@
         margin-left: 400px;
     }
 
-
     .crops-chart .chart-img {
         margin-top: 70px;
     }
 
     .status-chart .india-img {
         margin-left: 80px;
-        width: 48%;
+        width: 54%;
     }
 
     .status-chart .india-dotted-img {
@@ -328,8 +327,11 @@
     }
 
     .upcoming .lists {
-        font-size: 22px;
-        margin-top: 50px;
+        margin-top: 70px;
+        & .MuiTypography-root{
+            font-size: 18px;
+        }
+        
     }
 
     .yield-chart .lists {
@@ -338,7 +340,7 @@
 
     .status-chart .lists {
         margin-left: 400px;
-        margin-top: 260px;
+        margin-top: 240px;
     }
 
     .crops-chart .lists {

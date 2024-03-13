@@ -86,10 +86,9 @@ function Login({ addUser }) {
                                         className='login-textfield'
                                         type='text'
                                         label='Phone number'
+                                        
                                         required
-                                        InputLabelProps={{
-                                            style: { fontSize: '20px' } // Adjust the font size as needed
-                                        }}>
+                                        >
                                     </TextField>
                                 </Grid>
                                 {phoneNoError && <Typography color="error" sx={{textAlign:'center',mt:2}}>{phoneNoError}</Typography>}

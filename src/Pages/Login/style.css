@@ -49,25 +49,26 @@
         padding: 200px 200px 0px 200px;
     }
     .finalLogo {
-        width: 50%;
-        height: 50%;
+        width: 43%;
+        height: 43%;
     }
     .logo{
         width: 100%;
         margin-bottom: 150px;
     }
     .signintext {
-        font-size: 60px;
+        font-size: 54px;
     }
     .login-textfield{
+        width: 100%;
         top: 30px;
     }
     .button{
         top: 50px;
-        width: 40%;
+        width: 30%;
     }
     .otheracc{
-        font-size: 26px;
+        font-size: 24px;
         top: 80px;
     }
     .googleicon{
@@ -84,15 +85,15 @@
         padding: 200px 200px 0px 200px;
     }
     .finalLogo {
-        width: 48%;
-        height: 48%;
+        width: 45%;
+        height: 45%;
     }
     .logo{
         width: 100%;
         margin-bottom: 130px;
     }
     .signintext {
-        font-size: 56px;
+        font-size: 52px;
     }
     .login-textfield{
         top: 30px;
@@ -101,7 +102,7 @@
         top: 50px;
     }
     .otheracc{
-        font-size: 24px;
+        font-size: 20px;
         top: 70px;
     }
     .googleicon{
@@ -118,28 +119,28 @@
         padding: 200px 200px 0px 200px;
     }
     .finalLogo {
-        width: 46%;
-        height: 46%;
+        width: 44%;
+        height: 44%;
     }
     .logo{
         width: 100%;
         margin-bottom: 100px;
     }
     .signintext {
-        font-size: 48px;
+        font-size: 42px;
     }
     .login-textfield{
-        top: 30px;
+        top: 20px;
     }
     .button{
-        top: 50px;
+        top: 40px;
     }
     .otheracc{
-        font-size: 22px;
-        top: 70px;
+        font-size: 20px;
+        top: 50px;
     }
     .googleicon{
-        margin-top: 70px;
+        margin-top: 50px;
     }
 }
 
@@ -152,28 +153,28 @@
         padding: 200px 170px 0px 170px;
     }
     .finalLogo {
-        width: 44%;
-        height: 44%;
+        width: 42%;
+        height: 42%;
     }
     .logo{
         width: 100%;
         margin-bottom: 80px;
     }
     .signintext {
-        font-size: 44px;
+        font-size: 36px;
     }
     .login-textfield{
-        top: 20px;
+        top: 10px;
     }
     .button{
         top: 40px;
     }
     .otheracc{
-        font-size: 20px;
-        top: 60px;
+        font-size: 18px;
+        top: 50px;
     }
     .googleicon{
-        margin-top: 60px;
+        margin-top: 50px;
     }
 }
 
@@ -194,7 +195,7 @@
         margin-bottom: 70px;
     }
     .signintext {
-        font-size: 40px;
+        font-size: 36px;
     }
     .login-textfield{
         top: 10px;
@@ -203,7 +204,7 @@
         top: 30px;
     }
     .otheracc{
-        font-size: 18px;
+        font-size: 16px;
         top: 50px;
     }
     .googleicon{
@@ -228,7 +229,7 @@
         margin-bottom: 50px;
     }
     .signintext {
-        font-size: 36px;
+        font-size: 34px;
     }
     .login-textfield{
         top: 10px;
@@ -237,7 +238,7 @@
         top: 30px;
     }
     .otheracc{
-        font-size: 16px;
+        font-size: 14px;
         top: 30px;
     }
     .googleicon{
@@ -251,7 +252,7 @@
         width: 50vw;
     }
     .signin-form {
-        padding: 200px 150px 0px 150px;
+        padding: 150px 150px 0px 150px;
     }
     .finalLogo {
         width: 44%;
@@ -262,16 +263,17 @@
         margin-bottom: 50px;
     }
     .signintext {
-        font-size: 34px;
+        font-size: 32px;
     }
     .login-textfield{
         top: 10px;
     }
     .button{
         top: 20px;
+        width: 35%;
     }
     .otheracc{
-        font-size: 16px;
+        font-size: 12px;
         top: 30px;
     }
     .googleicon{
@@ -296,19 +298,29 @@
         margin-bottom: 30px;
     }
     .signintext {
-        font-size: 30px;
+        font-size: 28px;
     }
     .login-textfield{
         top: 0px;
+        & .MuiInputLabelProps-root{
+            font-size: 5px;
+        }
+        & .MuiInputBase-root{
+            height: 50px;
+
+        }
+        
     }
     .button{
         top: 10px;
+        width: 34%;
     }
     .otheracc{
-        font-size: 14px;
-        top: 20px;
+        font-size: 10px;
+        top: 0px;
     }
     .googleicon{
-        margin-top: 20px;
+        width: 10%;
+        margin-top: 0px;
     }
 }
