@@ -6,6 +6,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### npm install react-scripts (if needed)
+
+### First you need to install Mock Server(v20.1.0) with Publisher:Thinker from extensions
+
+### Then right click on public/data.json and start api mock server
+
 ### `npm start`
 
 Runs the app in the development mode.\
