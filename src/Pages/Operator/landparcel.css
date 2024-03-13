@@ -84,17 +84,17 @@
 
 @media screen and (max-width:2200px) {
     .chennaiah-polam-details .name {
-        font-size: 26px;
+        font-size: 22px;
     }
 
     .chennaiah-polam-details .address {
-        font-size: 20px;
+        font-size: 22px;
         text-align: center;
     }
 
     .chennaiah-polam-details .n,
     .crops-grid-lower .n {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .chennaiah-polam-details .t,
@@ -102,13 +102,13 @@
         font-size: 22px;
     }
     .details{
-        font-size: 20px;
+        font-size: 22px;
     }
     .details .title{
         font-size: 22px;
     }
     .crops-heading{
-        font-size: 30px;
+        font-size: 22px;
     }
     .crops-grid-upper{
         margin-top: 10px;
@@ -117,14 +117,14 @@
     .crops-grid-lower{
         width: 85%;
         & .MuiTypography-root{
-            font-size: 24px;
+            font-size: 22px;
         }
     }
 }
 
 @media screen and (max-width:1920px) {
     .chennaiah-polam-details .name {
-        font-size: 26px;
+        font-size: 20px;
     }
 
     .chennaiah-polam-details .address {
@@ -134,18 +134,18 @@
 
     .chennaiah-polam-details .n,
     .crops-grid-lower .n {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .chennaiah-polam-details .t,
     .crops-grid-lower .t{
-        font-size: 22px;
+        font-size: 20px;
     }
     .details{
         font-size: 20px;
     }
     .details .title{
-        font-size: 22px;
+        font-size: 20px;
     }
     .crops-heading{
         font-size: 30px;
@@ -157,38 +157,38 @@
     .crops-grid-lower{
         width: 85%;
         & .MuiTypography-root{
-            font-size: 24px;
+            font-size: 20px;
         }
     }
 }
 
 @media screen and (max-width:1660px) {
     .chennaiah-polam-details .name {
-        font-size: 26px;
+        font-size: 18px;
     }
 
     .chennaiah-polam-details .address {
-        font-size: 20px;
+        font-size: 18px;
         text-align: center;
     }
 
     .chennaiah-polam-details .n,
     .crops-grid-lower .n {
-        font-size: 24px;
+        font-size: 18px;
     }
 
     .chennaiah-polam-details .t,
     .crops-grid-lower .t{
-        font-size: 22px;
+        font-size: 18px;
     }
     .details{
-        font-size: 20px;
+        font-size: 18px;
     }
     .details .title{
-        font-size: 22px;
+        font-size: 18px;
     }
     .crops-heading{
-        font-size: 28px;
+        font-size: 18px;
     }
     .crops-grid-upper{
         margin-top: 10px;
@@ -197,14 +197,14 @@
     .crops-grid-lower{
         width: 83%;
         & .MuiTypography-root{
-            font-size: 24px;
+            font-size: 18px;
         }
     }
 }
 
 @media screen and (max-width:1520px) {
     .chennaiah-polam-details .name {
-        font-size: 24px;
+        font-size: 18px;
     }
 
     .chennaiah-polam-details .address {
@@ -214,21 +214,21 @@
 
     .chennaiah-polam-details .n,
     .crops-grid-lower .n {
-        font-size: 22px;
+        font-size: 18px;
     }
 
     .chennaiah-polam-details .t,
     .crops-grid-lower .t{
-        font-size: 20px;
+        font-size: 18px;
     }
     .details{
-        font-size: 16px;
+        font-size: 18px;
     }
     .details .title{
-        font-size: 20px;
+        font-size: 18px;
     }
     .crops-heading{
-        font-size: 24px;
+        font-size: 18px;
     }
     .crops-grid-upper{
         margin-top: 10px;
@@ -237,35 +237,35 @@
     .crops-grid-lower{
         width: 83%;
         & .MuiTypography-root{
-            font-size: 20px;
+            font-size: 18px;
         }
     }
 }
 
 @media screen and (max-width:1440px) {
     .chennaiah-polam-details .name {
-        font-size: 26px;
+        font-size: 16px;
     }
 
     .chennaiah-polam-details .address {
-        font-size: 18px;
+        font-size: 16px;
         text-align: center;
     }
 
     .chennaiah-polam-details .n,
     .crops-grid-lower .n {
-        font-size: 22px;
+        font-size: 16px;
     }
 
     .chennaiah-polam-details .t,
     .crops-grid-lower .t{
-        font-size: 20px;
+        font-size: 16px;
     }
     .details{
-        font-size: 18px;
+        font-size: 16px;
     }
     .details .title{
-        font-size: 22px;
+        font-size: 16px;
     }
     .crops-heading{
         font-size: 26px;
@@ -277,14 +277,14 @@
     .crops-grid-lower{
         width: 83%;
         & .MuiTypography-root{
-            font-size: 20px;
+            font-size: 16px;
         }
     }
 }
 
 @media screen and (max-width:1366px) {
     .chennaiah-polam-details .name {
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .chennaiah-polam-details .address {
@@ -294,24 +294,24 @@
 
     .chennaiah-polam-details .n,
     .crops-grid-lower .n {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .chennaiah-polam-details .t,
     .crops-grid-lower .t{
-        font-size: 16px;
+        font-size: 14px;
     }
     .details{
-        font-size: 16px;
+        font-size: 14px;
     }
     .details .title{
-        font-size: 18px;
+        font-size: 14px;
     }
     .crops-heading{
-        font-size: 24px;
+        font-size: 14px;
     }
     .crops-grid-upper{
-        margin-top: 10px;
+        margin-top: 14px;
         width: 90%;
     }
     .crops-grid-lower{
@@ -324,31 +324,31 @@
 
 @media screen and (max-width:1280px) {
     .chennaiah-polam-details .name {
-        font-size: 22px;
+        font-size: 14px;
     }
 
     .chennaiah-polam-details .address {
-        font-size: 16px;
+        font-size: 14px;
         text-align: center;
     }
 
     .chennaiah-polam-details .n,
     .crops-grid-lower .n {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .chennaiah-polam-details .t,
     .crops-grid-lower .t{
-        font-size: 16px;
+        font-size: 14px;
     }
     .details{
-        font-size: 16px;
+        font-size: 14px;
     }
     .details .title{
-        font-size: 20px;
+        font-size: 14px;
     }
     .crops-heading{
-        font-size: 24px;
+        font-size: 14px;
     }
     .crops-grid-upper{
         margin-top: 10px;
@@ -357,47 +357,47 @@
     .crops-grid-lower{
         width: 81%;
         & .MuiTypography-root{
-            font-size: 16px;
+            font-size: 14px;
         }
     }
 }
 
 @media screen and (max-width:1120px) {
     .chennaiah-polam-details .name {
-        font-size: 20px;
+        font-size: 12px;
     }
 
     .chennaiah-polam-details .address {
-        font-size: 14px;
+        font-size: 12px;
         text-align: center;
     }
 
     .chennaiah-polam-details .n,
     .crops-grid-lower .n {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .chennaiah-polam-details .t,
     .crops-grid-lower .t{
-        font-size: 14px;
+        font-size: 12px;
     }
     .details{
-        font-size: 14px;
+        font-size: 12px;
     }
     .details .title{
-        font-size: 18px;
+        font-size: 12px;
     }
     .crops-heading{
-        font-size: 22px;
+        font-size: 12px;
     }
     .crops-grid-upper{
-        margin-top: 10px;
+        margin-top: 12px;
         width: 90%;
     }
     .crops-grid-lower{
         width: 80%;
         & .MuiTypography-root{
-            font-size: 14px;
+            font-size: 12px;
         }
     }
 }

@@ -135,7 +135,7 @@
     }
 
     .profile-grid .name {
-        font-size: 28px;
+        font-size: 22px;
     }
 
     .profile-grid .id,
@@ -144,32 +144,32 @@
     .documents .title,
     .details .title,
     .grid-lower-profile .t {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .contact .contact-details,
     .contact .email-details,
     .contact .address-details,
     .documents .aadhar {
-        font-size: 16px;
+        font-size: 22px;
     }
 
     .profile-grid .n,
     .grid-lower-profile .n {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .details .fathername,
     .details .familysize,
     .details .farming,
     .details .organic-farming {
-        font-size: 18px;
+        font-size: 22px;
     }
 
     .no-of-landparcels .content,
     .no-of-crops .content,
     .no-of-events .content {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .no-of-crops,
@@ -193,7 +193,7 @@
 
     .landparcel {
         margin-left: 50px;
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .grid-upper-profile {
@@ -204,17 +204,18 @@
     .grid-lower-profile {
         width: 80%;
         margin-left: 50px;
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .grid-lower-profile .crops-operators {
-        font-size: 20px;
+        font-size: 22px;
         gap: 30px;
         padding: 10px;
+        margin-top: 10px;
     }
     
     .grid-lower-profile .crops-operators .text {
-        font-size: 20px;
+        font-size: 16px;
         margin-left: 10px;
         margin-top: -15px;
     }
@@ -234,7 +235,7 @@
     }
 
     .profile-grid .name {
-        font-size: 28px;
+        font-size: 20px;
     }
 
     .profile-grid .id,
@@ -250,19 +251,19 @@
     .contact .email-details,
     .contact .address-details,
     .documents .aadhar {
-        font-size: 16px;
+        font-size: 20px;
     }
 
     .profile-grid .n,
     .grid-lower-profile .n {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .details .fathername,
     .details .familysize,
     .details .farming,
     .details .organic-farming {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .no-of-landparcels .content,
@@ -292,7 +293,7 @@
 
     .landparcel {
         margin-left: 50px;
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .grid-upper-profile {
@@ -310,6 +311,7 @@
         font-size: 20px;
         gap: 0px;
         padding: 10px;
+        margin-top: 10px;
     }
     
     .grid-lower-profile .crops-operators .text {
@@ -333,7 +335,7 @@
     }
 
     .profile-grid .name {
-        font-size: 26px;
+        font-size: 18px;
     }
 
     .profile-grid .id,
@@ -342,19 +344,19 @@
     .documents .title,
     .details .title,
     .grid-lower-profile .t {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .contact .contact-details,
     .contact .email-details,
     .contact .address-details,
     .documents .aadhar {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .profile-grid .n,
     .grid-lower-profile .n {
-        font-size: 24px;
+        font-size: 18px;
     }
 
     .details .fathername,
@@ -367,7 +369,7 @@
     .no-of-landparcels .content,
     .no-of-crops .content,
     .no-of-events .content {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .no-of-crops,
@@ -391,7 +393,7 @@
 
     .landparcel {
         margin-left: 50px;
-        font-size: 24px;
+        font-size: 18px;
     }
 
     .grid-upper-profile {
@@ -402,17 +404,18 @@
     .grid-lower-profile {
         width: 79%;
         margin-left: 50px;
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .grid-lower-profile .crops-operators {
-        font-size: 20px;
+        font-size: 18px;
         gap: 2px;
         padding: 10px;
+        margin-top: 10px;
     }
     
     .grid-lower-profile .crops-operators .text {
-        font-size: 20px;
+        font-size: 18px;
         margin-left: 0px;
         margin-top: -15px;
     }
@@ -432,7 +435,7 @@
     }
 
     .profile-grid .name {
-        font-size: 26px;
+        font-size: 16px;
     }
 
     .profile-grid .id,
@@ -441,7 +444,7 @@
     .documents .title,
     .details .title,
     .grid-lower-profile .t {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .contact .contact-details,
@@ -453,7 +456,7 @@
 
     .profile-grid .n,
     .grid-lower-profile .n {
-        font-size: 24px;
+        font-size: 16px;
     }
 
     .details .fathername,
@@ -466,7 +469,7 @@
     .no-of-landparcels .content,
     .no-of-crops .content,
     .no-of-events .content {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .no-of-crops,
@@ -490,7 +493,7 @@
 
     .landparcel {
         margin-left: 50px;
-        font-size: 24px;
+        font-size: 16px;
     }
 
     .grid-upper-profile {
@@ -501,17 +504,18 @@
     .grid-lower-profile {
         width: 79%;
         margin-left: 50px;
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .grid-lower-profile .crops-operators {
-        font-size: 20px;
+        font-size: 16px;
         gap: 0px;
         padding: 10px;
+        margin-top: 10px;
     }
     
     .grid-lower-profile .crops-operators .text {
-        font-size: 18px;
+        font-size: 16px;
         margin-left: 0px;
         margin-top: -15px;
     }
@@ -531,7 +535,7 @@
     }
 
     .profile-grid .name {
-        font-size: 24px;
+        font-size: 14px;
     }
 
     .profile-grid .id,
@@ -540,32 +544,32 @@
     .documents .title,
     .details .title,
     .grid-lower-profile .t {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .contact .contact-details,
     .contact .email-details,
     .contact .address-details,
     .documents .aadhar {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .profile-grid .n,
     .grid-lower-profile .n {
-        font-size: 22px;
+        font-size: 14px;
     }
 
     .details .fathername,
     .details .familysize,
     .details .farming,
     .details .organic-farming {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .no-of-landparcels .content,
     .no-of-crops .content,
     .no-of-events .content {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .no-of-crops,
@@ -589,7 +593,7 @@
 
     .landparcel {
         margin-left: 50px;
-        font-size: 24px;
+        font-size: 14px;
     }
 
     .grid-upper-profile {
@@ -600,17 +604,18 @@
     .grid-lower-profile {
         width: 78%;
         margin-left: 50px;
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .grid-lower-profile .crops-operators {
-        font-size: 18px;
+        font-size: 14px;
         gap: 0px;
         padding: 10px;
+        margin-top: 10px;
     }
     
     .grid-lower-profile .crops-operators .text {
-        font-size: 16px;
+        font-size: 14px;
         margin-left: 0px;
         margin-top: -15px;
     }
@@ -630,7 +635,7 @@
     }
 
     .profile-grid .name {
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .profile-grid .id,
@@ -651,7 +656,7 @@
 
     .profile-grid .n,
     .grid-lower-profile .n {
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .details .fathername,
@@ -664,7 +669,7 @@
     .no-of-landparcels .content,
     .no-of-crops .content,
     .no-of-events .content {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .no-of-crops,
@@ -688,7 +693,7 @@
 
     .landparcel {
         margin-left: 50px;
-        font-size: 24px;
+        font-size: 14px;
     }
 
     .grid-upper-profile {
@@ -699,7 +704,7 @@
     .grid-lower-profile {
         width: 77%;
         margin-left: 40px;
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .grid-lower-profile .crops-operators {
@@ -707,6 +712,7 @@
         gap: 0px;
         margin-top: 10px;
         padding: 10px;
+        margin-top: 10px;
     }
     
     .grid-lower-profile .crops-operators .text {
@@ -725,12 +731,12 @@
     }
 
     .profile-grid .avatar {
-        width: 100%;
+        width: 1000%;
         height: 100%;
     }
 
     .profile-grid .name {
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .profile-grid .id,
@@ -746,19 +752,19 @@
     .contact .email-details,
     .contact .address-details,
     .documents .aadhar {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .profile-grid .n,
     .grid-lower-profile .n {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .details .fathername,
     .details .familysize,
     .details .farming,
     .details .organic-farming {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     .no-of-landparcels .content,
@@ -788,7 +794,7 @@
 
     .landparcel {
         margin-left: 40px;
-        font-size: 22px;
+        font-size: 14px;
     }
 
     .grid-upper-profile {
@@ -799,17 +805,18 @@
     .grid-lower-profile {
         width: 77%;
         margin-left: 30px;
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .grid-lower-profile .crops-operators {
         font-size: 14px;
         gap: 0px;
         padding: 10px;
+        margin-top: 10px;
     }
     
     .grid-lower-profile .crops-operators .text {
-        font-size: 12px;
+        font-size: 14px;
         margin-left: 0px;
         margin-top: -15px;
     }
@@ -824,15 +831,15 @@
     }
 
     .profile-grid .avatar {
-        width: 30%;
-        height: 90%;
+        width: 25%;
+        height: 70%;
     }
     .profile-grid .badge{
-        top: 75px;
+        top: 55px;
     }
 
     .profile-grid .name {
-        font-size: 20px;
+        font-size: 12px;
     }
 
     .profile-grid .id,
@@ -848,25 +855,25 @@
     .contact .email-details,
     .contact .address-details,
     .documents .aadhar {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .profile-grid .n,
     .grid-lower-profile .n {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .details .fathername,
     .details .familysize,
     .details .farming,
     .details .organic-farming {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .no-of-landparcels .content,
     .no-of-crops .content,
     .no-of-events .content {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .no-of-crops,
@@ -890,7 +897,7 @@
 
     .landparcel {
         margin-left: 25px;
-        font-size: 20px;
+        font-size: 12px;
     }
 
     .grid-upper-profile {
@@ -901,13 +908,14 @@
     .grid-lower-profile {
         width: 75%;
         margin-left: 20px;
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .grid-lower-profile .crops-operators {
         font-size: 12px;
         gap: 0px;
         padding: 10px;
+        margin-top: 8px;
     }
     
     .grid-lower-profile .crops-operators .text {

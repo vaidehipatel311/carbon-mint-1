@@ -157,8 +157,11 @@
         margin-top: 10px;
     }
     .grid-item{
-        margin-left: 50px;
+        margin-left: 0px;
 
+    }
+    .grid-item .grid-item-card{
+        width: 90%;
     }
     .grid-item-card .typo1{
         font-size: 20px;
@@ -166,13 +169,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 0px;
+        margin-left: 90px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 20px;
-        left: 0px;
+        left: 65px;
         position: relative;
     }
 }
@@ -193,8 +196,11 @@
         margin-top: 15px;
     }
     .grid-item{
-        margin-left: 50px;
+        margin-left: 0px;
 
+    }
+    .grid-item .grid-item-card{
+        width: 85%;
     }
     .grid-item-card .typo1{
         font-size: 18px;
@@ -202,13 +208,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 0px;
+        margin-left: 50px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 18px;
-        left: 0px;
+        left: 30px;
         position: relative;
     }
 }
@@ -229,8 +235,11 @@
         margin-top: 15px;
     }
     .grid-item{
-        margin-left: 50px;
+        margin-left: 0px;
 
+    }
+    .grid-item .grid-item-card{
+        width: 85%;
     }
     .grid-item-card .typo1{
         font-size: 16px;
@@ -238,13 +247,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 0px;
+        margin-left: 30px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 16px;
-        left: 0px;
+        left: 30px;
         position: relative;
     }
 }
@@ -265,8 +274,11 @@
         margin-top: 15px;
     }
     .grid-item{
-        margin-left: 50px;
+        margin-left: 0px;
 
+    }
+    .grid-item .grid-item-card{
+        width: 85%;
     }
     .grid-item-card .typo1{
         font-size: 14px;
@@ -274,13 +286,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 0px;
+        margin-left: 20px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 14px;
-        left: 0px;
+        left: 20px;
         position: relative;
     }
 }
@@ -301,8 +313,11 @@
         margin-top: 15px;
     }
     .grid-item{
-        margin-left: 50px;
+        margin-left: 0px;
 
+    }
+    .grid-item .grid-item-card{
+        width: 85%;
     }
     .grid-item-card .typo1{
         font-size: 14px;
@@ -310,13 +325,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 0px;
+        margin-left: 20px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 14px;
-        left: 0px;
+        left: 20px;
         position: relative;
     }
 }
@@ -337,8 +352,11 @@
         margin-top: 20px;
     }
     .grid-item{
-        margin-left: 50px;
+        margin-left: 0px;
 
+    }
+    .grid-item .grid-item-card{
+        width: 80%;
     }
     .grid-item-card .typo1{
         font-size: 14px;
@@ -346,13 +364,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 0px;
+        margin-left: 5px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 14px;
-        left: 0px;
+        left: 5px;
         position: relative;
     }
 }
@@ -376,8 +394,11 @@
         margin-top: 20px;
     }
     .grid-item{
-        margin-left: 50px;
+        margin-left: 0px;
 
+    }
+    .grid-item .grid-item-card{
+        width: 80%;
     }
     .grid-item-card .typo1{
         font-size: 14px;
@@ -385,13 +406,18 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 0px;
+        margin-left: -10px;
     }
     .grid-item-card .name,
-    .grid-item-card .grid-button,
+    
     .grid-item-card .contact{
-        font-size: 14px;
-        left: 0px;
+        font-size: 12px;
+        left: -10px;
+        position: relative;
+    }
+    .grid-item-card .grid-button{
+        font-size: 12px;
+        left: -10px;
         position: relative;
     }
     

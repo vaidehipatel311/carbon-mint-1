@@ -159,7 +159,7 @@
     }
     .user-name,
     .agent {
-        font-size: 26px;
+        font-size: 22px;
     }
 
     .user-image {
@@ -169,7 +169,7 @@
 
     .user-in-drawer .user-name,
     .user-in-drawer .agent {
-        font-size: 24px;
+        font-size: 22px;
     }
     .user-image-drawer{
         margin-left: 130px;
@@ -190,14 +190,14 @@
         margin-left: 300px;
     }
     .notification .title{
-        font-size: 20px;
+        font-size: 22px;
     }
     .corner-field,
     .lake-edge-field,
     .operator-approved,
     .operator-processing,
     .desha{
-        font-size: 20px;
+        font-size: 22px;
         & .MuiTypography-root {
             font-size: 12px;
         }
@@ -210,7 +210,7 @@
     }
     .user-name,
     .agent {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .user-image {
@@ -261,7 +261,7 @@
     }
     .user-name,
     .agent {
-        font-size: 22px;
+        font-size: 18px;
     }
 
     .user-image {
@@ -271,7 +271,7 @@
 
     .user-in-drawer .user-name,
     .user-in-drawer .agent {
-        font-size: 20px;
+        font-size: 18px;
     }
     .user-image-drawer{
         margin-left: 130px;
@@ -312,7 +312,7 @@
     }
     .user-name,
     .agent {
-        font-size: 22px;
+        font-size: 18px;
     }
 
     .user-image {
@@ -322,7 +322,7 @@
 
     .user-in-drawer .user-name,
     .user-in-drawer .agent {
-        font-size: 20px;
+        font-size: 18px;
     }
     .user-image-drawer{
         margin-left: 130px;
@@ -363,7 +363,7 @@
     }
     .user-name,
     .agent {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .user-image {
@@ -373,7 +373,7 @@
 
     .user-in-drawer .user-name,
     .user-in-drawer .agent {
-        font-size: 20px;
+        font-size: 16px;
     }
     .user-image-drawer{
         margin-left: 130px;
@@ -414,7 +414,7 @@
     }
     .user-name,
     .agent {
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .user-image {
@@ -424,7 +424,7 @@
 
     .user-in-drawer .user-name,
     .user-in-drawer .agent {
-        font-size: 20px;
+        font-size: 14px;
     }
     .user-image-drawer{
         margin-left: 130px;
@@ -465,7 +465,7 @@
     }
     .user-name,
     .agent {
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .user-image {
@@ -475,7 +475,7 @@
 
     .user-in-drawer .user-name,
     .user-in-drawer .agent {
-        font-size: 20px;
+        font-size: 14px;
     }
     .user-image-drawer{
         margin-left: 120px;
@@ -516,7 +516,7 @@
     }
     .user-name,
     .agent {
-        font-size: 18px;
+        font-size: 12px;
     }
 
     .user-image {
@@ -526,7 +526,7 @@
 
     .user-in-drawer .user-name,
     .user-in-drawer .agent {
-        font-size: 20px;
+        font-size: 12px;
     }
     .user-image-drawer{
         margin-left: 100px;

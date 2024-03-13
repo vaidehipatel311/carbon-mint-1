@@ -63,8 +63,8 @@ function Operators({ fetchOperator, fetchOnboarding }) {
                 <TableRow className='tr'>
                     <Link to='/operator/profile' style={{ textDecoration: 'none' }}>
                         <TableCell align='center' sx={{ display: 'flex', borderRight: '1px solid #d7d7d7' }}>
-                            <Avatar sx={{ background: 'none' }}><img src={avatar}></img></Avatar>
-                            <Typography variant='p' sx={{ mt: 1, ml: 1 }}>{owners.name}</Typography>
+                            <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
+                            <Typography variant='p'>{owners.name}</Typography>
                         </TableCell>
                     </Link>
                     <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.ownerID}</TableCell>
@@ -86,8 +86,8 @@ function Operators({ fetchOperator, fetchOnboarding }) {
             <TableBody>
                 <TableRow className='tr'>
                     <TableCell align='center' sx={{ display: 'flex', borderRight: '1px solid #d7d7d7' }}>
-                        <Avatar sx={{ background: 'none' }}><img src={avatar}></img></Avatar>
-                        <Typography variant='p' sx={{ mt: 1, ml: 1 }}>{owners.name}</Typography>
+                        <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
+                        <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
                     <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.ownerId}</TableCell>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.aadhar}</TableCell>
