@@ -19,7 +19,8 @@ export default function Sidebar() {
     const isActive1 = location.pathname === '/dashboard';
     const isActive2 = location.pathname === '/landowners';
     const isActive3 = location.pathname === '/landparcels';
-    const isActive4 = location.pathname.includes('/operator') || location.pathname.includes('/operator/add-operator') || location.pathname.includes('/operator/profile') || location.pathname.includes('/operator/profile/landparcel') || location.pathname.includes('/operator/profile/landparcel/crops');
+    const isActive4 = location.pathname.includes('/operator') || location.pathname.includes('/add-operator') ||
+                    location.pathname.includes('/operator/profile') || location.pathname.includes('/operator/profile/landparcel') || location.pathname.includes('/operator/profile/landparcel/crops');
     const isActive5 = location.pathname.includes('/events/1') || location.pathname.includes('/events/2');
     
     const dashboardStyles = {
