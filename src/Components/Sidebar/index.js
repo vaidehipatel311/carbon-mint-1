@@ -15,7 +15,6 @@ import PersonIcon from '@mui/icons-material/Person';
 export default function Sidebar() {
     const location = useLocation();
 
-    // Check if the current location matches the specified route
     const isActive1 = location.pathname === '/dashboard';
     const isActive2 = location.pathname === '/landowners';
     const isActive3 = location.pathname === '/landparcels';

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './style.css'
 import { Link } from 'react-router-dom'
-import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid';
 import { Typography } from '@mui/material';
 import finalLogo from '../../assets/images/Login/Final Logo.png'
@@ -10,28 +9,80 @@ import graphicSide from '../../assets/images/Login/image 50.png'
 import { Button, TextField } from '@mui/material';
 import { connect } from 'react-redux'
 import * as action from '../../Services/Login/actions';
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import firebaseConfig from '../../firebase';
 
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 
 function Login({ addUser }) {
+    const navigate = useNavigate();
 
     const [showOtp, setShowOtp] = useState(false);
-    const [phoneNo, setPhoneNo] = useState('');
     const [otp, setOtp] = useState('');
-    const [phoneNoError, setPhoneNoError] = useState('');
+    const [verificationId, setVerificationId] = useState('');
 
-
-    const handleClick = () => {
-        if (phoneNo.length !== 10) {
-            setPhoneNoError('Please enter a valid phone number');
-            return;
+    const validate = values => {
+        const errors = {};
+        if (!values.phoneNo) {
+            errors.phoneNo = 'Required'
         }
-        else {
-            const otp = (Math.floor(Math.random() * 1000000) + 1)
-            setOtp(otp)
-            addUser(phoneNo, otp)
-            setShowOtp(true);
+        else if (values.phoneNo.length !== 10) {
+            errors.phoneNo = 'Must be 10 characters';
         }
+        return errors;
     }
+    const formik = useFormik({
+        initialValues: {
+            phoneNo: '',
+            otp: ''
+        },
+        validate,
+        onSubmit: (values) => {
+            navigate('/dashboard')
+        }
+    })
+
+
+    // const handleClick = () => {
+
+    //         const otp = (Math.floor(Math.random() * 1000000) + 1)
+    //         setOtp(otp)
+    //         addUser(formik.values.phoneNo, otp)
+    //         setShowOtp(true);
+    // }
+    const handleClick = async () => {
+        try {
+            const confirmationResult = await firebase.auth().signInWithPhoneNumber(`+91${formik.values.phoneNo}`);
+            console.log(confirmationResult);
+            if (confirmationResult.verificationId) {
+                const verificationId = confirmationResult.verificationId;
+                console.log(verificationId);
+                setVerificationId(verificationId);
+                setShowOtp(true);
+            } else {
+                console.error('Error obtaining verification ID');
+            }
+        } catch (error) {
+            console.error('Error sending OTP:', error);
+        }
+    };
+    
+    const handleVerifyOTP = async () => {
+        try {
+            const credential = firebase.auth.PhoneAuthProvider.credential(verificationId, otp);
+            await firebase.auth().signInWithCredential(credential);
+            console.log('OTP verification successful');
+            navigate('/dashboard');
+        } catch (error) {
+            console.error('Error verifying OTP:', error);
+        }
+    };
+
 
     return (
         <>
@@ -52,19 +103,27 @@ function Login({ addUser }) {
                     {showOtp ? (
                         <>
                             <Grid xs={12}>
-                                <TextField value={phoneNo}
-                                    type='text' sx={{ marginTop: "16px" }}
-                                    label='Phone Number'
+                                <TextField
+                                    name="phoneNo"
+                                    value={formik.values.phoneNo}
+                                    onChange={formik.handleChange}
+                                    type="text"
+                                    sx={{ marginTop: '16px' }}
+                                    label="Phone Number"
                                     required
-                                    className='login-textfield'>
-                                </TextField>
+                                    className="login-textfield"
+                                />
                             </Grid>
                             <Grid xs={12}>
-                                <TextField label='OTP' type='text' value={otp}
-                                    className='login-textfield'
-                                    sx={{ marginTop: "16px" }}
-                                >
-                                </TextField>
+                                <TextField
+                                    name="otp"
+                                    value={otp}
+                                    onChange={formik.handleChange}
+                                    label="OTP"
+                                    type="text"
+                                    className="login-textfield"
+                                    sx={{ marginTop: '16px' }}
+                                />
                             </Grid>
                             <Grid xs={12} sx={{ textAlign: 'center' }}>
                                 <Link to='/dashboard' style={{ textDecoration: 'none', color: 'black' }}>
@@ -74,7 +133,11 @@ function Login({ addUser }) {
                                             border: '1px solid black',
                                             borderRadius: '8px'
                                         }}
-                                        size="large" variant="filled" className='button'>Sign In</Button>
+                                        size="large"
+                                        variant="filled"
+                                        className="button"
+                                        onClick={handleVerifyOTP}
+                                    >Sign In</Button>
                                 </Link>
                             </Grid>
 
@@ -82,24 +145,30 @@ function Login({ addUser }) {
                         : (
                             <>
                                 <Grid xs={12}>
-                                    <TextField value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)}
-                                        className='login-textfield'
-                                        type='text'
-                                        label='Phone number'
-                                        
-                                        required
-                                        >
-                                    </TextField>
+                                    <TextField
+                                        name="phoneNo"
+                                        value={formik.values.phoneNo}
+                                        onChange={
+                                            formik.handleChange
+                                        }
+                                        className="login-textfield"
+                                        type="text"
+                                        label="Phone number"
+                                    />
                                 </Grid>
-                                {phoneNoError && <Typography color="error" sx={{textAlign:'center',mt:2}}>{phoneNoError}</Typography>}
+                                {formik.errors.phoneNo ? <Typography color="error" sx={{ textAlign: 'center', mt: 2 }}>{formik.errors.phoneNo}</Typography> : null}
+                                
                                 <Grid xs={12} sx={{ textAlign: 'center' }}>
-                                    <Button className='button'
+                                    <Button
+                                        className="button"
                                         sx={{
                                             backgroundColor: '#8CD867',
                                             border: '1px solid black',
                                             borderRadius: '8px'
                                         }}
-                                        variant="filled" onClick={handleClick}>Send OTP</Button>
+                                        variant="filled"
+                                        onClick={handleClick}
+                                    >Send OTP</Button>
                                 </Grid>
 
                             </>)}
