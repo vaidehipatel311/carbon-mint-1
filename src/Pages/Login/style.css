@@ -2,6 +2,7 @@
     width: 50vw;
     height: 100vh;
 }
+
 .signin-form {
     padding: 100px 130px 0px 130px;
 }
@@ -9,13 +10,14 @@
 .logo {
     margin-bottom: 30px;
 }
+
 .signintext {
     font-weight: 600;
     font-size: 28px;
     line-height: 42.9px;
 }
 
-.login-textfield{
+.login-textfield {
     width: 100%;
 }
 
@@ -25,6 +27,7 @@
     top: 15px;
 }
 
+
 .otheracc {
     font-weight: 400;
     font-size: 18px;
@@ -33,10 +36,10 @@
     top: 10px;
     position: relative;
 }
-.googleicon{
+
+.googleicon {
     margin-top: 10px;
 }
-
 
 
 
@@ -45,33 +48,41 @@
         height: 100vh;
         width: 50vw;
     }
+
     .signin-form {
         padding: 200px 200px 0px 200px;
     }
+
     .finalLogo {
         width: 43%;
         height: 43%;
     }
-    .logo{
+
+    .logo {
         width: 100%;
         margin-bottom: 150px;
     }
+
     .signintext {
         font-size: 54px;
     }
-    .login-textfield{
+
+    .login-textfield {
         width: 100%;
         top: 30px;
     }
-    .button{
+
+    .button {
         top: 50px;
         width: 30%;
     }
-    .otheracc{
+
+    .otheracc {
         font-size: 24px;
         top: 80px;
     }
-    .googleicon{
+
+    .googleicon {
         margin-top: 80px;
     }
 }
@@ -81,31 +92,39 @@
         height: 100vh;
         width: 50vw;
     }
+
     .signin-form {
         padding: 200px 200px 0px 200px;
     }
+
     .finalLogo {
         width: 45%;
         height: 45%;
     }
-    .logo{
+
+    .logo {
         width: 100%;
         margin-bottom: 130px;
     }
+
     .signintext {
         font-size: 52px;
     }
-    .login-textfield{
+
+    .login-textfield {
         top: 30px;
     }
-    .button{
+
+    .button {
         top: 50px;
     }
-    .otheracc{
+
+    .otheracc {
         font-size: 20px;
         top: 70px;
     }
-    .googleicon{
+
+    .googleicon {
         margin-top: 70px;
     }
 }
@@ -115,31 +134,39 @@
         height: 100vh;
         width: 50vw;
     }
+
     .signin-form {
         padding: 200px 200px 0px 200px;
     }
+
     .finalLogo {
         width: 44%;
         height: 44%;
     }
-    .logo{
+
+    .logo {
         width: 100%;
         margin-bottom: 100px;
     }
+
     .signintext {
         font-size: 42px;
     }
-    .login-textfield{
+
+    .login-textfield {
         top: 20px;
     }
-    .button{
+
+    .button {
         top: 40px;
     }
-    .otheracc{
+
+    .otheracc {
         font-size: 20px;
         top: 50px;
     }
-    .googleicon{
+
+    .googleicon {
         margin-top: 50px;
     }
 }
@@ -149,31 +176,39 @@
         height: 100vh;
         width: 50vw;
     }
+
     .signin-form {
         padding: 200px 170px 0px 170px;
     }
+
     .finalLogo {
         width: 42%;
         height: 42%;
     }
-    .logo{
+
+    .logo {
         width: 100%;
         margin-bottom: 80px;
     }
+
     .signintext {
         font-size: 36px;
     }
-    .login-textfield{
+
+    .login-textfield {
         top: 10px;
     }
-    .button{
+
+    .button {
         top: 40px;
     }
-    .otheracc{
+
+    .otheracc {
         font-size: 18px;
         top: 50px;
     }
-    .googleicon{
+
+    .googleicon {
         margin-top: 50px;
     }
 }
@@ -183,31 +218,39 @@
         height: 100vh;
         width: 50vw;
     }
+
     .signin-form {
         padding: 200px 170px 0px 170px;
     }
+
     .finalLogo {
         width: 44%;
         height: 44%;
     }
-    .logo{
+
+    .logo {
         width: 100%;
         margin-bottom: 70px;
     }
+
     .signintext {
         font-size: 36px;
     }
-    .login-textfield{
+
+    .login-textfield {
         top: 10px;
     }
-    .button{
+
+    .button {
         top: 30px;
     }
-    .otheracc{
+
+    .otheracc {
         font-size: 16px;
         top: 50px;
     }
-    .googleicon{
+
+    .googleicon {
         margin-top: 50px;
     }
 }
@@ -217,31 +260,40 @@
         height: 100vh;
         width: 50vw;
     }
+
     .signin-form {
         padding: 150px 150px 0px 150px;
     }
+
     .finalLogo {
         width: 44%;
         height: 44%;
     }
-    .logo{
+
+    .logo {
         width: 100%;
         margin-bottom: 50px;
     }
+
     .signintext {
         font-size: 34px;
     }
-    .login-textfield{
+
+    .login-textfield {
         top: 10px;
+        width: 100%;
     }
-    .button{
+
+    .button {
         top: 30px;
     }
-    .otheracc{
+
+    .otheracc {
         font-size: 14px;
         top: 30px;
     }
-    .googleicon{
+
+    .googleicon {
         margin-top: 30px;
     }
 }
@@ -251,32 +303,40 @@
         height: 100vh;
         width: 50vw;
     }
+
     .signin-form {
         padding: 150px 150px 0px 150px;
     }
+
     .finalLogo {
         width: 44%;
         height: 44%;
     }
-    .logo{
+
+    .logo {
         width: 100%;
         margin-bottom: 50px;
     }
+
     .signintext {
         font-size: 32px;
     }
-    .login-textfield{
+
+    .login-textfield {
         top: 10px;
     }
-    .button{
+
+    .button {
         top: 20px;
         width: 35%;
     }
-    .otheracc{
+
+    .otheracc {
         font-size: 12px;
         top: 30px;
     }
-    .googleicon{
+
+    .googleicon {
         margin-top: 30px;
     }
 }
@@ -286,40 +346,50 @@
         height: 100vh;
         width: 50vw;
     }
+
     .signin-form {
         padding: 150px 120px 0px 120px;
     }
+
     .finalLogo {
         width: 44%;
         height: 44%;
     }
-    .logo{
+
+    .logo {
         width: 100%;
         margin-bottom: 30px;
     }
+
     .signintext {
         font-size: 28px;
     }
-    .login-textfield{
+
+    .login-textfield {
         top: 0px;
-        & .MuiInputLabelProps-root{
+
+        & .MuiInputLabelProps-root {
             font-size: 5px;
         }
-        & .MuiInputBase-root{
+
+        & .MuiInputBase-root {
             height: 50px;
 
         }
-        
+
     }
-    .button{
+
+    .button {
         top: 10px;
         width: 34%;
     }
-    .otheracc{
+
+    .otheracc {
         font-size: 10px;
         top: 0px;
     }
-    .googleicon{
+
+    .googleicon {
         width: 10%;
         margin-top: 0px;
     }

@@ -11,20 +11,20 @@ import { connect } from 'react-redux'
 import * as action from '../../Services/Login/actions';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import firebaseConfig from '../../firebase';
+import 'react-phone-input-2/lib/style.css'
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
+import { auth } from '../../firebase';
+import PhoneInput from 'react-phone-input-2';
 
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
 
 function Login({ addUser }) {
     const navigate = useNavigate();
 
     const [showOtp, setShowOtp] = useState(false);
     const [otp, setOtp] = useState('');
-    const [verificationId, setVerificationId] = useState('');
+    const [phoneNo,setPhoneNo] = useState('')
+    const [phoneOtp, setPhoneOtp] = useState(null)
 
     const validate = values => {
         const errors = {};
@@ -48,36 +48,42 @@ function Login({ addUser }) {
     })
 
 
-    // const handleClick = () => {
-
-    //         const otp = (Math.floor(Math.random() * 1000000) + 1)
-    //         setOtp(otp)
-    //         addUser(formik.values.phoneNo, otp)
-    //         setShowOtp(true);
-    // }
+   
     const handleClick = async () => {
         try {
-            const confirmationResult = await firebase.auth().signInWithPhoneNumber(`+91${formik.values.phoneNo}`);
-            console.log(confirmationResult);
-            if (confirmationResult.verificationId) {
-                const verificationId = confirmationResult.verificationId;
-                console.log(verificationId);
-                setVerificationId(verificationId);
-                setShowOtp(true);
-            } else {
-                console.error('Error obtaining verification ID');
-            }
+            console.log(phoneNo);
+            const recaptcha = new RecaptchaVerifier(auth,'recaptcha', {
+                size: 'invisible',
+                callback: (response) => {
+                }
+            })
+            const options = {
+                displayName: 'is you verification code for Carbon-mint.'
+            };
+
+            const confirmationResult = await signInWithPhoneNumber(auth, `+${phoneNo}`, recaptcha, options);
+            console.log(confirmationResult)
+            setPhoneOtp(confirmationResult);
+            setShowOtp(true);
         } catch (error) {
             console.error('Error sending OTP:', error);
         }
     };
-    
+
     const handleVerifyOTP = async () => {
         try {
-            const credential = firebase.auth.PhoneAuthProvider.credential(verificationId, otp);
-            await firebase.auth().signInWithCredential(credential);
-            console.log('OTP verification successful');
-            navigate('/dashboard');
+            if(otp === ''){
+                alert('Please enter otp.')
+            }
+            else{
+            const data =  phoneOtp.confirm(otp)
+            console.log(data);
+            if(phoneOtp.confirm(otp)){
+                addUser(phoneNo,otp)
+                navigate('/dashboard');
+            }
+        }
+            
         } catch (error) {
             console.error('Error verifying OTP:', error);
         }
@@ -103,7 +109,19 @@ function Login({ addUser }) {
                     {showOtp ? (
                         <>
                             <Grid xs={12}>
-                                <TextField
+                            <PhoneInput
+                                        country={'in'}
+                                        name="phoneNo"
+                                        value={formik.values.phoneNo}
+                                        onChange={formik.handleChange}
+                                        inputProps={{
+                                            name: 'phoneNo',
+                                            required: true,
+                                            autoFocus: true
+                                        }}
+                                        inputClass="login-textfield"
+                                        dropdownClass="phone-dropdown" />
+                                {/* <TextField
                                     name="phoneNo"
                                     value={formik.values.phoneNo}
                                     onChange={formik.handleChange}
@@ -112,13 +130,13 @@ function Login({ addUser }) {
                                     label="Phone Number"
                                     required
                                     className="login-textfield"
-                                />
+                                /> */}
                             </Grid>
                             <Grid xs={12}>
                                 <TextField
                                     name="otp"
                                     value={otp}
-                                    onChange={formik.handleChange}
+                                    onChange={(e) => setOtp(e.target.value)}
                                     label="OTP"
                                     type="text"
                                     className="login-textfield"
@@ -145,7 +163,19 @@ function Login({ addUser }) {
                         : (
                             <>
                                 <Grid xs={12}>
-                                    <TextField
+                                    <PhoneInput
+                                        country={'in'}
+                                        name="phoneNo"
+                                        value={phoneNo}
+                                        onChange={(phoneNo)=>setPhoneNo(phoneNo)}
+                                        inputProps={{
+                                            name: 'phoneNo',
+                                            required: true,
+                                            autoFocus: true
+                                        }}                                        
+                                        className="login-textfield"
+                                        dropdownClass="phone-dropdown" />
+                                    {/* <TextField
                                         name="phoneNo"
                                         value={formik.values.phoneNo}
                                         onChange={
@@ -154,17 +184,19 @@ function Login({ addUser }) {
                                         className="login-textfield"
                                         type="text"
                                         label="Phone number"
-                                    />
+                                    /> */}
                                 </Grid>
-                                {formik.errors.phoneNo ? <Typography color="error" sx={{ textAlign: 'center', mt: 2 }}>{formik.errors.phoneNo}</Typography> : null}
-                                
+                                <div id='recaptcha'></div>
+                                {/* {formik.errors.phoneNo ? <Typography color="error" sx={{ textAlign: 'center', mt: 2 }}>{formik.errors.phoneNo}</Typography> : null} */}
+
                                 <Grid xs={12} sx={{ textAlign: 'center' }}>
                                     <Button
                                         className="button"
                                         sx={{
                                             backgroundColor: '#8CD867',
                                             border: '1px solid black',
-                                            borderRadius: '8px'
+                                            borderRadius: '8px',
+                                            color: 'black'
                                         }}
                                         variant="filled"
                                         onClick={handleClick}

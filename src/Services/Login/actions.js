@@ -6,7 +6,6 @@ export const addUser = (phoneNo,otp) => {
     return async (dispatch) => {
         try {
             const response = await axios.post(urls.usersUrl,{phoneNo,otp});
-            const userdata = response.data
             dispatch({
                 type: actionTypes.ADD_USER,
                 payload: { user : {phoneNo , id:response.data.id, otp : otp} },
