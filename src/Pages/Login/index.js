@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.css'
 import { Link } from 'react-router-dom'
 import Grid from '@mui/material/Grid';
@@ -11,7 +11,6 @@ import { connect } from 'react-redux'
 import * as action from '../../Services/Login/actions';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import 'firebase/compat/auth';
 import 'react-phone-input-2/lib/style.css'
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { auth } from '../../firebase';
@@ -23,8 +22,32 @@ function Login({ addUser }) {
 
     const [showOtp, setShowOtp] = useState(false);
     const [otp, setOtp] = useState('');
-    const [phoneNo,setPhoneNo] = useState('')
+    const [phoneNo, setPhoneNo] = useState('')
     const [phoneOtp, setPhoneOtp] = useState(null)
+    const [remainingTime, setRemainingTime] = useState(60);
+    const [recaptchaVerifier, setRecaptchaVerifier] = useState(null);
+
+
+    useEffect(() => {
+        let timer;
+        if (showOtp) {
+            timer = setInterval(() => {
+                setRemainingTime(prevTime => {
+                    if (prevTime === 0) {
+                        clearInterval(timer);
+                        setShowOtp(false);
+                        return prevTime;
+                    }
+                    return prevTime - 1;
+                });
+            }, 1000);
+        } else {
+            setRemainingTime(60);
+        }
+
+        return () => clearInterval(timer);
+    }, [showOtp]);
+
 
     const validate = values => {
         const errors = {};
@@ -48,23 +71,22 @@ function Login({ addUser }) {
     })
 
 
-   
+
     const handleClick = async () => {
         try {
-            console.log(phoneNo);
-            const recaptcha = new RecaptchaVerifier(auth,'recaptcha', {
-                size: 'invisible',
-                callback: (response) => {
-                }
-            })
-            const options = {
-                displayName: 'is you verification code for Carbon-mint.'
-            };
 
-            const confirmationResult = await signInWithPhoneNumber(auth, `+${phoneNo}`, recaptcha, options);
-            console.log(confirmationResult)
-            setPhoneOtp(confirmationResult);
+            const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
+                size: 'invisible',
+                'callback': () => { }
+            })
+            setRecaptchaVerifier(recaptcha);
+
             setShowOtp(true);
+
+            const confirmationResult = await signInWithPhoneNumber(auth, `+${phoneNo}`, recaptcha);
+            console.log(confirmationResult);
+            setPhoneOtp(confirmationResult);
+
         } catch (error) {
             console.error('Error sending OTP:', error);
         }
@@ -72,18 +94,18 @@ function Login({ addUser }) {
 
     const handleVerifyOTP = async () => {
         try {
-            if(otp === ''){
+            if (otp === '') {
                 alert('Please enter otp.')
             }
-            else{
-            const data =  phoneOtp.confirm(otp)
-            console.log(data);
-            if(phoneOtp.confirm(otp)){
-                addUser(phoneNo,otp)
-                navigate('/dashboard');
+            else {
+                const data = phoneOtp.confirm(otp)
+                console.log(data);
+                if (phoneOtp.confirm(otp)) {
+                    addUser(phoneNo, otp)
+                    navigate('/dashboard');
+                }
             }
-        }
-            
+
         } catch (error) {
             console.error('Error verifying OTP:', error);
         }
@@ -106,32 +128,24 @@ function Login({ addUser }) {
                     <Grid xs={12}>
                         <Typography className="signintext" variant="p">Sign In</Typography>
                     </Grid>
-                    {showOtp ? (
+                    <Grid xs={12}>
+                        <PhoneInput
+                            country={'in'}
+                            name="phoneNo"
+                            value={phoneNo}
+                            onChange={(phoneNo) => setPhoneNo(phoneNo)}
+                            inputProps={{
+                                name: 'phoneNo',
+                                required: true,
+                                autoFocus: true
+                            }}
+                            inputStyle={{ width: '95%' }}
+                            inputClass="login-textfield"
+                        />
+                    </Grid>
+                    <div id="recaptcha"></div>
+                    {showOtp && (
                         <>
-                            <Grid xs={12}>
-                            <PhoneInput
-                                        country={'in'}
-                                        name="phoneNo"
-                                        value={formik.values.phoneNo}
-                                        onChange={formik.handleChange}
-                                        inputProps={{
-                                            name: 'phoneNo',
-                                            required: true,
-                                            autoFocus: true
-                                        }}
-                                        inputClass="login-textfield"
-                                        dropdownClass="phone-dropdown" />
-                                {/* <TextField
-                                    name="phoneNo"
-                                    value={formik.values.phoneNo}
-                                    onChange={formik.handleChange}
-                                    type="text"
-                                    sx={{ marginTop: '16px' }}
-                                    label="Phone Number"
-                                    required
-                                    className="login-textfield"
-                                /> */}
-                            </Grid>
                             <Grid xs={12}>
                                 <TextField
                                     name="otp"
@@ -142,9 +156,12 @@ function Login({ addUser }) {
                                     className="login-textfield"
                                     sx={{ marginTop: '16px' }}
                                 />
+
+                            </Grid>
+                            <Grid xs={12} sx={{ mt: 2, textAlign: 'center' }}>
+                                <Typography variant='p' sx={{ fontSize: 'small', color: 'red' }}>{remainingTime} seconds remaining</Typography>
                             </Grid>
                             <Grid xs={12} sx={{ textAlign: 'center' }}>
-                                <Link to='/dashboard' style={{ textDecoration: 'none', color: 'black' }}>
                                     <Button
                                         sx={{
                                             backgroundColor: '#8CD867',
@@ -156,54 +173,25 @@ function Login({ addUser }) {
                                         className="button"
                                         onClick={handleVerifyOTP}
                                     >Sign In</Button>
-                                </Link>
                             </Grid>
 
-                        </>)
-                        : (
-                            <>
-                                <Grid xs={12}>
-                                    <PhoneInput
-                                        country={'in'}
-                                        name="phoneNo"
-                                        value={phoneNo}
-                                        onChange={(phoneNo)=>setPhoneNo(phoneNo)}
-                                        inputProps={{
-                                            name: 'phoneNo',
-                                            required: true,
-                                            autoFocus: true
-                                        }}                                        
-                                        className="login-textfield"
-                                        dropdownClass="phone-dropdown" />
-                                    {/* <TextField
-                                        name="phoneNo"
-                                        value={formik.values.phoneNo}
-                                        onChange={
-                                            formik.handleChange
-                                        }
-                                        className="login-textfield"
-                                        type="text"
-                                        label="Phone number"
-                                    /> */}
-                                </Grid>
-                                <div id='recaptcha'></div>
-                                {/* {formik.errors.phoneNo ? <Typography color="error" sx={{ textAlign: 'center', mt: 2 }}>{formik.errors.phoneNo}</Typography> : null} */}
+                        </>)}
 
-                                <Grid xs={12} sx={{ textAlign: 'center' }}>
-                                    <Button
-                                        className="button"
-                                        sx={{
-                                            backgroundColor: '#8CD867',
-                                            border: '1px solid black',
-                                            borderRadius: '8px',
-                                            color: 'black'
-                                        }}
-                                        variant="filled"
-                                        onClick={handleClick}
-                                    >Send OTP</Button>
-                                </Grid>
 
-                            </>)}
+                    {!showOtp && (<Grid xs={12} sx={{ textAlign: 'center' }}>
+                        <Button
+                            className="button"
+                            sx={{
+                                backgroundColor: '#8CD867',
+                                border: '1px solid black',
+                                borderRadius: '8px',
+                                color: 'black'
+                            }}
+                            variant="filled"
+                            onClick={handleClick}
+                        >Send OTP</Button>
+                    </Grid>)}
+
 
                     <br></br>
                     <Grid xs={12} sx={{ textAlign: 'center' }}>

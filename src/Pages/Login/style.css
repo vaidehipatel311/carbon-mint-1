@@ -40,7 +40,10 @@
 .googleicon {
     margin-top: 10px;
 }
-
+.form-control {
+    left: 20px;
+    width: 100%;
+}
 
 
 @media screen and (max-width:2200px) {
@@ -279,12 +282,22 @@
         font-size: 34px;
     }
 
-    .login-textfield {
+    .login-textfield{
         top: 10px;
         width: 100%;
     }
-
-    .button {
+    .form-control {
+        left: 20px;
+        width: 100%;
+    }
+    .flag-dropdown{
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        width: 15%;
+        height: 100%;
+    }
+     .button {
         top: 30px;
     }
 
