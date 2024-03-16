@@ -74,7 +74,17 @@
         width: 100%;
         top: 30px;
     }
-
+    .form-control {
+        left: 30px;
+        width: 100%;
+    }
+    .flag-dropdown{
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+        width: 10%;
+        height: 100%;
+    }
     .button {
         top: 50px;
         width: 30%;
@@ -117,7 +127,17 @@
     .login-textfield {
         top: 30px;
     }
-
+    .form-control {
+        left: 20px;
+        width: 100%;
+    }
+    .flag-dropdown{
+        display: flex;
+        gap: 10px;
+        margin-top: 30px;
+        width: 10%;
+        height: 100%;
+    }
     .button {
         top: 50px;
     }
@@ -159,7 +179,17 @@
     .login-textfield {
         top: 20px;
     }
-
+    .form-control {
+        left: 20px;
+        width: 100%;
+    }
+    .flag-dropdown{
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        width: 14%;
+        height: 100%;
+    }
     .button {
         top: 40px;
     }
@@ -201,7 +231,17 @@
     .login-textfield {
         top: 10px;
     }
-
+    .form-control {
+        left: 20px;
+        width: 100%;
+    }
+    .flag-dropdown{
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        width: 15%;
+        height: 100%;
+    }
     .button {
         top: 40px;
     }
@@ -243,7 +283,17 @@
     .login-textfield {
         top: 10px;
     }
-
+    .form-control {
+        left: 20px;
+        width: 100%;
+    }
+    .flag-dropdown{
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        width: 15%;
+        height: 100%;
+    }
     .button {
         top: 30px;
     }
@@ -338,7 +388,17 @@
     .login-textfield {
         top: 10px;
     }
-
+    .form-control {
+        left: 20px;
+        width: 100%;
+    }
+    .flag-dropdown{
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        width: 15%;
+        height: 100%;
+    }
     .button {
         top: 20px;
         width: 35%;
@@ -391,7 +451,17 @@
         }
 
     }
-
+    .form-control {
+        left: 10px;
+        width: 100%;
+    }
+    .flag-dropdown{
+        display: flex;
+        gap: 10px;
+        margin-top: 0px;
+        width: 15%;
+        height: 100%;
+    }
     .button {
         top: 10px;
         width: 34%;
