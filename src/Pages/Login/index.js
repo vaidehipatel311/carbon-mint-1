@@ -79,6 +79,7 @@ function Login({ addUser }) {
                 size: 'invisible',
                 'callback': () => { }
             })
+            
             setRecaptchaVerifier(recaptcha);
 
             setShowOtp(true);

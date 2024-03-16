@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB52DDwoH6glIZPhoZIwAoSGzNXtqfra7Q",
-  authDomain: "phone-auth-7e808.firebaseapp.com",
-  projectId: "phone-auth-7e808",
-  storageBucket: "phone-auth-7e808.appspot.com",
-  messagingSenderId: "716783724332",
-  appId: "1:716783724332:web:0e4f7b98df99c0ca43ae89"
+  apiKey: "AIzaSyAWKeWlzMRHXEejB4PE-2d23CfCw05IywQ",
+  authDomain: "carbon-mint-1ac52.firebaseapp.com",
+  projectId: "carbon-mint-1ac52",
+  storageBucket: "carbon-mint-1ac52.appspot.com",
+  messagingSenderId: "148494697033",
+  appId: "1:148494697033:web:3ff9e9aa37353680e6f598"
 };
 
 const app = initializeApp(firebaseConfig)

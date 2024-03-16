@@ -11,60 +11,84 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 
 import aadhar_img from '../../assets/images/Operators/aadhar_img.png'
 import { addOperator } from '../../Services/Operator/actions'
 import { connect } from 'react-redux'
 
+const validate = (values) => {
+    const errors = {};
+
+    if (!values.name) {
+        errors.name = 'Required';
+    }
+    return errors;
+};
+
+
 function AddOperator({ addOperator }) {
+    const navigate = useNavigate();
     const [selectedFileaadhar, setSelectedFileaadhar] = useState([]);
     const [selectedFilePanCard, setSelectedFilePanCard] = useState([]);
     const [selectedFileLeasedDoc, setSelectedFileLeasedDoc] = useState([]);
 
-    const [formData, setFormData] = useState({
-        uniqueID: null,
-        uniqueIDFileName: '',
-        pancardFile: null,
-        pancardFileName: '',
-        leasedFile: null,
-        leasedFileName: '',
+    const formik = useFormik({
+        initialValues: {
+            uniqueID: null,
+            uniqueIDFileName: '',
+            pancardFile: null,
+            pancardFileName: '',
+            leasedFile: null,
+            leasedFileName: '',
 
-        name: '',
-        co: '',
-        father_name: '',
-        ownerID: 'KFP/MT/03',
-        contact_number_2: '',
-        contact_number_1: '',
-        house_no: '',
-        street_name: '',
-        village: '',
-        block: '',
-        district: '',
-        state: '',
-        country: '',
-        postal_code: '',
-        website_addr: '',
-        email_id: '',
-        aadhar_no: '',
-        unique_id: '',
-        panCard_id: '',
-        edu_qualification: '',
-        passbook_refno: '',
-        total_farming_exp_year: '',
-        organic_farming_exp_year: '',
-        exp_in_crops: '',
-        exp_in_livestock: '',
-        exp_in_other: '',
-        landparcel_name: '',
-        ownership: '',
-        owner_name: '',
-        leased_doc_id: '',
-        survey_no: '',
-        area: '',
-        crops: ''
+            name: '',
+            co: '',
+            father_name: '',
+            ownerID: 'KFP/MT/03',
+            contact_number_2: '',
+            contact_number_1: '',
+            house_no: '',
+            street_name: '',
+            village: '',
+            block: '',
+            district: '',
+            state: '',
+            country: '',
+            postal_code: '',
+            website_addr: '',
+            email_id: '',
+            aadhar_no: '',
+            unique_id: '',
+            panCard_id: '',
+            edu_qualification: '',
+            passbook_refno: '',
+            total_farming_exp_year: '',
+            organic_farming_exp_year: '',
+            exp_in_crops: '',
+            exp_in_livestock: '',
+            exp_in_other: '',
+            landparcel_name: '',
+            ownership: '',
+            owner_name: '',
+            leased_doc_id: '',
+            survey_no: '',
+            area: '',
+            crops: ''
+        },
+        validate,
+        onSubmit: (values) => {
+            const uniqueIDBase64 = formik.values.uniqueID ? btoa(formik.values.uniqueID) : null;
+            const pancardFileIDBase64 = formik.values.pancardFile ? btoa(formik.values.pancardFile) : null;
+            const leasedFileIDBase64 = formik.values.leasedFile ? btoa(formik.values.leasedFile) : null;
 
-
-
+            formik.values.unique_id = uniqueIDBase64;
+            formik.values.panCard_id = pancardFileIDBase64;
+            formik.values.leased_doc_id = leasedFileIDBase64;
+            addOperator(values);
+            navigate('/operator')
+        },
     });
 
     const VisuallyHiddenInput = styled('input')({
@@ -90,77 +114,89 @@ function AddOperator({ addOperator }) {
 
         if (fileType === 'aadhar') {
             setSelectedFileaadhar([]);
-            setFormData({
-                ...formData,
-                uniqueID: null,
-                uniqueIDFileName: 'No file chosen'
-            });
+            formik.values.uniqueID = null;
+            formik.values.uniqueIDFileName = 'No File Chosen'
+            // setFormData({
+            //     ...formData,
+            //     uniqueID: null,
+            //     uniqueIDFileName: 'No file chosen'
+            // });
         } else if (fileType === 'pancard') {
             setSelectedFilePanCard([]);
-            setFormData({
-                ...formData,
-                pancardFile: null,
-                pancardFileName: 'No file chosen'
-            });
+            formik.values.pancardFile = null;
+            formik.values.pancardFileName = 'No File Chosen'
+            // setFormData({
+            //     ...formData,
+            //     pancardFile: null,
+            //     pancardFileName: 'No file chosen'
+            // });
         } else if (fileType === 'leased') {
             setSelectedFileLeasedDoc([]);
-            setFormData({
-                ...formData,
-                leasedFile: null,
-                leasedFileName: 'No file chosen'
-            });
+            formik.values.leasedFile = null;
+            formik.values.leasedFileName = 'No File Chosen';
+            // setFormData({
+            //     ...formData,
+            //     leasedFile: null,
+            //     leasedFileName: 'No file chosen'
+            // });
         }
     };
 
     const handleFileChangeAadhar = (event, key) => {
         const file = event.target.files[0];
         setSelectedFileaadhar([file]);
-        setFormData({
-            ...formData,
-            [key]: file,
-            [`${key}FileName`]: file.name
-        });
+        formik.values.uniqueID = file;
+        formik.values.uniqueIDFileName = file.name
+        // setFormData({
+        //     ...formData,
+        //     [key]: file,
+        //     [`${key}FileName`]: file.name
+        // });
     };
 
     const handleFileChangePanCard = (event, key) => {
         const file = event.target.files[0];
         setSelectedFilePanCard([file]);
-        setFormData({
-            ...formData,
-            [key]: file,
-            [`${key}FileName`]: file.name
-        });
+        formik.values.pancardFile = file;
+        formik.values.pancardFileName = file.name
+        // setFormData({
+        //     ...formData,
+        //     [key]: file,
+        //     [`${key}FileName`]: file.name
+        // });
     };
 
     const handleFileChangeLeasedDoc = (event, key) => {
         const file = event.target.files[0];
         setSelectedFileLeasedDoc([file]);
-        setFormData({
-            ...formData,
-            [key]: file,
-            [`${key}FileName`]: file.name
-        });
+        formik.values.leasedFile = file;
+        formik.values.leasedFileName = file.name
+        // setFormData({
+        //     ...formik.values,
+        //     [key]: file,
+        //     [`${key}FileName`]: file.name
+        // });
     };
 
-    const handleChange = (event, key) => {
+    // const handleChange = (event, key) => {
 
-        setFormData({
-            ...formData,
-            [key]: event.target.value
-        });
-    };
+    //     setFormData({
+    //         ...formData,
+    //         [key]: event.target.value
+    //     });
+    // };
 
-    const handleAdd = () => {
-        const uniqueIDBase64 = formData.uniqueID ? btoa(formData.uniqueID) : null;
-        const pancardFileIDBase64 = formData.pancardFile ? btoa(formData.pancardFile) : null;
-        const leasedFileIDBase64 = formData.leasedFile ? btoa(formData.leasedFile) : null;
+    // const handleAdd = () => {
+    //     const uniqueIDBase64 = formData.uniqueID ? btoa(formData.uniqueID) : null;
+    //     const pancardFileIDBase64 = formData.pancardFile ? btoa(formData.pancardFile) : null;
+    //     const leasedFileIDBase64 = formData.leasedFile ? btoa(formData.leasedFile) : null;
 
-        formData.unique_id = uniqueIDBase64;
-        formData.panCard_id = pancardFileIDBase64;
-        formData.leased_doc_id = leasedFileIDBase64;
+    //     formData.unique_id = uniqueIDBase64;
+    //     formData.panCard_id = pancardFileIDBase64;
+    //     formData.leased_doc_id = leasedFileIDBase64;
 
-        addOperator(formData)
-    };
+    //     addOperator(formData)
+    // };
 
 
 
@@ -188,26 +224,28 @@ function AddOperator({ addOperator }) {
 
                 </Grid>
 
-                <Grid container spacing={2} sx={{ mt: 3,ml:1}}>
+                <Grid container spacing={2} sx={{ mt: 3, ml: 1 }}>
                     <Grid xs={6}>
                         <div className='first-part'>
                             <div className='operator-name'>
                                 <Typography variant='p' fontWeight='bold'>Operator name</Typography>
                                 <TextField
-                                    type='text'
-                                    label='Name'
-                                    required
-                                    value={formData.name}
-                                    onChange={(e) => handleChange(e, 'name')}
+                                    type="text"
+                                    label="Name"
+                                    name="name"
+                                    value={formik.values.name}
+                                    onChange={formik.handleChange}
                                     helperText='First name + Last name'
                                 />
+
 
                                 <TextField
                                     type='text'
                                     select
+                                    name='co'
                                     label='C/O'
-                                    value={formData.co}
-                                    onChange={(e) => handleChange(e, 'co')}
+                                    value={formik.values.co}
+                                    onChange={formik.handleChange}
                                 >
                                     <MenuItem value='Father name'>
                                         Father name
@@ -217,14 +255,16 @@ function AddOperator({ addOperator }) {
                                 <TextField
                                     type='text'
                                     label='Father name'
-                                    value={formData.father_name}
-                                    onChange={(e) => handleChange(e, 'father_name')}
+                                    name='father_name'
+                                    value={formik.values.father_name}
+                                    onChange={formik.handleChange}
                                 />
                                 <TextField
                                     type='text'
                                     label='ID'
-                                    value={formData.ownerID}
-                                    onChange={(e) => handleChange(e, 'ownerID')}
+                                    name='ownerID'
+                                    value={formik.values.ownerID}
+                                    onChange={formik.handleChange}
                                     required
                                 />
                             </div>
@@ -235,42 +275,48 @@ function AddOperator({ addOperator }) {
                                     type='text'
                                     label='Contact number 1'
                                     required
-                                    value={formData.contact_number_1}
-                                    onChange={(e) => handleChange(e, 'contact_number_1')}
+                                    name='contact_number_1'
+                                    value={formik.values.contact_number_1}
+                                    onChange={formik.handleChange}
 
                                 />
 
                                 <TextField
                                     type='text'
                                     label='Contact number 2'
-                                    value={formData.contact_number_2}
-                                    onChange={(e) => handleChange(e, 'contact_number_2')}
+                                    name='contact_number_2'
+                                    value={formik.values.contact_number_2}
+                                    onChange={formik.handleChange}
                                 />
                                 <TextField
                                     type='text'
                                     label='House no / Door no'
-                                    value={formData.house_no}
-                                    onChange={(e) => handleChange(e, 'house_no')}
+                                    name='house_no'
+                                    value={formik.values.house_no}
+                                    onChange={formik.handleChange}
                                 >
                                 </TextField>
                                 <TextField
                                     type='text'
                                     label='Street name'
-                                    value={formData.street_name}
-                                    onChange={(e) => handleChange(e, 'street_name')}
+                                    name='street_name'
+                                    value={formik.values.street_name}
+                                    onChange={formik.handleChange}
                                 />
                                 <TextField
                                     type='text'
                                     label='Village'
-                                    value={formData.village}
-                                    onChange={(e) => handleChange(e, 'village')}
+                                    name='village'
+                                    value={formik.values.village}
+                                    onChange={formik.handleChange}
                                     required
                                 />
                                 <TextField
                                     type='text'
                                     label='Block/Mandal'
-                                    value={formData.block}
-                                    onChange={(e) => handleChange(e, 'block')}
+                                    name='block'
+                                    value={formik.values.block}
+                                    onChange={formik.handleChange}
                                 />
                                 <div style={{ gap: '10px', display: 'flex' }}>
                                     <TextField
@@ -278,8 +324,9 @@ function AddOperator({ addOperator }) {
                                         type='text'
                                         select
                                         label='District'
-                                        value={formData.district}
-                                        onChange={(e) => handleChange(e, 'district')}
+                                        name='district'
+                                        value={formik.values.district}
+                                        onChange={formik.handleChange}
                                     >
                                         <MenuItem value='Hyderabad'>Hyderabad</MenuItem>
                                         <MenuItem value='Ahmedabad'>Ahmedabad</MenuItem>
@@ -289,8 +336,9 @@ function AddOperator({ addOperator }) {
                                         type='text'
                                         select
                                         label='State'
-                                        value={formData.state}
-                                        onChange={(e) => handleChange(e, 'state')}
+                                        name='state'
+                                        value={formik.values.state}
+                                        onChange={formik.handleChange}
                                     >
                                         <MenuItem value='Telangana'>Telangana</MenuItem>
                                         <MenuItem value='Gujarat'>Gujarat</MenuItem>
@@ -302,8 +350,9 @@ function AddOperator({ addOperator }) {
                                         type='text'
                                         select
                                         label='Country'
-                                        value={formData.country}
-                                        onChange={(e) => handleChange(e, 'country')}
+                                        name='country'
+                                        value={formik.values.country}
+                                        onChange={formik.handleChange}
                                     >
                                         <MenuItem value='India'>India</MenuItem>
                                         <MenuItem value='U.S.A'>U.S.A</MenuItem>
@@ -312,8 +361,9 @@ function AddOperator({ addOperator }) {
                                         fullWidth
                                         type='text'
                                         label='Postal Code'
-                                        value={formData.postal_code}
-                                        onChange={(e) => handleChange(e, 'postal_code')}
+                                        name='postal_code'
+                                        value={formik.values.postal_code}
+                                        onChange={formik.handleChange}
                                     >
                                     </TextField>
 
@@ -321,14 +371,16 @@ function AddOperator({ addOperator }) {
                                 <TextField
                                     type='text'
                                     label='Website address of the operations'
-                                    value={formData.website_addr}
-                                    onChange={(e) => handleChange(e, 'website_addr')}
+                                    name='website_addr'
+                                    value={formik.values.website_addr}
+                                    onChange={formik.handleChange}
                                 />
                                 <TextField
                                     type='text'
                                     label='Email ID'
-                                    value={formData.email_id}
-                                    onChange={(e) => handleChange(e, 'email_id')}
+                                    name='email_id'
+                                    value={formik.values.email_id}
+                                    onChange={formik.handleChange}
                                 />
                                 <Typography variant='p'>Unique ID (Aadhar card) *</Typography>
 
@@ -337,8 +389,9 @@ function AddOperator({ addOperator }) {
                                     type='text'
                                     label='Aadhar number'
                                     required
-                                    value={formData.aadhar}
-                                    onChange={(e) => handleChange(e, 'aadhar')}
+                                    name='aadhar_no'
+                                    value={formik.values.aadhar_no}
+                                    onChange={formik.handleChange}
                                 />
                                 <Grid container sx={{ display: 'flex', gap: '20px' }}>
                                     <Button
@@ -362,7 +415,7 @@ function AddOperator({ addOperator }) {
                                         Choose file
                                         <VisuallyHiddenInput type="file" multiple onChange={(event) => handleFileChangeAadhar(event, 'uniqueID')} />
                                     </Button>
-                                    <Typography sx={{ mt: 1 }}>{formData.uniqueID ? (formData.uniqueID.name) : "No file chosen"}</Typography>
+                                    <Typography sx={{ mt: 1 }}>{formik.values.uniqueID ? (formik.values.uniqueID.name) : "No file chosen"}</Typography>
                                     {(
                                         <>
                                             {selectedFileaadhar.map((file, index) => (
@@ -408,7 +461,7 @@ function AddOperator({ addOperator }) {
                                         Choose file
                                         <VisuallyHiddenInput type="file" multiple onChange={(event) => handleFileChangePanCard(event, 'pancardFile')} />
                                     </Button>
-                                    <Typography sx={{ mt: 1 }}>{formData.pancardFile ? formData.pancardFile.name : "No file chosen"}</Typography>
+                                    <Typography sx={{ mt: 1 }}>{formik.values.pancardFile ? formik.values.pancardFile.name : "No file chosen"}</Typography>
                                     {(
                                         <>
                                             {selectedFilePanCard.map((file, index) => (
@@ -430,15 +483,17 @@ function AddOperator({ addOperator }) {
                                     fullWidth
                                     type='text'
                                     label='Educational qualification'
-                                    value={formData.edu_qualification}
-                                    onChange={(e) => handleChange(e, 'edu_qualification')} />
+                                    name='edu_qualification'
+                                    value={formik.values.edu_qualification}
+                                    onChange={formik.handleChange} />
                                 <TextField
                                     fullWidth
                                     type='text'
                                     required
                                     label='Pass Book ref. no'
-                                    value={formData.passbook_refno}
-                                    onChange={(e) => handleChange(e, 'passbook_refno')} />
+                                    name='passbook_refno'
+                                    value={formik.values.passbook_refno}
+                                    onChange={formik.handleChange} />
 
                             </div>
                             <div className='farming-experience'>
@@ -446,28 +501,33 @@ function AddOperator({ addOperator }) {
                                 <TextField
                                     type='text'
                                     label='Total farming experience in year'
-                                    value={formData.total_farming_exp_year}
-                                    onChange={(e) => handleChange(e, 'total_farming_exp_year')} />
+                                    name='total_farming_exp_year'
+                                    value={formik.values.total_farming_exp_year}
+                                    onChange={formik.handleChange} />
                                 <TextField
                                     type='text'
                                     label='Organic farming experience in year'
-                                    value={formData.organic_farming_exp_year}
-                                    onChange={(e) => handleChange(e, 'organic_farming_exp_year')} />
+                                    name='organic_farming_exp_year'
+                                    value={formik.values.organic_farming_exp_year}
+                                    onChange={formik.handleChange} />
                                 <TextField
                                     type='text'
                                     label='Experience in crops(Names of the crops)'
-                                    value={formData.exp_in_crops}
-                                    onChange={(e) => handleChange(e, 'exp_in_crops')} />
+                                    name='exp_in_crops'
+                                    value={formik.values.exp_in_crops}
+                                    onChange={formik.handleChange} />
                                 <TextField
                                     type='text'
                                     label='Experience in livestock(Name of the livestock)'
-                                    value={formData.exp_in_livestock}
-                                    onChange={(e) => handleChange(e, 'exp_in_livestock')} />
+                                    name='exp_in_livestock'
+                                    value={formik.values.exp_in_livestock}
+                                    onChange={formik.handleChange} />
                                 <TextField
                                     type='text'
                                     label='Experience in any other allied agricultural activities'
-                                    value={formData.exp_in_other}
-                                    onChange={(e) => handleChange(e, 'exp_in_other')} />
+                                    name='exp_in_other'
+                                    value={formik.values.exp_in_other}
+                                    onChange={formik.handleChange} />
 
                             </div>
                             <div className='land-information'>
@@ -475,14 +535,16 @@ function AddOperator({ addOperator }) {
                                 <TextField
                                     type='text'
                                     label='Land Parcel name'
-                                    value={formData.landparcel_name}
-                                    onChange={(e) => handleChange(e, 'landparcel_name')} />
+                                    name='landparcel_name'
+                                    value={formik.values.landparcel_name}
+                                    onChange={formik.handleChange} />
                                 <TextField
                                     type='text'
                                     select
                                     label='Ownership status of the land'
-                                    value={formData.ownership}
-                                    onChange={(e) => handleChange(e, 'ownership')}
+                                    name='ownership'
+                                    value={formik.values.ownership}
+                                    onChange={formik.handleChange}
                                 >
 
                                     <MenuItem value='Own'>Own</MenuItem>
@@ -491,13 +553,15 @@ function AddOperator({ addOperator }) {
                                 <TextField
                                     type='text'
                                     label='Name of the owner'
-                                    value={formData.owner_name}
-                                    onChange={(e) => handleChange(e, 'owner_name')} />
+                                    name='owner_name'
+                                    value={formik.values.owner_name}
+                                    onChange={formik.handleChange} />
                                 <TextField
                                     type='text'
                                     label='Crop name'
-                                    value={formData.crops}
-                                    onChange={(e) => handleChange(e, 'crops')} />
+                                    name='crops'
+                                    value={formik.values.crops}
+                                    onChange={formik.handleChange} />
                             </div>
 
                             <div className='leased-document'>
@@ -524,7 +588,7 @@ function AddOperator({ addOperator }) {
                                         Choose file
                                         <VisuallyHiddenInput type="file" multiple onChange={(event) => handleFileChangeLeasedDoc(event, 'leasedFile')} />
                                     </Button>
-                                    <Typography sx={{ mt: 1 }}>{formData.leasedFile ? (formData.leasedFile.name) : "No file chosen"}</Typography>
+                                    <Typography sx={{ mt: 1 }}>{formik.values.leasedFile ? (formik.values.leasedFile.name) : "No file chosen"}</Typography>
                                     {(
                                         <>
                                             {selectedFileLeasedDoc.map((file, index) => (
@@ -546,19 +610,21 @@ function AddOperator({ addOperator }) {
                                 <TextField
                                     type='text'
                                     label='Survey number'
-                                    value={formData.survey_no}
-                                    onChange={(e) => handleChange(e, 'survey_no')} />
+                                    name='survey_no'
+                                    value={formik.values.survey_no}
+                                    onChange={formik.handleChange} />
                                 <TextField
                                     type='text'
                                     label='Acres(in acres)'
-                                    value={formData.area}
-                                    onChange={(e) => handleChange(e, 'area')} />
+                                    name='acres'
+                                    value={formik.values.acres}
+                                    onChange={formik.handleChange} />
                             </div>
 
                             <div className='submit-cancel-btn'>
                                 <Button variant='outlined' className='cancel-btn'>Cancel</Button>
                                 <Link to='/operator' style={{ textDecoration: 'none' }}>
-                                    <Button variant='contained' className='submit-btn' onClick={handleAdd}>Submit</Button>
+                                    <Button variant='contained' className='submit-btn' onClick={formik.handleSubmit}>Submit</Button>
 
                                 </Link>
 
@@ -578,7 +644,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    addOperator: (formData) => addOperator(formData)
+    addOperator: (formik) => addOperator(formik)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddOperator)
