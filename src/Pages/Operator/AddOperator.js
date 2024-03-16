@@ -21,8 +21,14 @@ import { connect } from 'react-redux'
 const validate = (values) => {
     const errors = {};
 
-    if (!values.name) {
+    if (!values.name || !values.contact_number_1 || !values.village || !values.aadhar_no || !values.passbook_refno
+        || !values.crops) {
         errors.name = 'Required';
+        errors.contact_number_1 = 'Required';
+        errors.village = 'Required';
+        errors.aadhar_no = 'Required';
+        errors.passbook_refno = 'Required';
+        errors.crops = 'Required';
     }
     return errors;
 };
@@ -170,7 +176,7 @@ function AddOperator({ addOperator }) {
         const file = event.target.files[0];
         setSelectedFileLeasedDoc([file]);
         formik.values.leasedFile = file;
-        formik.values.leasedFileName = file.name
+        formik.values.leasedFileName = file.name;
         // setFormData({
         //     ...formik.values,
         //     [key]: file,
@@ -233,11 +239,13 @@ function AddOperator({ addOperator }) {
                                     type="text"
                                     label="Name"
                                     name="name"
+                                    required
                                     value={formik.values.name}
                                     onChange={formik.handleChange}
                                     helperText='First name + Last name'
+                                    error={formik.errors.name ? formik.errors.name : null}
                                 />
-
+                                
 
                                 <TextField
                                     type='text'
@@ -265,7 +273,6 @@ function AddOperator({ addOperator }) {
                                     name='ownerID'
                                     value={formik.values.ownerID}
                                     onChange={formik.handleChange}
-                                    required
                                 />
                             </div>
 
@@ -274,10 +281,11 @@ function AddOperator({ addOperator }) {
                                 <TextField
                                     type='text'
                                     label='Contact number 1'
-                                    required
                                     name='contact_number_1'
                                     value={formik.values.contact_number_1}
                                     onChange={formik.handleChange}
+                                    required
+                                    error={formik.errors.contact_number_1 ? formik.errors.contact_number_1 : null}
 
                                 />
 
@@ -310,6 +318,7 @@ function AddOperator({ addOperator }) {
                                     value={formik.values.village}
                                     onChange={formik.handleChange}
                                     required
+                                    error={formik.errors.village ? formik.errors.village : null}
                                 />
                                 <TextField
                                     type='text'
@@ -388,10 +397,11 @@ function AddOperator({ addOperator }) {
                                 <TextField
                                     type='text'
                                     label='Aadhar number'
-                                    required
                                     name='aadhar_no'
+                                    required
                                     value={formik.values.aadhar_no}
                                     onChange={formik.handleChange}
+                                    error={formik.errors.village ? formik.errors.village : null}
                                 />
                                 <Grid container sx={{ display: 'flex', gap: '20px' }}>
                                     <Button
@@ -489,11 +499,12 @@ function AddOperator({ addOperator }) {
                                 <TextField
                                     fullWidth
                                     type='text'
-                                    required
                                     label='Pass Book ref. no'
                                     name='passbook_refno'
+                                    required
                                     value={formik.values.passbook_refno}
-                                    onChange={formik.handleChange} />
+                                    onChange={formik.handleChange}
+                                    error={formik.errors.passbook_refno ? formik.errors.passbook_refno : null} />
 
                             </div>
                             <div className='farming-experience'>
@@ -560,8 +571,10 @@ function AddOperator({ addOperator }) {
                                     type='text'
                                     label='Crop name'
                                     name='crops'
+                                    required
                                     value={formik.values.crops}
-                                    onChange={formik.handleChange} />
+                                    onChange={formik.handleChange}
+                                    error={formik.errors.crops ? formik.errors.crops : null} />
                             </div>
 
                             <div className='leased-document'>
