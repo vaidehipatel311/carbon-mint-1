@@ -30,6 +30,9 @@ const validate = (values) => {
         errors.passbook_refno = 'Required';
         errors.crops = 'Required';
     }
+    else if(values.contact_number_1 !== 10){
+        errors.contact_number_1 = 'Must be 10 digits'
+    }
     return errors;
 };
 
