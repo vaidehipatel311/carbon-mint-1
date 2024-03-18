@@ -711,9 +711,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                 onClick={() => handleEventForm()}><Typography>Create a new event</Typography></Button>
 
                             {submitbutton ? (<>
-                                {/* <Link href='/dashboard'> */}
                                 <Button variant='contained' className='three-buttons' sx={{ backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", display: !formVisible ? "none" : "" }} onClick={handleAdd}>Submit</Button>
-                                {/* </Link> */}
                             </>) : (<></>)}
                         </div>
                     </Box >
