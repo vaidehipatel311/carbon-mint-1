@@ -30,7 +30,7 @@ const validate = (values) => {
         errors.passbook_refno = 'Required';
         errors.crops = 'Required';
     }
-    else if(values.contact_number_1 !== 10){
+    else if(values.contact_number_1.length !== 10){
         errors.contact_number_1 = 'Must be 10 digits'
     }
     return errors;
@@ -246,7 +246,7 @@ function AddOperator({ addOperator }) {
                                     value={formik.values.name}
                                     onChange={formik.handleChange}
                                     helperText='First name + Last name'
-                                    error={formik.errors.name ? formik.errors.name : null}
+                                    error={formik.errors.name ? true : false}
                                 />
                                 
 
@@ -288,8 +288,8 @@ function AddOperator({ addOperator }) {
                                     value={formik.values.contact_number_1}
                                     onChange={formik.handleChange}
                                     required
-                                    error={formik.errors.contact_number_1 ? formik.errors.contact_number_1 : null}
-
+                                    error={formik.errors.contact_number_1 ? true : false}
+                                    helperText={formik.errors.contact_number_1}
                                 />
 
                                 <TextField
@@ -321,7 +321,7 @@ function AddOperator({ addOperator }) {
                                     value={formik.values.village}
                                     onChange={formik.handleChange}
                                     required
-                                    error={formik.errors.village ? formik.errors.village : null}
+                                    error={formik.errors.village ? true : false}
                                 />
                                 <TextField
                                     type='text'
@@ -404,7 +404,7 @@ function AddOperator({ addOperator }) {
                                     required
                                     value={formik.values.aadhar_no}
                                     onChange={formik.handleChange}
-                                    error={formik.errors.village ? formik.errors.village : null}
+                                    error={formik.errors.aadhar_no ? true : false}
                                 />
                                 <Grid container sx={{ display: 'flex', gap: '20px' }}>
                                     <Button
@@ -507,7 +507,7 @@ function AddOperator({ addOperator }) {
                                     required
                                     value={formik.values.passbook_refno}
                                     onChange={formik.handleChange}
-                                    error={formik.errors.passbook_refno ? formik.errors.passbook_refno : null} />
+                                    error={formik.errors.passbook_refno ? true : false} />
 
                             </div>
                             <div className='farming-experience'>
@@ -577,7 +577,7 @@ function AddOperator({ addOperator }) {
                                     required
                                     value={formik.values.crops}
                                     onChange={formik.handleChange}
-                                    error={formik.errors.crops ? formik.errors.crops : null} />
+                                    error={formik.errors.crops ? true : false} />
                             </div>
 
                             <div className='leased-document'>

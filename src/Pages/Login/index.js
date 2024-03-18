@@ -15,6 +15,7 @@ import 'react-phone-input-2/lib/style.css'
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { auth } from '../../firebase';
 import PhoneInput from 'react-phone-input-2';
+import { MuiOtpInput } from 'mui-one-time-password-input'
 
 
 function Login({ addUser }) {
@@ -79,7 +80,7 @@ function Login({ addUser }) {
                 size: 'invisible',
                 'callback': () => { }
             })
-            
+
             setRecaptchaVerifier(recaptcha);
 
             setShowOtp(true);
@@ -144,36 +145,39 @@ function Login({ addUser }) {
                             inputClass="login-textfield"
                         />
                     </Grid>
+
                     <div id="recaptcha"></div>
                     {showOtp && (
                         <>
                             <Grid xs={12}>
-                                <TextField
+                                
+                                <MuiOtpInput
                                     name="otp"
                                     value={otp}
-                                    onChange={(e) => setOtp(e.target.value)}
-                                    label="OTP"
-                                    type="text"
+                                    onChange={(newValue) => setOtp(newValue)}
+                                    TextFieldsProps={{ placeholder: '-' }}
+                                    length={6}
                                     className="login-textfield"
                                     sx={{ marginTop: '16px' }}
                                 />
+
 
                             </Grid>
                             <Grid xs={12} sx={{ mt: 2, textAlign: 'center' }}>
                                 <Typography variant='p' sx={{ fontSize: 'small', color: 'red' }}>{remainingTime} seconds remaining</Typography>
                             </Grid>
                             <Grid xs={12} sx={{ textAlign: 'center' }}>
-                                    <Button
-                                        sx={{
-                                            backgroundColor: '#8CD867',
-                                            border: '1px solid black',
-                                            borderRadius: '8px'
-                                        }}
-                                        size="large"
-                                        variant="filled"
-                                        className="button"
-                                        onClick={handleVerifyOTP}
-                                    >Sign In</Button>
+                                <Button
+                                    sx={{
+                                        backgroundColor: '#8CD867',
+                                        border: '1px solid black',
+                                        borderRadius: '8px'
+                                    }}
+                                    size="large"
+                                    variant="filled"
+                                    className="button"
+                                    onClick={handleVerifyOTP}
+                                >Sign In</Button>
                             </Grid>
 
                         </>)}
