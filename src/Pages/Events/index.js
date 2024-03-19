@@ -82,9 +82,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                 setDraftData(filteredEvent);
             })
             .catch(err => console.log(err));
-
-
-
     }, [draftdata]);
 
     const formik = useFormik({
@@ -104,22 +101,20 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
             irrigation_method: '',
             intercultural_operations: '',
             recommended_competent: '',
-            scarcification:'',
-            soaking_hot_water:'',
-            soaking_chemicals:'',
-            soaking_cool_water:'',
-            wetting_drying:'',
-            others:'',
+            scarcification: '',
+            soaking_hot_water: '',
+            soaking_chemicals: '',
+            soaking_cool_water: '',
+            wetting_drying: '',
+            others: '',
             evidence: ""
         },
         onSubmit: (values) => {
-
-
             if (eventGroup !== "Seed & Seedlings" || eventName !== 'Seed') {
-                alert('Please select the field!')
+                alert('Please select the field!');
+
             }
             else {
-                // values.evidence = draftdata.evidence;
                 addEvent(values)
                 navigate('/dashboard', { state: { showAlert: true } });
             }
@@ -142,7 +137,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
             };
         });
     };
-
 
     const handleDeleteFile = (index) => {
         const updatedFiles = selectedFiles.filter((_, i) => i !== index);
@@ -176,7 +170,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
         setnorecord(false);
     }
 
-
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
         clipPath: 'inset(50%)',
@@ -187,8 +180,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
         left: 0,
         whiteSpace: 'nowrap',
     });
-
-
 
     const generateGridItems = () => {
 
@@ -237,133 +228,131 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
         ...theme.typography.body2,
         color: theme.palette.text.secondary,
     }));
+
     return (
         <>
-            <Header></Header>
-            <Sidebar></Sidebar>
+            <Header />
+            <Sidebar />
 
-            {id == 1 ? (
-
-                <>
+            {id == 1 ?(
                     <Box sx={{ margin: '100px 20px 50px 300px' }}>
-                        <Grid container className='right-part-landowner'>
-                            <Grid xs={8.5}>
-                                <Typography className='title' variant='p'>Events</Typography>
-                            </Grid>
-                            <Grid xs={3}>
-                                <SearchIcon className='search-icon' />
-                                <input type='text' placeholder='Search..' />
-                            </Grid>
-                            <Grid xs={0.5}>
-                                <Badge color='success' variant='dot' className='filter-icon'><FilterAltIcon onClick={handleClick} /></Badge>
-                                <Menu
-                                    anchorEl={anchorEl}
-                                    open={open}
-                                    onClose={handleClose}
-                                >
+                    <Grid container className='right-part-landowner'>
+                        <Grid xs={8.5}>
+                            <Typography className='title' variant='p'>Events</Typography>
+                        </Grid>
+                        <Grid xs={3}>
+                            <SearchIcon className='search-icon' />
+                            <input type='text' placeholder='Search..' />
+                        </Grid>
+                        <Grid xs={0.5}>
+                            <Badge color='success' variant='dot' className='filter-icon'><FilterAltIcon onClick={handleClick} /></Badge>
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                            >
 
-                                    <Typography type="p" className='filter' fontWeight='bold'>Filter</Typography>
+                                <Typography type="p" className='filter' fontWeight='bold'>Filter</Typography>
 
-                                    <MenuItem >
-                                        <input type='text' placeholder="Operator" className='textfield' />
-                                    </MenuItem>
+                                <MenuItem >
+                                    <input type='text' placeholder="Operator" className='textfield' />
+                                </MenuItem>
 
-                                    <MenuItem>
-                                        <input type='text' placeholder="Land Parcel" className='textfield' value={filterValue} onChange={((event) => setFiltervalue(event.target.value))} />
-                                    </MenuItem>
+                                <MenuItem>
+                                    <input type='text' placeholder="Land Parcel" className='textfield' value={filterValue} onChange={((event) => setFiltervalue(event.target.value))} />
+                                </MenuItem>
 
-                                    <MenuItem>
-                                        <input type='text' placeholder='Location' className='textfield' />
-                                    </MenuItem>
+                                <MenuItem>
+                                    <input type='text' placeholder='Location' className='textfield' />
+                                </MenuItem>
 
-                                    <MenuItem >
-                                        <select className='select' placeholder='Type of Event'>
+                                <MenuItem >
+                                    <select className='select' placeholder='Type of Event'>
 
-                                            <option>Corner Field</option>
-                                            <option>Lake Edge</option>
-                                        </select>
-                                    </MenuItem>
+                                        <option>Corner Field</option>
+                                        <option>Lake Edge</option>
+                                    </select>
+                                </MenuItem>
 
-                                    <Button variant='outlined' className="buttons" sx={{ ml: "95px", mr: "15px" }}>Clear</Button>
-                                    <Button variant='contained' className="buttons" onClick={handleClose}>Submit</Button>
+                                <Button variant='outlined' className="buttons" sx={{ ml: "95px", mr: "15px" }}>Clear</Button>
+                                <Button variant='contained' className="buttons" onClick={handleClose}>Submit</Button>
 
-                                </Menu >
-                                {showFilterValue ? (<Typography>{filterValue}</Typography>) : (<></>)}
-                            </Grid>
+                            </Menu >
+                            {showFilterValue ? (<Typography>{filterValue}</Typography>) : (<></>)}
+                        </Grid>
+                    </Grid>
+
+                    <Grid container className='cards'>
+                        <Grid item xs={2.3}>
+                            <Item className='operators'>
+                                <img src={operators} alt='event-images'></img>
+                                <div className='information'>
+                                    <Typography className='operators-text' variant='p'>Land Owners</Typography><br />
+                                    <b><Typography variant='p' className='numbers'>359</Typography></b>
+                                </div>
+                            </Item>
+                        </Grid>
+                        <Grid item xs={2.3}>
+                            <Item className='no-acrs'>
+                                <img src={noacrs} alt='event-images'></img>
+                                <div className='information'>
+                                    <Typography className='no-acrs-text' variant='p'>No. Acrs</Typography><br />
+                                    <b><Typography variant='p' className='numbers'>20583</Typography></b>
+                                </div>
+                            </Item>
                         </Grid>
 
-                        <Grid container className='cards'>
-                            <Grid item xs={2.3}>
-                                <Item className='operators'>
-                                    <img src={operators}></img>
-                                    <div className='information'>
-                                        <Typography className='operators-text' variant='p'>Land Owners</Typography><br />
-                                        <b><Typography variant='p' className='numbers'>359</Typography></b>
-                                    </div>
-                                </Item>
-                            </Grid>
-                            <Grid item xs={2.3}>
-                                <Item className='no-acrs'>
-                                    <img src={noacrs}></img>
-                                    <div className='information'>
-                                        <Typography className='no-acrs-text' variant='p'>No. Acrs</Typography><br />
-                                        <b><Typography variant='p' className='numbers'>20583</Typography></b>
-                                    </div>
-                                </Item>
-                            </Grid>
-
-                            <Grid item xs={2.3}>
-                                <Item className='yields'>
-                                    <img src={yields}></img>
-                                    <div className='information'>
-                                        <Typography className='yields-text' variant='p'>Leased(Acres)</Typography><br />
-                                        <b><Typography variant='p' className='numbers'>489</Typography></b>
-                                    </div>
-                                </Item>
-                            </Grid>
-                            <Grid item xs={2.3}>
-                                <Item className='crops'>
-                                    <img src={crops}></img>
-                                    <div className='information'>
-                                        <Typography className='crops-text' variant='p'>Crops</Typography><br />
-                                        <b><Typography variant='p' className='numbers'>359</Typography></b>
-                                    </div>
-                                    <img src={chart} className='information'></img>
-                                </Item>
-                            </Grid>
-                            <Grid item xs={2.3}>
-                                <Item className='events'>
-                                    <img src={event}></img>
-                                    <div className='information'>
-                                        <Typography className='events-text' variant='p'>Events</Typography><br />
-                                        <b><Typography variant='p' className='numbers'>86</Typography></b>
-                                    </div>
-                                    <img src={vector} className='information'></img>
-                                </Item>
-                            </Grid>
-
+                        <Grid item xs={2.3}>
+                            <Item className='yields'>
+                                <img src={yields} alt='event-images'></img>
+                                <div className='information'>
+                                    <Typography className='yields-text' variant='p'>Leased(Acres)</Typography><br />
+                                    <b><Typography variant='p' className='numbers'>489</Typography></b>
+                                </div>
+                            </Item>
+                        </Grid>
+                        <Grid item xs={2.3}>
+                            <Item className='crops'>
+                                <img src={crops} alt='event-images'></img>
+                                <div className='information'>
+                                    <Typography className='crops-text' variant='p'>Crops</Typography><br />
+                                    <b><Typography variant='p' className='numbers'>359</Typography></b>
+                                </div>
+                                <img src={chart} className='information' alt='event-images'></img>
+                            </Item>
+                        </Grid>
+                        <Grid item xs={2.3}>
+                            <Item className='events'>
+                                <img src={event} alt='event-images'></img>
+                                <div className='information'>
+                                    <Typography className='events-text' variant='p'>Events</Typography><br />
+                                    <b><Typography variant='p' className='numbers'>86</Typography></b>
+                                </div>
+                                <img src={vector} className='information' alt='event-images'></img>
+                            </Item>
                         </Grid>
 
-                        <Typography variant='body1' align='left' sx={{ mt: 2 }} fontWeight="bold">Events</Typography>
-                        <br></br>
-                        <Grid container>
-                            {generateGridItems()}
-                        </Grid>
-                        <Grid container sx={{ mt: 3 }} >
-                            <Grid xs={9} className='total-events'>
-                                <Typography sx={{ color: 'gray' }}>128 Events</Typography>
-                            </Grid>
-                            <Grid xs={3} className='pagination'>
-                                <Stack spacing={2}>
-                                    <Pagination count={3} variant="outlined" />
+                    </Grid>
 
-                                </Stack>
-                            </Grid>
+                    <Typography variant='body1' align='left' sx={{ mt: 2 }} fontWeight="bold">Events</Typography>
+                    <br/>
+                    <Grid container>
+                        {generateGridItems()}
+                    </Grid>
+                    <Grid container sx={{ mt: 3 }} >
+                        <Grid xs={9} className='total-events'>
+                            <Typography sx={{ color: 'gray' }}>128 Events</Typography>
                         </Grid>
-                    </Box >
-                </>)
+                        <Grid xs={3} className='pagination'>
+                            <Stack spacing={2}>
+                                <Pagination count={3} variant="outlined" />
+                            </Stack>
+                        </Grid>
+                    </Grid>
+                </Box >
+                )
                 :
-                (<>
+                (
                     <Box sx={{ margin: '100px 20px 50px 300px' }}>
                         <Grid container>
                             <Grid xs={9}>
@@ -371,9 +360,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                     <Grid className='links'>
                                         <Breadcrumbs
                                             separator={<NavigateNextIcon fontSize="small" />}
-                                            aria-label="breadcrumb"
-
-                                        >
+                                            aria-label="breadcrumb">
                                             <Link underline='hover' color='inherit' href="/operator/profile">
                                                 Kethavath Laxmanna
                                             </Link>
@@ -386,8 +373,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                             <Link underline='hover' color='inherit' href="/events/2">
                                                 Events
                                             </Link>
-
-
                                         </Breadcrumbs>
                                     </Grid>
 
@@ -401,7 +386,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                     <CallIcon />
                                     <Typography variant='p'>Operator: <b>+91 999 888 9898</b></Typography>
                                 </div>
-
                             </Grid>
                         </Grid>
 
@@ -411,27 +395,27 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                 <Grid container className='images4'>
                                     <Grid xs={3}>
                                         {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
-                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} /
-                                        ><img src={img1}></img></>) :
-                                            (<img src={img1}></img>)}
+                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
+                                            <img src={img1} alt='event-images'/></>) :
+                                            (<img src={img1} alt='event-images'/>)}
                                     </Grid>
                                     <Grid xs={3}>
                                         {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
-                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} /
-                                        ><img src={img2}></img></>) :
-                                            (<img src={img2}></img>)}
+                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
+                                            <img src={img2} alt='event-images'/></>) :
+                                            (<img src={img2} alt='event-images'/>)}
                                     </Grid>
                                     <Grid xs={3}>
                                         {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
-                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} /
-                                        ><img src={img3}></img></>) :
-                                            (<img src={img3}></img>)}
+                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
+                                            <img src={img3} alt='event-images'/></>) :
+                                            (<img src={img3} alt='event-images'/>)}
                                     </Grid>
                                     <Grid xs={3}>
                                         {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
-                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} /
-                                        ><img src={img4}></img></>) :
-                                            (<img src={img4}></img>)}
+                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
+                                            <img src={img4} alt='event-images'/></>) :
+                                            (<img src={img4} alt='event-images'/>)}
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -440,7 +424,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                 <div className='notes'>
                                     {isDraft ?
                                         (<div style={{ display: 'flex' }}>
-                                            <Checkbox {...label} defaultChecked color="success" sx={{ mt: -10 }} />
+                                            <Checkbox {...label} defaultChecked color="success" sx={{ mt: -7 }} />
                                             <Typography variant='p'>I want to present my clients the Figma files first, so it would be great if you add those as well, more manual downloads.</Typography>
                                         </div>) :
                                         (
@@ -453,7 +437,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                             <Snackbar autoHideDuration={60} open={norecord} >
                                 <Alert sx={{ ml: 90, mt: -60 }} severity='error'>
                                     No record
-                                </Alert></Snackbar></>) : ("")}
+                                </Alert>
+                            </Snackbar></>) : (<></>)}
                         {formVisible ?
                             (
                                 <div className='event-form'>
@@ -462,9 +447,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                             <Grid xs={3.5}>
                                                 <Typography variant='p' className='event-selection' fontWeight='bold'>Crop Event Selection
                                                 </Typography>
-
-
-
                                             </Grid>
                                             <Grid xs={0.5}></Grid>
                                             <Grid xs={3.5} >
@@ -733,11 +715,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         onChange={formik.handleChange}
                                                         defaultValue={isDraft ? draftdata.recommended_competent : ""}
                                                     />
-
-
                                                 </Box>
                                             </Grid>
-
 
                                             <Grid item xs={6} sx={{ mt: 4 }}>
                                                 <Typography variant='p' sx={{ marginLeft: "40px", marginTop: "50px" }} fontWeight='bold'>Evidence</Typography>
@@ -750,7 +729,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                         tabIndex={-1}
                                                         startIcon={<CloudUploadIcon />}
                                                         size="small"
-
                                                         sx={{ width: "150px", marginBottom: "10px", backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", marginLeft: "40px" }}
                                                     >
                                                         Upload file
@@ -773,8 +751,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                                 />
                                                                 <CloseIcon className='ev-close-img' onClick={() => handleDeleteFile(index)} />
                                                             </>
-
                                                         ))}
+
                                                         {isDraft && draftdata && draftdata.evidence && draftdata.evidence.length > 0 && (
                                                             <>
                                                                 {(() => {
@@ -785,7 +763,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                                             <>
                                                                                 <img
                                                                                     src={imagePath}
-                                                                                    alt={`Draft Image ${index}`}
+                                                                                    alt='event-images'
                                                                                     style={{ width: '100px', height: '100px', marginLeft: "40px" }}
                                                                                 /></>
                                                                         );
@@ -795,11 +773,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                                                 })()}
                                                             </>
                                                         )}
-
-
-
-
-
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
@@ -832,8 +805,10 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                             </>) : (<></>)}
                         </div>
                     </Box >
-                </>)
+                )
             }
+                
+            
         </>
     )
 }

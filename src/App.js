@@ -21,13 +21,13 @@ function App() {
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/dashboard' element={<DashBoard/>}/>
-          <Route path='/operator' element={<Operator />} />
-          <Route path='/add-operator' element={<AddOperator />} />
+          <Route path='/landowners' element={<LandOwners />} />
+          <Route path='/landparcels' element={<LandParcels />} />
           <Route path='/operator/profile' element={<Profile />} />
           <Route path='/operator/profile/landparcel' element={<Landparcel />} />
           <Route path='/operator/profile/landparcel/crops' element={<Crops />} />
-          <Route path='/landowners' element={<LandOwners />} />
-          <Route path='/landparcels' element={<LandParcels />} />
+          <Route path='/operator' element={<Operator />} />
+          <Route path='/add-operator' element={<AddOperator />} />
           <Route path='/events/:id' element={<Events />} />
 
 

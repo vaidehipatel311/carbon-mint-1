@@ -1,5 +1,7 @@
 
 import React, { useState } from 'react';
+import './style.css';
+import { Link } from 'react-router-dom';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Drawer from '@mui/material/Drawer';
 import BusinessIcon from '@mui/icons-material/Business';
@@ -27,12 +29,6 @@ import operator_approved from '../../assets/images/DashBoard/operator_approved.p
 import operator_processing from '../../assets/images/DashBoard/operator_processing.png'
 import desha from '../../assets/images/DashBoard/desha.png'
 import lake_edge from '../../assets/images/DashBoard/lake_edge.png'
-
-
-
-
-import './style.css';
-import { Link } from 'react-router-dom';
 
 export default function Header() {
     const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false);
@@ -153,7 +149,7 @@ export default function Header() {
             onClick={closeProfileDrawer}
             onKeyDown={closeProfileDrawer}>
 
-            <Button sx={{ color: 'gray'}} onClick={closeProfileDrawer}><CloseIcon className='close-icon' /></Button>
+            <Button sx={{ color: 'gray' }} onClick={closeProfileDrawer}><CloseIcon className='close-icon' /></Button>
             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                 <Avatar sx={{ width: '70px', height: '70px' }} className='user-image-drawer'><img src={person}></img></Avatar>
                 <div className='user-in-drawer'>
@@ -198,7 +194,7 @@ export default function Header() {
                             <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Logout</Typography><br />
                             <Typography variant='p' sx={{ color: 'gray' }}>847064392663</Typography>
                         </div>
-                        <Button sx={{ color: 'black' }}><ArrowForwardIosIcon className='arrowforward-icon'/></Button>
+                        <Button sx={{ color: 'black' }}><ArrowForwardIosIcon className='arrowforward-icon' /></Button>
                     </div>
                 </Link>
             </div>
@@ -209,62 +205,61 @@ export default function Header() {
     return (
         <>
 
-<Box>
+            <Box>
+                <Grid container >
+                    <div className='header'>
+                        <Grid xs={1}>
 
-            <Grid container >
-                <div className='header'>
-                    <Grid xs={1}>
+                            <Button sx={{ color: 'gray', display: "flex", justifyContent: 'flex-start' }}><ArrowBackIosIcon /></Button>
+                        </Grid>
+                        <Grid xs={7}>
+                        </Grid>
 
-                        <Button sx={{ color: 'gray',display:"flex",justifyContent:'flex-start' }}><ArrowBackIosIcon /></Button>
-                    </Grid>
-                    <Grid xs={7}>
-                    </Grid>
-
-                    <Grid xs={4} sx={{justifyContent: 'flex-end',display:'flex',marginRight:'20px'}}>
-                        <div className='notification' onClick={toggleNotificationDrawer}>
-                            {notificationDrawerOpen ?
-                                (<Button sx={{ color: 'white', backgroundColor: 'green', borderRadius: '80px', height: '40px' }}>
-                                    <NotificationsNoneIcon className='notification-icon' />
-                                </Button>)
-                                : (<Button sx={{ color: 'black', borderRadius: '50px', height: '40px' }}>
-                                    <Badge color='success' variant="dot">
-                                        <NotificationsNoneIcon badge className='notification-icon' />
-                                    </Badge>
-                                </Button>)
-                            }
-                        </div>
-                        <Drawer
-                            anchor="right"
-                            open={notificationDrawerOpen}
-                            onClose={toggleNotificationDrawer}
-                            sx={{ zIndex: 199 }}
-                        >
-                            {notificationDrawer}
-                        </Drawer>
-
-
-
-                    {/* </Grid> */}
-
-                    {/* <Grid xs={2.5}> */}
-                        <div style={{ display: 'flex', cursor: 'pointer' }} onClick={toggleProfileDrawer}>
-                            <Avatar sx={{ ml: 1, border: profileDrawerOpen ? '3px solid green' : 'none' }}><img className='user-image' src={person} alt="Person" /></Avatar>
-                            <div className='user'>
-                                <Typography className='user-name' variant='p'>Subbarayudu KV</Typography><br />
-                                <Typography className='agent' variant='p'>Agent</Typography>
+                        <Grid xs={4} sx={{ justifyContent: 'flex-end', display: 'flex', marginRight: '20px' }}>
+                            <div className='notification' onClick={toggleNotificationDrawer}>
+                                {notificationDrawerOpen ?
+                                    (<Button sx={{ color: 'white', backgroundColor: 'green', borderRadius: '80px', height: '40px' }}>
+                                        <NotificationsNoneIcon className='notification-icon' />
+                                    </Button>)
+                                    : (<Button sx={{ color: 'black', borderRadius: '50px', height: '40px' }}>
+                                        <Badge color='success' variant="dot">
+                                            <NotificationsNoneIcon badge className='notification-icon' />
+                                        </Badge>
+                                    </Button>)
+                                }
                             </div>
-                        </div>
-                        <Drawer
-                            anchor="right"
-                            open={profileDrawerOpen}
-                            onClose={toggleProfileDrawer}
-                            sx={{ zIndex: 199 }}
-                        >
-                            {profileDrawer}
-                        </Drawer>
-                    </Grid>
-                </div>
-            </Grid>
+                            <Drawer
+                                anchor="right"
+                                open={notificationDrawerOpen}
+                                onClose={toggleNotificationDrawer}
+                                sx={{ zIndex: 199 }}
+                            >
+                                {notificationDrawer}
+                            </Drawer>
+
+
+
+                            {/* </Grid> */}
+
+                            {/* <Grid xs={2.5}> */}
+                            <div style={{ display: 'flex', cursor: 'pointer' }} onClick={toggleProfileDrawer}>
+                                <Avatar sx={{ ml: 1, border: profileDrawerOpen ? '3px solid green' : 'none' }}><img className='user-image' src={person} alt="Person" /></Avatar>
+                                <div className='user'>
+                                    <Typography className='user-name' variant='p'>Subbarayudu KV</Typography><br />
+                                    <Typography className='agent' variant='p'>Agent</Typography>
+                                </div>
+                            </div>
+                            <Drawer
+                                anchor="right"
+                                open={profileDrawerOpen}
+                                onClose={toggleProfileDrawer}
+                                sx={{ zIndex: 199 }}
+                            >
+                                {profileDrawer}
+                            </Drawer>
+                        </Grid>
+                    </div>
+                </Grid>
             </Box>
 
 
