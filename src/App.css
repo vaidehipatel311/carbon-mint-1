@@ -61,12 +61,6 @@ input {
   color: gray;
 }
 
-/* body{
-  & .MuiButton-root:hover{
-    color: black;
-    background: rgba(140, 216, 103, 1);
-  }
-} */
 
 @media screen and (max-width:2200px) {
   .search-icon {

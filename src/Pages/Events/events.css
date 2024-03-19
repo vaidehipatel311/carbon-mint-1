@@ -192,7 +192,9 @@
     height: 30px;
 
 }
-
+.three-buttons:hover{
+    transform: scale(1.02);
+}
 .myDiv {
     position: relative;
     margin-bottom: 20px;

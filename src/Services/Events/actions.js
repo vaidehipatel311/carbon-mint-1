@@ -22,7 +22,13 @@ export const addEvent = (formData) => {
                     "irrigation_method": formData.irrigation_method,
                     "intercultural_operations": formData.intercultural_operations,
                     "recommended_competent": formData.recommended_competent,
-                    "evidence": [formData.evidence[0], formData.evidence[1]]
+                    'scarcification': formData.scarcification,
+                    'soaking_hot_water': formData.soaking_hot_water,
+                    'soaking_chemicals': formData.soaking_chemicals,
+                    'soaking_cool_water': formData.soaking_cool_water,
+                    'wetting_drying': formData.wetting_drying,
+                    'others': formData.others,
+                    "evidence": formData.evidence
                 });
             dispatch({
                 type: actionTypes.ADD_EVENTS,
