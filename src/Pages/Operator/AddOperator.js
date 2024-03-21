@@ -125,29 +125,17 @@ function AddOperator({ addOperator }) {
             setSelectedFileaadhar([]);
             formik.values.uniqueID = null;
             formik.values.uniqueIDFileName = 'No File Chosen'
-            // setFormData({
-            //     ...formData,
-            //     uniqueID: null,
-            //     uniqueIDFileName: 'No file chosen'
-            // });
+            
         } else if (fileType === 'pancard') {
             setSelectedFilePanCard([]);
             formik.values.pancardFile = null;
             formik.values.pancardFileName = 'No File Chosen'
-            // setFormData({
-            //     ...formData,
-            //     pancardFile: null,
-            //     pancardFileName: 'No file chosen'
-            // });
+            
         } else if (fileType === 'leased') {
             setSelectedFileLeasedDoc([]);
             formik.values.leasedFile = null;
             formik.values.leasedFileName = 'No File Chosen';
-            // setFormData({
-            //     ...formData,
-            //     leasedFile: null,
-            //     leasedFileName: 'No file chosen'
-            // });
+            
         }
     };
 
@@ -156,11 +144,7 @@ function AddOperator({ addOperator }) {
         setSelectedFileaadhar([file]);
         formik.values.uniqueID = file;
         formik.values.uniqueIDFileName = file.name
-        // setFormData({
-        //     ...formData,
-        //     [key]: file,
-        //     [`${key}FileName`]: file.name
-        // });
+        
     };
 
     const handleFileChangePanCard = (event, key) => {
@@ -168,11 +152,7 @@ function AddOperator({ addOperator }) {
         setSelectedFilePanCard([file]);
         formik.values.pancardFile = file;
         formik.values.pancardFileName = file.name
-        // setFormData({
-        //     ...formData,
-        //     [key]: file,
-        //     [`${key}FileName`]: file.name
-        // });
+        
     };
 
     const handleFileChangeLeasedDoc = (event, key) => {
@@ -180,32 +160,10 @@ function AddOperator({ addOperator }) {
         setSelectedFileLeasedDoc([file]);
         formik.values.leasedFile = file;
         formik.values.leasedFileName = file.name;
-        // setFormData({
-        //     ...formik.values,
-        //     [key]: file,
-        //     [`${key}FileName`]: file.name
-        // });
+        
     };
 
-    // const handleChange = (event, key) => {
-
-    //     setFormData({
-    //         ...formData,
-    //         [key]: event.target.value
-    //     });
-    // };
-
-    // const handleAdd = () => {
-    //     const uniqueIDBase64 = formData.uniqueID ? btoa(formData.uniqueID) : null;
-    //     const pancardFileIDBase64 = formData.pancardFile ? btoa(formData.pancardFile) : null;
-    //     const leasedFileIDBase64 = formData.leasedFile ? btoa(formData.leasedFile) : null;
-
-    //     formData.unique_id = uniqueIDBase64;
-    //     formData.panCard_id = pancardFileIDBase64;
-    //     formData.leased_doc_id = leasedFileIDBase64;
-
-    //     addOperator(formData)
-    // };
+    
 
 
 

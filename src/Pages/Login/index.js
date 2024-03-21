@@ -17,7 +17,16 @@ import { auth } from '../../firebase';
 import PhoneInput from 'react-phone-input-2';
 import { MuiOtpInput } from 'mui-one-time-password-input'
 
-
+const validate = values => {
+    const errors = {};
+    if (!values.phoneNo) {
+        errors.phoneNo = 'Required'
+    }
+    else if (values.phoneNo.length !== 10) {
+        errors.phoneNo = 'Must be 10 characters';
+    }
+    return errors;
+}
 function Login({ addUser }) {
     const navigate = useNavigate();
 
@@ -50,16 +59,7 @@ function Login({ addUser }) {
     }, [showOtp]);
 
 
-    const validate = values => {
-        const errors = {};
-        if (!values.phoneNo) {
-            errors.phoneNo = 'Required'
-        }
-        else if (values.phoneNo.length !== 10) {
-            errors.phoneNo = 'Must be 10 characters';
-        }
-        return errors;
-    }
+    
     const formik = useFormik({
         initialValues: {
             phoneNo: '',
@@ -75,8 +75,10 @@ function Login({ addUser }) {
 
     const handleClick = async () => {
         try {
-
-            const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
+            if(phoneNo.length === 0){
+                alert('Please Enter Phone Number.')
+            }
+            else {const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
                 size: 'invisible',
                 'callback': () => { }
             })
@@ -87,7 +89,7 @@ function Login({ addUser }) {
 
             const confirmationResult = await signInWithPhoneNumber(auth, `+${phoneNo}`, recaptcha);
             console.log(confirmationResult);
-            setPhoneOtp(confirmationResult);
+            setPhoneOtp(confirmationResult);}
 
         } catch (error) {
             console.error('Error sending OTP:', error);
@@ -143,6 +145,7 @@ function Login({ addUser }) {
                             }}
                             inputStyle={{ width: '95%' }}
                             inputClass="login-textfield"
+                            error={formik.errors.phoneNo ? true : false}
                         />
                     </Grid>
 
