@@ -12,7 +12,6 @@
     box-sizing: border-box;
     background-color: #EFEFF0;
     padding-left: 15px;
-    /* padding-right: 10px; */
 }
 
 .main-div .div {
@@ -105,7 +104,6 @@
         margin-top: 5px;
     }
 }
-
 @media screen and (max-width:1120px) {
     .main-div{
         & .MuiTypography-root{

@@ -213,10 +213,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                     <Grid xs={3}>
                         <img className='vector-img' src={vectorgroup} alt={vector}></img>
                     </Grid>
-
-
-
-
                 </div>
             </Grid >
 
@@ -234,8 +230,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
             <Header />
             <Sidebar />
 
-            {id == 1 ?(
-                    <Box sx={{ margin: '100px 20px 50px 300px' }}>
+            {id == 1 ? (
+                <Box sx={{ margin: '100px 20px 50px 300px' }}>
                     <Grid container className='right-part-landowner'>
                         <Grid xs={8.5}>
                             <Typography className='title' variant='p'>Events</Typography>
@@ -335,7 +331,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                     </Grid>
 
                     <Typography variant='body1' align='left' sx={{ mt: 2 }} fontWeight="bold">Events</Typography>
-                    <br/>
+                    <br />
                     <Grid container>
                         {generateGridItems()}
                     </Grid>
@@ -350,7 +346,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                         </Grid>
                     </Grid>
                 </Box >
-                )
+            )
                 :
                 (
                     <Box sx={{ margin: '100px 20px 50px 300px' }}>
@@ -396,26 +392,26 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                                     <Grid xs={3}>
                                         {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
                                             sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
-                                            <img src={img1} alt='event-images'/></>) :
-                                            (<img src={img1} alt='event-images'/>)}
+                                            <img src={img1} alt='event-images' /></>) :
+                                            (<img src={img1} alt='event-images' />)}
                                     </Grid>
                                     <Grid xs={3}>
                                         {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
                                             sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
-                                            <img src={img2} alt='event-images'/></>) :
-                                            (<img src={img2} alt='event-images'/>)}
+                                            <img src={img2} alt='event-images' /></>) :
+                                            (<img src={img2} alt='event-images' />)}
                                     </Grid>
                                     <Grid xs={3}>
                                         {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
                                             sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
-                                            <img src={img3} alt='event-images'/></>) :
-                                            (<img src={img3} alt='event-images'/>)}
+                                            <img src={img3} alt='event-images' /></>) :
+                                            (<img src={img3} alt='event-images' />)}
                                     </Grid>
                                     <Grid xs={3}>
                                         {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
                                             sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
-                                            <img src={img4} alt='event-images'/></>) :
-                                            (<img src={img4} alt='event-images'/>)}
+                                            <img src={img4} alt='event-images' /></>) :
+                                            (<img src={img4} alt='event-images' />)}
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -807,8 +803,8 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                     </Box >
                 )
             }
-                
-            
+
+
         </>
     )
 }

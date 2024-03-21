@@ -236,12 +236,7 @@ export default function Header() {
                             >
                                 {notificationDrawer}
                             </Drawer>
-
-
-
-                            {/* </Grid> */}
-
-                            {/* <Grid xs={2.5}> */}
+                            
                             <div style={{ display: 'flex', cursor: 'pointer' }} onClick={toggleProfileDrawer}>
                                 <Avatar sx={{ ml: 1, border: profileDrawerOpen ? '3px solid green' : 'none' }}><img className='user-image' src={person} alt="Person" /></Avatar>
                                 <div className='user'>

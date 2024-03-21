@@ -3,7 +3,7 @@ import './style.css'
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import { Drawer, Grid, Paper, Typography } from "@mui/material";
+import { Drawer, Typography } from "@mui/material";
 import finalLogo from "../../assets/images/SideBar/FinalLogo.png";
 import { Link, useLocation } from "react-router-dom";
 import DashboardIcon from '@mui/icons-material/Dashboard';
