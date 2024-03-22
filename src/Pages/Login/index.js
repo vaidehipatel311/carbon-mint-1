@@ -102,11 +102,13 @@ function Login({ addUser }) {
                 alert('Please enter otp.')
             }
             else {
-                const data = phoneOtp.confirm(otp)
-                console.log(data);
-                if (phoneOtp.confirm(otp)) {
-                    addUser(phoneNo, otp)
+                const userCredential = await phoneOtp.confirm(otp)
+                console.log(userCredential);
+                if (userCredential && userCredential.user) {
+                    addUser(phoneNo, otp);
                     navigate('/dashboard');
+                } else {
+                    console.error('Invalid user credential.');
                 }
             }
 
