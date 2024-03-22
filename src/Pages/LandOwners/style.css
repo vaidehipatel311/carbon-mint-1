@@ -116,7 +116,19 @@
     }
     .grid-item{
         margin-left: 0px;
+    
+    }
+    .right-part-landowner .add-landowner-btn{
+        width: 100%;
+    }
+    /* .right-part-landowner .filter-icon, */
+    .right-part-landowner .grid-icon,
+    .right-part-landowner .list-icon{
+        width: 50%;
         
+    }
+    .right-part-landowner .filter-icon{
+        padding: 5px 10px;
 
     }
     .grid-item .grid-item-card{

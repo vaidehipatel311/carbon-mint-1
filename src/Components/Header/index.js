@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
@@ -57,6 +57,12 @@ export default function Header() {
         ...theme.typography.body2,
         color: theme.palette.text.secondary,
     }));
+    // window.history.forward();
+    // window.history.back();
+    const handleLogout = () => {
+        // window.history.forward();
+        // window.history.back();
+    }
 
     const notificationDrawer = (
         <Box
@@ -194,7 +200,7 @@ export default function Header() {
                             <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Logout</Typography><br />
                             <Typography variant='p' sx={{ color: 'gray' }}>847064392663</Typography>
                         </div>
-                        <Button sx={{ color: 'black' }}><ArrowForwardIosIcon className='arrowforward-icon' /></Button>
+                        <Button sx={{ color: 'black' }} onClick={handleLogout}><ArrowForwardIosIcon className='arrowforward-icon'/></Button>
                     </div>
                 </Link>
             </div>
@@ -236,7 +242,7 @@ export default function Header() {
                             >
                                 {notificationDrawer}
                             </Drawer>
-                            
+
                             <div style={{ display: 'flex', cursor: 'pointer' }} onClick={toggleProfileDrawer}>
                                 <Avatar sx={{ ml: 1, border: profileDrawerOpen ? '3px solid green' : 'none' }}><img className='user-image' src={person} alt="Person" /></Avatar>
                                 <div className='user'>
