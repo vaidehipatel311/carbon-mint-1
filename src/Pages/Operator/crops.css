@@ -408,11 +408,21 @@
         font-size: 14px;
     }
 
-    .seed,
     .land-preparation {
         width: 85%;
         margin-top: 70px;
         margin-right: 280px;
+        display: flex;
+        gap: 100px;
+
+        & .MuiTypography-root {
+            font-size: 14px;
+        }
+
+    }
+    .seed{
+        width: 90%;
+        margin-right: 0px;
         display: flex;
         gap: 100px;
 

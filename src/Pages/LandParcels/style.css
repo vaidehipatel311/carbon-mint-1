@@ -281,12 +281,12 @@
     }
     .tr{
         .MuiTypography-root{
-            margin-top: 15px;
+            /* margin-top: 15px; */
         }
     }
     .landowner-avatar{
         width: 60%;
-        margin-top: 15px;
+        /* margin-top: 15px; */
     }
     .grid-item{
         margin-left: 0px;

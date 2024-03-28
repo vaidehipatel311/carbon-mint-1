@@ -53,7 +53,7 @@ function AddOperator({ addOperator }) {
             leasedFileName: '',
 
             name: '',
-            co: '',
+            family_size: '',
             father_name: '',
             ownerID: 'KFP/MT/03',
             contact_number_2: '',
@@ -75,14 +75,11 @@ function AddOperator({ addOperator }) {
             passbook_refno: '',
             total_farming_exp_year: '',
             organic_farming_exp_year: '',
-            exp_in_crops: '',
-            exp_in_livestock: '',
-            exp_in_other: '',
             landparcel_name: '',
-            ownership: '',
+            total_landparcels: '',
             owner_name: '',
             leased_doc_id: '',
-            survey_no: '',
+            total_crops: '',
             area: '',
             crops: ''
         },
@@ -210,17 +207,13 @@ function AddOperator({ addOperator }) {
 
                                 <TextField
                                     type='text'
-                                    select
-                                    name='co'
-                                    label='C/O'
-                                    value={formik.values.co}
+                                    name='family_size'
+                                    label='Family size'
+                                    value={formik.values.family_size}
                                     onChange={formik.handleChange}
-                                >
-                                    <MenuItem value='Father name'>
-                                        Father name
-                                    </MenuItem>
+                                />
+                                    
 
-                                </TextField>
                                 <TextField
                                     type='text'
                                     label='Father name'
@@ -281,13 +274,7 @@ function AddOperator({ addOperator }) {
                                     required
                                     error={formik.errors.village ? true : false}
                                 />
-                                <TextField
-                                    type='text'
-                                    label='Block/Mandal'
-                                    name='block'
-                                    value={formik.values.block}
-                                    onChange={formik.handleChange}
-                                />
+                                
                                 <div style={{ gap: '10px', display: 'flex' }}>
                                     <TextField
                                         fullWidth
@@ -338,13 +325,7 @@ function AddOperator({ addOperator }) {
                                     </TextField>
 
                                 </div>
-                                <TextField
-                                    type='text'
-                                    label='Website address of the operations'
-                                    name='website_addr'
-                                    value={formik.values.website_addr}
-                                    onChange={formik.handleChange}
-                                />
+                                
                                 <TextField
                                     type='text'
                                     label='Email ID'
@@ -482,24 +463,8 @@ function AddOperator({ addOperator }) {
                                     name='organic_farming_exp_year'
                                     value={formik.values.organic_farming_exp_year}
                                     onChange={formik.handleChange} />
-                                <TextField
-                                    type='text'
-                                    label='Experience in crops(Names of the crops)'
-                                    name='exp_in_crops'
-                                    value={formik.values.exp_in_crops}
-                                    onChange={formik.handleChange} />
-                                <TextField
-                                    type='text'
-                                    label='Experience in livestock(Name of the livestock)'
-                                    name='exp_in_livestock'
-                                    value={formik.values.exp_in_livestock}
-                                    onChange={formik.handleChange} />
-                                <TextField
-                                    type='text'
-                                    label='Experience in any other allied agricultural activities'
-                                    name='exp_in_other'
-                                    value={formik.values.exp_in_other}
-                                    onChange={formik.handleChange} />
+                                
+                                
 
                             </div>
                             <div className='land-information'>
@@ -512,16 +477,13 @@ function AddOperator({ addOperator }) {
                                     onChange={formik.handleChange} />
                                 <TextField
                                     type='text'
-                                    select
-                                    label='Ownership status of the land'
-                                    name='ownership'
-                                    value={formik.values.ownership}
+                                    label='Total Landparcels'
+                                    name='total_landparcels'
+                                    value={formik.values.total_landparcels}
                                     onChange={formik.handleChange}
-                                >
+                                />
 
-                                    <MenuItem value='Own'>Own</MenuItem>
-                                    <MenuItem value='Other'>Other</MenuItem>
-                                </TextField>
+                                    
                                 <TextField
                                     type='text'
                                     label='Name of the owner'
@@ -583,9 +545,9 @@ function AddOperator({ addOperator }) {
 
                                 <TextField
                                     type='text'
-                                    label='Survey number'
-                                    name='survey_no'
-                                    value={formik.values.survey_no}
+                                    label='Total Crops'
+                                    name='total_crops'
+                                    value={formik.values.total_crops}
                                     onChange={formik.handleChange} />
                                 <TextField
                                     type='text'

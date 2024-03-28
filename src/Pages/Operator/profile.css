@@ -94,18 +94,18 @@
     font-weight: bold;
 }
 
+.grid-upper-profile{
+    width: 100%;
+}
 
 .grid-upper-profile img {
-    width: 100%;
     border-radius: 5px;
     margin-top: 30px;
-    margin-left: 20px;
 }
 
 .grid-lower-profile {
     border: 2px;
     padding: 14px;
-    margin-left: 20px;
 }
 
 .grid-lower-profile .crops-operators {
@@ -692,18 +692,18 @@
     }
 
     .landparcel {
-        margin-left: 50px;
+        margin-left: 35px;
         font-size: 14px;
     }
 
-    .grid-upper-profile {
+    .grid-upper-profile{
         width: 85%;
-        margin-left: 20px;
+        margin-left: 30px;
     }
 
     .grid-lower-profile {
-        width: 77%;
-        margin-left: 40px;
+        width: 112%;
+        margin-left: 30px;
         font-size: 14px;
     }
 

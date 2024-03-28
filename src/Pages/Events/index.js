@@ -14,11 +14,6 @@ import { connect } from 'react-redux';
 import vector from '../../assets/images/LandOwners/vector.png';
 import Sidebar from '../../Components/Sidebar';
 import vectorgroup from '../../assets/images/Events/vector-group.png'
-import img1 from '../../assets/images/Events/Image1.png'
-import img2 from '../../assets/images/Events/Image2.png'
-import img3 from '../../assets/images/Events/Image3.png'
-import img4 from '../../assets/images/Events/Image4.png'
-import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -186,34 +181,38 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
         return events.map((event, index) => (
 
             <Grid xs={4} key={event.id}>
-                <div className="events-cards" sx={{ boxShadow: '0px 0px 12px 0px #3834341f' }}>
-                    <Grid xs={9}>
-                        <div style={{ display: 'grid' }}>
-                            <div style={{ display: "flex" }} align="center">
-                                <Typography variant="p" className='fieldname' >
-                                    {event.field} :
-                                </Typography>
-                                <Typography variant="p" className='crop-name' >
-                                    {event.name}
-                                </Typography>
+                <Link href={'/events/eventDescription/' + `${event.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                <div className="events-cards" style={{ boxShadow: '0px 0px 12px 0px #3834341f' }}>
+                        <Grid xs={9}>
+                            <div style={{ display: 'grid' }}>
+                                <div style={{ display: "flex" }} align="center">
+                                    <Typography variant="p" className='fieldname' >
+                                        {event.field} :
+                                    </Typography>
+                                    <Typography variant="p" className='crop-name' >
+                                        {event.name}
+                                    </Typography>
 
+                                </div>
+                                <div style={{ display: "flex" }} >
+
+                                    <Typography variant="p" className='date' >
+                                        {event.date} ,
+                                    </Typography>
+                                    <Typography variant="p" className='time'>
+                                        {event.time}
+                                    </Typography>
+                                </div>
                             </div>
-                            <div style={{ display: "flex" }} >
 
-                                <Typography variant="p" className='date' >
-                                    {event.date} ,
-                                </Typography>
-                                <Typography variant="p" className='time'>
-                                    {event.time}
-                                </Typography>
-                            </div>
-                        </div>
+                        </Grid>
 
-                    </Grid>
-                    <Grid xs={3}>
-                        <img className='vector-img' src={vectorgroup} alt={vector}></img>
-                    </Grid>
+                        <Grid xs={3}>
+                            <img className='vector-img' src={vectorgroup} alt={vector}></img>
+                        </Grid>
+                    
                 </div>
+                </Link>
             </Grid >
 
         ));
@@ -230,7 +229,6 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
             <Header />
             <Sidebar />
 
-            {id == 1 ? (
                 <Box sx={{ margin: '100px 20px 50px 300px' }}>
                     <Grid container className='right-part-landowner'>
                         <Grid xs={8.5}>
@@ -337,7 +335,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                     </Grid>
                     <Grid container sx={{ mt: 3 }} >
                         <Grid xs={9} className='total-events'>
-                            <Typography sx={{ color: 'gray' }}>128 Events</Typography>
+                            <Typography sx={{ color: 'gray' }}>{events.length} {events.length == 1 ? 'Event' : "Events"}</Typography>
                         </Grid>
                         <Grid xs={3} className='pagination'>
                             <Stack spacing={2}>
@@ -345,465 +343,9 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                             </Stack>
                         </Grid>
                     </Grid>
+
+                    
                 </Box >
-            )
-                :
-                (
-                    <Box sx={{ margin: '100px 20px 50px 300px' }}>
-                        <Grid container>
-                            <Grid xs={9}>
-                                <div>
-                                    <Grid className='links'>
-                                        <Breadcrumbs
-                                            separator={<NavigateNextIcon fontSize="small" />}
-                                            aria-label="breadcrumb">
-                                            <Link underline='hover' color='inherit' href="/operator/profile">
-                                                Kethavath Laxmanna
-                                            </Link>
-                                            <Link underline='hover' color='inherit' href="/operator/profile/landparcel">
-                                                Chennaiah Polam
-                                            </Link>
-                                            <Link underline='hover' color='inherit' href="/operator/profile/landparcel/crops">
-                                                Sorghum
-                                            </Link>
-                                            <Link underline='hover' color='inherit' href="/events/2">
-                                                Events
-                                            </Link>
-                                        </Breadcrumbs>
-                                    </Grid>
-
-                                    <div className='title'>
-                                        <Typography variant='p'>Corner Field : Sourgham Photos</Typography>
-                                    </div>
-                                </div>
-                            </Grid>
-                            <Grid xs={3}>
-                                <div className='call-icon'>
-                                    <CallIcon />
-                                    <Typography variant='p'>Operator: <b>+91 999 888 9898</b></Typography>
-                                </div>
-                            </Grid>
-                        </Grid>
-
-                        <Grid container>
-                            <Grid item xs={8} className='event-images' sx={{ mt: 2 }}>
-                                <Typography variant='p' fontWeight='bold'>Event images</Typography>
-                                <Grid container className='images4'>
-                                    <Grid xs={3}>
-                                        {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
-                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
-                                            <img src={img1} alt='event-images' /></>) :
-                                            (<img src={img1} alt='event-images' />)}
-                                    </Grid>
-                                    <Grid xs={3}>
-                                        {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
-                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
-                                            <img src={img2} alt='event-images' /></>) :
-                                            (<img src={img2} alt='event-images' />)}
-                                    </Grid>
-                                    <Grid xs={3}>
-                                        {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
-                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
-                                            <img src={img3} alt='event-images' /></>) :
-                                            (<img src={img3} alt='event-images' />)}
-                                    </Grid>
-                                    <Grid xs={3}>
-                                        {isDraft ? (<><Checkbox {...label} defaultChecked color="success"
-                                            sx={{ position: 'absolute', ml: -3, backgroundColor: 'white' }} />
-                                            <img src={img4} alt='event-images' /></>) :
-                                            (<img src={img4} alt='event-images' />)}
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid item xs={4} sx={{ mt: 2 }}>
-                                <Typography variant='p' fontWeight='bold' className='notes-title'>Notes</Typography>
-                                <div className='notes'>
-                                    {isDraft ?
-                                        (<div style={{ display: 'flex' }}>
-                                            <Checkbox {...label} defaultChecked color="success" sx={{ mt: -7 }} />
-                                            <Typography variant='p'>I want to present my clients the Figma files first, so it would be great if you add those as well, more manual downloads.</Typography>
-                                        </div>) :
-                                        (
-                                            <Typography variant='p'>I want to present my clients the Figma files first, so it would be great if you add those as well, more manual downloads.</Typography>
-                                        )}
-                                </div>
-                            </Grid>
-                        </Grid>
-                        {norecord ? (<>
-                            <Snackbar autoHideDuration={60} open={norecord} >
-                                <Alert sx={{ ml: 90, mt: -60 }} severity='error'>
-                                    No record
-                                </Alert>
-                            </Snackbar></>) : (<></>)}
-                        {formVisible ?
-                            (
-                                <div className='event-form'>
-                                    <div className='formheader' >
-                                        <Grid container>
-                                            <Grid xs={3.5}>
-                                                <Typography variant='p' className='event-selection' fontWeight='bold'>Crop Event Selection
-                                                </Typography>
-                                            </Grid>
-                                            <Grid xs={0.5}></Grid>
-                                            <Grid xs={3.5} >
-                                                <TextField
-                                                    sx={{ width: '100%' }}
-                                                    type='text'
-                                                    select
-                                                    label='Event Group'
-                                                    onChange={(e) => setEventGroup(e.target.value)}
-                                                    disabled={isDraft ? true : false}
-                                                    defaultValue={isDraft ? "Seed & Seedlings" : ""}>
-                                                    <MenuItem value='Seed & Seedlings'>Seed & Seedlings</MenuItem>
-                                                </TextField>
-                                            </Grid>
-                                            <Grid xs={0.5}></Grid>
-                                            <Grid xs={3.5}>
-                                                <TextField
-                                                    sx={{ width: '100%' }}
-                                                    type='text'
-                                                    select
-                                                    label='Event Name'
-                                                    onChange={(e) => setEventName(e.target.value)}
-                                                    disabled={isDraft ? true : false}
-                                                    defaultValue={isDraft ? "Seed" : ""}>
-                                                    <MenuItem value='Seed'>Seed</MenuItem>
-                                                </TextField>
-                                            </Grid>
-                                            <Grid xs={0.5}></Grid>
-                                        </Grid>
-                                    </div>
-
-                                    {eventGroup && eventName ? (
-                                        <Grid container spacing={2}>
-                                            <Grid item xs={6}>
-                                                <Box className='textfields'>
-                                                    <TextField
-                                                        name='seedlings'
-                                                        size='small'
-                                                        type='text'
-                                                        select
-                                                        fullWidth
-                                                        // value={formik.values.seedlings}
-                                                        onChange={formik.handleChange}
-                                                        label='Source of Seedlings'
-                                                        sx={{ mt: "15px" }}
-                                                        defaultValue={isDraft ? draftdata.seedlings : ""}>
-                                                        <MenuItem value='On farm nursery' >On farm nursery</MenuItem>
-                                                    </TextField>
-
-                                                    <TextField
-                                                        name='nursery'
-                                                        size='small'
-                                                        type='text'
-                                                        select
-                                                        fullWidth
-                                                        label='Type of Nursery'
-                                                        // value={formik.values.nursery}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.nursery : ""}>
-                                                        <MenuItem value='Wet nursery'>Wet nursery</MenuItem>
-                                                    </TextField>
-
-                                                    <TextField
-                                                        name='nursery_bed'
-                                                        size='small'
-                                                        type='text'
-                                                        select
-                                                        fullWidth
-                                                        label='Type of Nursery bed'
-                                                        // value={formik.values.nursery_bed}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.nursery_bed : ""} >
-                                                        <MenuItem value='Raised bed'>Raised bed</MenuItem>
-                                                    </TextField>
-
-                                                    <TextField
-                                                        name='house'
-                                                        size='small'
-                                                        type='text'
-                                                        select
-                                                        fullWidth
-                                                        label='Type of in house (Framed structures)nursery'
-                                                        // value={formik.values.house}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.house : ""}>
-                                                        <MenuItem value='Open nursery'>Open nursery</MenuItem>
-                                                    </TextField>
-
-                                                    <TextField
-                                                        size='small'
-                                                        name='soil_treatment'
-                                                        type='text'
-                                                        select
-                                                        fullWidth
-                                                        label='Soil Treatment methods'
-                                                        // value={formik.values.soil_treatment}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.soil_treatment : ""}>
-                                                        <MenuItem value='Soil treatment by chemicals'>Soil treatment by chemicals</MenuItem>
-                                                    </TextField>
-
-                                                    <TextField
-                                                        size='small'
-                                                        name='chemicals'
-                                                        type='text'
-                                                        select
-                                                        label='Chemicals applied'
-                                                        // value={formik.values.chemicals}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.chemicals : ""}>
-                                                        <MenuItem value='Chlorpyriphos'>Chlorpyriphos</MenuItem>
-                                                    </TextField>
-
-                                                    <TextField
-                                                        size='small'
-                                                        name='quantity'
-                                                        type='text'
-                                                        select
-                                                        label='Quantity applied (gm or ml)'
-                                                        // value={formik.values.quantity}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.quantity : ""}>
-                                                        <MenuItem value='200'>200</MenuItem>
-                                                        <MenuItem value='300'>300</MenuItem>
-                                                        <MenuItem value='400'>400</MenuItem>
-                                                        <MenuItem value='500'>500</MenuItem>
-                                                    </TextField>
-
-                                                    <Typography variant='p' sx={{ mr: 42 }} fontWeight='bold'>Pre sowing seed Treatment</Typography>
-
-                                                    <Grid container>
-                                                        <Grid xs={6}>
-                                                            <FormGroup>
-                                                                <FormControlLabel
-                                                                    control={<Checkbox
-                                                                        onChange={(e) => {
-                                                                            formik.setFieldValue('scarcification', e.target.checked);
-                                                                        }}
-                                                                        defaultChecked={isDraft ? draftdata.scarcification : ''}
-                                                                    />}
-                                                                    label="Scarification"
-                                                                />
-                                                                <FormControlLabel
-                                                                    control={<Checkbox
-                                                                        color='success'
-                                                                        onChange={(e) => {
-                                                                            formik.setFieldValue('soaking_hot_water', e.target.checked);
-                                                                        }}
-                                                                        defaultChecked={isDraft ? draftdata.soaking_hot_water : ''}
-                                                                    />}
-                                                                    label="Soaking in hot water"
-                                                                />
-                                                                <FormControlLabel
-                                                                    control={<Checkbox
-                                                                        color='success'
-                                                                        onChange={(e) => {
-                                                                            formik.setFieldValue('soaking_chemicals', e.target.checked);
-                                                                        }}
-                                                                        defaultChecked={isDraft ? draftdata.soaking_chemicals : ''}
-                                                                    />}
-                                                                    label="Soaking in chemicals"
-                                                                />
-                                                            </FormGroup>
-                                                        </Grid>
-                                                        <Grid xs={6}>
-                                                            <FormGroup>
-                                                                <FormControlLabel
-                                                                    control={<Checkbox
-                                                                        color='success'
-                                                                        onChange={(e) => {
-                                                                            formik.setFieldValue('soaking_cool_water', e.target.checked);
-                                                                        }}
-                                                                        defaultChecked={isDraft ? draftdata.soaking_cool_water : ''}
-                                                                    />}
-                                                                    label="Soaking in cool water"
-                                                                />
-                                                                <FormControlLabel
-                                                                    control={<Checkbox
-                                                                        onChange={(e) => {
-                                                                            formik.setFieldValue('wetting_drying', e.target.checked);
-                                                                        }}
-                                                                        defaultChecked={isDraft ? draftdata.wetting_drying : ''}
-                                                                    />}
-                                                                    label="Wetting and drying"
-                                                                />
-                                                                <FormControlLabel
-                                                                    control={<Checkbox
-                                                                        onChange={(e) => {
-                                                                            formik.setFieldValue('others', e.target.checked);
-                                                                        }}
-                                                                        defaultChecked={isDraft ? draftdata.others : ''}
-                                                                    />}
-                                                                    label="Others"
-                                                                />
-                                                            </FormGroup>
-                                                        </Grid>
-                                                    </Grid>
-
-
-                                                    <TextField
-                                                        size='small'
-                                                        name='variety'
-                                                        type='text'
-                                                        label='Variety/Hybrid name'
-                                                        // value={formik.values.variety}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.variety : ""} />
-
-                                                    <TextField
-                                                        size='small'
-                                                        name='crop_duration'
-                                                        type='number'
-                                                        label='Crop Duration (Days)'
-                                                        // value={formik.values.crop_duration}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.crop_duration : ""} />
-
-                                                    <TextField
-                                                        size='small'
-                                                        name='seed_rate'
-                                                        type='number'
-                                                        label='Seed rate (Kg/cent)'
-                                                        // value={formik.values.seed_rate}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.seed_rate : ""} />
-
-                                                    <TextField
-                                                        size='small'
-                                                        name='sowing_method'
-                                                        select
-                                                        type='text'
-                                                        label='Method of sowing'
-                                                        // value={formik.values.sowing_method}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.sowing_method : ""} >
-                                                        <MenuItem value='Sowing in pro-trays'>Sowing in pro-trays</MenuItem>
-                                                    </TextField>
-
-                                                    <TextField
-                                                        size='small'
-                                                        name='irrigation_method'
-                                                        type='text'
-                                                        label='Method of irrigation'
-                                                        value={formik.values.irrigation_method}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.irrigation_method : ""} />
-
-                                                    <TextField
-                                                        size='small'
-                                                        type='text'
-                                                        name='intercultural_operations'
-                                                        select
-                                                        label='Intercultural operations in nursery'
-                                                        // value={formik.values.intercultural_operations}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.intercultural_operations : ""}>
-                                                        <MenuItem value='Gap filling'>Gap filling</MenuItem>
-                                                    </TextField>
-
-                                                    <TextField
-                                                        size='small'
-                                                        type='text'
-                                                        name='recommended_competent'
-                                                        label='Recommended compitent authority'
-                                                        // value={formik.values.recommended_competent}
-                                                        onChange={formik.handleChange}
-                                                        defaultValue={isDraft ? draftdata.recommended_competent : ""}
-                                                    />
-                                                </Box>
-                                            </Grid>
-
-                                            <Grid item xs={6} sx={{ mt: 4 }}>
-                                                <Typography variant='p' sx={{ marginLeft: "40px", marginTop: "50px" }} fontWeight='bold'>Evidence</Typography>
-                                                <Grid container>
-
-                                                    <Button
-                                                        component="label"
-                                                        role={undefined}
-                                                        variant="contained"
-                                                        tabIndex={-1}
-                                                        startIcon={<CloudUploadIcon />}
-                                                        size="small"
-                                                        sx={{ width: "150px", marginBottom: "10px", backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", marginLeft: "40px" }}
-                                                    >
-                                                        Upload file
-                                                        <VisuallyHiddenInput
-                                                            type="file"
-                                                            multiple
-                                                            name='evidence'
-                                                            onChange={handleFileChange} />
-                                                    </Button>
-
-                                                    <Typography sx={{ marginLeft: "20px" }} display={isDraft ? "none" : ""}> {selectedFiles.length} Files selected </Typography>
-                                                    <Grid xs={12} >
-                                                        {selectedFiles.map((base64data, index) => (
-                                                            <>
-                                                                <img
-                                                                    key={index}
-                                                                    src={base64data}
-                                                                    alt={`Preview ${index}`}
-                                                                    style={{ width: '100px', height: '100px', marginRight: '40px', marginLeft: "40px" }}
-                                                                />
-                                                                <CloseIcon className='ev-close-img' onClick={() => handleDeleteFile(index)} />
-                                                            </>
-                                                        ))}
-
-                                                        {isDraft && draftdata && draftdata.evidence && draftdata.evidence.length > 0 && (
-                                                            <>
-                                                                {(() => {
-                                                                    const imageElements = [];
-                                                                    for (let index = 0; index < draftdata.evidence.length; index++) {
-                                                                        const imagePath = draftdata.evidence[index];
-                                                                        const imageElement = (
-                                                                            <>
-                                                                                <img
-                                                                                    src={imagePath}
-                                                                                    alt='event-images'
-                                                                                    style={{ width: '100px', height: '100px', marginLeft: "40px" }}
-                                                                                /></>
-                                                                        );
-                                                                        imageElements.push(imageElement);
-                                                                    }
-                                                                    return imageElements;
-                                                                })()}
-                                                            </>
-                                                        )}
-                                                    </Grid>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
-                                    ) : (<></>)}
-                                </div>
-                            ) : (<></>)
-                        }
-
-                        <div className={`myDiv ${formVisible ? 'formVisibleTrue' : 'formVisibleFalse'}`}>
-
-                            <Button variant='outlined' className='three-buttons' sx={{
-                                mr: 1, color: "#2B9348", border: "2px solid #2B9348",
-                                "&:hover": { color: '#2B9348', border: "2px solid #2B9348", }
-                            }} onClick={handleDiscard}><Typography>Discard</Typography></Button>
-
-                            <Button variant='contained' className='three-buttons' sx={{
-                                mr: 1, backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348",
-                                "&:hover": { color: 'black', backgroundColor: '#8CD867' }
-                            }} onClick={() => handleDraftForm()}><Typography>Add to Draft</Typography></Button>
-
-                            <Button variant='contained' className='three-buttons' sx={{
-                                backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", display: submitbutton ? 'none' : "",
-                                "&:hover": { color: 'black', backgroundColor: '#8CD867' }
-                            }}
-                                onClick={() => handleEventForm()}><Typography>Create a new event</Typography></Button>
-
-                            {submitbutton ? (<>
-                                <Button variant='contained' className='three-buttons' sx={{ backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348", display: !formVisible ? "none" : "" }} onClick={formik.handleSubmit}>Submit</Button>
-                            </>) : (<></>)}
-                        </div>
-                    </Box >
-                )
-            }
-
 
         </>
     )

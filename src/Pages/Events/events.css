@@ -195,7 +195,6 @@
 }
 .myDiv {
     position: relative;
-    margin-bottom: 20px;
 }
 
 .myDiv.formVisibleTrue {
@@ -617,7 +616,7 @@
         margin-top: 10px;
         display: flex;
         padding: 20px;
-        width: 80%;
+        width: 100%;
     }
 
     .grid-item .events-cards .vector-img {
@@ -669,18 +668,13 @@
 
     .myDiv {
         position: relative;
-        margin-bottom: 20px;
     }
 
     .myDiv.formVisibleTrue {
         margin-top: 0px;
-        margin-left: 62%;
+        margin-left: 78%;
     }
-
-    .myDiv.formVisibleFalse {
-        margin-top: 27%;
-        margin-left: 52%;
-    }
+    
 
     .total-events {
         & .MuiTypography-root {

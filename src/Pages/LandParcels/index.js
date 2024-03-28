@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './style.css'
+import { useNavigate } from 'react-router-dom';
+import Link from '@mui/material/Link';
 import Header from '../../Components/Header';
 import Sidebar from '../../Components/Sidebar';
 import { Avatar, Button, Typography } from '@mui/material'
@@ -31,29 +33,27 @@ import crops from '../../assets/images/DashBoard/crops.png'
 import events from '../../assets/images/DashBoard/events.png'
 import avatar from '../../assets/images/LandParcels/avatar.png'
 import Banner from '../../assets/images/LandParcels/Banner.png'
-
+import axios from 'axios';
+import * as urls from '../../Config/urls';
 
 import * as action from '../../Services/LandParcels/actions';
 import * as action_onboard from '../../Services/Onboarding/actions';
 
-function LandParcels({ fetchLandParcels, fetchOnboarding }) {
-    const [landParcels, setlandParcels] = useState([]);
+function LandParcels({ fetchLandParcel, fetchOnboarding }) {
+    const navigate = useNavigate()
+
+    const [landParcels, setLandParcels] = useState([]);
     const [onboarding, setonboarding] = useState([]);
     const [showTable, setshowtable] = useState(true);
 
 
     useEffect(() => {
-        fetchLandParcels()
+        fetchLandParcel()
             .then((data) => {
-                setlandParcels(data);
-                console.log(landParcels);
-            })
-            .catch(err => console.log(err))
-
-        fetchOnboarding()
-            .then((data) => {
-                setonboarding(data);
-                console.log(landParcels);
+                const approved = data.filter((p) => p.status === "Approved");
+                setLandParcels(approved);
+                const pending = data.filter((p) => p.status === "Pending");
+                setonboarding(pending);
             })
             .catch(err => console.log(err))
 
@@ -63,23 +63,39 @@ function LandParcels({ fetchLandParcels, fetchOnboarding }) {
 
     const handleTable = () => { setshowtable(true); console.log("handle") }
 
+    const handleDelete = async (id) => {
+        try {
+            const updatedCartjson = [...landParcels];
+            setLandParcels(updatedCartjson);
+            await axios.delete(urls.landParcelsUrl + `/${id}`);
 
+        } catch (error) {
+            console.error('Error deleting item from cart:', error);
+        }
+    };
+
+    const handleProfile = (id) => {
+        navigate('/landparcels' + `/${id}`)
+    }
     const generateLandParcels = () => {
         return landParcels.map((owners, index) => (
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex' }}>
+                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
                         <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
 
+
                     <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.SyNo}</TableCell>
                     <TableCell align='center'>{owners.acres}</TableCell>
-                    <TableCell align='center'>{owners.contactno}</TableCell>
+                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
                     <TableCell align='center'>{owners.village}</TableCell>
                     <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
-                    <TableCell align='center'><EditIcon /><DeleteIcon /></TableCell>
+                    <TableCell align='center'>
+                        <Link href={'/landparcels/add-landparcel/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
+                        <DeleteIcon onClick={() => handleDelete(owners.id)} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
 
                 </TableRow>
             </TableBody>
@@ -93,12 +109,13 @@ function LandParcels({ fetchLandParcels, fetchOnboarding }) {
                         <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
-                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerId}</TableCell>
-                    <TableCell align='center'>{owners.aadhar}</TableCell>
-                    <TableCell align='center'>{owners.contactno}</TableCell>
+                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.SyNo}</TableCell>
+                    <TableCell align='center'>{owners.acres}</TableCell>
+                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
                     <TableCell align='center'>{owners.village}</TableCell>
                     <TableCell align='center'><Button variant='contained' className="status-button" >{owners.status}</Button></TableCell>
-                    <TableCell align='center'><RemoveRedEyeIcon /></TableCell>
+
+                    <TableCell align='center' sx={{ cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}><RemoveRedEyeIcon /></TableCell>
 
 
                 </TableRow>
@@ -173,7 +190,9 @@ function LandParcels({ fetchLandParcels, fetchOnboarding }) {
                             sx={{ color: showTable ? 'lightgreen' : 'black', cursor: 'pointer' }}></ListIcon>
                     </Grid>
                     <Grid xs={2}>
-                        <Button variant='contained' className='add-landowner-btn'>Add Land Parcel</Button>
+                        <Link href='/landparcels/add-landparcel/0' style={{ textDecoration: "none", color: "black" }}>
+                            <Button variant='contained' className='add-landowner-btn'>Add Land Parcel</Button>
+                        </Link>
                     </Grid>
 
                 </Grid>
@@ -253,7 +272,7 @@ function LandParcels({ fetchLandParcels, fetchOnboarding }) {
                         </Grid>
                         <Grid container sx={{ mt: 3 }} >
                             <Grid xs={9} className='total-events'>
-                                <Typography sx={{ color: 'gray' }}>259 Land Parcels</Typography>
+                                <Typography sx={{ color: 'gray' }}>{landParcels.length} {landParcels.length <= 1 ? 'Land Parcel' : 'Land Parcels'} </Typography>
                             </Grid>
                             <Grid xs={3} className='pagination'>
                                 <Stack spacing={2}>
@@ -285,6 +304,7 @@ function LandParcels({ fetchLandParcels, fetchOnboarding }) {
                         </Grid>
                         <Grid container sx={{ mt: 3 }} >
                             <Grid xs={9} className='total-events'>
+                            <Typography sx={{ color: 'gray' }}>{onboarding.length} {onboarding.length <= 1 ? 'Land Parcel' : 'Land Parcels'} </Typography>
                             </Grid>
                             <Grid xs={3} className='pagination'>
                                 <Stack spacing={2}>
@@ -315,7 +335,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    fetchLandParcels: () => action.fetchLandParcels(),
+    fetchLandParcel: () => action.fetchLandParcel(),
     fetchOnboarding: () => action_onboard.fetchOnboarding()
 }
 

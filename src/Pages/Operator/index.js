@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './operator.css'
+import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header';
 import Sidebar from '../../Components/Sidebar';
 import { Link } from 'react-router-dom'
@@ -24,6 +25,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
+import App from '../../App'
 import operators from '../../assets/images/DashBoard/operators.png'
 import noacrs from '../../assets/images/DashBoard/noacrs.png'
 import yields from '../../assets/images/DashBoard/yields.png'
@@ -36,8 +38,11 @@ import chart from '../../assets/images/LandOwners/Chart.png'
 
 import * as action from '../../Services/Operator/actions';
 import * as action_onboard from '../../Services/Onboarding/actions';
+import axios from 'axios';
+import * as urls from '../../Config/urls';
 
 function Operators({ fetchOperator, fetchOnboarding }) {
+    const navigate = useNavigate()
     const [operator, setOperator] = useState([]);
     const [onboarding, setonboarding] = useState([]);
 
@@ -45,28 +50,39 @@ function Operators({ fetchOperator, fetchOnboarding }) {
     useEffect(() => {
         fetchOperator()
             .then((data) => {
-                setOperator(data);
+                const approved = data.filter((p) => p.status === "Approved");
+                setOperator(approved);
+                const pending = data.filter((p) => p.status === "Pending");
+                setonboarding(pending);
             })
             .catch(err => console.log(err))
 
-        fetchOnboarding()
-            .then((data) => {
-                setonboarding(data);
-            })
-            .catch(err => console.log(err))
+    }, []);
 
-    }, [onboarding]);
+    const handleDelete = async (id) => {
+        try {
+            const updatedCartjson = [...operator];
+            setOperator(updatedCartjson);
+            await axios.delete(urls.operatorUrl + `/${id}`);
 
+        } catch (error) {
+            console.error('Error deleting item from cart:', error);
+        }
+    };
+
+    const handleProfile = (id) => {
+        navigate('/operator/'+`${id}`+'/profile')
+    }
     const generateLandOwners = () => {
         return operator.map((owners, index) => (
             <TableBody>
                 <TableRow className='tr'>
-                    <Link to='/operator/profile' style={{ textDecoration: 'none' }}>
-                        <TableCell align='center' sx={{ display: 'flex', borderRight: '1px solid #d7d7d7' }}>
-                            <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
-                            <Typography variant='p'>{owners.name}</Typography>
-                        </TableCell>
-                    </Link>
+
+                    <TableCell align='center' sx={{ display: 'flex', borderRight: '1px solid #d7d7d7', cursor: 'pointer' }}  onClick={() => { handleProfile(owners.id) }}>
+                        <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
+                        <Typography variant='p'>{owners.name}</Typography>
+                    </TableCell>
+
                     <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.ownerID}</TableCell>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.passbook_refno}</TableCell>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.contact_number_1}</TableCell>
@@ -75,7 +91,9 @@ function Operators({ fetchOperator, fetchOnboarding }) {
                         {owners.crops.split(',').map((crop, cropIndex) => (
                             <button key={cropIndex} className="grid-button" style={{ marginRight: '5px' }}>{crop.trim()}</button>
                         ))}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}><EditIcon /><DeleteIcon /></TableCell>
+                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>
+                    <Link href={'/add-operator/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
+                        <DeleteIcon onClick={() => handleDelete(owners.id)} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
 
                 </TableRow>
             </TableBody>
@@ -89,12 +107,14 @@ function Operators({ fetchOperator, fetchOnboarding }) {
                         <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
-                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.ownerId}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.aadhar}</TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.contactno}</TableCell>
+                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)", borderRight: '1px solid #d7d7d7' }}>{owners.ownerID}</TableCell>
+                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.aadhar_no}</TableCell>
+                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.contact_number_1}</TableCell>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>{owners.village}</TableCell>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}><Button variant='contained' className="status-button" >{owners.status}</Button></TableCell>
-                    <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}><RemoveRedEyeIcon /></TableCell>
+
+                    <TableCell align='center' sx={{ cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}><RemoveRedEyeIcon /></TableCell>
+
 
 
                 </TableRow>
@@ -129,7 +149,7 @@ function Operators({ fetchOperator, fetchOnboarding }) {
 
                     <Grid xs={2}>
 
-                        <Link to='/add-operator'>
+                        <Link to='/add-operator/0'>
                             <Button variant='contained' className='add-landowner-btn'>Add Operator</Button>
                         </Link>
                     </Grid>
@@ -211,7 +231,7 @@ function Operators({ fetchOperator, fetchOnboarding }) {
                 </Grid>
                 <Grid container sx={{ mt: 3 }} >
                     <Grid xs={9} className='total-events'>
-                        <Typography sx={{ color: 'gray' }}>259 Operators</Typography>
+                        <Typography sx={{ color: 'gray' }}>{operator.length} {operator.length <= 1 ? 'Operator' : 'Operators'} </Typography>
                     </Grid>
                     <Grid xs={3} className='pagination'>
                         <Stack spacing={2}>
@@ -243,6 +263,7 @@ function Operators({ fetchOperator, fetchOnboarding }) {
                 </Grid>
                 <Grid container sx={{ mt: 3 }} >
                     <Grid xs={9} className='total-events'>
+                    <Typography sx={{ color: 'gray' }}>{operator.length} {operator.length <= 1 ? 'Operator' : 'Operators'} </Typography>
                     </Grid>
                     <Grid xs={3} className='pagination'>
                         <Stack spacing={2}>

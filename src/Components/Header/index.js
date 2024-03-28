@@ -58,10 +58,8 @@ export default function Header() {
         color: theme.palette.text.secondary,
     }));
     // window.history.forward();
-    // window.history.back();
     const handleLogout = () => {
         // window.history.forward();
-        // window.history.back();
     }
 
     const notificationDrawer = (
@@ -78,7 +76,7 @@ export default function Header() {
                     <Button sx={{ color: 'gray', ml: 22 }} onClick={closeNotificationDrawer}><CloseIcon /></Button>
                 </div>
                 <Grid container spacing={2}>
-                    <Link to='/events/2' style={{ textDecoration: 'none' }}>
+                    
                         <Grid xs={12}>
                             <Item className='corner-field'>
                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -91,7 +89,6 @@ export default function Header() {
                                 </div>
                             </Item>
                         </Grid>
-                    </Link>
 
                     <Grid xs={12}>
                         <Item className='lake-edge-field'>

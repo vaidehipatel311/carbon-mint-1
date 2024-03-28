@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './style.css'
+import { useNavigate } from 'react-router-dom';
+import Link from '@mui/material/Link';
 import Header from '../../Components/Header';
 import Sidebar from '../../Components/Sidebar';
 import { Avatar, Button, Typography } from '@mui/material'
@@ -37,52 +39,69 @@ import chart from '../../assets/images/LandOwners/Chart.png'
 
 import * as action from '../../Services/LandOwners/actions';
 import * as action_onboarding from '../../Services/Onboarding/actions';
-
+import axios from 'axios';
+import * as urls from '../../Config/urls';
 function LandOwners({ fetchLandOwners, fetchOnboarding }) {
+    const navigate = useNavigate()
     const [landOwners, setlandOwners] = useState([]);
     const [onboarding, setonboarding] = useState([]);
     const [showTable, setshowtable] = useState(true);
 
-
     useEffect(() => {
         fetchLandOwners()
             .then((data) => {
-                setlandOwners(data);
+                const approved = data.filter((p) => p.status === "Approved");
+                setlandOwners(approved);
                 console.log(landOwners);
+                const pending = data.filter((p) => p.status === "Pending");
+                setonboarding(pending);
             })
             .catch(err => console.log(err))
 
-        fetchOnboarding()
-            .then((data) => {
-                setonboarding(data);
-                console.log(landOwners);
-            })
-            .catch(err => console.log(err))
-
-    }, []);
+    }, [landOwners]);
 
     const handleGrid = () => { setshowtable(false); console.log("handle") }
 
     const handleTable = () => { setshowtable(true); console.log("handle") }
 
+    const handleDelete = async (id) => {
+        try {
+            const updatedCartjson = [...landOwners];
+            setlandOwners(updatedCartjson);
+            await axios.delete(urls.landOwnersUrl + `/${id}`);
+
+        } catch (error) {
+            console.error('Error deleting item from cart:', error);
+        }
+    };
+
+    const handleProfile = (id) => {
+        navigate('/landowners' + `/${id}`)
+    }
 
     const generateLandOwners = () => {
         return landOwners.map((owners, index) => (
             <TableBody>
                 <TableRow className='tr'>
-                    <TableCell align='center' sx={{ display: 'flex' }}>
+
+                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+
                         <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
-                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerId}</TableCell>
-                    <TableCell align='center'>{owners.passbookrefno}</TableCell>
-                    <TableCell align='center'>{owners.contactno}</TableCell>
+
+                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerID}</TableCell>
+                    <TableCell align='center'>{owners.passbook_refno}</TableCell>
+                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
                     <TableCell align='center'>{owners.village}</TableCell>
                     <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
-                    <TableCell align='center'><EditIcon /><DeleteIcon /></TableCell>
+                    <TableCell align='center'>
+                        <Link href={'/landowners/add-landowner/'+`${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
+                            <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
+                        <DeleteIcon onClick={() => handleDelete(owners.id)} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
 
                 </TableRow>
-            </TableBody>
+            </TableBody >
         ));
     }
     const generateOnBoarding = () => {
@@ -93,12 +112,15 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
                         <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
                         <Typography variant='p' sx={{ mt: 1, ml: 1 }}>{owners.name}</Typography>
                     </TableCell>
-                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerId}</TableCell>
-                    <TableCell align='center'>{owners.aadhar}</TableCell>
-                    <TableCell align='center'>{owners.contactno}</TableCell>
+                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerID}</TableCell>
+                    <TableCell align='center'>{owners.aadhar_no}</TableCell>
+                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
                     <TableCell align='center'>{owners.village}</TableCell>
                     <TableCell align='center'><Button variant='contained' className="status-button" >{owners.status}</Button></TableCell>
-                    <TableCell align='center'><RemoveRedEyeIcon /></TableCell>
+
+                    <TableCell align='center' sx={{ cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                        <RemoveRedEyeIcon />
+                    </TableCell>
 
 
                 </TableRow>
@@ -170,7 +192,9 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
                             sx={{ color: showTable ? 'lightgreen' : 'black' }}></ListIcon>
                     </Grid>
                     <Grid xs={2}>
-                        <Button variant='contained' className='add-landowner-btn'>Add Land Owner</Button>
+                        <Link href='/landowners/add-landowner/0' style={{ textDecoration: "none", color: "black" }}>
+                            <Button variant='contained' className='add-landowner-btn'>Add Land Owner</Button>
+                        </Link>
                     </Grid>
 
 
@@ -253,7 +277,7 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
                         </Grid>
                         <Grid container sx={{ mt: 3 }} >
                             <Grid xs={9} className='total-events'>
-                                <Typography sx={{ color: 'gray' }}>259 Operators</Typography>
+                                <Typography sx={{ color: 'gray' }}>{landOwners.length} {landOwners.length == 1 ? 'Operator' : 'Operators'}</Typography>
                             </Grid>
                             <Grid xs={3} className='pagination'>
                                 <Stack spacing={2}>
@@ -285,6 +309,7 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
                         </Grid>
                         <Grid container sx={{ mt: 3 }} >
                             <Grid xs={9} className='total-events'>
+                                <Typography sx={{ color: 'gray' }}>{onboarding.length} {onboarding.length <= 1 ? 'Operator' : 'Operators'}</Typography>
                             </Grid>
                             <Grid xs={3} className='pagination'>
                                 <Stack spacing={2}>
@@ -304,17 +329,15 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
         </>
     )
 }
-
 const mapStateToProps = (state) => {
     return {
         landOwners: state.landowners.landowners,
-        onboarding: state.onboarding.onboarding,
+        // onboarding: state.onboarding.onboarding,
     };
 };
 
 const mapDispatchToProps = {
     fetchLandOwners: () => action.fetchLandOwners(),
-    fetchOnboarding: () => action_onboarding.fetchOnboarding()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandOwners);

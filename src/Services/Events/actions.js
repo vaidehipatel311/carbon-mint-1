@@ -7,6 +7,10 @@ export const addEvent = (formData) => {
         try {
             const response = await axios.post(urls.addEventsUrl,
                 {
+                    "event_group": formData.event_group,
+                    "event_name": formData.event_name,
+                    "date": formData.date,
+                    "time": formData.time,
                     "seedlings": formData.seedlings,
                     "nursery": formData.nursery,
                     "nursery_bed": formData.nursery_bed,
@@ -39,7 +43,19 @@ export const addEvent = (formData) => {
         }
     };
 };
-
+export const editEvent = (id, formData) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.put(urls.addEventsUrl + `/${id}`, formData);
+            dispatch({
+                type: actionTypes.EDIT_EVENT,
+                payload: { id, formData: response.data },
+            });
+        } catch (error) {
+            console.error('Error editing event:', error);
+        }
+    };
+};
 export const fetchEvents = () => {
     return async (dispatch) => {
         try {

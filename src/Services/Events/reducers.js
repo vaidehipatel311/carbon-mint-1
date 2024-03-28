@@ -11,7 +11,18 @@ const eventReducer = (state = initialState, action) => {
                 ...state,
                 events: [...state.events, action.payload.eventdata],
             }
-
+            case actionTypes.EDIT_EVENT:
+                const { id, formData } = action.payload;
+                const updatedEvents = state.events.map(event => {
+                    if (event.id === id) {
+                        return { ...event, ...formData };
+                    }
+                    return event;
+                });
+                return {
+                    ...state,
+                    events: updatedEvents,
+                };
         case actionTypes.FETCH_EVENTS:
             return {
                 ...state,

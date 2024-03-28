@@ -16,11 +16,11 @@ export default function Sidebar() {
     const location = useLocation();
 
     const isActive1 = location.pathname === '/dashboard';
-    const isActive2 = location.pathname === '/landowners';
-    const isActive3 = location.pathname === '/landparcels';
+    const isActive2 = location.pathname.includes('/landowners') || location.pathname.includes('/landowners/add-landowner');
+    const isActive3 = location.pathname.includes('/landparcels') || location.pathname.includes('/landparcels/add-landparcel');
     const isActive4 = location.pathname.includes('/operator') || location.pathname.includes('/add-operator') ||
                     location.pathname.includes('/operator/profile') || location.pathname.includes('/operator/profile/landparcel') || location.pathname.includes('/operator/profile/landparcel/crops');
-    const isActive5 = location.pathname.includes('/events/1') || location.pathname.includes('/events/2');
+    const isActive5 = location.pathname.includes('/events') || location.pathname.includes('/events/eventDescription/1');
     
     const dashboardStyles = {
         color: isActive1 ? 'white' : 'black',
@@ -96,7 +96,7 @@ export default function Sidebar() {
                                 </div>
                             </Link>
 
-                            <Link to='/events/1' style={{ textDecoration: 'none', color: 'black' }}>
+                            <Link to='/events' style={{ textDecoration: 'none', color: 'black' }}>
                                 <div className='div' style={eventsStyles}>
                                     <CalendarMonthIcon className='icon' ></CalendarMonthIcon>
                                     <Typography variant='p' sx={{ mt: 1.3 }}>Events</Typography>

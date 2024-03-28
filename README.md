@@ -10,6 +10,8 @@ In the project directory, you can run:
 
 ### First you need to install Mock Server(v20.1.0) with Publisher:Thinker from extensions
 
+### Set the port by opening the json file and on right click set port to 5000.
+
 ### Then right click on public/data.json and start api mock server
 
 ### `npm start`

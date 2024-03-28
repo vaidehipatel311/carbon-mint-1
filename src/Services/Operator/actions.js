@@ -9,7 +9,7 @@ export const addOperator = (formData) => {
             const response = await axios.post(urls.operatorUrl,
                 {
                     "name": formData.name,
-                    "co": formData.co,
+                    "family_size": formData.family_size,
                     "father_name": formData.father_name,
                     "ownerID": formData.ownerID,
                     "contact_number_2": formData.contact_number_2,
@@ -17,12 +17,10 @@ export const addOperator = (formData) => {
                     "house_no": formData.house_no,
                     "street_name": formData.street_name,
                     "village": formData.village,
-                    "block": formData.block,
                     "district": formData.district,
                     "state": formData.state,
                     "country": formData.country,
                     "postal_code": formData.postal_code,
-                    "website_addr": formData.website_addr,
                     "email_id": formData.email_id,
                     "aadhar_no": formData.aadhar_no,
                     "unique_id": formData.unique_id,
@@ -31,21 +29,75 @@ export const addOperator = (formData) => {
                     "passbook_refno": formData.passbook_refno,
                     "total_farming_exp_year": formData.total_farming_exp_year,
                     "organic_farming_exp_year": formData.organic_farming_exp_year,
-                    "exp_in_crops": formData.exp_in_crops,
-                    "exp_in_livestock": formData.exp_in_livestock,
-                    "exp_in_other": formData.exp_in_other,
                     "landparcel_name": formData.landparcel_name,
-                    "ownership": formData.ownership,
+                    "total_landparcels": formData.total_landparcels,
                     "owner_name": formData.owner_name,
                     "leased_doc_id": formData.leased_doc_id,
-                    "survey_no": formData.survey_no,
+                    "total_crops": formData.total_crops,
                     "area": formData.area,
-                    "crops":formData.crops
+                    "crops": formData.crops
                 });
             dispatch({
                 type: actionTypes.ADD_OPERATOR,
                 payload: { operatordata: { formData, id: response.data.id } },
             })
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
+        }
+    };
+};
+
+export const addCrops = (formData) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.post(urls.cropsUrl,
+                {
+                    "crop_name": formData.crop_name,
+                    "landparcel_name": formData.landparcel_name,
+                    "acres": formData.acres,
+                    "area_owned": formData.area_owned,
+                    "crop_age": formData.crop_age,
+                    "cropping_systems": formData.cropping_systems,
+                    "water_resources": formData.water_resources,
+                    "water_sample_test": formData.water_sample_test,
+                    "irrigation_status":formData.irrigation_status
+
+                });
+            
+            dispatch({
+                type: actionTypes.ADD_CROP,
+                payload: { operatordata: { formData, id: response.data.id } },
+            })
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
+        }
+    };
+};
+
+export const editCrop = (id, formData) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.put(urls.cropsUrl + `/${id}`, formData);
+            dispatch({
+                type: actionTypes.EDIT_CROP,
+                payload: { id, formData: response.data },
+            });
+        } catch (error) {
+            console.error('Error editing parcel:', error);
+        }
+    };
+};
+
+export const fetchCrops = () => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get(urls.cropsUrl);
+            const cropsdata = response.data
+            dispatch({
+                type: actionTypes.FETCH_CROPS,
+                payload: { cropsdata },
+            })
+            return response.data
         } catch (error) {
             console.error('Error fetching tasks:', error);
         }

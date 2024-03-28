@@ -41,7 +41,7 @@
 }
 
 .tr {
-    max-height: 10px;
+    /* max-height: 10px; */
     padding: 0px 16px;
 
 }
@@ -317,12 +317,12 @@
     }
     .tr{
         .MuiTypography-root{
-            margin-top: 15px;
+            /* margin-top: 15px; */
         }
     }
     .landowner-avatar{
         width: 60%;
-        margin-top: 15px;
+        /* margin-top: 15px; */
     }
     .grid-item{
         margin-left: 0px;
