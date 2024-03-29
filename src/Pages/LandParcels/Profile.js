@@ -9,8 +9,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import BusinessIcon from '@mui/icons-material/Business';
 import SmartphoneIcon from '@mui/icons-material/Smartphone';
-import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import BadgeIcon from '@mui/icons-material/Badge';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import Box from '@mui/material/Box';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -22,7 +21,6 @@ function Profile({ fetchLandParcel, updateLandParcelStatus }) {
     const navigate = useNavigate();
     const { id } = useParams();
     const [landOwners, setlandOwners] = useState([]);
-    const [onboarding, setonboarding] = useState([]);
     const [approved, setApproved] = useState(false)
 
     const Item = styled(Paper)(({ theme }) => ({
@@ -43,13 +41,9 @@ function Profile({ fetchLandParcel, updateLandParcelStatus }) {
                 else {
                     setlandOwners(pending);
                 }
-
                 console.log(approved);
-
-                // setonboarding(pending);
             })
             .catch(err => console.log(err))
-
     }, [landOwners]);
 
     const handleApprove = (id, status) => {
@@ -74,7 +68,7 @@ function Profile({ fetchLandParcel, updateLandParcelStatus }) {
                                 separator={<NavigateNextIcon fontSize="small" />}
                                 aria-label="breadcrumb">
 
-                                <Link underline='hover' color='inherit' href="/operator">Operator</Link>
+                                <Link underline='hover' color='inherit' href="/landparcels">Land Parcels</Link>
                                 <Link underline='hover' color='inherit' href="/operator/profile">Profile</Link>
 
                             </Breadcrumbs>
@@ -88,11 +82,16 @@ function Profile({ fetchLandParcel, updateLandParcelStatus }) {
                                     width: '100%',
                                     fontSize: '12px',
                                     height: '40px',
-                                    color: 'black',
-                                    background: 'rgba(140, 216, 103, 1)',
-                                    border: '1px solid black',
+                                    color: 'green',
+                                    background: 'lightgreen',
+                                    border: '1px solid green',
                                     borderRadius: '5px',
-                                }} onClick={() => { handleApprove(owners.id, "Approved") }}>Approve</Button>)}
+                                    "&:hover": {
+                                        color: 'green',
+                                        background: 'lightgreen',
+                                        border: '1px solid green',
+                                    }
+                                }} onClick={() => { handleApprove(owners.id, "Approved") }} startIcon={<CheckCircleOutlineIcon sx={{ color: 'green' }} />}>Approve</Button>)}
 
                         </Grid>
 

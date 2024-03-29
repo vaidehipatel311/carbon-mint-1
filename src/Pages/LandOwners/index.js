@@ -38,14 +38,15 @@ import avatar from '../../assets/images/LandOwners/avatar.png'
 import chart from '../../assets/images/LandOwners/Chart.png'
 
 import * as action from '../../Services/LandOwners/actions';
-import * as action_onboarding from '../../Services/Onboarding/actions';
 import axios from 'axios';
 import * as urls from '../../Config/urls';
-function LandOwners({ fetchLandOwners, fetchOnboarding }) {
+function LandOwners({ fetchLandOwners }) {
     const navigate = useNavigate()
     const [landOwners, setlandOwners] = useState([]);
     const [onboarding, setonboarding] = useState([]);
     const [showTable, setshowtable] = useState(true);
+    const [pageLandowner, setPageLandowner] = useState(1);
+    const [pageOnboarding, setPageOnboarding] = useState(1);
 
     useEffect(() => {
         fetchLandOwners()
@@ -59,6 +60,25 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
             .catch(err => console.log(err))
 
     }, [landOwners]);
+
+    const itemsPerPageLandowner = 1;
+    const startIndexLandowner = (pageLandowner - 1) * itemsPerPageLandowner;
+    const endIndexLandowner = pageLandowner * itemsPerPageLandowner;
+    const paginatedProductLandowner = landOwners.slice(startIndexLandowner, endIndexLandowner);
+
+    const handleChangePageLandowner = (event, newPageLandparcel) => {
+        setPageLandowner(newPageLandparcel);
+    };
+
+    const itemsPerPageOnboarding = 1;
+    const startIndexOnboarding = (pageOnboarding - 1) * itemsPerPageOnboarding;
+    const endIndexOnboarding = pageOnboarding * itemsPerPageOnboarding;
+    const paginatedProductOnboarding = onboarding.slice(startIndexOnboarding, endIndexOnboarding);
+
+    const handleChangePageOnboarding = (event, newPageOnboarding) => {
+        setPageOnboarding(newPageOnboarding);
+    };
+
 
     const handleGrid = () => { setshowtable(false); console.log("handle") }
 
@@ -80,7 +100,7 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
     }
 
     const generateLandOwners = () => {
-        return landOwners.map((owners, index) => (
+        return paginatedProductLandowner.map((owners, index) => (
             <TableBody>
                 <TableRow className='tr'>
 
@@ -96,7 +116,7 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
                     <TableCell align='center'>{owners.village}</TableCell>
                     <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
                     <TableCell align='center'>
-                        <Link href={'/landowners/add-landowner/'+`${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
+                        <Link href={'/landowners/add-landowner/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
                             <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
                         <DeleteIcon onClick={() => handleDelete(owners.id)} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
 
@@ -105,7 +125,7 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
         ));
     }
     const generateOnBoarding = () => {
-        return onboarding.map((owners, index) => (
+        return paginatedProductOnboarding.map((owners, index) => (
             <TableBody>
                 <TableRow className='tr'>
                     <TableCell align='center' sx={{ display: 'flex' }}>
@@ -136,23 +156,58 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
                 <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }} >
                     <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Typography variant="p" className='typo1' >
-                            #{owner.ownerId}
+                            #{owner.ownerID}
                         </Typography>
                         <MoreVertIcon />
                     </div>
-                    <Avatar className='avatar'><img src={old_man}></img></Avatar>
-                    <Typography variant="p" className='name'>
-                        {owner.name}
-                    </Typography>
-                    <Typography variant="body2" className='contact'>
-                        {owner.contactno}
-                    </Typography>
-                    <div style={{ marginLeft: '20px' }}>
-                        <button className="grid-button">
-                            2 crops
-                        </button>
-                        <button className="grid-button" >32 events</button>
-                        <button className="grid-button" >...</button>
+                    <div style={{ display: 'grid', alignItems: 'center' }}>
+                        <Avatar className='avatar' ><img src={old_man}></img></Avatar>
+                        <Typography variant="p" className='name'>
+                            {owner.name}
+                        </Typography>
+                        <Typography variant="body2" className='contact'>
+                            {owner.contact_number_1}
+                        </Typography>
+                        <div>
+                            <button className="grid-button">
+                                {owner.crops.length} crops
+                            </button>
+                            <button className="grid-button" >32 events</button>
+                        </div>
+                    </div>
+                </Paper>
+                <br></br>
+            </Grid >
+
+        ));
+    };
+
+    const generateGridItemsOnboarding = () => {
+
+        return onboarding.map((owner, index) => (
+
+            <Grid xs={3} key={owner.id} className='grid-item'>
+                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }} >
+                    <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Typography variant="p" className='typo1' >
+                            #{owner.ownerID}
+                        </Typography>
+                        <MoreVertIcon />
+                    </div>
+                    <div style={{ display: 'grid', alignItems: 'center' }}>
+                        <Avatar className='avatar' ><img src={old_man}></img></Avatar>
+                        <Typography variant="p" className='name'>
+                            {owner.name}
+                        </Typography>
+                        <Typography variant="body2" className='contact'>
+                            {owner.contact_number_1}
+                        </Typography>
+                        <div>
+                            <button className="grid-button">
+                                {owner.crops.length} crops
+                            </button>
+                            <button className="grid-button" >32 events</button>
+                        </div>
                     </div>
                 </Paper>
                 <br></br>
@@ -281,7 +336,11 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
                             </Grid>
                             <Grid xs={3} className='pagination'>
                                 <Stack spacing={2}>
-                                    <Pagination count={3} variant="outlined" />
+                                    <Pagination
+                                        count={Math.ceil(landOwners.length / itemsPerPageLandowner)}
+                                        variant='outlined'
+                                        page={pageLandowner}
+                                        onChange={handleChangePageLandowner} />
 
                                 </Stack>
                             </Grid>
@@ -313,16 +372,30 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
                             </Grid>
                             <Grid xs={3} className='pagination'>
                                 <Stack spacing={2}>
-                                    <Pagination count={3} variant="outlined" />
+                                    <Pagination
+                                        count={Math.ceil(onboarding.length / itemsPerPageOnboarding)}
+                                        variant='outlined'
+                                        page={pageOnboarding}
+                                        onChange={handleChangePageOnboarding} />
+
 
                                 </Stack>
                             </Grid>
                         </Grid>
                     </>)
-                    : (
+                    : (<div style={{marginTop:'20px'}}>
+                        <Typography variant='body1' fontWeight='bold'>Land Owners</Typography>
+
                         <Grid container>
                             {generateGridItems()}
                         </Grid>
+
+                        <Typography variant='body1' fontWeight='bold' >Onboarding Land Owners</Typography>
+
+                        <Grid container>
+                            {generateGridItemsOnboarding()}
+                        </Grid>
+                    </div>
                     )
                 }
             </Box>
@@ -332,7 +405,6 @@ function LandOwners({ fetchLandOwners, fetchOnboarding }) {
 const mapStateToProps = (state) => {
     return {
         landOwners: state.landowners.landowners,
-        // onboarding: state.onboarding.onboarding,
     };
 };
 

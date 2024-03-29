@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import './profile.css'
 import Header from '../../Components/Header';
 import Sidebar from '../../Components/Sidebar';
@@ -25,13 +25,16 @@ import Banner from '../../assets/images/Operators/Banner.png'
 import * as action from '../../Services/Operator/actions';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { fetchLandparcels } from '../../Services/Operator/actions';
+import { updateOperatorStatus } from '../../Services/Operator/actions';
 
-function Profile({fetchOperator}) {
+function Profile({ fetchOperator, fetchLandparcels,updateOperatorStatus }) {
     const navigate = useNavigate();
     const { id } = useParams();
-    const { opid } = useParams();
+    const { landparcelid } = useParams();
 
     const [operators, setOperators] = useState([]);
+    const [landparcel, setLandparcel] = useState([])
     const [approved, setApproved] = useState(false)
     useEffect(() => {
         fetchOperator()
@@ -45,9 +48,11 @@ function Profile({fetchOperator}) {
                 else {
                     setOperators(pending);
                 }
-
-                console.log(approved);
-
+            })
+            .catch(err => console.log(err))
+        fetchLandparcels()
+            .then((data) => {
+                setLandparcel(data);
             })
             .catch(err => console.log(err))
 
@@ -58,8 +63,52 @@ function Profile({fetchOperator}) {
         color: theme.palette.text.secondary,
     }));
 
+    const genereateLandparcel = () => {
+        return landparcel.map((land, index) => (
+            (land.operator_id === id ? (
+            <Grid xs={6}>
+                <Link href={'/operator/' + `${id}` + '/profile/landparcel/' + `${land.id}`} style={{ textDecoration: 'none' }}>
+                    <div className="grid-upper-profile">
+                        <img src={Banner}></img>
+
+                    </div >
+                    <Item className='grid-lower-profile' sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
+                        <div style={{ display: 'grid', textAlign: 'center' }}>
+                            <Typography variant='p' fontWeight='bold'>{land.landparcel_name}</Typography>
+                            <Typography variant='p' sx={{color:'rgb(175, 174, 174)'}}>{land.village}, {land.district}</Typography>
+                        </div>
+
+                        <Grid container sx={{ mt: 3, textAlign: 'center' }}>
+                            <Grid xs={4}>
+                                <Typography variant='p' className='n'><b>{land.acres}</b></Typography>
+                            </Grid>
+                            <Grid xs={4}>
+                                <Typography variant='p' className='n'><b>{land.area_owned}</b></Typography>
+                            </Grid>
+                            <Grid xs={4}>
+                                <Typography variant='p' className='n'><b>{land.area_leased}</b></Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid container sx={{ textAlign: 'center' }}>
+                            <Grid xs={4}>
+                                <Typography variant='p' className='t'>Acres</Typography>
+                            </Grid>
+                            <Grid xs={4}>
+                                <Typography variant='p' className='t'>Area Owned</Typography>
+                            </Grid>
+                            <Grid xs={4}>
+                                <Typography variant='p' className='t'>Area Leased</Typography>
+                            </Grid>
+                        </Grid>
+                    </Item>
+                </Link>
+            </Grid>
+            ) : (<></>))
+        ))
+    }
+
     const handleApprove = (id, status) => {
-        // updateLandParcelStatus(id, status);
+        updateOperatorStatus(id, status);
         navigate('/operator')
 
     }
@@ -69,24 +118,24 @@ function Profile({fetchOperator}) {
             <Header />
             <Sidebar />
             {operators.map((owners, index) => (
-            <Box sx={{ margin: '100px 20px 50px 300px' }}>
-                <Grid container>
-                    <Grid xs={8}>
-                        <Breadcrumbs sx={{
-                            textDecoration: 'none'
-                        }}
-                            separator={<NavigateNextIcon fontSize="small" />}
-                            aria-label="breadcrumb">
+                <Box sx={{ margin: '100px 20px 50px 300px' }}>
+                    <Grid container>
+                        <Grid xs={8}>
+                            <Breadcrumbs sx={{
+                                textDecoration: 'none'
+                            }}
+                                separator={<NavigateNextIcon fontSize="small" />}
+                                aria-label="breadcrumb">
 
-                            <Link underline='hover' color='inherit' href="/operator">Operator</Link>
-                            <Link underline='hover' color='inherit' href="/operator/profile">Profile</Link>
+                                <Link underline='hover' color='inherit' href="/operator">Operator</Link>
+                                <Link underline='hover' color='inherit' href={"/operator/"+`${id}`+"/profile"}>Profile</Link>
 
-                        </Breadcrumbs>
-                        <div className='title'>
-                            <Typography variant='p'>Profile</Typography>
-                        </div>
-                    </Grid>
-                    <Grid xs={2}>
+                            </Breadcrumbs>
+                            <div className='title'>
+                                <Typography variant='p'>Profile</Typography>
+                            </div>
+                        </Grid>
+                        <Grid xs={2}>
                             {approved ? (<></>) : (<Button variant='contained'
                                 sx={{
                                     width: '100%',
@@ -99,242 +148,178 @@ function Profile({fetchOperator}) {
                                 }} onClick={() => { handleApprove(owners.id, "Approved") }}>Approve</Button>)}
 
                         </Grid>
-                    <Grid xs={2}>
-                        <Button variant='contained'
-                            sx={{
-                                ml: 2,
-                                fontSize: '12px',
-                                height: '40px',
-                                color: 'black',
-                                background: 'rgba(140, 216, 103, 1)',
-                                border: '1px solid black',
-                                borderRadius: '5px',
-                            }}>Add Land Parcel</Button>
+                        <Grid xs={2}>
+                            <Link href={'/operator/' + `${id}` + '/profile/landparcel/add-landparcel/0'}><Button variant='contained'
+                                sx={{
+                                    ml: 2,
+                                    fontSize: '12px',
+                                    height: '40px',
+                                    color: 'black',
+                                    background: 'rgba(140, 216, 103, 1)',
+                                    border: '1px solid black',
+                                    borderRadius: '5px',
+                                }}>Add Land Parcel</Button></Link>
+                        </Grid>
 
                     </Grid>
 
-                </Grid>
-
-                <Grid container sx={{ mt: 3 }} className='cards3'>
-                    <Grid xs={4.5} sx={{ mb: 5 }}>
-                        <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2 }}>
-                            <div className='profile-grid'>
-                                <Badge color='success' badgeContent=" " size="large"
-                                    className='badge'
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'right',
-                                    }}></Badge><Avatar className='avatar'><img src={avatar}></img></Avatar>
-                                <Typography variant='p' className='name'>{owners.name}</Typography>
-                                <Typography variant='p' className='id'>{owners.ownerID}</Typography>
-                                <Grid container sx={{ mt: 3, textAlign: 'center' }}>
-                                    <Grid xs={4} className='n'>
-                                        <Typography variant='p' fontWeight='bold'>{owners.acres}</Typography>
-                                    </Grid>
-                                    <Grid xs={4} className='n'>
-                                        <Typography variant='p' fontWeight='bold'>{owners.total_landparcels}</Typography>
-                                    </Grid>
-                                    <Grid xs={4} className='n'>
-                                        <Typography variant='p' fontWeight='bold'>{owners.total_crops}</Typography>
-                                    </Grid>
-                                </Grid>
-
-                                <Grid container sx={{ textAlign: 'center' }}>
-                                    <Grid xs={4} className='t'>
-                                        <Typography variant='p'>Acres</Typography>
-                                    </Grid>
-                                    <Grid xs={4} className='t'>
-                                        <Typography variant='p'>Landparcels</Typography>
-                                    </Grid>
-                                    <Grid xs={4} className='t'>
-                                        <Typography variant='p'>Crops</Typography>
+                    <Grid container sx={{ mt: 3 }} className='cards3'>
+                        <Grid xs={4.3} sx={{ mb: 5 }}>
+                            <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2 }}>
+                                <div className='profile-grid'>
+                                    <Badge color='success' badgeContent=" " size="large"
+                                        className='badge'
+                                        anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'right',
+                                        }}></Badge><Avatar className='avatar'><img src={avatar}></img></Avatar>
+                                    <Typography variant='p' className='name'>{owners.name}</Typography>
+                                    <Typography variant='p' className='id'>{owners.ownerID}</Typography>
+                                    <Grid container sx={{ mt: 3, textAlign: 'center' }}>
+                                        <Grid xs={4} className='n'>
+                                            <Typography variant='p' fontWeight='bold'>{owners.acres}</Typography>
+                                        </Grid>
+                                        <Grid xs={4} className='n'>
+                                            <Typography variant='p' fontWeight='bold'>{owners.total_landparcels}</Typography>
+                                        </Grid>
+                                        <Grid xs={4} className='n'>
+                                            <Typography variant='p' fontWeight='bold'>{owners.total_crops}</Typography>
+                                        </Grid>
                                     </Grid>
 
-                                </Grid>
-                            </div>
-                            <hr style={{ margin: '20px' }} />
+                                    <Grid container sx={{ textAlign: 'center' }}>
+                                        <Grid xs={4} className='t'>
+                                            <Typography variant='p'>Acres</Typography>
+                                        </Grid>
+                                        <Grid xs={4} className='t'>
+                                            <Typography variant='p'>Landparcels</Typography>
+                                        </Grid>
+                                        <Grid xs={4} className='t'>
+                                            <Typography variant='p'>Crops</Typography>
+                                        </Grid>
 
-                            <div className='contact'>
-
-                                <Typography className='title' variant='p'>Contact</Typography>
-                                <div className='address-details'>
-                                    <Button sx={{ color: 'black' }}><BusinessIcon /></Button>
-                                    <div>
-                                        <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Address</Typography><br />
-                                        <Typography variant='p'>{owners.house_no}, {owners.village}, {owners.district}, {owners.state}, {owners.country} - {<br/>} {owners.postal_code}</Typography>
-                                    </div>
+                                    </Grid>
                                 </div>
-                                <div className='contact-details'>
-                                    <Button sx={{ color: 'black' }}><SmartphoneIcon /></Button>
-                                    <div>
-                                        <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Contact</Typography><br />
-                                        <Typography variant='p'>{owners.contact_number_1}</Typography>
-                                    </div>
-                                </div>
-                                <div className='email-details'>
-                                    <Button sx={{ color: 'black' }}><AlternateEmailIcon /></Button>
-                                    <div>
-                                        <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Mail</Typography><br />
-                                        <Typography variant='p'>{owners.email_id}</Typography>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr style={{ margin: '20px' }} />
+                                <hr style={{ margin: '20px' }} />
 
-                            <div className='documents'>
-                                <Typography variant='p' className='title'>Documents</Typography>
-                                <div className='aadhar'>
-                                    <Button sx={{ color: 'black' }}><BadgeIcon /></Button>
-                                    <div>
-                                        <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Aadhar</Typography><br />
-                                        <Typography variant='p'>{owners.aadhar_no}</Typography>
-                                    </div>
-                                    <div style={{marginLeft:'30px'}}>
-                                        <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Passbook Ref No</Typography><br />
-                                        <Typography variant='p'>{owners.passbook_refno}</Typography>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr style={{ margin: '20px' }} />
+                                <div className='contact'>
 
-                            <div className='details'>
-                                <Typography variant='p' className='title'>Details</Typography>
-                                <div className='fathername'>
-                                    <Typography variant='p'>Father's name</Typography>
-                                    <b><Typography variant='p'>{owners.father_name}</Typography></b>
-
-                                </div>
-                                <div className='familysize'>
-                                    <Typography variant='p'>Family size</Typography>
-                                    <b><Typography variant='p'>{owners.family_size}</Typography></b>
-
-                                </div>
-                                <div className='farming'>
-                                    <Typography variant='p'>Total ex. in farming</Typography>
-                                    <b><Typography variant='p'>{owners.total_farming_exp_year} years</Typography></b>
-
-                                </div>
-                                <div className='organic-farming'>
-                                    <Typography variant='p'>Ex. in organic farming</Typography>
-                                    <b><Typography variant='p'>{owners.organic_farming_exp_year} years</Typography></b>
-
-                                </div>
-                            </div>
-                        </Item>
-
-                    </Grid>
-
-                    <Grid xs={2.3}>
-                        <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
-                            <div className='no-of-landparcels'>
-                                <Avatar><img src={noacrs}></img></Avatar>
-                                <div>
-                                    <Typography className='content'>No. Landparcels</Typography>
-                                    <Typography className='content'><b>{owners.total_landparcels}</b></Typography>
-                                </div>
-                            </div>
-
-                        </Item>
-
-                    </Grid>
-                    <Grid xs={2.3}>
-                        <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
-                            <div className='no-of-crops'>
-                                <Avatar><img src={no_of_crops}></img></Avatar>
-                                <div>
-                                    <Typography className='content'>No. Crops</Typography>
-                                    <Typography className='content'><b>{owners.total_crops}</b></Typography>
-                                </div>
-                            </div>
-
-                        </Item>
-
-                    </Grid>
-                    <Grid xs={2.3}>
-                        <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
-                            <div className='no-of-events'>
-                                <Avatar><img src={events}></img></Avatar>
-                                <div>
-                                    <Typography className='content'>Events</Typography>
-                                    <Typography className='content'><b>1</b></Typography>
-                                </div>
-                            </div>
-                        </Item>
-                    </Grid>
-
-
-
-                    <div className='landparcels-cards'>
-                        <div className='landparcel'><Typography variant='p'>Land parcels</Typography></div>
-                        <Grid container sx={{ml:1}}>
-
-                            <Grid xs={6}>
-                                <Link href={'/operator/'+`${id}`+'/profile/landparcel'} style={{ textDecoration: 'none' }}>
-                                    <div className="grid-upper-profile">
-                                        <img src={Banner}></img>
-                                    </div >
-                                    <Item className='grid-lower-profile' sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
+                                    <Typography className='title' variant='p'>Contact</Typography>
+                                    <div className='address-details'>
+                                        <Button sx={{ color: 'black' }}><BusinessIcon /></Button>
                                         <div>
-                                            <div style={{ display: 'grid', justifyContent: 'center' }}>
-
-                                                <b><Typography variant='p'>Chennaiah polam - Sy.no:33/95</Typography></b>
-                                                <Typography variant='p'>Megya Thanda, Rangareddy, Hyderabad</Typography>
-                                            </div>
-                                            <Grid container sx={{ textAlign: 'center', mt: 3 }}>
-                                                <Grid xs={4}>
-                                                    <Typography variant='p' className='n'><b>14</b></Typography>
-                                                </Grid>
-                                                <Grid xs={4}>
-                                                    <Typography variant='p' className='n'><b>8</b></Typography>
-                                                </Grid>
-                                                <Grid xs={4}>
-                                                    <Typography variant='p' className='n'><b>8</b></Typography>
-                                                </Grid>
-                                            </Grid>
-                                            <Grid container sx={{ textAlign: 'center' }}>
-                                                <Grid xs={4}>
-                                                    <Typography variant='p' className='t'>Acres</Typography>
-                                                </Grid>
-                                                <Grid xs={4}>
-                                                    <Typography variant='p' className='t'>Area Owned</Typography>
-                                                </Grid>
-                                                <Grid xs={4}>
-                                                    <Typography variant='p' className='t'>Area Leased</Typography>
-                                                </Grid>
-
-                                            </Grid>
-
-                                            <Grid container>
-                                                <Grid xs={12}>
-                                                    <Item className='crops-operators'>
-                                                        <Avatar><img src={sourgham}></img></Avatar>
-                                                        <div style={{ display: 'grid' }}>
-                                                            <Typography variant='p'><b>Sourgham</b></Typography>
-                                                            <Typography variant='p' className='text'>Corner Field</Typography>
-                                                        </div>
-                                                        <Typography variant='p' className='no-of-events'>12 events</Typography>
-                                                    </Item>
-
-                                                </Grid>
-                                                <Grid xs={12}>
-                                                    <Item className='crops-operators'>
-                                                        <Avatar><img src={finger_millet}></img></Avatar>
-                                                        <div style={{ display: 'grid' }}>
-                                                            <Typography variant='p'><b>Finger Millet</b></Typography>
-                                                            <Typography variant='p' className='text'>Lake Edge Field</Typography>
-                                                        </div>
-                                                        <Typography variant='p' className='no-of-events'>20 events</Typography>
-                                                    </Item>
-                                                </Grid>
-                                            </Grid>
+                                            <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Address</Typography><br />
+                                            <Typography variant='p'>{owners.house_no}, {owners.village}, {owners.district}, {owners.state}, {owners.country} - {<br />} {owners.postal_code}</Typography>
                                         </div>
-                                    </Item>
-                                </Link>
+                                    </div>
+                                    <div className='contact-details'>
+                                        <Button sx={{ color: 'black' }}><SmartphoneIcon /></Button>
+                                        <div>
+                                            <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Contact</Typography><br />
+                                            <Typography variant='p'>{owners.contact_number_1}</Typography>
+                                        </div>
+                                    </div>
+                                    <div className='email-details'>
+                                        <Button sx={{ color: 'black' }}><AlternateEmailIcon /></Button>
+                                        <div>
+                                            <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Mail</Typography><br />
+                                            <Typography variant='p'>{owners.email_id}</Typography>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style={{ margin: '20px' }} />
+
+                                <div className='documents'>
+                                    <Typography variant='p' className='title'>Documents</Typography>
+                                    <div className='aadhar'>
+                                        <Button sx={{ color: 'black' }}><BadgeIcon /></Button>
+                                        <div>
+                                            <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Aadhar</Typography><br />
+                                            <Typography variant='p'>{owners.aadhar_no}</Typography>
+                                        </div>
+                                        <div style={{ marginLeft: '30px' }}>
+                                            <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Passbook Ref No</Typography><br />
+                                            <Typography variant='p'>{owners.passbook_refno}</Typography>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style={{ margin: '20px' }} />
+
+                                <div className='details'>
+                                    <Typography variant='p' className='title'>Details</Typography>
+                                    <div className='fathername'>
+                                        <Typography variant='p'>Father's name</Typography>
+                                        <b><Typography variant='p'>{owners.father_name}</Typography></b>
+
+                                    </div>
+                                    <div className='familysize'>
+                                        <Typography variant='p'>Family size</Typography>
+                                        <b><Typography variant='p'>{owners.family_size}</Typography></b>
+
+                                    </div>
+                                    <div className='farming'>
+                                        <Typography variant='p'>Total ex. in farming</Typography>
+                                        <b><Typography variant='p'>{owners.total_farming_exp_year} years</Typography></b>
+
+                                    </div>
+                                    <div className='organic-farming'>
+                                        <Typography variant='p'>Ex. in organic farming</Typography>
+                                        <b><Typography variant='p'>{owners.organic_farming_exp_year} years</Typography></b>
+
+                                    </div>
+                                </div>
+                            </Item>
+
+                        </Grid>
+                        <Grid xs={7.5}>
+                            <div className='cards3' style={{display:'flex'}}>
+                            <Grid xs={4}>
+                                <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
+                                    <div className='no-of-landparcels'>
+                                        <Avatar><img src={noacrs}></img></Avatar>
+                                        <div>
+                                            <Typography className='content'>No. Landparcels</Typography>
+                                            <Typography className='content'><b>{landparcel.length}</b></Typography>
+                                        </div>
+                                    </div>
+
+                                </Item>
+
+                            </Grid>
+                            <Grid xs={4}>
+                                <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
+                                    <div className='no-of-crops'>
+                                        <Avatar><img src={no_of_crops}></img></Avatar>
+                                        <div>
+                                            <Typography className='content'>No. Crops</Typography>
+                                            <Typography className='content'><b>{owners.total_crops}</b></Typography>
+                                        </div>
+                                    </div>
+
+                                </Item>
+
+                            </Grid>
+                            <Grid xs={4}>
+                                <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
+                                    <div className='no-of-events'>
+                                        <Avatar><img src={events}></img></Avatar>
+                                        <div>
+                                            <Typography className='content'>Events</Typography>
+                                            <Typography className='content'><b>1</b></Typography>
+                                        </div>
+                                    </div>
+                                </Item>
+                            </Grid>
+                            </div>
+                            <Grid xs={12} sx={{mt:5}}>
+                                <div className='landparcel'><Typography variant='p'>Land parcels</Typography></div>
+                                <Grid container>
+                                    {genereateLandparcel()}
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </div>
-                </Grid>
-            </Box >
+                    </Grid>
+                </Box >
             ))}
         </>
     )
@@ -348,6 +333,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     fetchOperator: () => action.fetchOperator(),
+    fetchLandparcels: () => fetchLandparcels(),
+    updateOperatorStatus: (id,status) => updateOperatorStatus(id,status)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

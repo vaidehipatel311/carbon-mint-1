@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Header from '../../Components/Header'
 import Sidebar from '../../Components/Sidebar'
 import './addoperator.css'
@@ -11,37 +11,21 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import aadhar_img from '../../assets/images/Operators/aadhar_img.png'
-import { addOperator } from '../../Services/Operator/actions'
+import { addOperator,editOperator,fetchOperator } from '../../Services/Operator/actions'
 import { connect } from 'react-redux'
 
-const validate = (values) => {
-    const errors = {};
 
-    if (!values.name || !values.contact_number_1 || !values.village || !values.aadhar_no || !values.passbook_refno
-        || !values.crops) {
-        errors.name = 'Required';
-        errors.contact_number_1 = 'Required';
-        errors.village = 'Required';
-        errors.aadhar_no = 'Required';
-        errors.passbook_refno = 'Required';
-        errors.crops = 'Required';
-    }
-    else if(values.contact_number_1.length !== 10){
-        errors.contact_number_1 = 'Must be 10 digits'
-    }
-    return errors;
-};
-
-
-function AddOperator({ addOperator }) {
+function AddOperator({ addOperator,editOperator,fetchOperator }) {
     const navigate = useNavigate();
+    const {addOperatorId} = useParams()
     const [selectedFileaadhar, setSelectedFileaadhar] = useState([]);
     const [selectedFilePanCard, setSelectedFilePanCard] = useState([]);
     const [selectedFileLeasedDoc, setSelectedFileLeasedDoc] = useState([]);
+    const [draftdata, setDraftData] = useState([])
 
     const formik = useFormik({
         initialValues: {
@@ -83,8 +67,16 @@ function AddOperator({ addOperator }) {
             area: '',
             crops: ''
         },
-        validate,
         onSubmit: (values) => {
+        if (addOperatorId != '0') {
+            formik.setValues({
+              ...formik.values,
+              ...values
+            });
+            editOperator(addOperatorId, values)
+            navigate('/operator', { state: { showAlert: true } });
+          }
+          else {
             const uniqueIDBase64 = formik.values.uniqueID ? btoa(formik.values.uniqueID) : null;
             const pancardFileIDBase64 = formik.values.pancardFile ? btoa(formik.values.pancardFile) : null;
             const leasedFileIDBase64 = formik.values.leasedFile ? btoa(formik.values.leasedFile) : null;
@@ -94,8 +86,31 @@ function AddOperator({ addOperator }) {
             formik.values.leased_doc_id = leasedFileIDBase64;
             addOperator(values);
             navigate('/operator')
-        },
+          }
+        }
+        
     });
+
+    useEffect(() => {
+        fetchOperator()
+          .then((data) => {
+            const filteredEvent = data.find(p => p.id === parseInt(addOperatorId, 10))
+            setDraftData(filteredEvent);
+            formik.setValues({
+              ...formik.values,
+              ...filteredEvent
+            });
+          })
+          .catch(err => console.log(err));
+        handleDraftForm();
+    
+      }, [addOperatorId]);
+
+    const handleDraftForm = () =>{
+        if(addOperatorId != 0){
+            setDraftData(true)
+        }
+    }
 
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
@@ -580,7 +595,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    addOperator: (formik) => addOperator(formik)
+    addOperator: (formik) => addOperator(formik),
+    editOperator: (id,formik) => editOperator(id,formik),
+    fetchOperator: () => fetchOperator()
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddOperator)

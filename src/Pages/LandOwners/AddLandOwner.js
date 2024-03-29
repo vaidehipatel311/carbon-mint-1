@@ -17,26 +17,9 @@ import { addLandOwner, fetchLandOwners, editOwner } from '../../Services/LandOwn
 import { connect } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
 
-// const validate = (values) => {
-//   const errors = {};
-
-//   if (!values.name || !values.contact_number_1 || !values.village || !values.aadhar_no || !values.passbook_refno
-//     || !values.crops) {
-//     errors.name = 'Required';
-//     errors.contact_number_1 = 'Required';
-//     errors.village = 'Required';
-//     errors.aadhar_no = 'Required';
-//     errors.passbook_refno = 'Required';
-//     errors.crops = 'Required';
-//   }
-//   else if (values.contact_number_1.length !== 10) {
-//     errors.contact_number_1 = 'Must be 10 digits'
-//   }
-//   return errors;
-// };
 
 function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
-  const { id } = useParams();
+  const { addLandownerId } = useParams();
   const [isDraft, setisDraft] = useState(false);
   const [draftdata, setDraftData] = useState([]);
   const [selectedFileaadhar, setSelectedFileaadhar] = useState([]);
@@ -72,14 +55,13 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
       crops: '',
       status: 'Pending'
     },
-    // validate,
     onSubmit: (values) => {
-      if (id != '0') {
+      if (addLandownerId != '0') {
         formik.setValues({
           ...formik.values,
           ...values
         });
-        editOwner(id, values)
+        editOwner(addLandownerId, values)
         navigate('/landowners', { state: { showAlert: true } });
       }
       else {
@@ -99,7 +81,7 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
   useEffect(() => {
     fetchLandOwners()
       .then((data) => {
-        const filteredEvent = data.find(p => p.id === parseInt(id, 10))
+        const filteredEvent = data.find(p => p.id === parseInt(addLandownerId, 10))
         setDraftData(filteredEvent);
         formik.setValues({
           ...formik.values,
@@ -109,7 +91,7 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
       .catch(err => console.log(err));
     handleDraftForm();
 
-  }, [id]);
+  }, [addLandownerId]);
 
   const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -151,7 +133,7 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
   };
 
   const handleDraftForm = () => {
-    if (id != 0) {
+    if (addLandownerId != 0) {
       setisDraft(true);
     }
 
@@ -196,18 +178,16 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
                   type="text"
                   label=" Owner Name"
                   name="name"
-                  required
                   value={formik.values.name}
+                  defaultValue={isDraft ? draftdata.name : ""}
                   onChange={formik.handleChange}
                   helperText='First name + Last name'
-                  error={formik.errors.name ? true : false}
                 />
 
 
                 <TextField
                   type='text'
                   label='Father name'
-                  required
                   name='father_name'
                   value={formik.values.father_name}
                   onChange={formik.handleChange}
@@ -229,9 +209,6 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
                   name='contact_number_1'
                   value={formik.values.contact_number_1}
                   onChange={formik.handleChange}
-                  required
-                  error={formik.errors.contact_number_1 ? true : false}
-                  helperText={formik.errors.contact_number_1}
                 />
 
                 <TextField
@@ -454,7 +431,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   fetchLandOwners: () => fetchLandOwners(),
-  editOwner: (id, formik) => editOwner(id, formik)
+  editOwner: (id, formik) => editOwner(id, formik),
+  addLandOwner: (formik) => addLandOwner(formik)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddLandOwner)

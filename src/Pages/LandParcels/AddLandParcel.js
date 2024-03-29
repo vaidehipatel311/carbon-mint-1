@@ -8,11 +8,7 @@ import { Button, MenuItem, TextField } from '@mui/material'
 import { Grid } from '@mui/material'
 import { Breadcrumbs, Typography } from '@mui/material'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { styled } from '@mui/material/styles';
-import CloseIcon from '@mui/icons-material/Close';
 import { useFormik } from 'formik';
-import aadhar_img from '../../assets/images/Operators/aadhar_img.png'
 import { connect } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
 import * as action from '../../Services/LandParcels/actions'

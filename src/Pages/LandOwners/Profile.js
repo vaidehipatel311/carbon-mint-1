@@ -6,6 +6,7 @@ import { Avatar, Badge, Button } from '@mui/material'
 import { Grid } from '@mui/material'
 import { Breadcrumbs, Typography } from '@mui/material'
 import Paper from '@mui/material/Paper';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { styled } from '@mui/material/styles';
 import BusinessIcon from '@mui/icons-material/Business';
 import SmartphoneIcon from '@mui/icons-material/Smartphone';
@@ -52,8 +53,8 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
 
     }, [landOwners]);
 
-    const handleApprove = (id,status) => {
-        updateLandOwnerStatus(id,status);
+    const handleApprove = (id, status) => {
+        updateLandOwnerStatus(id, status);
         navigate('/landowners')
 
     }
@@ -74,7 +75,7 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
                                 separator={<NavigateNextIcon fontSize="small" />}
                                 aria-label="breadcrumb">
 
-                                <Link underline='hover' color='inherit' href="/operator">Operator</Link>
+                                <Link underline='hover' color='inherit' href="/landowners">Land Owners</Link>
                                 <Link underline='hover' color='inherit' href="/operator/profile">Profile</Link>
 
                             </Breadcrumbs>
@@ -88,11 +89,16 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
                                     width: '100%',
                                     fontSize: '12px',
                                     height: '40px',
-                                    color: 'black',
-                                    background: 'rgba(140, 216, 103, 1)',
-                                    border: '1px solid black',
+                                    color: 'green',
+                                    background: 'lightgreen',
+                                    border: '1px solid green',
                                     borderRadius: '5px',
-                                }} onClick={()=>{handleApprove(owners.id,"Approved")}}>Approve</Button>)}
+                                    "&:hover": {
+                                        color: 'green',
+                                        background: 'lightgreen',
+                                        border: '1px solid green',
+                                    }
+                                }} onClick={() => { handleApprove(owners.id, "Approved") }} startIcon={<CheckCircleOutlineIcon sx={{ color: 'green' }} />}>Approve</Button>)}
 
                         </Grid>
 
@@ -218,7 +224,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     fetchLandOwners: () => action.fetchLandOwners(),
-    updateLandOwnerStatus: (id,status) => action.updateLandOwnerStatus(id,status),
+    updateLandOwnerStatus: (id, status) => action.updateLandOwnerStatus(id, status),
 
 }
 

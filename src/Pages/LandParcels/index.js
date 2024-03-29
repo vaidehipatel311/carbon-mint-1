@@ -38,13 +38,17 @@ import * as urls from '../../Config/urls';
 
 import * as action from '../../Services/LandParcels/actions';
 import * as action_onboard from '../../Services/Onboarding/actions';
+import landparcel from '../Operator/landparcel';
 
-function LandParcels({ fetchLandParcel, fetchOnboarding }) {
+function LandParcels({ fetchLandParcel }) {
     const navigate = useNavigate()
 
     const [landParcels, setLandParcels] = useState([]);
     const [onboarding, setonboarding] = useState([]);
     const [showTable, setshowtable] = useState(true);
+    const [pageLandparcel, setPageLandparcel] = useState(1);
+    const [pageOnboarding, setPageOnboarding] = useState(1);
+
 
 
     useEffect(() => {
@@ -58,6 +62,24 @@ function LandParcels({ fetchLandParcel, fetchOnboarding }) {
             .catch(err => console.log(err))
 
     }, []);
+
+    const itemsPerPageLandparcel = 1;
+    const startIndexLandparcel = (pageLandparcel - 1) * itemsPerPageLandparcel;
+    const endIndexLandparcel = pageLandparcel * itemsPerPageLandparcel;
+    const paginatedProductLandparcel = landParcels.slice(startIndexLandparcel, endIndexLandparcel);
+
+    const handleChangePageLandparcel = (event, newPageLandparcel) => {
+        setPageLandparcel(newPageLandparcel);
+    };
+
+    const itemsPerPageOnboarding = 1;
+    const startIndexOnboarding = (pageOnboarding - 1) * itemsPerPageOnboarding;
+    const endIndexOnboarding = pageOnboarding * itemsPerPageOnboarding;
+    const paginatedProductOnboarding = onboarding.slice(startIndexOnboarding, endIndexOnboarding);
+
+    const handleChangePageOnboarding = (event, newPageOnboarding) => {
+        setPageOnboarding(newPageOnboarding);
+    };
 
     const handleGrid = () => { setshowtable(false); console.log("handle") }
 
@@ -78,7 +100,7 @@ function LandParcels({ fetchLandParcel, fetchOnboarding }) {
         navigate('/landparcels' + `/${id}`)
     }
     const generateLandParcels = () => {
-        return landParcels.map((owners, index) => (
+        return paginatedProductLandparcel.map((owners, index) => (
             <TableBody>
                 <TableRow className='tr'>
 
@@ -102,7 +124,7 @@ function LandParcels({ fetchLandParcel, fetchOnboarding }) {
         ));
     }
     const generateOnBoarding = () => {
-        return onboarding.map((owners, index) => (
+        return paginatedProductOnboarding.map((owners, index) => (
             <TableBody>
                 <TableRow className='tr'>
                     <TableCell align='center' sx={{ display: 'flex' }}>
@@ -276,7 +298,11 @@ function LandParcels({ fetchLandParcel, fetchOnboarding }) {
                             </Grid>
                             <Grid xs={3} className='pagination'>
                                 <Stack spacing={2}>
-                                    <Pagination count={3} variant="outlined" />
+                                <Pagination
+                                count={Math.ceil(landParcels.length / itemsPerPageLandparcel)}
+                                variant='outlined'
+                                page={pageLandparcel}
+                                onChange={handleChangePageLandparcel} />
 
                                 </Stack>
                             </Grid>
@@ -308,7 +334,11 @@ function LandParcels({ fetchLandParcel, fetchOnboarding }) {
                             </Grid>
                             <Grid xs={3} className='pagination'>
                                 <Stack spacing={2}>
-                                    <Pagination count={3} variant="outlined" />
+                                <Pagination
+                                count={Math.ceil(onboarding.length / itemsPerPageOnboarding)}
+                                variant='outlined'
+                                page={pageOnboarding}
+                                onChange={handleChangePageOnboarding} />
 
                                 </Stack>
                             </Grid>
@@ -336,7 +366,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     fetchLandParcel: () => action.fetchLandParcel(),
-    fetchOnboarding: () => action_onboard.fetchOnboarding()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandParcels);

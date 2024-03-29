@@ -94,18 +94,16 @@
     font-weight: bold;
 }
 
-.grid-upper-profile{
-    width: 100%;
-}
-
 .grid-upper-profile img {
     border-radius: 5px;
     margin-top: 30px;
+    width: 100%;
 }
 
 .grid-lower-profile {
     border: 2px;
     padding: 14px;
+    width: 100%;
 }
 
 .grid-lower-profile .crops-operators {
@@ -626,7 +624,7 @@
 
 @media screen and (max-width:1366px) {
     .cards3 {
-        gap: 15px;
+        gap: 10px;
     }
 
     .profile-grid .avatar {
@@ -687,23 +685,21 @@
         background: white;
     }
 
-    .landparcels-cards {
-        margin-left: 365px;
-    }
 
     .landparcel {
-        margin-left: 35px;
+        margin-left: 10px;
         font-size: 14px;
     }
 
-    .grid-upper-profile{
-        width: 85%;
-        margin-left: 30px;
+    .grid-upper-profile, .grid-upper-profile img{
+        width: 95%;
+        margin-left: 5px;
     }
+    
 
     .grid-lower-profile {
-        width: 112%;
-        margin-left: 30px;
+        width: 81%;
+        margin-left: 10px;
         font-size: 14px;
     }
 

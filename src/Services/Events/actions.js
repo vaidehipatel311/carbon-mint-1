@@ -2,11 +2,12 @@ import * as actionTypes from './actionTypes';
 import axios from '../../Utils/axios';
 import * as urls from '../../Config/urls';
 
-export const addEvent = (formData) => {
+export const addEvent = (formData,cropid) => {
     return async (dispatch) => {
         try {
             const response = await axios.post(urls.addEventsUrl,
                 {
+                    "crop_id":cropid,
                     "event_group": formData.event_group,
                     "event_name": formData.event_name,
                     "date": formData.date,

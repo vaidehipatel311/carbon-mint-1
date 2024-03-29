@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
+import {Typography,Breadcrumbs} from '@mui/material';
 import Header from '../../Components/Header';
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid';
 import './events.css'
+import Link from '@mui/material/Link';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { Button, MenuItem, TextField } from '@mui/material';
 import { connect } from 'react-redux';
 import Sidebar from '../../Components/Sidebar';
@@ -13,17 +15,22 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
-import { addEvent, fetchAddedEvents,editEvent } from '../../Services/Events/actions';
+import { addEvent, fetchAddedEvents, editEvent } from '../../Services/Events/actions';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import Checkbox from '@mui/material/Checkbox';
 
 
 
-function AddEvent({ addEvent, fetchAddedEvents,editEvent }) {
+function AddEvent({ addEvent, fetchAddedEvents, editEvent }) {
   const navigate = useNavigate();
 
   const { id } = useParams();
+  const { cropid } = useParams();
+  const { landparcelid } = useParams();
+  const { eventid } = useParams();
+
+
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isDraft, setisDraft] = useState(false);
   const [draftdata, setDraftData] = useState([]);
@@ -31,12 +38,12 @@ function AddEvent({ addEvent, fetchAddedEvents,editEvent }) {
   useEffect(() => {
     fetchAddedEvents()
       .then((data) => {
-        const filteredEvent = data.find(p => p.id === parseInt(id, 10));
+        const filteredEvent = data.find(p => p.id === parseInt(eventid, 10));
         setDraftData(filteredEvent);
         formik.setValues({
           ...formik.values,
           ...filteredEvent
-      });
+        });
       })
       .catch(err => console.log(err));
     handleDraftForm();
@@ -71,20 +78,20 @@ function AddEvent({ addEvent, fetchAddedEvents,editEvent }) {
       evidence: ""
     },
     onSubmit: (values) => {
-      if (id != '0') {
-          formik.setValues({
-              ...formik.values,
-              ...values
-          });
-          editEvent(id, values)
-          navigate('/operator/profile/landparcel/crops', { state: { showAlert: true } });
+      if (eventid != '0') {
+        formik.setValues({
+          ...formik.values,
+          ...values
+        });
+        editEvent(eventid, values)
+        navigate('/operator/profile/landparcel/crops', { state: { showAlert: true } });
       }
       else {
-          formik.values.time = Date();
-          addEvent(values)
-          navigate('/operator/profile/landparcel/crops', { state: { showAlert: true } });
+        formik.values.time = Date();
+        addEvent(values, cropid)
+        navigate('/operator/' + `${id}` + '/profile/landparcel/' + `${landparcelid}` + '/crops/' + `${cropid}`, { state: { showAlert: true } });
       }
-  }
+    }
   })
 
   const handleFileChange = (event) => {
@@ -110,12 +117,12 @@ function AddEvent({ addEvent, fetchAddedEvents,editEvent }) {
   };
 
   const handleDraftForm = () => {
-    if (id != 0) {
+    if (eventid != 0) {
       formik.values.event_group = draftdata.event_group;
       formik.values.event_name = draftdata.event_name;
 
       setisDraft(true);
-      
+
     }
   };
 
@@ -139,7 +146,20 @@ function AddEvent({ addEvent, fetchAddedEvents,editEvent }) {
       <Sidebar />
       <Box sx={{ margin: '100px 20px 50px 300px' }}>
 
-        <Typography className='title' variant='p'>Add New Event</Typography>
+        <div className='path'>
+          <Breadcrumbs sx={{
+            textDecoration: 'none'
+          }}
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb">
+
+            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/profile/landparcel/' + `${landparcelid}` + '/crops'+`${cropid}`}>Crops</Link>
+
+          </Breadcrumbs>
+          <div className='create-operator-title'>
+            <Typography variant='p' className='title'>Add Land Parcel</Typography>
+          </div>
+        </div>
 
 
         <div className='event-form'>
@@ -509,7 +529,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
 
-  addEvent: (formik) => addEvent(formik),
+  addEvent: (formik, cropid) => addEvent(formik, cropid),
   fetchAddedEvents: () => fetchAddedEvents(),
   editEvent: (id, formik) => editEvent(id, formik),
 }

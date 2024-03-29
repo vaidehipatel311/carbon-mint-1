@@ -15,6 +15,8 @@ import { addCrops, editCrop, fetchCrops } from '../../Services/Operator/actions'
 function AddCrop({ addCrops, editCrop, fetchCrops }) {
     const { cropid } = useParams();
     const { id } = useParams();
+    const { landparcelid } = useParams();
+
 
     const [isDraft, setisDraft] = useState(false);
     const [draftdata, setDraftData] = useState([]);
@@ -38,11 +40,11 @@ function AddCrop({ addCrops, editCrop, fetchCrops }) {
                     ...values
                 });
                 editCrop(id, values)
-                navigate('/operator' + `${id}` + '/profile/landparcel/crops/' + `${cropid}`, { state: { showAlert: true } })
+                navigate('/operator/' + `${id}` + '/profile/landparcel/'+`${cropid}`+'/crops/' + `${cropid}`, { state: { showAlert: true } })
             }
             else {
-                addCrops(values);
-                navigate('/operator/'+`${id}`+'/profile/landparcel', { state: { showAlert: true } })
+                addCrops(values,landparcelid);
+                navigate('/operator/'+`${id}`+'/profile/landparcel/'+`${landparcelid}`, { state: { showAlert: true } })
 
             }
         },
@@ -80,7 +82,7 @@ function AddCrop({ addCrops, editCrop, fetchCrops }) {
                         separator={<NavigateNextIcon fontSize="small" />}
                         aria-label="breadcrumb">
 
-                        <Link href={'/operator/'+`${id}`+'/profile/landparcel'} color='inherit' underline='hover'>
+                        <Link href={'/operator/'+`${id}`+'/profile/landparcel'+`${landparcelid}`} color='inherit' underline='hover'>
                             Land Parcels
                         </Link>
 
@@ -215,7 +217,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    addCrops: (formik) => addCrops(formik),
+    addCrops: (formik,landparcelid) => addCrops(formik,landparcelid),
     editCrop: (id, formik) => editCrop(id, formik),
     fetchCrops: () => fetchCrops()
 

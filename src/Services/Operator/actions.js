@@ -35,7 +35,8 @@ export const addOperator = (formData) => {
                     "leased_doc_id": formData.leased_doc_id,
                     "total_crops": formData.total_crops,
                     "area": formData.area,
-                    "crops": formData.crops
+                    "crops": formData.crops,
+                    "status":"Pending"
                 });
             dispatch({
                 type: actionTypes.ADD_OPERATOR,
@@ -46,12 +47,41 @@ export const addOperator = (formData) => {
         }
     };
 };
+export const editOperator = (id, formData) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.put(urls.operatorUrl + `/${id}`, formData);
+            dispatch({
+                type: actionTypes.EDIT_OPERATOR,
+                payload: { id, formData: response.data },
+            });
+        } catch (error) {
+            console.error('Error editing parcel:', error);
+        }
+    };
+};
+export const fetchOperator = () => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get(urls.operatorUrl);
+            const operatordata = response.data
+            dispatch({
+                type: actionTypes.FETCH_OPERATOR,
+                payload: { operatordata },
+            })
+            return response.data
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
+        }
+    };
+};
 
-export const addCrops = (formData) => {
+export const addCrops = (formData,landparcelID) => {
     return async (dispatch) => {
         try {
             const response = await axios.post(urls.cropsUrl,
                 {
+                    "landparcel_id":landparcelID,
                     "crop_name": formData.crop_name,
                     "landparcel_name": formData.landparcel_name,
                     "acres": formData.acres,
@@ -60,10 +90,10 @@ export const addCrops = (formData) => {
                     "cropping_systems": formData.cropping_systems,
                     "water_resources": formData.water_resources,
                     "water_sample_test": formData.water_sample_test,
-                    "irrigation_status":formData.irrigation_status
+                    "irrigation_status": formData.irrigation_status
 
                 });
-            
+
             dispatch({
                 type: actionTypes.ADD_CROP,
                 payload: { operatordata: { formData, id: response.data.id } },
@@ -104,18 +134,83 @@ export const fetchCrops = () => {
     };
 };
 
-export const fetchOperator = () => {
+export const addLandparcel = (formData,opid) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(urls.operatorUrl);
-            const operatordata = response.data
+            const response = await axios.post(urls.addLandparcelUrl,
+                {
+                    "operator_id":opid,
+                    "landparcel_name": formData.landparcel_name,
+                    "house_no": formData.house_no,
+                    "village": formData.village,
+                    "district": formData.district,
+                    "state": formData.state,
+                    "country": formData.country,
+                    "postal_code": formData.postal_code,
+                    "acres": formData.acres,
+                    "area_owned": formData.area_owned,
+                    "area_leased": formData.area_leased,
+                    "SyNo": formData.SyNo,
+                    "neighbouring_farm": formData.neighbouring_farm,
+                    "distance": formData.distance,
+                    "land_under_cultivation": formData.land_under_cultivation,
+                    "cropping_systems": formData.cropping_systems,
+                    "farming_system": formData.farming_system,
+                    "infrastructure": formData.infrastructure,
+                    "water_resources": formData.water_resources
+
+                });
+
             dispatch({
-                type: actionTypes.FETCH_OPERATOR,
-                payload: { operatordata },
+                type: actionTypes.ADD_LANDPARCEL,
+                payload: { landparceldata: { formData, id: response.data.id } },
+            })
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
+        }
+    };
+};
+
+export const editLandparcel = (id, formData) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.put(urls.addLandparcelUrl + `/${id}`, formData);
+            dispatch({
+                type: actionTypes.EDIT_LANDPARCEL,
+                payload: { id, formData: response.data },
+            });
+        } catch (error) {
+            console.error('Error editing parcel:', error);
+        }
+    };
+};
+
+export const fetchLandparcels = () => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get(urls.addLandparcelUrl);
+            const addLandparceldata = response.data
+            dispatch({
+                type: actionTypes.FETCH_LANDPARCEL,
+                payload: { addLandparceldata },
             })
             return response.data
         } catch (error) {
             console.error('Error fetching tasks:', error);
+        }
+    };
+};
+
+export const updateOperatorStatus = (id,status) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.patch(urls.operatorUrl + `/${id}`, { 
+                status
+            });
+
+            dispatch({ type: actionTypes.UPDATE_OPERATOR_STATUS, payload: { id, status} });
+        } catch (error) {
+            console.error('Error updating landowner status:', error);
         }
     };
 };

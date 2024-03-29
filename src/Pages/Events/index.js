@@ -39,7 +39,6 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
     const navigate = useNavigate();
 
-    const { id } = useParams();
     const [events, setEvents] = useState([]);
     const [addedevents, setaddedEvents] = useState([]);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -53,11 +52,13 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
     const [isDraft, setisDraft] = useState(false);
     const [draftdata, setDraftData] = useState([]);
     const [norecord, setnorecord] = useState(false);
+    const [pageEvent, setPageEvent] = useState(1);
 
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+    
     const handleClose = () => {
         setAnchorEl(null);
         setshowFilterValue(true)
@@ -78,6 +79,16 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
             })
             .catch(err => console.log(err));
     }, [draftdata]);
+
+    const handlePageEvent = (event,newPageEvent) =>{
+        setPageEvent(newPageEvent)
+    }
+
+    const itemsPerPageEvent = 1;
+    const startIndexEvent = (pageEvent - 1) * itemsPerPageEvent;
+    const endIndexEvent = pageEvent * itemsPerPageEvent;
+    const paginatedProductEvent = events.slice(startIndexEvent, endIndexEvent);
+
 
     const formik = useFormik({
         initialValues: {
@@ -178,7 +189,7 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
 
     const generateGridItems = () => {
 
-        return events.map((event, index) => (
+        return paginatedProductEvent.map((event, index) => (
 
             <Grid xs={4} key={event.id}>
                 <Link href={'/events/eventDescription/' + `${event.id}`} style={{ textDecoration: 'none', color: 'black' }}>
@@ -339,7 +350,11 @@ function Events({ fetchEvents, addEvent, fetchAddedEvents }) {
                         </Grid>
                         <Grid xs={3} className='pagination'>
                             <Stack spacing={2}>
-                                <Pagination count={3} variant="outlined" />
+                            <Pagination
+                                count={Math.ceil(events.length / itemsPerPageEvent)}
+                                variant='outlined'
+                                page={pageEvent}
+                                onChange={handlePageEvent} />
                             </Stack>
                         </Grid>
                     </Grid>

@@ -226,6 +226,7 @@
     "crops": [
         {
             "id": 1,
+            "landparcel_id":"1",
             "crop_name": "Sorghum",
             "landparcel_name": "Chennaiah Polam Corner Field",
             "acres": "2.4",
@@ -235,6 +236,30 @@
             "water_resources": "Borewell",
             "water_sample_test": "+911234567890",
             "irrigation_status": "completed"
+        }
+    ],
+    "addLandparcel":[
+        {
+            "id":1,
+            "operator_id":"1",
+            "landparcel_name": "Chennaiah Polam Corner Field",
+            "house_no":"302",
+            "village": "Megya Thanda",
+            "district": "Ahmedabad",
+            "state": "Gujarat",
+            "country": "India",
+            "postal_code": "380059",
+            "acres": "10",
+            "area_owned": "500 sqft",
+            "area_leased": "300 sqft",
+            "SyNo": "33/95",            
+            "neighbouring_farm": "North",
+            "distance":"2km",
+            "land_under_cultivation":"Crops",
+            "cropping_systems": "Monocropping",
+            "farming_system": "Cropping",
+            "infrastructure": "Buildings",
+            "water_resources": "Borewell"
         }
     ],
     "events": [
@@ -258,6 +283,7 @@
     "addedEvents": [
         {
             "id": 1,
+            "crop_id":"1",
             "event_group": "Seed and Seedlings",
             "event_name": "Seed",
             "date": "24/04/2022",

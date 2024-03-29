@@ -17,7 +17,8 @@ import AddEvent from './Pages/Events/AddEvent';
 import OwnerProfile from './Pages/LandOwners/Profile';
 import ParcelProfile from './Pages/LandParcels/Profile';
 import AddLandOwner from './Pages/LandOwners/AddLandOwner';
-import AddLandParcel from './Pages/LandParcels/AddLandParcel'
+import AddLandParcel from './Pages/LandParcels/AddLandParcel';
+import AddLandparcel from './Pages/Operator/AddLandparcel'
 import AddCrop from './Pages/Operator/AddCrop';
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
           <Route path='/dashboard' element={<DashBoard/>}/>
 
           <Route path='/landowners' element={<LandOwners />} />
-          <Route path='/landowners/add-landowner/:id' element={<AddLandOwner />} />
+          <Route path='/landowners/add-landowner/:addLandownerId' element={<AddLandOwner />} />
           <Route path='/landowners/:id' element={<OwnerProfile />} />
 
           <Route path='/landparcels' element={<LandParcels />} />
@@ -38,15 +39,15 @@ function App() {
           <Route path='/landparcels/:id' element={<ParcelProfile />} />
 
           <Route path='/operator/:id/profile' element={<OperatorProfile />} />
-          <Route path='/operator/:id/profile/landparcel' element={<Landparcel />} />
-          <Route path='/operator/:id/profile/landparcel/crops/:cropid' element={<Crops />} />
+          <Route path='/operator/:id/profile/landparcel/:landparcelid' element={<Landparcel />} />
+          <Route path='/operator/:id/profile/landparcel/:landparcelid/crops/:cropid' element={<Crops />} />
           <Route path='/operator' element={<Operator />} />
-          <Route path='/add-operator/:id' element={<AddOperator />} />
-          <Route path='/operator/:id/profile/landparcel/add-crops/:cropid' element={<AddCrop/>} />
-          <Route path='/operator/:id/profile/landparcel/add-landparcel/:lanparcelid' element={<AddCrop/>} />
+          <Route path='/add-operator/:addOperatorId' element={<AddOperator />} />
+          <Route path='/operator/:id/profile/landparcel/:landparcelid/crops/add-crops/:cropid' element={<AddCrop/>} />
+          <Route path='/operator/:id/profile/landparcel/:landparcelid/add-landparcel/:landparcelid' element={<AddLandparcel/>} />
 
 
-          <Route path='/events/add-event/:id' element={<AddEvent />} />
+          <Route path='/operator/:id/profile/landparcel/:landparcelid/crops/:cropid/add-event/:eventid' element={<AddEvent />} />
           <Route path='/events' element={<Events />} />
           <Route path='/events/eventDescription/:id' element={<EventDescription />} />
 

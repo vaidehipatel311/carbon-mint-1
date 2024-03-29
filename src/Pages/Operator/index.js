@@ -3,7 +3,7 @@ import './operator.css'
 import { useNavigate } from 'react-router-dom';
 import Header from '../../Components/Header';
 import Sidebar from '../../Components/Sidebar';
-import { Link } from 'react-router-dom'
+import Link from '@mui/material/Link'
 import { Avatar, Button, Typography } from '@mui/material'
 import { Grid } from '@mui/material'
 import Paper from '@mui/material/Paper';
@@ -41,10 +41,14 @@ import * as action_onboard from '../../Services/Onboarding/actions';
 import axios from 'axios';
 import * as urls from '../../Config/urls';
 
-function Operators({ fetchOperator, fetchOnboarding }) {
+function Operators({ fetchOperator }) {
     const navigate = useNavigate()
     const [operator, setOperator] = useState([]);
     const [onboarding, setonboarding] = useState([]);
+    const [pageOperator, setPageOperator] = useState(1);
+    const [pageOnboarding, setPageOnboarding] = useState(1);
+
+
 
 
     useEffect(() => {
@@ -58,7 +62,23 @@ function Operators({ fetchOperator, fetchOnboarding }) {
             .catch(err => console.log(err))
 
     }, []);
+    const itemsPerPageOperator = 1;
+    const startIndexOperator = (pageOperator - 1) * itemsPerPageOperator;
+    const endIndexOperator = pageOperator * itemsPerPageOperator;
+    const paginatedProductOperator = operator.slice(startIndexOperator, endIndexOperator);
 
+    const handleChangePageOperator = (event, newPageOperator) => {
+        setPageOperator(newPageOperator);
+    };
+
+    const itemsPerPageOnboarding = 1;
+    const startIndexOnboarding = (pageOnboarding - 1) * itemsPerPageOnboarding;
+    const endIndexOnboarding = pageOnboarding * itemsPerPageOnboarding;
+    const paginatedProductOnboarding = onboarding.slice(startIndexOnboarding, endIndexOnboarding);
+
+    const handleChangePageOnboarding = (event, newPageOnboarding) => {
+        setPageOnboarding(newPageOnboarding);
+    };
     const handleDelete = async (id) => {
         try {
             const updatedCartjson = [...operator];
@@ -71,14 +91,14 @@ function Operators({ fetchOperator, fetchOnboarding }) {
     };
 
     const handleProfile = (id) => {
-        navigate('/operator/'+`${id}`+'/profile')
+        navigate('/operator/' + `${id}` + '/profile')
     }
     const generateLandOwners = () => {
-        return operator.map((owners, index) => (
+        return paginatedProductOperator.map((owners, index) => (
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex', borderRight: '1px solid #d7d7d7', cursor: 'pointer' }}  onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex', borderRight: '1px solid #d7d7d7', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
                         <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
@@ -92,7 +112,7 @@ function Operators({ fetchOperator, fetchOnboarding }) {
                             <button key={cropIndex} className="grid-button" style={{ marginRight: '5px' }}>{crop.trim()}</button>
                         ))}</TableCell>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>
-                    <Link href={'/add-operator/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
+                        <Link href={'/add-operator/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
                         <DeleteIcon onClick={() => handleDelete(owners.id)} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
 
                 </TableRow>
@@ -100,7 +120,7 @@ function Operators({ fetchOperator, fetchOnboarding }) {
         ));
     }
     const generateOnBoarding = () => {
-        return onboarding.map((owners, index) => (
+        return paginatedProductOnboarding.map((owners, index) => (
             <TableBody>
                 <TableRow className='tr'>
                     <TableCell align='center' sx={{ display: 'flex', borderRight: '1px solid #d7d7d7' }}>
@@ -235,7 +255,11 @@ function Operators({ fetchOperator, fetchOnboarding }) {
                     </Grid>
                     <Grid xs={3} className='pagination'>
                         <Stack spacing={2}>
-                            <Pagination count={3} variant="outlined" />
+                            <Pagination
+                                count={Math.ceil(operator.length / itemsPerPageOperator)}
+                                variant='outlined'
+                                page={pageOperator}
+                                onChange={handleChangePageOperator} />
 
                         </Stack>
                     </Grid>
@@ -263,11 +287,16 @@ function Operators({ fetchOperator, fetchOnboarding }) {
                 </Grid>
                 <Grid container sx={{ mt: 3 }} >
                     <Grid xs={9} className='total-events'>
-                    <Typography sx={{ color: 'gray' }}>{operator.length} {operator.length <= 1 ? 'Operator' : 'Operators'} </Typography>
+                        <Typography sx={{ color: 'gray' }}>{onboarding.length} {onboarding.length <= 1 ? 'Operator' : 'Operators'} </Typography>
                     </Grid>
                     <Grid xs={3} className='pagination'>
                         <Stack spacing={2}>
-                            <Pagination count={3} variant="outlined" />
+                            <Pagination
+                                count={Math.ceil(onboarding.length / itemsPerPageOnboarding)}
+                                variant='outlined'
+                                page={pageOnboarding}
+                                onChange={handleChangePageOnboarding} />
+
 
                         </Stack>
                     </Grid>
@@ -286,7 +315,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     fetchOperator: () => action.fetchOperator(),
-    fetchOnboarding: () => action_onboard.fetchOnboarding()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Operators);

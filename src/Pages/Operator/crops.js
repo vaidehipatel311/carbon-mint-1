@@ -56,6 +56,7 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
     const { cropid } = useParams();
     const { id } = useParams();
     const location = useLocation();
+    const { landparcelid } = useParams();
 
 
     const [addedevents, setaddedEvents] = useState([])
@@ -84,18 +85,20 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
     }, []);
     const generateGridEvents = () => {
         return addedevents.map((event, index) => (
-            <Grid xs={6}>
-                <Link href={'/events/add-event' + `/${event.id}`} sx={{ textDecoration: 'none', color: 'black' }}>
+            (event.crop_id === cropid ? (
+                <Grid xs={6}>
+                    <Link href={'/events/add-event' + `/${event.id}`} sx={{ textDecoration: 'none', color: 'black' }}>
 
-                    <Item className='seed' sx={{ background: '#ebeaea1f' }}>
-                        <div style={{ display: 'grid' }}>
-                            <Typography variant='p' sx={{ fontWeight: 'bold' }}>{event.event_group}</Typography>
-                            <Typography variant='p'>Submited on {event.date}, {event.time}</Typography>
-                        </div>
-                        <DoneIcon sx={{ color: 'green' }} className='doneicon' />
-                    </Item>
-                </Link>
-            </Grid>
+                        <Item className='seed' sx={{ background: '#ebeaea1f' }}>
+                            <div style={{ display: 'grid' }}>
+                                <Typography variant='p' sx={{ fontWeight: 'bold' }}>{event.event_group}</Typography>
+                                <Typography variant='p'>Submited on {event.date}, {event.time}</Typography>
+                            </div>
+                            <DoneIcon sx={{ color: 'green' }} className='doneicon' />
+                        </Item>
+                    </Link>
+                </Grid>
+            ) : (<></>))
         ))
     }
 
@@ -107,7 +110,7 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
                     <img src={Banner_crops_2}></img>
                     <Typography variant='p' className='name'>{crop.crop_name}</Typography>
                     <Typography variant='p' className='address'>{crop.landparcel_name}</Typography>
-                    <Link href={'/operator/profile/landparcel/add-crops/' + `${crop.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer', ml: 20, mt: -8, position: 'absolute' }} /></Link>
+                    <Link href={'/operator/'+`${id}`+'/profile/landparcel/'+`${landparcelid}`+'/crops/add-crops/' + `${crop.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer', ml: 20, mt: -8, position: 'absolute' }} /></Link>
                     <Grid container sx={{ mt: 3, textAlign: 'center' }}>
                         <Grid xs={4}>
                             <Typography variant='p' className='n'><b>{crop.acres}</b></Typography>
@@ -184,8 +187,8 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
 
                             <Link underline='hover' color='inherit' href="/operator">Operator</Link>
                             <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/profile'}>Profile</Link>
-                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/profile/landparcel'}>Landparcel</Link>
-                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/profile/landparcel/crops'}>Crops</Link>
+                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/profile/landparcel/'+`${landparcelid}`}>Landparcel</Link>
+                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/profile/landparcel/'+`${landparcelid}`+'/crops'}>Crops</Link>
 
 
                         </Breadcrumbs>
@@ -194,7 +197,7 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
                         </div>
                     </Grid>
                     <Grid xs={2}>
-                        <Link href='/events/add-event/0' sx={{ textDecoration: 'none' }}>
+                        <Link href={'/operator/'+`${id}`+'/profile/landparcel/'+`${landparcelid}`+'/crops/'+`${cropid}`+'/add-event/0'} sx={{ textDecoration: 'none' }}>
                             <Button variant='contained'
                                 sx={{
 
