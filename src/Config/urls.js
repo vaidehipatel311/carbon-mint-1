@@ -7,3 +7,4 @@ export const operatorUrl = 'http://localhost:5000/operator';
 export const addEventsUrl = 'http://localhost:5000/addedEvents';
 export const cropsUrl = 'http://localhost:5000/crops';
 export const addLandparcelUrl = 'http://localhost:5000/addLandparcel';
+export const mapsUrl = 'http://localhost:5000/maps'

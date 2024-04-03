@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes';
 
 const initialState = {
-    users : []
+    users: []
 }
 
 const loginReducer = (state = initialState, action) => {
@@ -16,6 +16,19 @@ const loginReducer = (state = initialState, action) => {
                 ...state,
                 users: action.payload.userdata
             }
+        case actionTypes.UPDATE_USER_STATUS:
+            const { status } = action.payload;
+            const updatedStatus = state.users.map((user) => {
+                if (user.id === action.payload.id) {
+                    return { ...user, status }
+                }
+                return user
+            })
+            return {
+                ...state,
+                users: updatedStatus
+
+            };
         default:
             return state
     }

@@ -17,15 +17,17 @@ import { useFormik } from 'formik';
 import aadhar_img from '../../assets/images/Operators/aadhar_img.png'
 import { addOperator,editOperator,fetchOperator } from '../../Services/Operator/actions'
 import { connect } from 'react-redux'
-
+import { useAuth } from '../../AuthProvider';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 function AddOperator({ addOperator,editOperator,fetchOperator }) {
     const navigate = useNavigate();
-    const {addOperatorId} = useParams()
+    const {id} = useParams()
     const [selectedFileaadhar, setSelectedFileaadhar] = useState([]);
     const [selectedFilePanCard, setSelectedFilePanCard] = useState([]);
     const [selectedFileLeasedDoc, setSelectedFileLeasedDoc] = useState([]);
     const [draftdata, setDraftData] = useState([])
+    const { currentUser } = useAuth();
 
     const formik = useFormik({
         initialValues: {
@@ -36,6 +38,7 @@ function AddOperator({ addOperator,editOperator,fetchOperator }) {
             leasedFile: null,
             leasedFileName: '',
 
+            operator_id:'',
             name: '',
             family_size: '',
             father_name: '',
@@ -68,12 +71,12 @@ function AddOperator({ addOperator,editOperator,fetchOperator }) {
             crops: ''
         },
         onSubmit: (values) => {
-        if (addOperatorId != '0') {
+        if (id != '0') {
             formik.setValues({
               ...formik.values,
               ...values
             });
-            editOperator(addOperatorId, values)
+            editOperator(id, values)
             navigate('/operator', { state: { showAlert: true } });
           }
           else {
@@ -85,7 +88,7 @@ function AddOperator({ addOperator,editOperator,fetchOperator }) {
             formik.values.panCard_id = pancardFileIDBase64;
             formik.values.leased_doc_id = leasedFileIDBase64;
             addOperator(values);
-            navigate('/operator')
+            navigate('/operator', { state: { showAlert: true } })
           }
         }
         
@@ -94,7 +97,7 @@ function AddOperator({ addOperator,editOperator,fetchOperator }) {
     useEffect(() => {
         fetchOperator()
           .then((data) => {
-            const filteredEvent = data.find(p => p.id === parseInt(addOperatorId, 10))
+            const filteredEvent = data.find(p => p.id === parseInt(id, 10))
             setDraftData(filteredEvent);
             formik.setValues({
               ...formik.values,
@@ -104,10 +107,10 @@ function AddOperator({ addOperator,editOperator,fetchOperator }) {
           .catch(err => console.log(err));
         handleDraftForm();
     
-      }, [addOperatorId]);
+      }, [id]);
 
     const handleDraftForm = () =>{
-        if(addOperatorId != 0){
+        if(id != 0){
             setDraftData(true)
         }
     }
@@ -181,6 +184,8 @@ function AddOperator({ addOperator,editOperator,fetchOperator }) {
 
     return (
         <>
+        {currentUser ? (
+                <>
             <Header />
             <Sidebar />
 
@@ -584,13 +589,16 @@ function AddOperator({ addOperator,editOperator,fetchOperator }) {
                     </Grid>
                 </Grid>
             </Box>
+            </>
+            ) : (
+                <ErrorPage />
+            )}
         </>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        onboarding: state.onboarding.onboarding,
     };
 };
 

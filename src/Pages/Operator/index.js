@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './operator.css'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Header from '../../Components/Header';
 import Sidebar from '../../Components/Sidebar';
 import Link from '@mui/material/Link'
@@ -18,35 +18,57 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
-import MoreVertIcon from '@mui/icons-material/MoreVert'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
-import DeleteIcon from '@mui/icons-material/Delete'
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import Slide from '@mui/material/Slide';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
-import App from '../../App'
 import operators from '../../assets/images/DashBoard/operators.png'
 import noacrs from '../../assets/images/DashBoard/noacrs.png'
 import yields from '../../assets/images/DashBoard/yields.png'
-import crops from '../../assets/images/DashBoard/crops.png'
+import crop from '../../assets/images/DashBoard/crops.png'
 import events from '../../assets/images/DashBoard/events.png'
-import old_man from '../../assets/images/LandOwners/old_man.png'
 import vector from '../../assets/images/LandOwners/vector.png'
 import avatar from '../../assets/images/LandOwners/avatar.png'
 import chart from '../../assets/images/LandOwners/Chart.png'
 
 import * as action from '../../Services/Operator/actions';
-import * as action_onboard from '../../Services/Onboarding/actions';
+import { fetchEvents } from '../../Services/Events/actions'
+import { fetchCrops } from '../../Services/Operator/actions';
 import axios from 'axios';
 import * as urls from '../../Config/urls';
+import { useAuth } from '../../AuthProvider';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
-function Operators({ fetchOperator }) {
-    const navigate = useNavigate()
+const Transition = React.forwardRef(function Transition(
+    props,
+    ref
+) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
+function Operators({ fetchOperator, fetchCrops, fetchEvents }) {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { addOperatorId } = useParams();
     const [operator, setOperator] = useState([]);
     const [onboarding, setonboarding] = useState([]);
     const [pageOperator, setPageOperator] = useState(1);
     const [pageOnboarding, setPageOnboarding] = useState(1);
+    const [crops, setCrops] = useState([]);
+    const [event, setEvent] = useState([]);
+    const [acres, setAcres] = useState(0);
+    const [open, setOpen] = React.useState(false);
+    const [openAlert, setOpenAlert] = useState(false);
+    const { currentUser } = useAuth();
 
 
 
@@ -58,10 +80,47 @@ function Operators({ fetchOperator }) {
                 setOperator(approved);
                 const pending = data.filter((p) => p.status === "Pending");
                 setonboarding(pending);
-            })
-            .catch(err => console.log(err))
 
+                const acresa = approved.reduce((total, owner) => total + owner.acres, 0);
+                const acresp = pending.reduce((total, owner) => total + owner.acres, 0);
+                const total = parseInt(acresa) + parseInt(acresp);
+                setAcres(total);
+            })
+            .catch(err => console.log(err));
+
+        // fetchCrops()
+        //     .then((data) => {
+        //         console.log(data);
+        //         setCrops(data);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching total operator:', error);
+        //     });
+
+
+        // fetchEvents()
+        //     .then((data) => {
+        //         setEvent(data);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching total operator:', error);
+        //     });
+
+    }, [operator]);
+
+    useEffect(() => {
+        if (location.state && location.state.showAlert && !openAlert) {
+            setOpenAlert(true);
+        }
     }, []);
+
+    const handleCloseAlert = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenAlert(false);
+    };
+
     const itemsPerPageOperator = 1;
     const startIndexOperator = (pageOperator - 1) * itemsPerPageOperator;
     const endIndexOperator = pageOperator * itemsPerPageOperator;
@@ -79,6 +138,15 @@ function Operators({ fetchOperator }) {
     const handleChangePageOnboarding = (event, newPageOnboarding) => {
         setPageOnboarding(newPageOnboarding);
     };
+
+    const handleClickOpen = () => {
+        setOpen(true)
+    };
+
+    function handleClose() {
+        setOpen(false);
+    };
+
     const handleDelete = async (id) => {
         try {
             const updatedCartjson = [...operator];
@@ -91,7 +159,7 @@ function Operators({ fetchOperator }) {
     };
 
     const handleProfile = (id) => {
-        navigate('/operator/' + `${id}` + '/profile')
+        navigate('/operator/' + `${id}`)
     }
     const generateLandOwners = () => {
         return paginatedProductOperator.map((owners, index) => (
@@ -112,10 +180,28 @@ function Operators({ fetchOperator }) {
                             <button key={cropIndex} className="grid-button" style={{ marginRight: '5px' }}>{crop.trim()}</button>
                         ))}</TableCell>
                     <TableCell align='center' sx={{ borderRight: '1px solid #d7d7d7' }}>
-                        <Link href={'/add-operator/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
-                        <DeleteIcon onClick={() => handleDelete(owners.id)} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
+                        <Link href={'/operator/add-operator/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
+                        <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
 
                 </TableRow>
+                <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-slide-description">
+                            <b>Are you sure you want to delete ?</b>
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>No</Button>
+                        <Button onClick={() => handleDelete(owners.id)}>Yes</Button>
+                    </DialogActions>
+                </Dialog>
             </TableBody>
         ));
     }
@@ -151,10 +237,17 @@ function Operators({ fetchOperator }) {
 
     return (
         <>
+        {currentUser ? (
+                <>
             <Header />
             <Sidebar />
 
             <Box sx={{ margin: '100px 20px 50px 300px' }}>
+                <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+                    <Alert sx={{ ml: 70, mt: -10 }} onClose={handleCloseAlert} severity="success">
+                        Operator details added successfully
+                    </Alert>
+                </Snackbar>
                 <Grid container className='right-part-landowner'>
                     <Grid xs={6.5}>
                         <Typography className='title' variant='p'>Operators</Typography>
@@ -169,7 +262,7 @@ function Operators({ fetchOperator }) {
 
                     <Grid xs={2}>
 
-                        <Link to='/add-operator/0'>
+                        <Link href='/operator/add-operator/0'>
                             <Button variant='contained' className='add-landowner-btn'>Add Operator</Button>
                         </Link>
                     </Grid>
@@ -180,8 +273,8 @@ function Operators({ fetchOperator }) {
                         <Item className='operators'>
                             <img src={operators}></img>
                             <div className='information'>
-                                <Typography className='operators-text' variant='p'>Land Owners</Typography><br />
-                                <b><Typography variant='p' className='numbers'>359</Typography></b>
+                                <Typography className='operators-text' variant='p'>Operators</Typography><br />
+                                <b><Typography variant='p' className='numbers'>{operator.length + onboarding.length}</Typography></b>
                             </div>
                         </Item>
                     </Grid>
@@ -190,7 +283,7 @@ function Operators({ fetchOperator }) {
                             <img src={noacrs}></img>
                             <div className='information'>
                                 <Typography className='no-acrs-text' variant='p'>No. Acrs</Typography><br />
-                                <b><Typography variant='p' className='numbers'>20583</Typography></b>
+                                <b><Typography variant='p' className='numbers'>{acres}</Typography></b>
                             </div>
                         </Item>
                     </Grid>
@@ -199,17 +292,17 @@ function Operators({ fetchOperator }) {
                         <Item className='yields'>
                             <img src={yields}></img>
                             <div className='information'>
-                                <Typography className='yields-text' variant='p'>Leased(Acres)</Typography><br />
-                                <b><Typography variant='p' className='numbers'>489</Typography></b>
+                                <Typography className='yields-text' variant='p'>Active Crops</Typography><br />
+                                <b><Typography variant='p' className='numbers'>-</Typography></b>
                             </div>
                         </Item>
                     </Grid>
                     <Grid item xs={2.3}>
                         <Item className='crops'>
-                            <img src={crops}></img>
+                            <img src={crop}></img>
                             <div className='information'>
                                 <Typography className='crops-text' variant='p'>Crops</Typography><br />
-                                <b><Typography variant='p' className='numbers'>359</Typography></b>
+                                <b><Typography variant='p' className='numbers'>{crops}</Typography></b>
                             </div>
                             <img src={chart} className='information'></img>
                         </Item>
@@ -219,7 +312,7 @@ function Operators({ fetchOperator }) {
                             <img src={events}></img>
                             <div className='information'>
                                 <Typography className='events-text' variant='p'>Events</Typography><br />
-                                <b><Typography variant='p' className='numbers'>86</Typography></b>
+                                <b><Typography variant='p' className='numbers'>{event}</Typography></b>
                             </div>
                             <img src={vector} className='information'></img>
                         </Item>
@@ -302,6 +395,10 @@ function Operators({ fetchOperator }) {
                     </Grid>
                 </Grid>
             </Box >
+            </>
+            ) : (
+                <ErrorPage />
+            )}
         </>
     )
 }
@@ -309,12 +406,13 @@ function Operators({ fetchOperator }) {
 const mapStateToProps = (state) => {
     return {
         landOwners: state.landowners.landowners,
-        onboarding: state.onboarding.onboarding,
     };
 };
 
 const mapDispatchToProps = {
     fetchOperator: () => action.fetchOperator(),
+    fetchCrops: () => fetchCrops(),
+    fetchEvents: () => fetchEvents()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Operators);

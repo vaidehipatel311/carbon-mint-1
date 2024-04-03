@@ -970,7 +970,7 @@
     .upcoming .days {
         font-size: 14px;
         margin-top: 40px;
-        margin-left: 0px;
+        margin-left: -5px;
     }
 
     .upcoming .numbers {

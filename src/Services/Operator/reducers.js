@@ -4,7 +4,8 @@ import * as actionTypes from './actionTypes';
 const initialState = {
     operator: [],
     crops: [],
-    landparcel: []
+    landparcel: [],
+    maps: []
 }
 
 const operatorReducer = (state = initialState, action) => {
@@ -49,35 +50,6 @@ const operatorReducer = (state = initialState, action) => {
                 crops: [...state.crops, action.payload.operatordata],
             }
 
-
-
-        case actionTypes.FETCH_LANDPARCEL:
-            return {
-                ...state,
-                landparcel: action.payload.addLandparceldata,
-            }
-
-        case actionTypes.EDIT_LANDPARCEL:
-            const updatedLandparcel = state.landparcel.map(lp => {
-                if (lp.id === action.payload.id) {
-                    return { ...lp, ...action.payload.formData };
-                }
-                return lp;
-            });
-            return {
-                ...state,
-                landparcel: updatedLandparcel,
-            };
-
-        case actionTypes.ADD_LANDPARCEL:
-            return {
-                ...state,
-                landparcel: [...state.landparcel, action.payload.landparceldata],
-                crops: state.crops.map(crop => {
-                    return { ...crop, landparcel_id: action.payload.landparceldata.id };
-                })
-            }
-
         case actionTypes.UPDATE_OPERATOR_STATUS:
             const { status } = action.payload;
             const updatedStatus = state.operator.map((owner) => {
@@ -103,6 +75,12 @@ const operatorReducer = (state = initialState, action) => {
                 ...state,
                 operator: updatedOperators,
             };
+
+        case actionTypes.FETCH_MAPS:
+            return {
+                ...state,
+                maps: action.payload.mapsdata,
+            }
         default:
             return state
     }

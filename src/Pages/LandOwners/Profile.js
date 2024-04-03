@@ -18,13 +18,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import avatar from '../../assets/images/Operators/avatar.png'
 import * as action from '../../Services/LandOwners/actions';
 import { connect } from 'react-redux';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useAuth } from '../../AuthProvider';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
     const navigate = useNavigate();
     const { id } = useParams();
     const [landOwners, setlandOwners] = useState([]);
     const [onboarding, setonboarding] = useState([]);
-    const [approved, setApproved] = useState(false)
+    const [approved, setApproved] = useState(false);
+    const { currentUser } = useAuth();
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -61,6 +65,8 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
 
     return (
         <>
+        {currentUser ? (
+                <>
             <Header />
             <Sidebar />
 
@@ -113,7 +119,8 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
                                             anchorOrigin={{
                                                 vertical: 'bottom',
                                                 horizontal: 'right',
-                                            }}></Badge><Avatar className='avatar'><img src={avatar}></img></Avatar><br />
+                                            }}></Badge>
+                                        <Avatar className='avatar_lo'><AccountCircleIcon className='acc'/></Avatar><br />
                                         <Typography variant='p' className='name'>{owners.name}</Typography>
                                         <Typography variant='p' className='id'>{owners.ownerID}</Typography><br />
                                         <Grid container sx={{ mt: 3, textAlign: 'center' }}>
@@ -212,6 +219,10 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
 
 
                 </Box >))}
+                </>
+            ) : (
+                <ErrorPage />
+            )}
         </>
     )
 }

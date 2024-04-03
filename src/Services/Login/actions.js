@@ -31,3 +31,18 @@ export const fetchUser = () => {
         }
     };
 };
+
+export const updateUserStatus = (id, status) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.patch(urls.usersUrl + `/${id}`, {
+                status
+            });
+            console.log(id, status);
+
+            dispatch({ type: actionTypes.UPDATE_USER_STATUS, payload: { id, status } });
+        } catch (error) {
+            console.error('Error updating landowner status:', error);
+        }
+    };
+};

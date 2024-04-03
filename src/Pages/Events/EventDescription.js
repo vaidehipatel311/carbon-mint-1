@@ -12,10 +12,14 @@ import img4 from '../../assets/images/Events/Image4.png'
 import { useParams } from 'react-router-dom';
 import {fetchEvents} from '../../Services/Events/actions';
 import { connect } from 'react-redux';
+import { useAuth } from '../../AuthProvider';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 function EventDescription({fetchEvents}) {
     const {id} = useParams();
     const [event, setEvent] = useState([]);
+    const { currentUser } = useAuth();
+
 
     useEffect(() => {
         fetchEvents()
@@ -28,6 +32,8 @@ function EventDescription({fetchEvents}) {
     }, []);
     return (
         <>
+        {currentUser ? (
+                <>
             <Header />
             <Sidebar />
             <Box sx={{ margin: '100px 20px 50px 300px' }}>
@@ -97,6 +103,10 @@ function EventDescription({fetchEvents}) {
                 </Grid>
 
             </Box >
+            </>
+            ) : (
+                <ErrorPage />
+            )}
         </>
     )
 }

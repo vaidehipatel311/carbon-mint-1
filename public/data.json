@@ -1,7 +1,28 @@
 {
     "users": [
         {
-            "id": 1
+            "id": 1,
+            "name": "Subbarayudu KV",
+            "address": "54b/TS, Main street, Megya Thanda, Rangareddy, Hyderabad, Telangana - 500008",
+            "contact": "919725785783",
+            "email": "kethavathlaxmanna@gmail.com",
+            "status": "Logged_Out"
+        },
+        {
+            "id": 2,
+            "name": "Harsh Patel",
+            "address": "A Avadh Apartment,Thaltej,Ahmedabad,Gujarat",
+            "contact": "919725577787",
+            "email": "harsh@gmail.com",
+            "status": "Logged_Out"
+        },
+        {
+            "id": 3,
+            "name": "Vaidehi Patel",
+            "address": "B Avadh Apartment,Thaltej,Ahmedabad,Gujarat",
+            "contact": "919601810856",
+            "email": "vaidehi@gmail.com",
+            "status": "Logged_Out"
         }
     ],
     "landOwners": [
@@ -39,7 +60,7 @@
             "ownerID": "KFP/MT/01",
             "contact_number_1": "+91 8889998989",
             "house_no": "301",
-            "village": "Gota",
+            "village": "Thaltej",
             "district": "Ahmedabad",
             "state": "Gujarat",
             "country": "India",
@@ -60,38 +81,11 @@
             "status": "Pending"
         }
     ],
-    "onboardingLandOwners": [
-        {
-            "id": 1,
-            "name": "Paragolla Thirupathaiah",
-            "father_name": "Paragolla Narayana",
-            "ownerID": "KFP/MT/01",
-            "contact_number_1": "+91 8889998989",
-            "house_no": "301",
-            "street_name": "S.G. Highway",
-            "village": "Gota",
-            "district": "Ahmedabad",
-            "state": "Gujarat",
-            "country": "India",
-            "postal_code": "380059",
-            "email_id": "abc@gmail.com",
-            "aadhar_no": "111122223333",
-            "unique_id": "W29iamVjdCBGaWxlXQ==",
-            "passbook_refno": "T04130091706",
-            "landparcels": "3",
-            "total_farming_exp_year": "20",
-            "organic_farming_exp_year": "5",
-            "area": "500 sqft",
-            "crops": [
-                "Sorghum",
-                "Finger Millet"
-            ],
-            "status": "Pending"
-        }
-    ],
     "landParcels": [
         {
             "id": 1,
+            "operator_id": "1",
+            "operator_name": "Harsh Patel",
             "SyNo": "33/95",
             "name": "Chennaiah Polam",
             "acres": "10",
@@ -114,45 +108,6 @@
                 "Finger Millet"
             ],
             "status": "Approved"
-        },
-        {
-            "id": 2,
-            "SyNo": "33/95",
-            "name": "Chennaiah Polam",
-            "acres": "10",
-            "house_no": "301",
-            "street_name": "S.G. Highway",
-            "village": "Megya Thanda",
-            "district": "Ahmedabad",
-            "state": "Gujarat",
-            "country": "India",
-            "postal_code": "380059",
-            "contact_number_1": "+91 8889998989",
-            "area_owned": "500 sqft",
-            "area_leased": "300 sqft",
-            "neighbouring_farm": "North",
-            "farming_system": "Cropping",
-            "infrastructure": "Buildings",
-            "water_resources": "Borewell",
-            "crops": [
-                "Sorghum",
-                "Finger Millet"
-            ],
-            "status": "Pending"
-        }
-    ],
-    "onboardingLandParcels": [
-        {
-            "id": 1,
-            "ownerId": "KFP/MT/01 ",
-            "name": "Kethavath Laxmanna",
-            "aadhar": "847064392663",
-            "contactno": "+91 8889998989",
-            "village": "Megya Thanda",
-            "type": "Land Parcel",
-            "status": [
-                "Pending"
-            ]
         }
     ],
     "operator": [
@@ -226,7 +181,7 @@
     "crops": [
         {
             "id": 1,
-            "landparcel_id":"1",
+            "landparcel_id": "1",
             "crop_name": "Sorghum",
             "landparcel_name": "Chennaiah Polam Corner Field",
             "acres": "2.4",
@@ -236,30 +191,6 @@
             "water_resources": "Borewell",
             "water_sample_test": "+911234567890",
             "irrigation_status": "completed"
-        }
-    ],
-    "addLandparcel":[
-        {
-            "id":1,
-            "operator_id":"1",
-            "landparcel_name": "Chennaiah Polam Corner Field",
-            "house_no":"302",
-            "village": "Megya Thanda",
-            "district": "Ahmedabad",
-            "state": "Gujarat",
-            "country": "India",
-            "postal_code": "380059",
-            "acres": "10",
-            "area_owned": "500 sqft",
-            "area_leased": "300 sqft",
-            "SyNo": "33/95",            
-            "neighbouring_farm": "North",
-            "distance":"2km",
-            "land_under_cultivation":"Crops",
-            "cropping_systems": "Monocropping",
-            "farming_system": "Cropping",
-            "infrastructure": "Buildings",
-            "water_resources": "Borewell"
         }
     ],
     "events": [
@@ -283,11 +214,11 @@
     "addedEvents": [
         {
             "id": 1,
-            "crop_id":"1",
+            "crop_id": "1",
             "event_group": "Seed and Seedlings",
             "event_name": "Seed",
-            "date": "24/04/2022",
-            "time": "9:20 am",
+            "date": "",
+            "time": "Wed Mar 27 2024 14:55:52 GMT+0530 (India Standard Time)",
             "seedlings": "On Farm Nursery",
             "nursery": "Wet nursery",
             "nursery_bed": "Raised Bed",
@@ -308,11 +239,117 @@
             "soaking_chemicals": true,
             "soaking_cool_water": false,
             "wetting_drying": true,
-            "others": false,
-            "evidence": [
-                "../../assets/Events/Image1.png",
-                "../../assets/Events/Image2.png"
+            "others": false
+            
+        }
+    ],
+    "maps": [
+        {
+            "id": 1,
+            "api_key": "AIzaSyCg8i1Q_GVHIXChAbBgQerjyUgfNBvRfks",
+            "url": "https://maps.google.com/mapfiles/kml/paddle/wht-circle.png",
+            "text":"Corner Field Sorghum",
+            "center_lat":20.5937,
+            "center_lng":78.9629,
+            "mapTypeId":"satellite",
+            "dots1": [
+                {
+                    "lat": 20.5937,
+                    "lng": 78.9629
+                },
+                {
+                    "lat": 20.5937,
+                    "lng": 80.9629
+                },
+                {
+                    "lat": 21.9937,
+                    "lng": 80.9629
+                },
+                {
+                    "lat": 21.9937,
+                    "lng": 78.9629
+                },
+                {
+                    "lat": 20.5937,
+                    "lng": 78.9629
+                }
+            ],
+            "dots2": [
+                {
+                    "lat": 20.5937,
+                    "lng": 80.9629
+                },
+                {
+                    "lat": 20.5937,
+                    "lng": 82.9629
+                },
+                {
+                    "lat": 21.9937,
+                    "lng": 82.9629
+                },
+                {
+                    "lat": 21.9937,
+                    "lng": 80.9629
+                },
+                {
+                    "lat": 20.5937,
+                    "lng": 80.9629
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "api_key": "AIzaSyCg8i1Q_GVHIXChAbBgQerjyUgfNBvRfks",
+            "url": "https://maps.google.com/mapfiles/kml/paddle/wht-circle.png",
+            "text":"Seed and Seedlings",
+            "center_lat":20.5937,
+            "center_lng":78.9629,
+            "mapTypeId":"satellite",
+            "dots1": [
+                {
+                    "lat": 20.5937,
+                    "lng": 78.9629
+                },
+                {
+                    "lat": 20.5937,
+                    "lng": 80.9629
+                },
+                {
+                    "lat": 21.9937,
+                    "lng": 80.9629
+                },
+                {
+                    "lat": 21.9937,
+                    "lng": 78.9629
+                },
+                {
+                    "lat": 20.5937,
+                    "lng": 78.9629
+                }
+            ],
+            "dots2": [
+                {
+                    "lat": 20.5937,
+                    "lng": 80.9629
+                },
+                {
+                    "lat": 20.5937,
+                    "lng": 82.9629
+                },
+                {
+                    "lat": 21.9937,
+                    "lng": 82.9629
+                },
+                {
+                    "lat": 21.9937,
+                    "lng": 80.9629
+                },
+                {
+                    "lat": 20.5937,
+                    "lng": 80.9629
+                }
             ]
         }
+        
     ]
 }

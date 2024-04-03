@@ -11,18 +11,24 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { useFormik } from 'formik';
 import { connect } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
-import * as action from '../../Services/LandParcels/actions'
+import * as action from '../../Services/LandParcels/actions';
+import { fetchOperator } from '../../Services/Operator/actions';
+import { useAuth } from '../../AuthProvider';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
-
-function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
+function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel, fetchOperator }) {
   const { id } = useParams();
   const [isDraft, setisDraft] = useState(false);
   const [draftdata, setDraftData] = useState([]);
+  const [operator, setOperator] = useState([]);
+  const { currentUser } = useAuth();
+
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-
+      operator_id: '',
+      operator_name: '',
       SyNo: '',
       name: '',
       acres: '',
@@ -43,13 +49,15 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
       crops: '',
       status: 'Pending'
     },
-    // validate,
     onSubmit: (values) => {
       if (id != '0') {
         formik.setValues({
           ...formik.values,
           ...values
         });
+
+
+
         editParcel(id, values)
         navigate('/landparcels', { state: { showAlert: true } });
       }
@@ -70,18 +78,41 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
         });
       })
       .catch(err => console.log(err));
+    fetchOperator()
+      .then((data) => {
+        setOperator(data);
+      })
+      .catch(err => console.log(err));
+
     handleDraftForm();
 
   }, [id]);
+
+  const handleName = (name) => {
+    const selectedOperator = operator.find(op => op.name === name);
+    if (selectedOperator) {
+      formik.setValues({
+        ...formik.values,
+        operator_id: String(selectedOperator.id),
+        operator_name: name
+      });
+    }
+  };
 
   const handleDraftForm = () => {
     if (id != 0) {
       setisDraft(true);
     }
-
   };
+
+  const handleCancel = () => {
+    navigate('/landparcels');
+  };
+
   return (
     <>
+    {currentUser ? (
+                <>
       <Header />
       <Sidebar />
       <Box sx={{ margin: '100px 20px 50px 300px' }}>
@@ -102,22 +133,49 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
           </div>
         </div>
 
-
-
-        <Grid container spacing={2} sx={{ ml:0,mt:3 }}>
+        <Grid container sx={{ mt: 2 }}>
           <Grid xs={6}>
             <div className='first-part'>
               <div className='operator-name'>
+                <Typography variant='p' fontWeight='bold'>Select Operator</Typography>
+
+                <TextField
+                  type='text'
+                  label='Operators List'
+                  name='operator_name'
+                  select
+                  fullWidth
+                  onChange={(e) => { handleName(e.target.value) }}
+                  value={formik.values.operator_name}
+                  defaultValue={isDraft ? draftdata.operator_name : formik.values.operator}>
+                  {operator.map((op, index) => (
+                    <MenuItem key={index} value={op.name}>{op.name}</MenuItem>
+
+                  ))}
+                </TextField>
+
+              </div>
+            </div>
+          </Grid>
+
+        </Grid>
+        {/* {formik.values.operator_name ? ( */}
+        <Grid container spacing={2} sx={{ ml: 0, mt: 3 }}>
+
+          <Grid xs={6}>
+
+            <div className='first-part'>
+              <div className='operator-name'>
+
                 <Typography variant='p' fontWeight='bold'>Land Parcel Details</Typography>
                 <TextField
                   type="text"
                   label=" Land Parcel Name"
                   name="name"
                   required
-                  value={formik.values.name} 
+                  value={formik.values.name}
                   defaultValue={isDraft ? draftdata.name : ""}
                   onChange={formik.handleChange}
-                  error={formik.errors.name ? true : false}
                 />
 
                 <div style={{ gap: '10px', display: 'flex' }}>
@@ -127,8 +185,8 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                     fullWidth
                     label='Survey Number'
                     name='SyNo'
-                    value={formik.values.SyNo} 
-                  defaultValue={isDraft ? draftdata.SyNo : ""}
+                    value={formik.values.SyNo}
+                    defaultValue={isDraft ? draftdata.SyNo : ""}
                     onChange={formik.handleChange}
                   />
 
@@ -138,7 +196,7 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                     fullWidth
                     label='Acres(in acres)'
                     name='acres'
-                    value={formik.values.acres} 
+                    value={formik.values.acres}
                     defaultValue={isDraft ? draftdata.acres : ""}
                     onChange={formik.handleChange} />
 
@@ -153,8 +211,8 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                     required
                     fullWidth
                     name='area_owned'
-                    value={formik.values.area_owned} 
-                  defaultValue={isDraft ? draftdata.area_owned : ""}
+                    value={formik.values.area_owned}
+                    defaultValue={isDraft ? draftdata.area_owned : ""}
                     onChange={formik.handleChange}
                   />
 
@@ -164,8 +222,8 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                     label='Area Leased'
                     required
                     name='area_leased'
-                    value={formik.values.area_leased} 
-                  defaultValue={isDraft ? draftdata.area_leased : ""}
+                    value={formik.values.area_leased}
+                    defaultValue={isDraft ? draftdata.area_leased : ""}
                     onChange={formik.handleChange}
                   />
                 </div>
@@ -174,7 +232,7 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                   label='Crops'
                   name='crops'
                   required
-                  value={formik.values.crops} 
+                  value={formik.values.crops}
                   defaultValue={isDraft ? draftdata.crops : ""}
                   onChange={formik.handleChange}
                   error={formik.errors.crops ? true : false} />
@@ -186,7 +244,7 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                   type='text'
                   label='Contact number'
                   name='contact_number_1'
-                  value={formik.values.contact_number_1} 
+                  value={formik.values.contact_number_1}
                   defaultValue={isDraft ? draftdata.contact_number_1 : ""}
                   onChange={formik.handleChange}
                   required
@@ -199,7 +257,7 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                   required
                   label='Address'
                   name='house_no'
-                  value={formik.values.house_no} 
+                  value={formik.values.house_no}
                   defaultValue={isDraft ? draftdata.house_no : ""}
                   onChange={formik.handleChange}
                 >
@@ -212,8 +270,8 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                     fullWidth
                     label='Village'
                     name='village'
-                    value={formik.values.village} 
-                  defaultValue={isDraft ? draftdata.village : ""}
+                    value={formik.values.village}
+                    defaultValue={isDraft ? draftdata.village : ""}
                     onChange={formik.handleChange}
                     required
                     error={formik.errors.village ? true : false}
@@ -225,8 +283,8 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                     select
                     label='District'
                     name='district'
-                    value={formik.values.district} 
-                  defaultValue={isDraft ? draftdata.district : ""}
+                    value={formik.values.district}
+                    defaultValue={isDraft ? draftdata.district : ""}
                     onChange={formik.handleChange}
                   >
                     <MenuItem value='Hyderabad'>Hyderabad</MenuItem>
@@ -242,8 +300,8 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                     select
                     label='State'
                     name='state'
-                    value={formik.values.state} 
-                  defaultValue={isDraft ? draftdata.state : ""}
+                    value={formik.values.state}
+                    defaultValue={isDraft ? draftdata.state : ""}
                     onChange={formik.handleChange}
                   >
                     <MenuItem value='Telangana'>Telangana</MenuItem>
@@ -256,8 +314,8 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                     select
                     label='Country'
                     name='country'
-                    value={formik.values.country} 
-                  defaultValue={isDraft ? draftdata.country : ""}
+                    value={formik.values.country}
+                    defaultValue={isDraft ? draftdata.country : ""}
                     onChange={formik.handleChange}
                   >
                     <MenuItem value='India'>India</MenuItem>
@@ -279,7 +337,7 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                   label='Neighbouring Farm'
                   name='neighbouring_farm'
                   select
-                  value={formik.values.neighbouring_farm} 
+                  value={formik.values.neighbouring_farm}
                   defaultValue={isDraft ? draftdata.neighbouring_farm : ""}
                   onChange={formik.handleChange} >
                   <MenuItem value='North'>North</MenuItem>
@@ -291,7 +349,7 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                   type='text'
                   label='Farming System'
                   name='farming_system'
-                  value={formik.values.farming_system} 
+                  value={formik.values.farming_system}
                   defaultValue={isDraft ? draftdata.farming_system : ""}
                   onChange={formik.handleChange} >
                   <MenuItem value='Cropping'>Cropping</MenuItem>
@@ -302,7 +360,7 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                   label='Infrastructure'
                   name='infrastructure'
                   required
-                  value={formik.values.infrastructure} 
+                  value={formik.values.infrastructure}
                   defaultValue={isDraft ? draftdata.infrastructure : ""}
                   onChange={formik.handleChange}
                 />
@@ -313,7 +371,7 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
                   select
                   label='Water Resources'
                   name='water_resources'
-                  value={formik.values.water_resources} 
+                  value={formik.values.water_resources}
                   defaultValue={isDraft ? draftdata.water_resources : ""}
                   onChange={formik.handleChange} >
                   <MenuItem value='BoreWell'>BoreWell</MenuItem>
@@ -323,8 +381,8 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
               </div>
 
 
-              <div className='submit-cancel-btn' style={{marginTop:'320px'}}>
-                <Button variant='outlined' className='cancel-btn'>Cancel</Button>
+              <div className='submit-cancel-btn' style={{ marginTop: '320px' }}>
+                <Button variant='outlined' className='cancel-btn' onClick={handleCancel}>Cancel</Button>
                 <Link href='/landowner' sx={{ textDecoration: 'none' }}>
                   <Button variant='contained' className='submit-btn' onClick={formik.handleSubmit}>Submit</Button>
                 </Link>
@@ -332,13 +390,17 @@ function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel }) {
             </div>
           </Grid>
         </Grid>
+        {/* ):(<></>)} */}
       </Box >
+      </>
+            ) : (
+                <ErrorPage />
+            )}
     </>
   )
 }
 const mapStateToProps = (state) => {
   return {
-    // onboarding: state.onboarding.onboarding,
   };
 };
 
@@ -346,6 +408,7 @@ const mapDispatchToProps = {
   addLandParcel: (formik) => action.addLandParcel(formik),
   fetchLandParcel: () => action.fetchLandParcel(),
   editParcel: (id, formik) => action.editParcel(id, formik),
+  fetchOperator: () => fetchOperator()
 
 }
 

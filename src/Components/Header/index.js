@@ -1,7 +1,7 @@
 
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Drawer from '@mui/material/Drawer';
 import BusinessIcon from '@mui/icons-material/Business';
@@ -11,29 +11,32 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import CloseIcon from '@mui/icons-material/Close';
-import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import Box from '@mui/material/Box';
 import { Avatar, Button, Typography, Grid } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 
-
-
 import person from '../../assets/images/DashBoard/person.png';
-import corner_field from '../../assets/images/DashBoard/corner_field.png'
-import operator_approved from '../../assets/images/DashBoard/operator_approved.png'
-import operator_processing from '../../assets/images/DashBoard/operator_processing.png'
-import desha from '../../assets/images/DashBoard/desha.png'
-import lake_edge from '../../assets/images/DashBoard/lake_edge.png'
+import { fetchUser, updateUserStatus } from '../../Services/Login/actions';
+import { connect } from 'react-redux'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useAuth } from '../../AuthProvider';
+import { auth } from '../../firebase';
 
-export default function Header() {
+function Header({ fetchUser, updateUserStatus }) {
     const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false);
     const [profileDrawerOpen, setProfileDrawerOpen] = useState(false);
+    const [user, setUser] = useState([]);
+    const navigate = useNavigate();
+    const { currentUser } = useAuth();
 
+    useEffect(() => {
+        fetchUser().then((data) => {
+            const filteredUser = data.filter((p) => p.status === 'Logged_In');
+            setUser(filteredUser);
+        })
+    }, [user]);
 
     const toggleNotificationDrawer = () => {
         setNotificationDrawerOpen(!notificationDrawerOpen);
@@ -57,14 +60,23 @@ export default function Header() {
         ...theme.typography.body2,
         color: theme.palette.text.secondary,
     }));
-    // window.history.forward();
-    const handleLogout = () => {
-        // window.history.forward();
-    }
 
+    
+
+    const handleLogout = (id, status) => {
+        updateUserStatus(id, status);
+        navigate('/')
+        auth.signOut()
+            .then(() => {
+                console.log('User signed out successfully');
+            })
+            .catch((error) => {
+                console.error('Error signing out:', error);
+            });
+    }
     const notificationDrawer = (
         <Box
-            sx={{ width: 350, marginTop: '70px', padding: '20px' }}
+            sx={{ width: 300, marginTop: '70px', padding: '20px' }}
             role="presentation"
             onClick={closeNotificationDrawer}
             onKeyDown={closeNotificationDrawer}>
@@ -73,9 +85,9 @@ export default function Header() {
             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                 <div className='notification'>
                     <Typography className='title' variant='p'>Notifications</Typography><br />
-                    <Button sx={{ color: 'gray', ml: 22 }} onClick={closeNotificationDrawer}><CloseIcon /></Button>
+                    <Button sx={{ color: 'gray', ml: 20 }} onClick={closeNotificationDrawer}><CloseIcon /></Button>
                 </div>
-                <Grid container spacing={2}>
+                {/* <Grid container spacing={2}>
                     
                         <Grid xs={12}>
                             <Item className='corner-field'>
@@ -138,71 +150,72 @@ export default function Header() {
                             </div>
                         </Item>
                     </Grid>
-                </Grid>
+                </Grid> */}
             </div>
         </Box>
     );
 
     const profileDrawer = (
+        user.map((user, index) => (
+            <Box
+                sx={{ marginTop: '70px', padding: '20px' }}
+                className='drawer'
+                role="presentation"
+                onClick={closeProfileDrawer}
+                onKeyDown={closeProfileDrawer}>
 
-        <Box
-            sx={{ marginTop: '70px', padding: '20px' }}
-            className='drawer'
-            role="presentation"
-            onClick={closeProfileDrawer}
-            onKeyDown={closeProfileDrawer}>
-
-            <Button sx={{ color: 'gray' }} onClick={closeProfileDrawer}><CloseIcon className='close-icon' /></Button>
-            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-                <Avatar sx={{ width: '70px', height: '70px' }} className='user-image-drawer'><img src={person}></img></Avatar>
-                <div className='user-in-drawer'>
-                    <Typography className='user-name' variant='p'>Subbarayudu KV</Typography><br />
-                    <Typography className='agent' variant='p'>Agent</Typography>
-                </div>
-
-            </div>
-            <hr />
-            <div className='contact'>
-                <Typography className='title' variant='p'>Contact</Typography>
-                <div className='address-details'>
-                    <Button sx={{ color: 'black' }}><BusinessIcon /></Button>
-                    <div>
-                        <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Address</Typography><br />
-                        <Typography variant='p' sx={{ color: 'gray' }}>H.no: 54b/TS, Main street, Megya Thanda, Rangareddy, Hyderabad,  Telangana - 500008</Typography>
+                <Button sx={{ color: 'gray' }} onClick={closeProfileDrawer}><CloseIcon className='close-icon' /></Button>
+                <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                    <Avatar sx={{ width: '70px', height: '70px' }} className='user-image-drawer'><AccountCircleIcon sx={{ width: '70px', height: '70px' }} /></Avatar>
+                    <div className='user-in-drawer'>
+                        <Typography className='user-name' variant='p'>{user.name}</Typography><br />
+                        <Typography className='agent' variant='p'>Agent</Typography>
                     </div>
-                </div>
-                <div className='contact-details'>
-                    <Button sx={{ color: 'black' }}><SmartphoneIcon /></Button>
-                    <div>
-                        <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Contact</Typography><br />
-                        <Typography variant='p' sx={{ color: 'gray' }}>+91 888 999 8989</Typography>
-                    </div>
-                </div>
-                <div className='email-details'>
-                    <Button sx={{ color: 'black' }}><AlternateEmailIcon /></Button>
-                    <div>
-                        <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Mail</Typography><br />
-                        <Typography variant='p' sx={{ color: 'gray' }}>kethavathlaxmanna@gmail.com</Typography>
-                    </div>
-                </div>
-            </div>
-            <hr />
 
-            <div className='actions'>
-                <Typography variant='p' className='title'>Actions</Typography>
-                <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
-                    <div className='logout-details'>
-                        <Button sx={{ color: 'black' }}><LogoutIcon /></Button>
+                </div>
+                <hr />
+                <div className='contact'>
+                    <Typography className='title' variant='p'>Contact</Typography>
+                    <div className='address-details'>
+                        <Button sx={{ color: 'black' }}><BusinessIcon /></Button>
                         <div>
-                            <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Logout</Typography><br />
-                            <Typography variant='p' sx={{ color: 'gray' }}>847064392663</Typography>
+                            <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Address</Typography><br />
+                            <Typography variant='p' sx={{ color: 'gray' }}>{user.address}</Typography>
                         </div>
-                        <Button sx={{ color: 'black' }} onClick={handleLogout}><ArrowForwardIosIcon className='arrowforward-icon'/></Button>
                     </div>
-                </Link>
-            </div>
+                    <div className='contact-details'>
+                        <Button sx={{ color: 'black' }}><SmartphoneIcon /></Button>
+                        <div>
+                            <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Contact</Typography><br />
+                            <Typography variant='p' sx={{ color: 'gray' }}>{user.contact}</Typography>
+                        </div>
+                    </div>
+                    <div className='email-details'>
+                        <Button sx={{ color: 'black' }}><AlternateEmailIcon /></Button>
+                        <div>
+                            <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Mail</Typography><br />
+                            <Typography variant='p' sx={{ color: 'gray' }}>{user.email}</Typography>
+                        </div>
+                    </div>
+                </div>
+                <hr />
 
-        </Box>
+                <div className='actions'>
+                    <Typography variant='p' className='title'>Actions</Typography>
+                    <Link to='/' style={{ textDecoration: 'none', color: 'black' }}>
+                        <div className='logout-details'>
+                            <Button sx={{ color: 'black' }}><LogoutIcon /></Button>
+                            <div>
+                                <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Logout</Typography><br />
+                                <Typography variant='p' sx={{ color: 'gray' }}>{user.contact}</Typography>
+                            </div>
+                            <Button sx={{ color: 'black' }} onClick={() => handleLogout(user.id, "Logged_Out")}><ArrowForwardIosIcon className='arrowforward-icon' /></Button>
+                        </div>
+                    </Link>
+                </div>
+
+            </Box>
+        ))
     );
 
     return (
@@ -239,14 +252,15 @@ export default function Header() {
                             >
                                 {notificationDrawer}
                             </Drawer>
-
-                            <div style={{ display: 'flex', cursor: 'pointer' }} onClick={toggleProfileDrawer}>
-                                <Avatar sx={{ ml: 1, border: profileDrawerOpen ? '3px solid green' : 'none' }}><img className='user-image' src={person} alt="Person" /></Avatar>
-                                <div className='user'>
-                                    <Typography className='user-name' variant='p'>Subbarayudu KV</Typography><br />
-                                    <Typography className='agent' variant='p'>Agent</Typography>
+                            {user.map((user, index) => (
+                                <div style={{ display: 'flex', cursor: 'pointer' }} onClick={toggleProfileDrawer}>
+                                    <Avatar sx={{ ml: 1, border: profileDrawerOpen ? '3px solid green' : 'none' }}><AccountCircleIcon /></Avatar>
+                                    <div className='user'>
+                                        <Typography className='user-name' variant='p'>{user.name}</Typography><br />
+                                        <Typography className='agent' variant='p'>Agent</Typography>
+                                    </div>
                                 </div>
-                            </div>
+                            ))}
                             <Drawer
                                 anchor="right"
                                 open={profileDrawerOpen}
@@ -265,3 +279,15 @@ export default function Header() {
         </>
     );
 }
+const mapStateToProps = (state) => {
+    return {
+        login: state.login.users
+    }
+}
+
+const mapDispatchToProps = {
+    fetchUser: () => fetchUser(),
+    updateUserStatus: (id, status) => updateUserStatus(id, status),
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

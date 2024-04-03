@@ -8,6 +8,8 @@ import { Button, MenuItem, TextField } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
+import { useAuth } from '../../AuthProvider';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 import { connect } from 'react-redux'
 import { addCrops, editCrop, fetchCrops } from '../../Services/Operator/actions'
@@ -21,6 +23,8 @@ function AddCrop({ addCrops, editCrop, fetchCrops }) {
     const [isDraft, setisDraft] = useState(false);
     const [draftdata, setDraftData] = useState([]);
     const navigate = useNavigate();
+    const { currentUser } = useAuth();
+
     const formik = useFormik({
         initialValues: {
             crop_name: '',
@@ -40,11 +44,11 @@ function AddCrop({ addCrops, editCrop, fetchCrops }) {
                     ...values
                 });
                 editCrop(id, values)
-                navigate('/operator/' + `${id}` + '/profile/landparcel/'+`${cropid}`+'/crops/' + `${cropid}`, { state: { showAlert: true } })
+                navigate('/operator/' + `${id}` + '/landparcel/'+`${cropid}`+'/crops/' + `${cropid}`, { state: { showAlert: true } })
             }
             else {
                 addCrops(values,landparcelid);
-                navigate('/operator/'+`${id}`+'/profile/landparcel/'+`${landparcelid}`, { state: { showAlert: true } })
+                navigate('/operator/'+`${id}`+'/landparcel/'+`${landparcelid}`, { state: { showAlert: true } })
 
             }
         },
@@ -72,6 +76,8 @@ function AddCrop({ addCrops, editCrop, fetchCrops }) {
     };
     return (
         <>
+        {currentUser ? (
+                <>
             <Header />
             <Sidebar />
             <Box sx={{ margin: '100px 30px 50px 300px' }}>
@@ -82,7 +88,7 @@ function AddCrop({ addCrops, editCrop, fetchCrops }) {
                         separator={<NavigateNextIcon fontSize="small" />}
                         aria-label="breadcrumb">
 
-                        <Link href={'/operator/'+`${id}`+'/profile/landparcel'+`${landparcelid}`} color='inherit' underline='hover'>
+                        <Link href={'/operator/'+`${id}`+'/landparcel/'+`${landparcelid}`} color='inherit' underline='hover'>
                             Land Parcels
                         </Link>
 
@@ -206,6 +212,10 @@ function AddCrop({ addCrops, editCrop, fetchCrops }) {
                 </div>
 
             </Box>
+            </>
+            ) : (
+                <ErrorPage />
+            )}
         </>
     )
 }

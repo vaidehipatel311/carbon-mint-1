@@ -1,322 +1,408 @@
+import React, { useState, useEffect } from 'react';
 import Header from '../../Components/Header'
 import Sidebar from '../../Components/Sidebar'
+import Box from '@mui/material/Box'
+import '../Operator/addoperator.css'
 import Link from '@mui/material/Link';
-import { Box, Grid, Typography, Breadcrumbs } from '@mui/material'
-import React, { useState, useEffect } from 'react';
-import './addoperator.css'
 import { Button, MenuItem, TextField } from '@mui/material'
-import { useNavigate, useParams } from 'react-router-dom';
-import { useFormik } from 'formik';
+import { Grid } from '@mui/material'
+import { Breadcrumbs, Typography } from '@mui/material'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
-
+import { useFormik } from 'formik';
 import { connect } from 'react-redux'
-import { addLandparcel, editLandparcel, fetchLandparcels } from '../../Services/Operator/actions'
+import { useNavigate, useParams } from 'react-router-dom';
+import * as action from '../../Services/LandParcels/actions';
+import { fetchOperator } from '../../Services/Operator/actions';
+import { useAuth } from '../../AuthProvider';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
-function AddLandparcel({ addLandparcel, editLandparcel, fetchLandparcels }) {
-    const { landparcelid } = useParams();
-    const { id } = useParams();
+function AddLandParcel({ addLandParcel, fetchLandParcel, editParcel, fetchOperator }) {
+  const { id } = useParams();
+  const {landparcelid} = useParams();
+  const [isDraft, setisDraft] = useState(false);
+  const [draftdata, setDraftData] = useState([]);
+  const [operator, setOperator] = useState([]);
+  const { currentUser } = useAuth();
 
-    const [isDraft, setisDraft] = useState(false);
-    const [draftdata, setDraftData] = useState([]);
-    const navigate = useNavigate();
-    const formik = useFormik({
-        initialValues: {
-            landparcel_name: '',
-            house_no:'',
-            village: '',
-            district: '',
-            state: '',
-            country: '',
-            postal_code: '',
-            acres: '',
-            area_owned: '',
-            area_leased: '',
-            SyNo: '',
-            neighbouring_farm: '',
-            distance: '',
-            land_under_cultivation: '',
-            cropping_systems: '',
-            farming_system: '',
-            infrastructure: '',
-            water_resources: ''
-        },
-        onSubmit: (values) => {
-            if (landparcelid != '0') {
-                formik.setValues({
-                    ...formik.values,
-                    ...values
-                });
-                editLandparcel(id, values)
-                navigate('/operator/' + `${id}` + '/profile/landparcel/' + `${landparcelid}`, { state: { showAlert: true } })
-            }
-            else {
-                addLandparcel(values,id);
-                navigate('/operator/' + `${id}` + '/profile', { state: { showAlert: true } })
 
-            }
-        },
-    });
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchLandparcels()
-            .then((data) => {
-                const filteredEvent = data.find(p => p.id === parseInt(landparcelid, 10))
-                setDraftData(filteredEvent);
-                formik.setValues({
-                    ...formik.values,
-                    ...filteredEvent
-                });
-            })
-            .catch(err => console.log(err));
-        handleDraftForm();
+  const formik = useFormik({
+    initialValues: {
+      operator_id:'',
+      operator_name:'',
+      SyNo: '',
+      name: '',
+      acres: '',
+      house_no: '',
+      street_name: '',
+      village: '',
+      district: '',
+      state: '',
+      country: '',
+      postal_code: '',
+      contact_number_1: '',
+      area_owned: '',
+      area_leased: '',
+      neighbouring_farm: '',
+      farming_system: '',
+      infrastructure: '',
+      water_resources: '',
+      crops: '',
+      status: 'Pending'
+    },
+    onSubmit: (values) => {
+      if (landparcelid != '0') {
+        formik.setValues({
+          ...formik.values,
+          ...values
+        });
+        editParcel(landparcelid, values)
+        navigate('/operator/'+`${id}`, { state: { showAlert: true } });
+      }
+      else {
+        addLandParcel(values);
+        navigate('/operator/'+`${id}`, { state: { showAlert: true } })
+      }
+    },
+  });
+  useEffect(() => {
+    fetchLandParcel()
+      .then((data) => {
+        const filteredEvent = data.find(p => p.id === parseInt(landparcelid, 10))
+        setDraftData(filteredEvent);
+        formik.setValues({
+          ...formik.values,
+          ...filteredEvent
+        });
+      })
+      .catch(err => console.log(err));
+    fetchOperator()
+      .then((data) => {
+        setOperator(data);
+      })
+      .catch(err => console.log(err));
 
-    }, [id]);
-    const handleDraftForm = () => {
-        if (landparcelid != 0) {
-            setisDraft(true);
-        }
+    handleDraftForm();
 
-    };
-    return (
-        <>
-            <Header />
-            <Sidebar />
-            <Box sx={{ margin: '100px 30px 50px 300px' }}>
-                <div className='path'>
-                    <Breadcrumbs sx={{
-                        textDecoration: 'none'
-                    }}
-                        separator={<NavigateNextIcon fontSize="small" />}
-                        aria-label="breadcrumb">
+  }, [landparcelid]);
 
-                        <Link href={'/operator/' + `${id}` + '/profile'} color='inherit' underline='hover'>
-                            Profile
-                        </Link>
+  const handleName = (name) => {
+    const selectedOperator = operator.find(op => op.name === name);
+    if (selectedOperator) {
+      formik.setValues({
+        ...formik.values,
+        operator_id: String(selectedOperator.id),
+        operator_name: name
+      });
+    }
+  };
 
-                    </Breadcrumbs>
-                    <div className='create-operator-title'>
-                        <Typography variant='p' className='title'>Add Land Parcel</Typography>
-                    </div>
+  const handleDraftForm = () => {
+    if (landparcelid != 0) {
+      setisDraft(true);
+    }
+
+  };
+  return (
+    <>
+    {currentUser ? (
+                <>
+      <Header />
+      <Sidebar />
+      <Box sx={{ margin: '100px 20px 50px 300px' }}>
+        <div className='path'>
+          <Breadcrumbs sx={{
+            textDecoration: 'none'
+          }}
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb">
+
+            <Link href={"/operator/"+`${id}`} color='inherit' underline='hover'>
+              Land Parcels
+            </Link>
+
+          </Breadcrumbs>
+          <div className='create-operator-title'>
+            <Typography variant='p' className='title'>Add Land Parcel</Typography>
+          </div>
+        </div>
+
+        <Grid container sx={{ mt: 2 }}>
+          <Grid xs={6}>
+            <div className='first-part'>
+              <div className='operator-name'>
+                <Typography variant='p' fontWeight='bold'>Select Operator</Typography>
+                <TextField
+                  type='text'
+                  label='Operators List'
+                  name='operator_name'
+                  select
+                  fullWidth
+                  onChange={(e) => { handleName(e.target.value) }}
+                  value={formik.values.operator_name}
+                  defaultValue={isDraft ? draftdata.operator_name : formik.values.operator}>
+                  {operator.map((op, index) => (
+                    <MenuItem key={index} value={op.name}>{op.name}</MenuItem>
+
+                  ))}
+                </TextField>
+              </div>
+            </div>
+          </Grid>
+
+        </Grid>
+        {/* {formik.values.operator_name ? ( */}
+        <Grid container spacing={2} sx={{ ml: 0, mt: 3 }}>
+
+          <Grid xs={6}>
+
+            <div className='first-part'>
+              <div className='operator-name'>
+
+                <Typography variant='p' fontWeight='bold'>Land Parcel Details</Typography>
+                <TextField
+                  type="text"
+                  label=" Land Parcel Name"
+                  name="name"
+                  required
+                  value={formik.values.name}
+                  defaultValue={isDraft ? draftdata.name : ""}
+                  onChange={formik.handleChange}
+                />
+
+                <div style={{ gap: '10px', display: 'flex' }}>
+                  <TextField
+                    type='text'
+                    required
+                    fullWidth
+                    label='Survey Number'
+                    name='SyNo'
+                    value={formik.values.SyNo}
+                    defaultValue={isDraft ? draftdata.SyNo : ""}
+                    onChange={formik.handleChange}
+                  />
+
+                  <TextField
+                    type='text'
+                    required
+                    fullWidth
+                    label='Acres(in acres)'
+                    name='acres'
+                    value={formik.values.acres}
+                    defaultValue={isDraft ? draftdata.acres : ""}
+                    onChange={formik.handleChange} />
+
+
+                </div>
+                <div style={{ gap: '10px', display: 'flex' }}>
+
+
+                  <TextField
+                    type='text'
+                    label='Area Owned'
+                    required
+                    fullWidth
+                    name='area_owned'
+                    value={formik.values.area_owned}
+                    defaultValue={isDraft ? draftdata.area_owned : ""}
+                    onChange={formik.handleChange}
+                  />
+
+                  <TextField
+                    type='text'
+                    fullWidth
+                    label='Area Leased'
+                    required
+                    name='area_leased'
+                    value={formik.values.area_leased}
+                    defaultValue={isDraft ? draftdata.area_leased : ""}
+                    onChange={formik.handleChange}
+                  />
+                </div>
+                <TextField
+                  type='text'
+                  label='Crops'
+                  name='crops'
+                  required
+                  value={formik.values.crops}
+                  defaultValue={isDraft ? draftdata.crops : ""}
+                  onChange={formik.handleChange}
+                  error={formik.errors.crops ? true : false} />
+              </div>
+
+              <div className='address-contact-details'>
+                <Typography variant='p' fontWeight='bold'>Address & Contact Details of Owner</Typography>
+                <TextField
+                  type='text'
+                  label='Contact number'
+                  name='contact_number_1'
+                  value={formik.values.contact_number_1}
+                  defaultValue={isDraft ? draftdata.contact_number_1 : ""}
+                  onChange={formik.handleChange}
+                  required
+                  error={formik.errors.contact_number_1 ? true : false}
+                  helperText={formik.errors.contact_number_1}
+                />
+
+                <TextField
+                  type='text'
+                  required
+                  label='Address'
+                  name='house_no'
+                  value={formik.values.house_no}
+                  defaultValue={isDraft ? draftdata.house_no : ""}
+                  onChange={formik.handleChange}
+                >
+                </TextField>
+
+
+                <div style={{ gap: '10px', display: 'flex' }}>
+                  <TextField
+                    type='text'
+                    fullWidth
+                    label='Village'
+                    name='village'
+                    value={formik.values.village}
+                    defaultValue={isDraft ? draftdata.village : ""}
+                    onChange={formik.handleChange}
+                    required
+                    error={formik.errors.village ? true : false}
+                  />
+                  <TextField
+                    fullWidth
+                    required
+                    type='text'
+                    select
+                    label='District'
+                    name='district'
+                    value={formik.values.district}
+                    defaultValue={isDraft ? draftdata.district : ""}
+                    onChange={formik.handleChange}
+                  >
+                    <MenuItem value='Hyderabad'>Hyderabad</MenuItem>
+                    <MenuItem value='Ahmedabad'>Ahmedabad</MenuItem>
+                  </TextField>
+
+                </div>
+                <div style={{ gap: '10px', display: 'flex' }}>
+                  <TextField
+                    fullWidth
+                    required
+                    type='text'
+                    select
+                    label='State'
+                    name='state'
+                    value={formik.values.state}
+                    defaultValue={isDraft ? draftdata.state : ""}
+                    onChange={formik.handleChange}
+                  >
+                    <MenuItem value='Telangana'>Telangana</MenuItem>
+                    <MenuItem value='Gujarat'>Gujarat</MenuItem>
+                  </TextField>
+                  <TextField
+                    fullWidth
+                    required
+                    type='text'
+                    select
+                    label='Country'
+                    name='country'
+                    value={formik.values.country}
+                    defaultValue={isDraft ? draftdata.country : ""}
+                    onChange={formik.handleChange}
+                  >
+                    <MenuItem value='India'>India</MenuItem>
+                    <MenuItem value='U.S.A'>U.S.A</MenuItem>
+                  </TextField>
                 </div>
 
 
-                <Grid container spacing={2} sx={{ mt: 3, ml: 1 }}>
-                    <Grid xs={6}>
-                        <div className='first-part'>
-                            <div className='operator-name'>
-                                <Typography variant='p' fontWeight='bold'>Crop name</Typography>
+              </div>
 
-                                <TextField
-                                    label='Landparcel name'
-                                    type='text'
-                                    select
-                                    name='landparcel_name'
-                                    onChange={formik.handleChange}
-                                value={formik.values.landparcel_name}
-                                defaultValue={isDraft ? draftdata.landparcel_name : ""}
-                                >
-                                    <MenuItem value='Chennaiah Polam Corner Field'>Chennaiah Polam Corner Field</MenuItem>
-                                    <MenuItem value='Chennaiah Polam Lake Edge Field'>Chennaiah Polam Lake Edge Field</MenuItem></TextField>
-                                <TextField
-                                    label='Acres'
-                                    type='number'
-                                    name='acres'
-                                    onChange={formik.handleChange}
-                                value={formik.values.acres}
-                                defaultValue={isDraft ? draftdata.acres : ""}
-                                />
-                                <TextField
-                                    label='Area Owned'
-                                    type='number'
-                                    name='area_owned'
-                                    onChange={formik.handleChange}
-                                value={formik.values.area_owned}
-                                defaultValue={isDraft ? draftdata.area_owned : ""}
-                                />
-                                <TextField
-                                    label='Area Leased'
-                                    type='text'
-                                    name='area_leased'
-                                    onChange={formik.handleChange}
-                                value={formik.values.area_leased}
-                                defaultValue={isDraft ? draftdata.area_leased : ""}
-                                />
+            </div>
+          </Grid>
+          <Grid xs={6}>
+            <div className='second-part'>
+              <div className='farming-experience' style={{ marginTop: "0px" }}>
+                <Typography variant='p' fontWeight='bold'>Additional Details</Typography>
+                <TextField
+                  type='text'
+                  label='Neighbouring Farm'
+                  name='neighbouring_farm'
+                  select
+                  value={formik.values.neighbouring_farm}
+                  defaultValue={isDraft ? draftdata.neighbouring_farm : ""}
+                  onChange={formik.handleChange} >
+                  <MenuItem value='North'>North</MenuItem>
+                  <MenuItem value='South'>South</MenuItem>
+                  <MenuItem value='East'>East</MenuItem>
+                  <MenuItem value='West'>West</MenuItem>
+                </TextField>
+                <TextField
+                  type='text'
+                  label='Farming System'
+                  name='farming_system'
+                  value={formik.values.farming_system}
+                  defaultValue={isDraft ? draftdata.farming_system : ""}
+                  onChange={formik.handleChange} >
+                  <MenuItem value='Cropping'>Cropping</MenuItem>
+                  <MenuItem value='Organic'>Organic</MenuItem>
+                </TextField>
+                <TextField
+                  type='text'
+                  label='Infrastructure'
+                  name='infrastructure'
+                  required
+                  value={formik.values.infrastructure}
+                  defaultValue={isDraft ? draftdata.infrastructure : ""}
+                  onChange={formik.handleChange}
+                />
 
-                                <Typography variant='p' fontWeight='bold'>Address Details</Typography>
-                                <TextField
-                                    label='Address'
-                                    type='text'
-                                    name='house_no'
-                                    onChange={formik.handleChange}
-                                value={formik.values.house_no}
-                                defaultValue={isDraft ? draftdata.house_no : ""}
-                                />
-                                <div style={{ gap: '10px', display: 'flex' }}>
-                                    <TextField
-                                        type='text'
-                                        fullWidth
-                                        label='Village'
-                                        name='village'
-                                        value={formik.values.village}
-                                        defaultValue={isDraft ? draftdata.village : ""}
-                                        onChange={formik.handleChange}
-                                    />
-                                    <TextField
-                                        fullWidth
-                                        type='text'
-                                        select
-                                        label='District'
-                                        name='district'
-                                        value={formik.values.district}
-                                        defaultValue={isDraft ? draftdata.district : ""}
-                                        onChange={formik.handleChange}
-                                    >
-                                        <MenuItem value='Hyderabad'>Hyderabad</MenuItem>
-                                        <MenuItem value='Ahmedabad'>Ahmedabad</MenuItem>
-                                    </TextField>
-                                </div>
-                                <div style={{ gap: '10px', display: 'flex' }}>
-                                    <TextField
-                                        fullWidth
-                                        type='text'
-                                        select
-                                        label='State'
-                                        name='state'
-                                        value={formik.values.state}
-                                        defaultValue={isDraft ? draftdata.state : ""}
-                                        onChange={formik.handleChange}
-                                    >
-                                        <MenuItem value='Telangana'>Telangana</MenuItem>
-                                        <MenuItem value='Gujarat'>Gujarat</MenuItem>
-                                    </TextField>
-                                    <TextField
-                                        fullWidth
-                                        type='text'
-                                        select
-                                        label='Country'
-                                        name='country'
-                                        value={formik.values.country}
-                                        defaultValue={isDraft ? draftdata.country : ""}
-                                        onChange={formik.handleChange}
-                                    >
-                                        <MenuItem value='India'>India</MenuItem>
-                                        <MenuItem value='U.S.A'>U.S.A</MenuItem>
-                                    </TextField>
-                                </div>
+                <TextField
+                  type='text'
+                  required
+                  select
+                  label='Water Resources'
+                  name='water_resources'
+                  value={formik.values.water_resources}
+                  defaultValue={isDraft ? draftdata.water_resources : ""}
+                  onChange={formik.handleChange} >
+                  <MenuItem value='BoreWell'>BoreWell</MenuItem>
+                  <MenuItem value='River'>River</MenuItem>
+                </TextField>
 
-                            </div>
+              </div>
 
-                        </div>
-                    </Grid>
-                    <Grid xs={6}>
-                        <div className='first-part'>
-                            <div className='operator-name'>
-                                <Typography variant='p' fontWeight='bold'>Details</Typography>
-                                <TextField
-                                    label='Syno.'
-                                    type='text'
-                                    name='SyNo'
-                                    onChange={formik.handleChange}
-                                value={formik.values.SyNo}
-                                defaultValue={isDraft ? draftdata.SyNo : ""}
-                                />
-                                    
-                                <TextField
-                                    label='Neighbouring Farm'
-                                    type='text'
-                                    name='neighbouring_farm'
-                                    onChange={formik.handleChange}
-                                    helperText='Enter Directions'
-                                value={formik.values.neighbouring_farm}
-                                defaultValue={isDraft ? draftdata.neighbouring_farm : ""}
-                                />
-                                <TextField
-                                    label='Distance'
-                                    type='text'
-                                    name='distance'
-                                    onChange={formik.handleChange}
-                                value={formik.values.distance}
-                                defaultValue={isDraft ? draftdata.distance : ""}
-                                />
-                                <TextField
-                                    label='Land Under Cultivation'
-                                    type='text'
-                                    name='land_under_cultivation'
-                                    onChange={formik.handleChange}
-                                value={formik.values.land_under_cultivation}
-                                defaultValue={isDraft ? draftdata.land_under_cultivation : ""}
-                                />
-                                <TextField
-                                    label='Cropping Systems'
-                                    type='text'
-                                    name='cropping_systems'
-                                    onChange={formik.handleChange}
-                                value={formik.values.cropping_systems}
-                                defaultValue={isDraft ? draftdata.cropping_systems : ""}
-                                >
-                                    <MenuItem value='Monocropping'>Monocropping</MenuItem>
-                                    <MenuItem value='Other'>Other</MenuItem></TextField>
-                                <TextField
-                                    label='Farming Systems'
-                                    type='text'
-                                    name='farming_system'
-                                    onChange={formik.handleChange}
-                                value={formik.values.farming_system}
-                                defaultValue={isDraft ? draftdata.farming_system : ""}
-                                >
-                                    <MenuItem value='Cropping'>Cropping</MenuItem>
-                                    <MenuItem value='Other'>Other</MenuItem></TextField>
-                                <TextField
-                                    label='Infrastructure'
-                                    type='text'
-                                    name='infrastructure'
-                                    onChange={formik.handleChange}
-                                value={formik.values.infrastructure}
-                                defaultValue={isDraft ? draftdata.infrastructure : ""}
-                                >
-                                    <MenuItem value='Buildings'>Buildings</MenuItem>
-                                    <MenuItem value='Other'>Other</MenuItem></TextField>
-                                <TextField
-                                    label='Water Resources'
-                                    type='text'
-                                    name='water_resources'
-                                    onChange={formik.handleChange}
-                                value={formik.values.water_resources}
-                                defaultValue={isDraft ? draftdata.water_resources : ""}
-                                >
-                                    <MenuItem value='Buildings'>Buildings</MenuItem>
-                                    <MenuItem value='Other'>Other</MenuItem></TextField>
 
-                            </div>
-                        </div>
-                    </Grid>
-                </Grid>
-                <div className='myDiv formVisibleTrue'>
-
-                    <Button variant='outlined' className='three-buttons' sx={{
-                        mr: 1, color: "#2B9348", border: "2px solid #2B9348",
-                        "&:hover": { color: '#2B9348', border: "2px solid #2B9348", }
-                    }} onClick={formik.handleReset}><Typography>Discard</Typography></Button>
-
-                    <Button variant='contained' className='three-buttons' sx={{ backgroundColor: '#8CD867', color: "black", border: "2px solid #2B9348" }} onClick={formik.handleSubmit}>Submit</Button>
-                </div>
-
-            </Box>
-        </>
-    )
+              <div className='submit-cancel-btn' style={{ marginTop: '320px' }}>
+                <Button variant='outlined' className='cancel-btn'>Cancel</Button>
+                <Link href='/landowner' sx={{ textDecoration: 'none' }}>
+                  <Button variant='contained' className='submit-btn' onClick={formik.handleSubmit}>Submit</Button>
+                </Link>
+              </div>
+            </div>
+          </Grid>
+        </Grid>
+        {/* ):(<></>)} */}
+      </Box >
+      </>
+            ) : (
+                <ErrorPage />
+            )}
+    </>
+  )
 }
 const mapStateToProps = (state) => {
-    return {
-
-        // onboarding: state.onboarding.onboarding,
-    };
+  return {
+  };
 };
 
 const mapDispatchToProps = {
-    addLandparcel: (formik,id) => addLandparcel(formik,id),
-    editLandparcel: (id, formik) => editLandparcel(id, formik),
-    fetchLandparcels: () => fetchLandparcels()
+  addLandParcel: (formik) => action.addLandParcel(formik),
+  fetchLandParcel: () => action.fetchLandParcel(),
+  editParcel: (id, formik) => action.editParcel(id, formik),
+  fetchOperator: () => fetchOperator()
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddLandparcel);
+export default connect(mapStateToProps, mapDispatchToProps)(AddLandParcel)

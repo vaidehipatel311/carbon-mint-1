@@ -16,7 +16,8 @@ import aadhar_img from '../../assets/images/Operators/aadhar_img.png'
 import { addLandOwner, fetchLandOwners, editOwner } from '../../Services/LandOwners/actions'
 import { connect } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
-
+import { useAuth } from '../../AuthProvider';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
   const { addLandownerId } = useParams();
@@ -25,6 +26,8 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
   const [selectedFileaadhar, setSelectedFileaadhar] = useState([]);
   const [selectedFilePanCard, setSelectedFilePanCard] = useState([]);
   const [selectedFileLeasedDoc, setSelectedFileLeasedDoc] = useState([]);
+  const { currentUser } = useAuth();
+
   const navigate = useNavigate();
 
 
@@ -73,7 +76,7 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
         formik.values.panCard_id = pancardFileIDBase64;
         formik.values.leased_doc_id = leasedFileIDBase64;
         addLandOwner(values);
-        navigate('/landowners')
+        navigate('/landowners', { state: { showAlert: true } })
       }
     },
   });
@@ -136,7 +139,10 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
     if (addLandownerId != 0) {
       setisDraft(true);
     }
+  };
 
+  const handleCancel = () => {
+    navigate('/landowners');
   };
 
   const handleFileChangeAadhar = (event, key) => {
@@ -149,6 +155,8 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
 
   return (
     <>
+    {currentUser ? (
+                <>
       <Header />
       <Sidebar />
       <Box sx={{ margin: '100px 20px 50px 300px' }}>
@@ -411,7 +419,7 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
               </div>
 
               <div className='submit-cancel-btn'>
-                <Button variant='outlined' className='cancel-btn'>Cancel</Button>
+                <Button variant='outlined' className='cancel-btn' onClick={handleCancel}>Cancel</Button>
                 <Link href='/landowner' sx={{ textDecoration: 'none' }}>
                   <Button variant='contained' className='submit-btn' onClick={formik.handleSubmit}>Submit</Button>
                 </Link>
@@ -420,6 +428,10 @@ function AddLandOwner({ addLandOwner, fetchLandOwners, editOwner }) {
           </Grid>
         </Grid>
       </Box >
+      </>
+            ) : (
+                <ErrorPage />
+            )}
     </>
   )
 }

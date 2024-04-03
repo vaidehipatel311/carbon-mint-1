@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
+    "bootbox": "^6.0.0",
     "firebase": "^10.8.1",
     "formik": "^2.4.5",
     "google-map-react": "^2.2.1",

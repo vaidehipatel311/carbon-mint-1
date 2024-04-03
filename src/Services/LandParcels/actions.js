@@ -7,6 +7,8 @@ export const addLandParcel = (formData) => {
         try {
             const response = await axios.post(urls.landParcelsUrl,
                 {
+                    "operator_id":formData.operator_id,
+                    "operator_name":formData.operator_name,
                     "SyNo": formData.SyNo,
                     "name": formData.name,
                     "acres": formData.acres,

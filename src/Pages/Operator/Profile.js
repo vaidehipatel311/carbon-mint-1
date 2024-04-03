@@ -14,6 +14,8 @@ import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import BadgeIcon from '@mui/icons-material/Badge';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 import avatar from '../../assets/images/Operators/avatar.png'
 import noacrs from '../../assets/images/DashBoard/noacrs.png'
@@ -24,18 +26,26 @@ import finger_millet from '../../assets/images/Operators/finger_millet.png'
 import Banner from '../../assets/images/Operators/Banner.png'
 import * as action from '../../Services/Operator/actions';
 import { connect } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { fetchLandParcel } from '../../Services/LandParcels/actions';
 import { fetchLandparcels } from '../../Services/Operator/actions';
 import { updateOperatorStatus } from '../../Services/Operator/actions';
+import { useAuth } from '../../AuthProvider';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
-function Profile({ fetchOperator, fetchLandparcels,updateOperatorStatus }) {
+function Profile({ fetchOperator, fetchLandParcel, updateOperatorStatus }) {
     const navigate = useNavigate();
     const { id } = useParams();
     const { landparcelid } = useParams();
+    const location = useLocation();
+
 
     const [operators, setOperators] = useState([]);
     const [landparcel, setLandparcel] = useState([])
-    const [approved, setApproved] = useState(false)
+    const [approved, setApproved] = useState(false);
+    const [openAlert, setOpenAlert] = useState(false);
+    const { currentUser } = useAuth();
+
     useEffect(() => {
         fetchOperator()
             .then((data) => {
@@ -50,13 +60,28 @@ function Profile({ fetchOperator, fetchLandparcels,updateOperatorStatus }) {
                 }
             })
             .catch(err => console.log(err))
-        fetchLandparcels()
+        fetchLandParcel()
             .then((data) => {
-                setLandparcel(data);
+                const filtereddata =
+                    setLandparcel(data);
             })
             .catch(err => console.log(err))
 
-    }, [operators]);
+    }, [operators, landparcel]);
+
+    useEffect(() => {
+        if (location.state && location.state.showAlert && !openAlert) {
+            setOpenAlert(true);
+        }
+    }, []);
+
+    const handleCloseAlert = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenAlert(false);
+    };
+
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         ...theme.typography.body2,
@@ -66,43 +91,43 @@ function Profile({ fetchOperator, fetchLandparcels,updateOperatorStatus }) {
     const genereateLandparcel = () => {
         return landparcel.map((land, index) => (
             (land.operator_id === id ? (
-            <Grid xs={6}>
-                <Link href={'/operator/' + `${id}` + '/profile/landparcel/' + `${land.id}`} style={{ textDecoration: 'none' }}>
-                    <div className="grid-upper-profile">
-                        <img src={Banner}></img>
+                <Grid xs={6}>
+                    <Link href={'/operator/' + `${id}` + '/landparcel/' + `${land.id}`} style={{ textDecoration: 'none' }}>
+                        <div className="grid-upper-profile">
+                            <img src={Banner}></img>
 
-                    </div >
-                    <Item className='grid-lower-profile' sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
-                        <div style={{ display: 'grid', textAlign: 'center' }}>
-                            <Typography variant='p' fontWeight='bold'>{land.landparcel_name}</Typography>
-                            <Typography variant='p' sx={{color:'rgb(175, 174, 174)'}}>{land.village}, {land.district}</Typography>
-                        </div>
+                        </div >
+                        <Item className='grid-lower-profile' sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
+                            <div style={{ display: 'grid', textAlign: 'center' }}>
+                                <Typography variant='p' fontWeight='bold'>{land.name}</Typography>
+                                <Typography variant='p' sx={{ color: 'rgb(175, 174, 174)' }}>{land.village}, {land.district}</Typography>
+                            </div>
 
-                        <Grid container sx={{ mt: 3, textAlign: 'center' }}>
-                            <Grid xs={4}>
-                                <Typography variant='p' className='n'><b>{land.acres}</b></Typography>
+                            <Grid container sx={{ mt: 3, textAlign: 'center' }}>
+                                <Grid xs={4}>
+                                    <Typography variant='p' className='n'><b>{land.acres}</b></Typography>
+                                </Grid>
+                                <Grid xs={4}>
+                                    <Typography variant='p' className='n'><b>{land.area_owned}</b></Typography>
+                                </Grid>
+                                <Grid xs={4}>
+                                    <Typography variant='p' className='n'><b>{land.area_leased}</b></Typography>
+                                </Grid>
                             </Grid>
-                            <Grid xs={4}>
-                                <Typography variant='p' className='n'><b>{land.area_owned}</b></Typography>
+                            <Grid container sx={{ textAlign: 'center' }}>
+                                <Grid xs={4}>
+                                    <Typography variant='p' className='t'>Acres</Typography>
+                                </Grid>
+                                <Grid xs={4}>
+                                    <Typography variant='p' className='t'>Area Owned</Typography>
+                                </Grid>
+                                <Grid xs={4}>
+                                    <Typography variant='p' className='t'>Area Leased</Typography>
+                                </Grid>
                             </Grid>
-                            <Grid xs={4}>
-                                <Typography variant='p' className='n'><b>{land.area_leased}</b></Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid container sx={{ textAlign: 'center' }}>
-                            <Grid xs={4}>
-                                <Typography variant='p' className='t'>Acres</Typography>
-                            </Grid>
-                            <Grid xs={4}>
-                                <Typography variant='p' className='t'>Area Owned</Typography>
-                            </Grid>
-                            <Grid xs={4}>
-                                <Typography variant='p' className='t'>Area Leased</Typography>
-                            </Grid>
-                        </Grid>
-                    </Item>
-                </Link>
-            </Grid>
+                        </Item>
+                    </Link>
+                </Grid>
             ) : (<></>))
         ))
     }
@@ -115,10 +140,17 @@ function Profile({ fetchOperator, fetchLandparcels,updateOperatorStatus }) {
 
     return (
         <>
+        {currentUser ? (
+                <>
             <Header />
             <Sidebar />
             {operators.map((owners, index) => (
                 <Box sx={{ margin: '100px 20px 50px 300px' }}>
+                    <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+                        <Alert sx={{ ml: 70, mt: -10 }} onClose={handleCloseAlert} severity="success">
+                            Landparcel details added successfully
+                        </Alert>
+                    </Snackbar>
                     <Grid container>
                         <Grid xs={8}>
                             <Breadcrumbs sx={{
@@ -128,7 +160,7 @@ function Profile({ fetchOperator, fetchLandparcels,updateOperatorStatus }) {
                                 aria-label="breadcrumb">
 
                                 <Link underline='hover' color='inherit' href="/operator">Operator</Link>
-                                <Link underline='hover' color='inherit' href={"/operator/"+`${id}`+"/profile"}>Profile</Link>
+                                <Link underline='hover' color='inherit' href={"/operator/" + `${id}` + "/profile"}>Profile</Link>
 
                             </Breadcrumbs>
                             <div className='title'>
@@ -149,7 +181,7 @@ function Profile({ fetchOperator, fetchLandparcels,updateOperatorStatus }) {
 
                         </Grid>
                         <Grid xs={2}>
-                            <Link href={'/operator/' + `${id}` + '/profile/landparcel/add-landparcel/0'}><Button variant='contained'
+                            <Link href={'/operator/' + `${id}` + '/add-landparcel/0'}><Button variant='contained'
                                 sx={{
                                     ml: 2,
                                     fontSize: '12px',
@@ -272,46 +304,46 @@ function Profile({ fetchOperator, fetchLandparcels,updateOperatorStatus }) {
 
                         </Grid>
                         <Grid xs={7.5}>
-                            <div className='cards3' style={{display:'flex'}}>
-                            <Grid xs={4}>
-                                <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
-                                    <div className='no-of-landparcels'>
-                                        <Avatar><img src={noacrs}></img></Avatar>
-                                        <div>
-                                            <Typography className='content'>No. Landparcels</Typography>
-                                            <Typography className='content'><b>{landparcel.length}</b></Typography>
+                            <div className='cards3' style={{ display: 'flex' }}>
+                                <Grid xs={4}>
+                                    <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
+                                        <div className='no-of-landparcels'>
+                                            <Avatar><img src={noacrs}></img></Avatar>
+                                            <div>
+                                                <Typography className='content'>No. Landparcels</Typography>
+                                                <Typography className='content'><b>{landparcel.length}</b></Typography>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </Item>
+                                    </Item>
 
-                            </Grid>
-                            <Grid xs={4}>
-                                <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
-                                    <div className='no-of-crops'>
-                                        <Avatar><img src={no_of_crops}></img></Avatar>
-                                        <div>
-                                            <Typography className='content'>No. Crops</Typography>
-                                            <Typography className='content'><b>{owners.total_crops}</b></Typography>
+                                </Grid>
+                                <Grid xs={4}>
+                                    <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
+                                        <div className='no-of-crops'>
+                                            <Avatar><img src={no_of_crops}></img></Avatar>
+                                            <div>
+                                                <Typography className='content'>No. Crops</Typography>
+                                                <Typography className='content'><b>{owners.total_crops}</b></Typography>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </Item>
+                                    </Item>
 
-                            </Grid>
-                            <Grid xs={4}>
-                                <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
-                                    <div className='no-of-events'>
-                                        <Avatar><img src={events}></img></Avatar>
-                                        <div>
-                                            <Typography className='content'>Events</Typography>
-                                            <Typography className='content'><b>1</b></Typography>
+                                </Grid>
+                                <Grid xs={4}>
+                                    <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F' }}>
+                                        <div className='no-of-events'>
+                                            <Avatar><img src={events}></img></Avatar>
+                                            <div>
+                                                <Typography className='content'>Events</Typography>
+                                                <Typography className='content'><b>1</b></Typography>
+                                            </div>
                                         </div>
-                                    </div>
-                                </Item>
-                            </Grid>
+                                    </Item>
+                                </Grid>
                             </div>
-                            <Grid xs={12} sx={{mt:5}}>
+                            <Grid xs={12} sx={{ mt: 5 }}>
                                 <div className='landparcel'><Typography variant='p'>Land parcels</Typography></div>
                                 <Grid container>
                                     {genereateLandparcel()}
@@ -321,6 +353,10 @@ function Profile({ fetchOperator, fetchLandparcels,updateOperatorStatus }) {
                     </Grid>
                 </Box >
             ))}
+            </>
+            ) : (
+                <ErrorPage />
+            )}
         </>
     )
 }
@@ -333,8 +369,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     fetchOperator: () => action.fetchOperator(),
-    fetchLandparcels: () => fetchLandparcels(),
-    updateOperatorStatus: (id,status) => updateOperatorStatus(id,status)
+    fetchLandParcel: () => fetchLandParcel(),
+    updateOperatorStatus: (id, status) => updateOperatorStatus(id, status)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

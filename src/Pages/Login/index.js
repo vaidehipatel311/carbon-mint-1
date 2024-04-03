@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import './style.css'
-import { Link } from 'react-router-dom'
 import Grid from '@mui/material/Grid';
 import { Typography } from '@mui/material';
 import finalLogo from '../../assets/images/Login/Final Logo.png'
 import googleicon from '../../assets/images/Login/Socail Links.png'
 import graphicSide from '../../assets/images/Login/image 50.png'
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { connect } from 'react-redux'
 import * as action from '../../Services/Login/actions';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import 'react-phone-input-2/lib/style.css'
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
-import { auth } from '../../firebase';
+import {auth} from '../../firebase';
 import PhoneInput from 'react-phone-input-2';
 import { MuiOtpInput } from 'mui-one-time-password-input'
 
@@ -27,18 +26,23 @@ const validate = values => {
     }
     return errors;
 }
-function Login({ addUser }) {
+function Login({ fetchUser, updateUserStatus }) {
     const navigate = useNavigate();
 
     const [showOtp, setShowOtp] = useState(false);
     const [otp, setOtp] = useState('');
     const [phoneNo, setPhoneNo] = useState('')
+    const [user, setUser] = useState([])
     const [phoneOtp, setPhoneOtp] = useState(null)
     const [remainingTime, setRemainingTime] = useState(60);
     const [recaptchaVerifier, setRecaptchaVerifier] = useState(null);
 
 
     useEffect(() => {
+        fetchUser().then((data) => {
+            const filteredUser = data.filter((p) => p.contact === phoneNo);
+            setUser(filteredUser);
+        })
         let timer;
         if (showOtp) {
             timer = setInterval(() => {
@@ -56,7 +60,7 @@ function Login({ addUser }) {
         }
 
         return () => clearInterval(timer);
-    }, [showOtp]);
+    }, [phoneNo,showOtp]);
 
 
     
@@ -75,10 +79,9 @@ function Login({ addUser }) {
 
     const handleClick = async () => {
         try {
-            if(phoneNo.length === 0){
-                alert('Please Enter Phone Number.')
-            }
-            else {const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
+            if(user.length > 0){
+            
+            const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {
                 size: 'invisible',
                 'callback': () => { }
             })
@@ -89,14 +92,18 @@ function Login({ addUser }) {
 
             const confirmationResult = await signInWithPhoneNumber(auth, `+${phoneNo}`, recaptcha);
             console.log(confirmationResult);
-            setPhoneOtp(confirmationResult);}
+            setPhoneOtp(confirmationResult);
+        }
+        else{
+            alert('No user found');
+        }
 
         } catch (error) {
             console.error('Error sending OTP:', error);
         }
     };
 
-    const handleVerifyOTP = async () => {
+    const handleVerifyOTP = async (id,status) => {
         try {
             if (otp === '') {
                 alert('Please enter otp.')
@@ -105,7 +112,7 @@ function Login({ addUser }) {
                 const userCredential = await phoneOtp.confirm(otp)
                 console.log(userCredential);
                 if (userCredential && userCredential.user) {
-                    addUser(phoneNo, otp);
+                    updateUserStatus(id,status);
                     navigate('/dashboard');
                 } else {
                     console.error('Invalid user credential.');
@@ -172,6 +179,7 @@ function Login({ addUser }) {
                                 <Typography variant='p' sx={{ fontSize: 'small', color: 'red' }}>{remainingTime} seconds remaining</Typography>
                             </Grid>
                             <Grid xs={12} sx={{ textAlign: 'center' }}>
+                                {user.map((b,index)=>(
                                 <Button
                                     sx={{
                                         backgroundColor: '#8CD867',
@@ -181,8 +189,9 @@ function Login({ addUser }) {
                                     size="large"
                                     variant="filled"
                                     className="button"
-                                    onClick={handleVerifyOTP}
+                                    onClick={()=>handleVerifyOTP(b.id,"Logged_In")}
                                 >Sign In</Button>
+                                ))}
                             </Grid>
 
                         </>)}
@@ -226,7 +235,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    addUser: (phoneNo, otp) => action.addUser(phoneNo, otp)
+    fetchUser: () => action.fetchUser(),
+    updateUserStatus: (id, status) => action.updateUserStatus(id, status),
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -14,53 +14,33 @@ import DoneIcon from '@mui/icons-material/Done';
 import Box from '@mui/material/Box';
 import EditIcon from '@mui/icons-material/Edit'
 
-
-import field_area_map from '../../assets/images/Operators/field_area_map.png'
 import Banner_crops_2 from '../../assets/images/Operators/Banner_crops_2.png'
 import irrigation from '../../assets/images/Operators/irrigation.png'
 import { fetchAddedEvents } from '../../Services/Events/actions';
 import { connect } from 'react-redux';
 import { GoogleMap, LoadScript, Polygon, Marker } from '@react-google-maps/api';
 
-import { fetchCrops } from '../../Services/Operator/actions';
+import { fetchCrops, fetchMaps } from '../../Services/Operator/actions';
 import { useParams, useLocation } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import { useAuth } from '../../AuthProvider';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
-const apiKey = 'AIzaSyCg8i1Q_GVHIXChAbBgQerjyUgfNBvRfks';
-const dots1 = [
-    { lat: 20.5937, lng: 78.9629 },
-    { lat: 20.5937, lng: 80.9629 },
-    { lat: 21.9937, lng: 80.9629 },
-    { lat: 21.9937, lng: 78.9629 },
-    { lat: 20.5937, lng: 78.9629 }
-];
-const dots2 = [
-    { lat: 20.5937, lng: 80.9629 },
-    { lat: 20.5937, lng: 82.9629 },
-    { lat: 21.9937, lng: 82.9629 },
-    { lat: 21.9937, lng: 80.9629 },
-    { lat: 20.5937, lng: 80.9629 }
-];
-const path1 = dots1.map(dot => ({ lat: dot.lat, lng: dot.lng }));
-const path2 = dots2.map(dot => ({ lat: dot.lat, lng: dot.lng }));
-const totalLat = dots2.reduce((sum, coord) => sum + coord.lat, 0);
-const totalLng = dots2.reduce((sum, coord) => sum + coord.lng, 0);
-const avgLat = totalLat / dots2.length;
-const avgLng = totalLng / dots2.length;
 
-// Center point
-const whiteMarkerIcon = {
-    url: 'https://maps.google.com/mapfiles/kml/paddle/wht-circle.png',
-    // scaledSize: new window.google.maps.Size(32, 32),
-};
-function Crops({ fetchAddedEvents, fetchCrops }) {
+function Crops({ fetchAddedEvents, fetchCrops, fetchMaps }) {
     const { cropid } = useParams();
     const { id } = useParams();
     const location = useLocation();
     const { landparcelid } = useParams();
 
+    const [openAlert, setOpenAlert] = useState(false);
 
     const [addedevents, setaddedEvents] = useState([])
     const [crops, setCrops] = useState([]);
+    const [maps, setMaps] = useState([]);
+    const { currentUser } = useAuth();
+
 
     const Item = styled(Paper)(({ theme }) => ({
         // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -82,12 +62,33 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
                 console.log(crops);
             })
             .catch(err => console.log(err))
+
+        fetchMaps()
+            .then((data) => {
+                setMaps(data);
+            })
+            .catch(err => console.log(err))
+        
     }, []);
+
+    useEffect(() => {
+        if (location.state && location.state.showAlert && !openAlert) {
+            setOpenAlert(true);
+        }
+    }, []);
+
+    const handleCloseAlert = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenAlert(false);
+    };
+    
     const generateGridEvents = () => {
         return addedevents.map((event, index) => (
             (event.crop_id === cropid ? (
                 <Grid xs={6}>
-                    <Link href={'/events/add-event' + `/${event.id}`} sx={{ textDecoration: 'none', color: 'black' }}>
+                    <Link href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops/' + `${cropid}` + '/add-event/' + `${event.id}`} sx={{ textDecoration: 'none', color: 'black' }}>
 
                         <Item className='seed' sx={{ background: '#ebeaea1f' }}>
                             <div style={{ display: 'grid' }}>
@@ -110,7 +111,7 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
                     <img src={Banner_crops_2}></img>
                     <Typography variant='p' className='name'>{crop.crop_name}</Typography>
                     <Typography variant='p' className='address'>{crop.landparcel_name}</Typography>
-                    <Link href={'/operator/'+`${id}`+'/profile/landparcel/'+`${landparcelid}`+'/crops/add-crops/' + `${crop.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer', ml: 20, mt: -8, position: 'absolute' }} /></Link>
+                    <Link href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops/add-crops/' + `${crop.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer', ml: 20, mt: -8, position: 'absolute' }} /></Link>
                     <Grid container sx={{ mt: 3, textAlign: 'center' }}>
                         <Grid xs={4}>
                             <Typography variant='p' className='n'><b>{crop.acres}</b></Typography>
@@ -171,12 +172,21 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
         ))
     }
 
+    
+
 
     return (
         <>
+        {currentUser ? (
+                <>
             <Header />
             <Sidebar />
             <Box sx={{ margin: '100px 20px 50px 300px' }}>
+                <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+                    <Alert sx={{ ml: 70, mt: -10 }} onClose={handleCloseAlert} severity="success">
+                        Submitted the Field Preparation event details successfully
+                    </Alert>
+                </Snackbar>
                 <Grid container>
                     <Grid xs={10}>
                         <Breadcrumbs sx={{
@@ -186,9 +196,9 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
                             aria-label="breadcrumb">
 
                             <Link underline='hover' color='inherit' href="/operator">Operator</Link>
-                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/profile'}>Profile</Link>
-                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/profile/landparcel/'+`${landparcelid}`}>Landparcel</Link>
-                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/profile/landparcel/'+`${landparcelid}`+'/crops'}>Crops</Link>
+                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}`}>Profile</Link>
+                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}`}>Landparcel</Link>
+                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops'}>Crops</Link>
 
 
                         </Breadcrumbs>
@@ -197,7 +207,7 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
                         </div>
                     </Grid>
                     <Grid xs={2}>
-                        <Link href={'/operator/'+`${id}`+'/profile/landparcel/'+`${landparcelid}`+'/crops/'+`${cropid}`+'/add-event/0'} sx={{ textDecoration: 'none' }}>
+                        <Link href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops/' + `${cropid}` + '/add-event/0'} sx={{ textDecoration: 'none' }}>
                             <Button variant='contained'
                                 sx={{
 
@@ -220,59 +230,63 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
 
                     </Grid>
                     <Grid xs={7.5}>
-                        <Grid xs={12}>
-                            <div sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2, ml: 2 }}>
-                                <div style={{ height: '300px', marginLeft: '20px' }}>
+                        {maps.slice(1).map((maps, index) => (
+                            <Grid xs={12} className='maps'>
+                                <div sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2, ml: 4 }}>
+                                    <div style={{ height: '300px', marginLeft: '20px' }}>
 
-                                    <LoadScript googleMapsApiKey={apiKey}>
-                                        <GoogleMap
-                                            mapContainerStyle={{ height: '100%', width: '100%' }}
-                                            center={{ lat: 20.5937, lng: 78.9629 }}
-                                            zoom={6}
-                                            options={{ mapTypeId: 'satellite' }}
-                                        >
-                                            <Polygon
-                                                path={path1}
-                                                options={{
-                                                    strokeColor: 'yellow',
-                                                    strokeOpacity: 0.8,
-                                                    strokeWeight: 2,
+                                        <LoadScript googleMapsApiKey={maps.api_key}>
+                                            <GoogleMap
+                                                mapContainerStyle={{ height: '100%', width: '100%' }}
+                                                center={{ lat: maps.center_lat, lng: maps.center_lng }}
+                                                zoom={6}
+                                                options={{ mapTypeId: 'satellite' }}
+                                            >
+                                                <Polygon
+                                                    path={maps.dots1.map(dot => ({ lat: dot.lat, lng: dot.lng }))}
+                                                    options={{
+                                                        strokeColor: 'yellow',
+                                                        strokeOpacity: 0.8,
+                                                        strokeWeight: 2,
+                                                    }}
+                                                />
+
+                                                {maps.dots1.map((dot, index) => (
+                                                    <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
+                                                ))}
+                                                <Polygon
+                                                    path={maps.dots2.map(dot => ({ lat: dot.lat, lng: dot.lng }))}
+                                                    options={{
+                                                        strokeColor: 'lightgreen',
+                                                        strokeOpacity: 0.8,
+                                                        strokeWeight: 2,
+                                                        fillColor: 'lightgreen',
+                                                        fillOpacity: 0.20
+                                                    }}
+                                                />
+
+                                                {maps.dots2.map((dot, index) => (
+                                                    <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
+                                                ))}
+                                                <Marker position={{
+                                                    lat: maps.dots2.reduce((sum, coord) => sum + coord.lat, 0) / maps.dots2.length,
+                                                    lng: maps.dots2.reduce((sum, coord) => sum + coord.lng, 0) / maps.dots2.length
                                                 }}
-                                            />
+                                                    label={{
+                                                        text: maps.text,
+                                                        color: 'black',
+                                                        fontWeight: 'bold',
+                                                        className: 'marker-label'
+                                                    }}
+                                                    icon={{ url: maps.url }}
+                                                />
 
-                                            {dots1.map((dot, index) => (
-                                                <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
-                                            ))}
-                                            <Polygon
-                                                path={path2}
-                                                options={{
-                                                    strokeColor: 'yellow',
-                                                    strokeOpacity: 0.8,
-                                                    strokeWeight: 2,
-                                                    fillColor: 'lightgreen',
-                                                    fillOpacity: 0.20
-                                                }}
-                                            />
-
-                                            {dots2.map((dot, index) => (
-                                                <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
-                                            ))}
-                                            <Marker position={{ lat: avgLat, lng: avgLng }}
-                                                label={{
-                                                    text: 'Seed and Seedlings',
-                                                    color: 'black',
-                                                    fontWeight: 'bold',
-                                                    className: 'marker-label'
-                                                }}
-                                                icon={whiteMarkerIcon}
-                                            />
-
-                                        </GoogleMap>
-                                    </LoadScript>
-
-
-                                </div>                            </div>
-                        </Grid>
+                                            </GoogleMap>
+                                        </LoadScript>
+                                    </div>
+                                </div>
+                            </Grid>
+                        ))}
                         <Grid xs={12}>
                             <div className='crops-heading'><Typography variant='p'>Draft</Typography></div>
 
@@ -300,6 +314,10 @@ function Crops({ fetchAddedEvents, fetchCrops }) {
 
                 </Grid>
             </Box>
+            </>
+            ) : (
+                <ErrorPage />
+            )}
         </>
     )
 }
@@ -314,6 +332,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     fetchCrops: () => fetchCrops(),
     fetchAddedEvents: () => fetchAddedEvents(),
+    fetchMaps: () => fetchMaps()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Crops);
