@@ -404,11 +404,11 @@ function DashBoard({ fetchOperator, fetchCrops, fetchEvents }) {
                                             <Grid xs={3}>
                                                 <div className='lists'>
                                                     <li style={{ color: 'green', position: 'relative' }}>
-                                                        <p style={{ color: 'black', position: 'relative', display: 'inline' }}>Sorghum -</p></li>
+                                                        <p style={{ color: 'black', position: 'relative', display: 'inline' }}>Sorghum</p></li>
                                                     <li style={{ color: 'red', position: 'relative' }}>
-                                                        <p style={{ color: 'black', position: 'relative', display: 'inline' }}>Finger Millet -</p></li>
+                                                        <p style={{ color: 'black', position: 'relative', display: 'inline' }}>Finger Millet</p></li>
                                                     <li style={{ color: '#EFEFF0', position: 'relative' }}>
-                                                        <p style={{ color: 'black', position: 'relative', display: 'inline' }}>Add +</p></li>
+                                                        <p style={{ color: 'black', position: 'relative', display: 'inline' }}>Add</p></li>
                                                 </div>
                                             </Grid>
                                         </Grid>
@@ -480,26 +480,19 @@ function DashBoard({ fetchOperator, fetchCrops, fetchEvents }) {
                                         <Grid container>
                                             <Grid item xs={9}>
                                                 <Typography className='title' variant='p'>Events</Typography><br />
-                                                <Typography className='content' variant='p' sx={{ mt: 4 }}>Megya Thanda, Hyderabad</Typography>
-                                                <Typography className='content' variant='p'>Warangal, Hyderabad</Typography>
-                                                <Typography className='content' variant='p'>Megya Thanda, West Godavari</Typography>
-                                                <Typography className='content' variant='p'>Vankamarry, Karnool</Typography>
-                                                <Typography className='content' variant='p'>Megya Thanda, Vijayawada</Typography>
-                                                <Typography className='content' variant='p'>Kollur, Andhrapradesh</Typography>
-                                                <Typography className='content' variant='p'>Nagamma thanda, Rangareddy</Typography>
+                                                {event.map((event, index) => (
+
+                                                    <Typography className='content' variant='p' sx={{ mt: 4 }}>{event.village}, {event.district}</Typography>
+
+                                                ))}
                                             </Grid>
                                             <Grid item xs={3}>
                                                 <div className='viewall'>
 
 
                                                     <Typography className='title' variant='p' sx={{ color: 'rgb(52, 156, 52)' }}>View</Typography><br />
-                                                    <b><Typography className='content' variant='p' sx={{ mt: 4 }}>298</Typography></b>
-                                                    <b><Typography className='content' variant='p'>473</Typography></b>
-                                                    <b><Typography className='content' variant='p'>120</Typography></b>
-                                                    <b><Typography className='content' variant='p'>498</Typography></b>
-                                                    <b><Typography className='content' variant='p'>65</Typography></b>
-                                                    <b><Typography className='content' variant='p'>287</Typography></b>
-                                                    <b><Typography className='content' variant='p'>39</Typography></b>
+                                                    <b><Typography className='content' variant='p' sx={{ mt: 4 }}>{event.length}</Typography></b>
+                                                    
                                                 </div>
                                             </Grid>
                                         </Grid>
@@ -533,7 +526,7 @@ function DashBoard({ fetchOperator, fetchCrops, fetchEvents }) {
                     </Box>
                 </>
             ) : (
-                <ErrorPage/>
+                <ErrorPage />
             )}
         </>
     )

@@ -114,13 +114,8 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
                             <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2, display: 'flex' }}>
                                 <Grid xs={3} sx={{ mt: 15 }}>
                                     <div className='profile-grid'>
-                                        <Badge color='success' badgeContent=" " size="large"
-                                            className='badge'
-                                            anchorOrigin={{
-                                                vertical: 'bottom',
-                                                horizontal: 'right',
-                                            }}></Badge>
-                                        <Avatar className='avatar_lo'><AccountCircleIcon className='acc'/></Avatar><br />
+                                        
+                                        <AccountCircleIcon className='acc'/>
                                         <Typography variant='p' className='name'>{owners.name}</Typography>
                                         <Typography variant='p' className='id'>{owners.ownerID}</Typography><br />
                                         <Grid container sx={{ mt: 3, textAlign: 'center' }}>

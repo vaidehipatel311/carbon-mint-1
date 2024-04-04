@@ -281,7 +281,7 @@
     }
     .tr{
         .MuiTypography-root{
-            margin-top: 15px;
+            margin-top: 5px;
         }
     }
     .landowner-avatar{
@@ -293,7 +293,7 @@
 
     }
     .grid-item .grid-item-card{
-        width: 85%;
+        width: 100%;
     }
     .grid-item-card .typo1{
         font-size: 14px;
@@ -307,7 +307,7 @@
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 14px;
-        left: 20px;
+        left: 0px;
         position: relative;
     }
     .landparcel-grid{
@@ -317,16 +317,12 @@
         width: 95%;
     }
     .grid-lower{
-        width: 84%;
+        width: 100%;
         .MuiTypography-root{
             font-size: 14px;
         }
     }
-    .table .avatar_lp{
-        width: 25px;
-        height: 25px;
-        margin-top: 10px;
-    }
+    
 }
 
 @media screen and (max-width:1280px) {

@@ -127,208 +127,209 @@ function Landparcel({ fetchCrops, fetchLandParcel, fetchMaps }) {
 
     return (
         <>
-        {currentUser ? (
+            {currentUser ? (
                 <>
-            <Header />
-            <Sidebar />
-            <Box sx={{ margin: '100px 20px 50px 300px' }}>
-                <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
-                    <Alert sx={{ ml: 70, mt: -10 }} onClose={handleCloseAlert} severity="success">
-                        Crops details added successfully
-                    </Alert>
-                </Snackbar>
+                    <Header />
+                    <Sidebar />
+                    <Box sx={{ margin: '100px 20px 50px 300px' }}>
+                        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+                            <Alert sx={{ ml: 70, mt: -10 }} onClose={handleCloseAlert} severity="success">
+                                Crops details added successfully
+                            </Alert>
+                        </Snackbar>
 
-                <Grid container>
-                    <Grid xs={10}>
-                        <Breadcrumbs sx={{
-                            textDecoration: 'none'
-                        }}
-                            separator={<NavigateNextIcon fontSize="small" />}
-                            aria-label="breadcrumb">
+                        <Grid container>
+                            <Grid xs={10}>
+                                <Breadcrumbs sx={{
+                                    textDecoration: 'none'
+                                }}
+                                    separator={<NavigateNextIcon fontSize="small" />}
+                                    aria-label="breadcrumb">
 
-                            <Link underline='hover' color='inherit' href="/operator">Operator</Link>
-                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}`}>Profile</Link>
-                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}`}>Landparcel</Link>
+                                    <Link underline='hover' color='inherit' href="/operator">Operator</Link>
+                                    <Link underline='hover' color='inherit' href={'/operator/' + `${id}`}>Profile</Link>
+                                    <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}`}>Landparcel</Link>
 
-                        </Breadcrumbs>
-                        <div className='title'>
-                            <Typography variant='p'>Chennaiah Polam</Typography>
-                        </div>
-                    </Grid>
-                    <Grid xs={2}>
-                        <Link href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops/add-crops/0'} sx={{ textDecoration: 'none' }}><Button variant='contained'
-                            sx={{
-                                width: '100%',
-                                fontSize: '12px',
-                                height: '40px',
-                                color: 'black',
-                                background: 'rgba(140, 216, 103, 1)',
-                                border: '1px solid black',
-                                borderRadius: '5px',
-                            }}>Add Crop</Button>
-                        </Link>
-                    </Grid>
-                </Grid>
-
-
-                {landparcel.map((land, index) => (
-                    <Grid container sx={{ mt: 3 }}>
-                        <Grid xs={4.5} sx={{ mb: 5 }}>
-                            <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2 }}>
-                                <div className='chennaiah-polam-details'>
-                                    <img src={Banner}></img>
-                                    <Typography variant='p' className='name'>{land.landparcel_name}</Typography>
-                                    <Typography variant='p' className='address'>{land.house_no}, {land.village}, {land.district}, {land.state}, {land.country} - {land.postal_code}</Typography>
-                                    <Link href={'/operator/' + `${id}` + '/add-landparcel/' + `${land.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer', ml: 20, mt: -8, position: 'absolute' }} /></Link>
-                                    <Grid container sx={{ mt: 3, textAlign: 'center' }}>
-                                        <Grid xs={4}>
-                                            <Typography variant='p' className='n'><b>{land.acres}</b></Typography>
-                                        </Grid>
-                                        <Grid xs={4}>
-                                            <Typography variant='p' className='n'><b>{land.area_owned}</b></Typography>
-                                        </Grid>
-                                        <Grid xs={4}>
-                                            <Typography variant='p' className='n'><b>{land.area_leased}</b></Typography>
-                                        </Grid>
-                                    </Grid>
-
-                                    <Grid container sx={{ textAlign: 'center' }}>
-                                        <Grid xs={4}>
-                                            <Typography variant='p' className='t'>Acres</Typography>
-                                        </Grid>
-                                        <Grid xs={4}>
-                                            <Typography variant='p' className='t'>Area Owned</Typography>
-                                        </Grid>
-                                        <Grid xs={4}>
-                                            <Typography variant='p' className='t'>Area Leased</Typography>
-                                        </Grid>
-
-                                    </Grid>
+                                </Breadcrumbs>
+                                <div className='title'>
+                                    <Typography variant='p'>Chennaiah Polam</Typography>
                                 </div>
-                                <hr style={{ margin: '20px' }} />
-
-                                <div className='details'>
-                                    <Typography variant='p' className='title'>Details</Typography>
-                                    <div className='content'>
-                                        <Typography variant='p'>Survey number</Typography>
-                                        <b><Typography variant='p'>{land.SyNo}</Typography></b>
-
-                                    </div>
-                                    <div className='content'>
-                                        <Typography variant='p'>Neighboring Farm</Typography>
-                                        <b><Typography variant='p'>{land.neighbouring_farm}</Typography></b>
-
-                                    </div>
-                                    <div className='content'>
-                                        <Typography variant='p'>Distance from the nearest service road</Typography>
-                                        <b><Typography variant='p'>{land.distance}</Typography></b>
-
-                                    </div>
-                                    <div className='content'>
-                                        <Typography variant='p'>Land under cultivation</Typography>
-                                        <b><Typography variant='p'>{land.land_under_cultivation}</Typography></b>
-
-                                    </div>
-                                    <div className='content'>
-                                        <Typography variant='p'>Cropping systems</Typography>
-                                        <b><Typography variant='p'>{land.cropping_systems}</Typography></b>
-
-                                    </div>
-                                    <div className='content'>
-                                        <Typography variant='p'>Farming system</Typography>
-                                        <b><Typography variant='p'>{land.farming_system}</Typography></b>
-
-                                    </div>
-                                    <div className='content'>
-                                        <Typography variant='p'>Infrastructure</Typography>
-                                        <b><Typography variant='p'>{land.infrastructure}</Typography></b>
-
-                                    </div>
-                                    <div className='content'>
-                                        <Typography variant='p'>Water resources</Typography>
-                                        <b><Typography variant='p'>{land.water_resources}</Typography></b>
-
-                                    </div>
-
-                                </div>
-                            </Item>
-
-                        </Grid>
-                        <Grid xs={7.5}>
-                            {maps.slice(0, 1).map((maps, index) => (
-                                <Grid xs={12} className='maps'>
-                                    <div sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2, ml: 4 }}>
-                                        <div style={{ height: '300px', marginLeft: '20px' }}>
-
-                                            <LoadScript googleMapsApiKey={maps.api_key}>
-                                                <GoogleMap
-                                                    mapContainerStyle={{ height: '100%', width: '100%' }}
-                                                    center={{ lat: maps.center_lat, lng: maps.center_lng }}
-                                                    zoom={6}
-                                                    options={{ mapTypeId: 'satellite' }}
-                                                >
-                                                    <Polygon
-                                                        path={maps.dots1.map(dot => ({ lat: dot.lat, lng: dot.lng }))}
-                                                        options={{
-                                                            strokeColor: 'yellow',
-                                                            strokeOpacity: 0.8,
-                                                            strokeWeight: 2,
-                                                            fillColor: 'yellow',
-                                                            fillOpacity: 0.20
-                                                        }}
-                                                    />
-
-                                                    {maps.dots1.map((dot, index) => (
-                                                        <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
-                                                    ))}
-                                                    <Polygon
-                                                        path={maps.dots2.map(dot => ({ lat: dot.lat, lng: dot.lng }))}
-                                                        options={{
-                                                            strokeColor: 'lightgreen',
-                                                            strokeOpacity: 0.8,
-                                                            strokeWeight: 2,
-                                                            fillColor: 'lightgreen',
-                                                            fillOpacity: 0.20
-                                                        }}
-                                                    />
-
-                                                    {maps.dots2.map((dot, index) => (
-                                                        <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
-                                                    ))}
-                                                    <Marker position={{
-                                                        lat: maps.dots2.reduce((sum, coord) => sum + coord.lat, 0) / maps.dots2.length,
-                                                        lng: maps.dots2.reduce((sum, coord) => sum + coord.lng, 0) / maps.dots2.length
-                                                    }}
-                                                        label={{
-                                                            text: maps.text,
-                                                            color: 'black',
-                                                            fontWeight: 'bold',
-                                                            className: 'marker-label'
-                                                        }}
-                                                        icon={{ url: maps.url }}
-                                                    />
-
-                                                </GoogleMap>
-                                            </LoadScript>
-                                        </div>
-                                    </div>
-                                </Grid>
-                            ))}
-                            <Grid xs={12}>
-                                <div className='crops-heading'><Typography variant='p'>Crops</Typography></div>
-
-                                <Grid container>
-
-                                    {generateCrops()}
-
-
-                                </Grid>
+                            </Grid>
+                            <Grid xs={2}>
+                                <Link href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops/add-crops/0'} sx={{ textDecoration: 'none' }}><Button variant='contained'
+                                    sx={{
+                                        width: '100%',
+                                        fontSize: '12px',
+                                        height: '40px',
+                                        color: 'black',
+                                        background: 'rgba(140, 216, 103, 1)',
+                                        border: '1px solid black',
+                                        borderRadius: '5px',
+                                        "&:hover": { color: 'white' }
+                                    }}>Add Crop</Button>
+                                </Link>
                             </Grid>
                         </Grid>
-                    </Grid>
-                ))}
-            </Box>
-            </>
+
+
+                        {landparcel.map((land, index) => (
+                            <Grid container sx={{ mt: 3 }}>
+                                <Grid xs={4.5} sx={{ mb: 5 }}>
+                                    <Item sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2 }}>
+                                        <div className='chennaiah-polam-details'>
+                                            <img src={Banner}></img>
+                                            <Typography variant='p' className='name'>{land.landparcel_name}</Typography>
+                                            <Typography variant='p' className='address'>{land.house_no}, {land.village}, {land.district}, {land.state}, {land.country} - {land.postal_code}</Typography>
+                                            <Link href={'/operator/' + `${id}` + '/add-landparcel/' + `${land.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer', ml: 20, mt: -8, position: 'absolute' }} /></Link>
+                                            <Grid container sx={{ mt: 3, textAlign: 'center' }}>
+                                                <Grid xs={4}>
+                                                    <Typography variant='p' className='n'><b>{land.acres}</b></Typography>
+                                                </Grid>
+                                                <Grid xs={4}>
+                                                    <Typography variant='p' className='n'><b>{land.area_owned}</b></Typography>
+                                                </Grid>
+                                                <Grid xs={4}>
+                                                    <Typography variant='p' className='n'><b>{land.area_leased}</b></Typography>
+                                                </Grid>
+                                            </Grid>
+
+                                            <Grid container sx={{ textAlign: 'center' }}>
+                                                <Grid xs={4}>
+                                                    <Typography variant='p' className='t'>Acres</Typography>
+                                                </Grid>
+                                                <Grid xs={4}>
+                                                    <Typography variant='p' className='t'>Area Owned</Typography>
+                                                </Grid>
+                                                <Grid xs={4}>
+                                                    <Typography variant='p' className='t'>Area Leased</Typography>
+                                                </Grid>
+
+                                            </Grid>
+                                        </div>
+                                        <hr style={{ margin: '20px' }} />
+
+                                        <div className='details'>
+                                            <Typography variant='p' className='title'>Details</Typography>
+                                            <div className='content'>
+                                                <Typography variant='p'>Survey number</Typography>
+                                                <b><Typography variant='p'>{land.SyNo}</Typography></b>
+
+                                            </div>
+                                            <div className='content'>
+                                                <Typography variant='p'>Neighboring Farm</Typography>
+                                                <b><Typography variant='p'>{land.neighbouring_farm}</Typography></b>
+
+                                            </div>
+                                            <div className='content'>
+                                                <Typography variant='p'>Distance from the nearest service road</Typography>
+                                                <b><Typography variant='p'>{land.distance}</Typography></b>
+
+                                            </div>
+                                            <div className='content'>
+                                                <Typography variant='p'>Land under cultivation</Typography>
+                                                <b><Typography variant='p'>{land.land_under_cultivation}</Typography></b>
+
+                                            </div>
+                                            <div className='content'>
+                                                <Typography variant='p'>Cropping systems</Typography>
+                                                <b><Typography variant='p'>{land.cropping_systems}</Typography></b>
+
+                                            </div>
+                                            <div className='content'>
+                                                <Typography variant='p'>Farming system</Typography>
+                                                <b><Typography variant='p'>{land.farming_system}</Typography></b>
+
+                                            </div>
+                                            <div className='content'>
+                                                <Typography variant='p'>Infrastructure</Typography>
+                                                <b><Typography variant='p'>{land.infrastructure}</Typography></b>
+
+                                            </div>
+                                            <div className='content'>
+                                                <Typography variant='p'>Water resources</Typography>
+                                                <b><Typography variant='p'>{land.water_resources}</Typography></b>
+
+                                            </div>
+
+                                        </div>
+                                    </Item>
+
+                                </Grid>
+                                <Grid xs={7.5}>
+                                    {maps.slice(0, 1).map((maps, index) => (
+                                        <Grid xs={12} className='maps'>
+                                            <div sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2, ml: 4 }}>
+                                                <div style={{ height: '300px', marginLeft: '20px' }}>
+
+                                                    <LoadScript googleMapsApiKey={maps.api_key}>
+                                                        <GoogleMap
+                                                            mapContainerStyle={{ height: '100%', width: '100%' }}
+                                                            center={{ lat: maps.center_lat, lng: maps.center_lng }}
+                                                            zoom={6}
+                                                            options={{ mapTypeId: 'satellite' }}
+                                                        >
+                                                            <Polygon
+                                                                path={maps.dots1.map(dot => ({ lat: dot.lat, lng: dot.lng }))}
+                                                                options={{
+                                                                    strokeColor: 'yellow',
+                                                                    strokeOpacity: 0.8,
+                                                                    strokeWeight: 2,
+                                                                    fillColor: 'yellow',
+                                                                    fillOpacity: 0.20
+                                                                }}
+                                                            />
+
+                                                            {maps.dots1.map((dot, index) => (
+                                                                <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
+                                                            ))}
+                                                            <Polygon
+                                                                path={maps.dots2.map(dot => ({ lat: dot.lat, lng: dot.lng }))}
+                                                                options={{
+                                                                    strokeColor: 'lightgreen',
+                                                                    strokeOpacity: 0.8,
+                                                                    strokeWeight: 2,
+                                                                    fillColor: 'lightgreen',
+                                                                    fillOpacity: 0.20
+                                                                }}
+                                                            />
+
+                                                            {maps.dots2.map((dot, index) => (
+                                                                <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
+                                                            ))}
+                                                            <Marker position={{
+                                                                lat: maps.dots2.reduce((sum, coord) => sum + coord.lat, 0) / maps.dots2.length,
+                                                                lng: maps.dots2.reduce((sum, coord) => sum + coord.lng, 0) / maps.dots2.length
+                                                            }}
+                                                                label={{
+                                                                    text: maps.text,
+                                                                    color: 'black',
+                                                                    fontWeight: 'bold',
+                                                                    className: 'marker-label'
+                                                                }}
+                                                                icon={{ url: maps.url }}
+                                                            />
+
+                                                        </GoogleMap>
+                                                    </LoadScript>
+                                                </div>
+                                            </div>
+                                        </Grid>
+                                    ))}
+                                    <Grid xs={12}>
+                                        <div className='crops-heading'><Typography variant='p'>Crops</Typography></div>
+
+                                        <Grid container>
+
+                                            {generateCrops()}
+
+
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        ))}
+                    </Box>
+                </>
             ) : (
                 <ErrorPage />
             )}

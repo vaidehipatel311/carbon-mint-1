@@ -66,12 +66,6 @@ const Transition = React.forwardRef(function Transition(
 function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
     const navigate = useNavigate();
     const location = useLocation();
-    const query = new URLSearchParams(location.search).get('query');
-    const [searchQuery, setSearchQuery] = useState("");
-    var searchedLandOwners;
-    var searchedOnboarding;
-
-
 
     const [landOwners, setlandOwners] = useState([]);
     const [onboarding, setonboarding] = useState([]);
@@ -88,16 +82,18 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
     const [countryF, setcountryF] = useState('');
     const [filterCriteria, setFilterCriteria] = useState([]);
 
-    const [fL,setFL] = useState([]);
-    const [fO,setFO] = useState([]);
-
-    // const [filterLandOwners, setFilterLandOwners] = useState([]);
-    // const [filterOnboarding, setFilterOnboarding] = useState([]);
+    const [filterLandOwners, setFilterLandOwners] = useState([]);
+    const [filterOnboarding, setFilterOnboarding] = useState([]);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [showFilterValue, setshowFilterValue] = useState(false);
     const [openAlert, setOpenAlert] = useState(false);
     const { currentUser } = useAuth();
+
+    const query = new URLSearchParams(location.search).get('query');
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchedLandOwners, setSearchedLandOwners] = useState("");
+    const [searchedOnboarding, setSearchedOnboarding] = useState("");
 
 
 
@@ -132,7 +128,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                 console.error('Error fetching total operator:', error);
             });
 
-    }, [landOwners, query]);
+    }, [landOwners, onboarding]);
 
     useEffect(() => {
         if (location.state && location.state.showAlert && !openAlert) {
@@ -149,29 +145,44 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
 
 
     const handleSearch = () => {
-        navigate('/landowners?query=' + `${encodeURIComponent(searchQuery)}`);
+        if (searchQuery.length == 1) {
+            navigate('/landowners');
+        }
+
+        else {
+            navigate('/landowners?query=' + `${encodeURIComponent(searchQuery)}`);
+        }
     };
 
-    if (query) {
-        searchedLandOwners = landOwners.filter((item) => {
-            return (
-                item.name.toLowerCase().includes(query.toLowerCase()) ||
-                item.ownerID.toLowerCase().includes(query.toLowerCase()) ||
-                item.contact_number_1.toLowerCase().includes(query.toLowerCase()) ||
-                item.village.toLowerCase().includes(query.toLowerCase())
-            );
-        });
 
+    useEffect(() => {
+        if (query) {
+            const sLO = landOwners.filter((item) => {
+                return (
+                    item.name.toLowerCase().includes(query.toLowerCase()) ||
+                    item.ownerID.toLowerCase().includes(query.toLowerCase()) ||
+                    item.contact_number_1.toLowerCase().includes(query.toLowerCase()) ||
+                    item.village.toLowerCase().includes(query.toLowerCase())
+                );
+            });
 
-        searchedOnboarding = onboarding.filter((item) => {
-            return (
-                item.name.toLowerCase().includes(query.toLowerCase()) ||
-                item.ownerID.toLowerCase().includes(query.toLowerCase()) ||
-                item.contact_number_1.toLowerCase().includes(query.toLowerCase()) ||
-                item.village.toLowerCase().includes(query.toLowerCase())
-            );
-        });
-    }
+            const sO = onboarding.filter((item) => {
+                return (
+                    item.name.toLowerCase().includes(query.toLowerCase()) ||
+                    item.ownerID.toLowerCase().includes(query.toLowerCase()) ||
+                    item.contact_number_1.toLowerCase().includes(query.toLowerCase()) ||
+                    item.village.toLowerCase().includes(query.toLowerCase())
+                );
+            });
+
+            setSearchedLandOwners(sLO);
+            setSearchedOnboarding(sO);
+        } else {
+            // Reset the searched lists if query is empty
+            setSearchedLandOwners([]);
+            setSearchedOnboarding([]);
+        }
+    }, [query, searchedLandOwners, searchedOnboarding]);
 
 
 
@@ -207,8 +218,8 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
             });
 
 
-            setFL(newfilteredLandOwners);
-            setFO(newfilteredOnboarding);
+            setFilterLandOwners(newfilteredLandOwners);
+            setFilterOnboarding(newfilteredOnboarding);
             setshowFilterValue(true);
         }
     }
@@ -251,8 +262,8 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
             );
         });
 
-        setFL(filteredLandOwners);
-        setFO(filteredOnboarding);
+        setFilterLandOwners(filteredLandOwners);
+        setFilterOnboarding(filteredOnboarding);
         setAnchorEl(null);
 
         const newFilterCriteria = [...filterCriteria];
@@ -312,7 +323,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display:'flex',borderBottom:'none',cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
 
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
@@ -322,7 +333,16 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                     <TableCell align='center'>{owners.passbook_refno}</TableCell>
                     <TableCell align='center'>{owners.contact_number_1}</TableCell>
                     <TableCell align='center'>{owners.village}</TableCell>
-                    <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
+                    <TableCell>
+                        <div style={{ display: "flex" }}>
+                            {owners.crops.slice(0, 1).map((crop, index) => (
+                                <button className="grid-button" key={index}>{crop}</button>
+                            ))}
+                            {owners.crops.length >= 2 && (
+                                <button className="grid-button" title={owners.crops.slice(1)}>+{owners.crops.length - 1} more</button>
+                            )}
+                        </div>
+                    </TableCell>
                     <TableCell align='center'>
                         <Link href={'/landowners/add-landowner/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
                             <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
@@ -350,97 +370,6 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
             </TableBody >
         ))
     }
-
-    const generateFilterLandOwners = () => {
-
-        return fL.map((owners, index) => (
-            <TableBody>
-                <TableRow className='tr'>
-
-                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
-
-                        <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
-                        <Typography variant='p'>{owners.name}</Typography>
-                    </TableCell>
-
-                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerID}</TableCell>
-                    <TableCell align='center'>{owners.passbook_refno}</TableCell>
-                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
-                    <TableCell align='center'>{owners.village}</TableCell>
-                    <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
-                    <TableCell align='center'>
-                        <Link href={'/landowners/add-landowner/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
-                            <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
-                        <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
-
-                </TableRow>
-                <Dialog
-                    open={open}
-                    TransitionComponent={Transition}
-                    keepMounted
-                    onClose={handleClose}
-                    aria-describedby="alert-dialog-slide-description"
-                >
-
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
-                            <b>Are you sure you want to delete ?</b>
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>No</Button>
-                        <Button onClick={() => handleDelete(owners.id)}>Yes</Button>
-                    </DialogActions>
-                </Dialog>
-            </TableBody >
-        ))
-    }
-
-    const generateFilterOnboarding = () => {
-        return fO.map((owners, index) => (
-            <TableBody>
-                <TableRow className='tr'>
-
-                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
-
-                        <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
-                        <Typography variant='p'>{owners.name}</Typography>
-                    </TableCell>
-
-                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerID}</TableCell>
-                    <TableCell align='center'>{owners.passbook_refno}</TableCell>
-                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
-                    <TableCell align='center'>{owners.village}</TableCell>
-                    <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
-                    <TableCell align='center'>
-                        <Link href={'/landowners/add-landowner/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
-                            <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
-                        <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
-
-                </TableRow>
-                <Dialog
-                    open={open}
-                    TransitionComponent={Transition}
-                    keepMounted
-                    onClose={handleClose}
-                    aria-describedby="alert-dialog-slide-description"
-                >
-
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
-                            <b>Are you sure you want to delete ?</b>
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>No</Button>
-                        <Button onClick={() => handleDelete(owners.id)}>Yes</Button>
-                    </DialogActions>
-                </Dialog>
-            </TableBody >
-        ))
-    }
-
-
     const generateOnBoarding = () => {
 
         return onboarding.map((owners, index) => (
@@ -466,11 +395,206 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
         ));
     }
 
+    const generateFilterLandOwners = () => {
+
+        return filterLandOwners.map((owners, index) => (
+            <TableBody>
+                <TableRow className='tr'>
+
+                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+
+                        <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
+                        <Typography variant='p'>{owners.name}</Typography>
+                    </TableCell>
+
+                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerID}</TableCell>
+                    <TableCell align='center'>{owners.passbook_refno}</TableCell>
+                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
+                    <TableCell align='center'>{owners.village}</TableCell>
+                    <TableCell>
+                        <div style={{ display: "flex" }}>
+                            {owners.crops.slice(0, 1).map((crop, index) => (
+                                <button className="grid-button" key={index}>{crop}</button>
+                            ))}
+                            {owners.crops.length >= 2 && (
+                                <button className="grid-button" title={owners.crops.slice(1)}>+{owners.crops.length - 1} more</button>
+                            )}
+                        </div>
+                    </TableCell>
+                    <TableCell align='center'>
+                        <Link href={'/landowners/add-landowner/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
+                            <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
+                        <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
+
+                </TableRow>
+                <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-slide-description">
+                            <b>Are you sure you want to delete ?</b>
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>No</Button>
+                        <Button onClick={() => handleDelete(owners.id)}>Yes</Button>
+                    </DialogActions>
+                </Dialog>
+            </TableBody >
+        ))
+    }
+    const generateFilterOnboarding = () => {
+        return filterOnboarding.map((owners, index) => (
+            <TableBody>
+                <TableRow className='tr'>
+
+                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+
+                        <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
+                        <Typography variant='p'>{owners.name}</Typography>
+                    </TableCell>
+
+                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerID}</TableCell>
+                    <TableCell align='center'>{owners.passbook_refno}</TableCell>
+                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
+                    <TableCell align='center'>{owners.village}</TableCell>
+                    <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
+                    <TableCell align='center'>
+                        <Link href={'/landowners/add-landowner/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
+                            <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
+                        <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
+
+                </TableRow>
+                <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-slide-description">
+                            <b>Are you sure you want to delete ?</b>
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>No</Button>
+                        <Button onClick={() => handleDelete(owners.id)}>Yes</Button>
+                    </DialogActions>
+                </Dialog>
+            </TableBody >
+        ))
+    }
+
+    const generateSearchedLandOwners = () => {
+
+        return searchedLandOwners.map((owners, index) => (
+            <TableBody>
+                <TableRow className='tr'>
+
+                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+
+                        <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
+                        <Typography variant='p'>{owners.name}</Typography>
+                    </TableCell>
+
+                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerID}</TableCell>
+                    <TableCell align='center'>{owners.passbook_refno}</TableCell>
+                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
+                    <TableCell align='center'>{owners.village}</TableCell>
+                    <TableCell>
+                        <div style={{ display: "flex" }}>
+                            {owners.crops.slice(0, 1).map((crop, index) => (
+                                <button className="grid-button" key={index}>{crop}</button>
+                            ))}
+                            {owners.crops.length >= 2 && (
+                                <button className="grid-button" title={owners.crops.slice(1)}>+{owners.crops.length - 1} more</button>
+                            )}
+                        </div>
+                    </TableCell>
+                    <TableCell align='center'>
+                        <Link href={'/landowners/add-landowner/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
+                            <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
+                        <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
+
+                </TableRow>
+                <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-slide-description">
+                            <b>Are you sure you want to delete ?</b>
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>No</Button>
+                        <Button onClick={() => handleDelete(owners.id)}>Yes</Button>
+                    </DialogActions>
+                </Dialog>
+            </TableBody >
+        ))
+    }
+    const generateSearchedOnboarding = () => {
+        return searchedOnboarding.map((owners, index) => (
+            <TableBody>
+                <TableRow className='tr'>
+
+                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+
+                        <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
+                        <Typography variant='p'>{owners.name}</Typography>
+                    </TableCell>
+
+                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerID}</TableCell>
+                    <TableCell align='center'>{owners.passbook_refno}</TableCell>
+                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
+                    <TableCell align='center'>{owners.village}</TableCell>
+                    <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
+                    <TableCell align='center'>
+                        <Link href={'/landowners/add-landowner/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
+                            <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
+                        <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
+
+                </TableRow>
+                <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-slide-description">
+                            <b>Are you sure you want to delete ?</b>
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>No</Button>
+                        <Button onClick={() => handleDelete(owners.id)}>Yes</Button>
+                    </DialogActions>
+                </Dialog>
+            </TableBody >
+        ))
+    }
+
+
     const generateGridItems = () => {
 
         return landOwners.map((owner, index) => (
 
-            <Grid xs={3} key={owner.id} className='grid-item'>
+            <Grid xs={3} key={owner.id} className='grid-item' justifyContent='center'>
                 <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }} >
                     <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Typography variant="p" className='typo1' >
@@ -478,8 +602,8 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                         </Typography>
                         <MoreVertIcon />
                     </div>
-                    <div style={{ display: 'grid', alignItems: 'center' }}>
-                        <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
+                    <Grid container xs={12} textAlign='center' display='grid'>
+                        <Grid container xs={12} justifyContent='center' display='grid'><AccountCircleIcon className='avatar_lo' /></Grid>
                         <Typography variant="p" className='name'>
                             {owner.name}
                         </Typography>
@@ -487,19 +611,18 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                             {owner.contact_number_1}
                         </Typography>
                         <div>
-                            <button className="grid-button">
+                            <button className="grid-button" title={owner.crops}>
                                 {owner.crops.length} crops
                             </button>
-                            <button className="grid-button" >32 events</button>
+
                         </div>
-                    </div>
+                    </Grid>
                 </Paper>
                 <br></br>
             </Grid >
 
         ));
     };
-
     const generateGridItemsOnboarding = () => {
 
         return onboarding.map((owner, index) => (
@@ -512,8 +635,8 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                         </Typography>
                         <MoreVertIcon />
                     </div>
-                    <div style={{ display: 'grid', alignItems: 'center' }}>
-                        <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
+                    <Grid container xs={12} textAlign='center' display='grid'>
+                        <Grid container xs={12} justifyContent='center' display='grid'><AccountCircleIcon className='avatar_lo' /></Grid>
                         <Typography variant="p" className='name'>
                             {owner.name}
                         </Typography>
@@ -521,12 +644,11 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                             {owner.contact_number_1}
                         </Typography>
                         <div>
-                            <button className="grid-button">
+                            <button className="grid-button" title={owner.crops}>
                                 {owner.crops.length} crops
                             </button>
-                            <button className="grid-button" >32 events</button>
                         </div>
-                    </div>
+                    </Grid>
                 </Paper>
                 <br></br>
             </Grid >
@@ -534,96 +656,71 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
         ));
     };
 
+    const generateFilterGridItems = () => {
 
+        return filterLandOwners.map((owner, index) => (
 
-    const generateSearchedLandOwners = () => {
+            <Grid xs={3} key={owner.id} className='grid-item' justifyContent='center'>
+                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }} >
+                    <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Typography variant="p" className='typo1' >
+                            #{owner.ownerID}
+                        </Typography>
+                        <MoreVertIcon />
+                    </div>
+                    <Grid container xs={12} textAlign='center' display='grid'>
+                        <Grid container xs={12} justifyContent='center' display='grid'><AccountCircleIcon className='avatar_lo' /></Grid>
+                        <Typography variant="p" className='name'>
+                            {owner.name}
+                        </Typography>
+                        <Typography variant="body2" className='contact'>
+                            {owner.contact_number_1}
+                        </Typography>
+                        <div>
+                            <button className="grid-button" title={owner.crops}>
+                                {owner.crops.length} crops
+                            </button>
 
-        return searchedLandOwners.map((owners, index) => (
-            <TableBody>
-                <TableRow className='tr'>
+                        </div>
+                    </Grid>
+                </Paper>
+                <br></br>
+            </Grid >
 
-                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+        ));
+    };
+    const generateFilterGridItemsOnboarding = () => {
 
-                        <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
-                        <Typography variant='p'>{owners.name}</Typography>
-                    </TableCell>
+        return filterOnboarding.map((owner, index) => (
 
-                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerID}</TableCell>
-                    <TableCell align='center'>{owners.passbook_refno}</TableCell>
-                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
-                    <TableCell align='center'>{owners.village}</TableCell>
-                    <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
-                    <TableCell align='center'>
-                        <Link href={'/landowners/add-landowner/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
-                            <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
-                        <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
+            <Grid xs={3} key={owner.id} className='grid-item'>
+                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }} >
+                    <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Typography variant="p" className='typo1' >
+                            #{owner.ownerID}
+                        </Typography>
+                        <MoreVertIcon />
+                    </div>
+                    <Grid container xs={12} textAlign='center' display='grid'>
+                        <Grid container xs={12} justifyContent='center' display='grid'><AccountCircleIcon className='avatar_lo' /></Grid>
+                        <Typography variant="p" className='name'>
+                            {owner.name}
+                        </Typography>
+                        <Typography variant="body2" className='contact'>
+                            {owner.contact_number_1}
+                        </Typography>
+                        <div>
+                            <button className="grid-button" title={owner.crops}>
+                                {owner.crops.length} crops
+                            </button>
+                        </div>
+                    </Grid>
+                </Paper>
+                <br></br>
+            </Grid >
 
-                </TableRow>
-                <Dialog
-                    open={open}
-                    TransitionComponent={Transition}
-                    keepMounted
-                    onClose={handleClose}
-                    aria-describedby="alert-dialog-slide-description"
-                >
-
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
-                            <b>Are you sure you want to delete ?</b>
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>No</Button>
-                        <Button onClick={() => handleDelete(owners.id)}>Yes</Button>
-                    </DialogActions>
-                </Dialog>
-            </TableBody >
-        ))
-    }
-
-    const generateSearchedOnboarding = () => {
-        return searchedOnboarding.map((owners, index) => (
-            <TableBody>
-                <TableRow className='tr'>
-
-                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
-
-                        <Avatar sx={{ background: 'none' }}><img src={avatar} className='landowner-avatar'></img></Avatar>
-                        <Typography variant='p'>{owners.name}</Typography>
-                    </TableCell>
-
-                    <TableCell align='center' sx={{ color: "rgb(62, 205, 62)" }}>{owners.ownerID}</TableCell>
-                    <TableCell align='center'>{owners.passbook_refno}</TableCell>
-                    <TableCell align='center'>{owners.contact_number_1}</TableCell>
-                    <TableCell align='center'>{owners.village}</TableCell>
-                    <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
-                    <TableCell align='center'>
-                        <Link href={'/landowners/add-landowner/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}>
-                            <EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
-                        <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
-
-                </TableRow>
-                <Dialog
-                    open={open}
-                    TransitionComponent={Transition}
-                    keepMounted
-                    onClose={handleClose}
-                    aria-describedby="alert-dialog-slide-description"
-                >
-
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
-                            <b>Are you sure you want to delete ?</b>
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>No</Button>
-                        <Button onClick={() => handleDelete(owners.id)}>Yes</Button>
-                    </DialogActions>
-                </Dialog>
-            </TableBody >
-        ))
-    }
+        ));
+    };
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -721,19 +818,64 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
 
 
                     </>)
-                    : (<div style={{ marginTop: '20px' }}>
-                        <Typography variant='body1' fontWeight='bold'>Land Owners</Typography>
+                    : (
+                        <div style={{ marginTop: '20px' }}>
 
-                        <Grid container>
-                            {generateGridItems()}
-                        </Grid>
+                            <Grid container>
+                                {filterCriteria.length > 0 ?
 
-                        <Typography variant='body1' fontWeight='bold' >Onboarding Land Owners</Typography>
+                                    (<>
+                                        {filterCriteria.length > 0 ? (
+                                            <Grid container>
+                                                <Grid xs={12} sx={{ justifyContent: 'right', mt: 3, width: '100%', display: 'flex' }}>
+                                                    {filterCriteria.length > 0 ? (<>
+                                                        <Typography variant='p' fontWeight='bold'>Filter : </Typography>
+                                                        {showFilterValue && (<>
+                                                            {filterCriteria.map((field, index) => (
+                                                                <>
+                                                                    {field !== "" && (
+                                                                        <button className="grid-button" style={{ display: 'flex' }}>
+                                                                            {field}
+                                                                            <CloseIcon sx={{ color: 'black' }} fontSize='small'
+                                                                                onClick={() => handleDeleteFilter(index, field)}
+                                                                            />
+                                                                        </button>
+                                                                    )}
+                                                                </>
+                                                            ))}
+                                                        </>
+                                                        )}
+                                                    </>) : (<></>)}
+                                                </Grid>
+                                            </Grid>
+                                        ) : (<></>)}
+                                        {filterLandOwners.length > 0 && (
+                                            <>
+                                                <Typography variant='body1' fontWeight='bold'>Land Owners</Typography>
+                                                <Grid container>
+                                                    {generateFilterGridItems()}
+                                                </Grid>
+                                            </>)}<br />
+                                        {filterOnboarding.length > 0 && (
+                                            <>
+                                                <Typography variant='body1' fontWeight='bold' >Onboarding Land Owners</Typography>
 
-                        <Grid container>
-                            {generateGridItemsOnboarding()}
-                        </Grid>
-                    </div>
+                                                <Grid container>
+                                                    {generateFilterGridItemsOnboarding()}
+                                                </Grid>
+                                            </>)}
+                                    </>) : (<>
+                                        <Typography variant='body1' fontWeight='bold' >Land Owners</Typography>
+                                        <Grid container>
+                                            {generateGridItems()}
+                                        </Grid><br />
+
+                                        < Typography variant='body1' fontWeight='bold' >Onboarding Land Owners</Typography>
+                                        <Grid container>
+                                            {generateGridItemsOnboarding()}
+                                        </Grid></>)}
+                            </Grid>
+                        </div>
                     )
                 }
             </>
@@ -768,7 +910,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                                     }} />
                             </Grid>
                             <Grid xs={0.5}>
-                                <Badge color='success' variant='dot' className='filter-icon' onClick={handleClick}><FilterAltIcon /></Badge>
+                                <Badge color='success' variant='dot' className='filter-icon'><FilterAltIcon onClick={handleClick} sx={{ color: Boolean(anchorEl) ? 'lightgreen' : 'black' }} /></Badge>
                                 <Menu
                                     anchorEl={anchorEl}
                                     keepMounted
@@ -835,7 +977,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                             </Grid>
                             <Grid xs={2}>
                                 <Link href='/landowners/add-landowner/0' style={{ textDecoration: "none", color: "black" }}>
-                                    <Button variant='contained' className='add-landowner-btn'>Add Land Owner</Button>
+                                    <Button variant='contained' className='add-landowner-btn' sx={{ "&:hover": { color: 'white' } }}>Add Land Owner</Button>
                                 </Link>
                             </Grid>
 
@@ -888,14 +1030,14 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                                         <Typography className='events-text' variant='p'>Events</Typography><br />
                                         <b><Typography variant='p' className='numbers'>{event.length}</Typography></b>
                                     </div>
-                                    <img src={vector} className='information'></img>
+                                    <img src={vector} className='information2'></img>
                                 </Item>
                             </Grid>
 
                         </Grid>
 
 
-                        {filterCriteria.length > 0 ?
+                        {(filterCriteria.length > 0 && showTable) || (query && searchQuery) ?
                             (
                                 <>
                                     {filterCriteria.length > 0 ? (
@@ -909,7 +1051,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                                                                 {field !== "" && (
                                                                     <button className="grid-button" style={{ display: 'flex' }}>
                                                                         {field}
-                                                                        <CloseIcon sx={{ color: 'black' }} fontSize='small'
+                                                                        <CloseIcon fontSize='small'
                                                                             onClick={() => handleDeleteFilter(index, field)}
                                                                         />
                                                                     </button>
@@ -922,7 +1064,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                                             </Grid>
                                         </Grid>
                                     ) : (<></>)}
-                                    {fL.length > 0 ? (<>
+                                    {filterLandOwners.length > 0 ? (<>
                                         <Grid container>
                                             <TableContainer>
                                                 <Table className='table' >
@@ -944,14 +1086,14 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                                             </TableContainer>
                                         </Grid>
                                         <Grid container sx={{ mt: 3 }} >
-                                            {fL.length > 0 ? (<>
+                                            {filterLandOwners.length > 0 ? (<>
                                                 <Grid xs={9} className='total-events'>
-                                                    <Typography sx={{ color: 'gray' }}>{fL.length} {fL.length == 1 ? 'Operator' : 'Operators'}</Typography>
+                                                    <Typography sx={{ color: 'gray' }}>{filterLandOwners.length} {filterLandOwners.length == 1 ? 'Operator' : 'Operators'}</Typography>
                                                 </Grid>
                                                 <Grid xs={3} className='pagination'>
                                                     <Stack spacing={2}>
                                                         <Pagination
-                                                            count={Math.ceil(fL.length / itemsPerPageLandowner)}
+                                                            count={Math.ceil(filterLandOwners.length / itemsPerPageLandowner)}
                                                             variant='outlined'
                                                             page={pageLandowner}
                                                             onChange={handleChangePageLandowner} />
@@ -962,7 +1104,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                                         </Grid>
                                     </>) : (<></>)}
 
-                                    {fO.length > 0 ?
+                                    {filterOnboarding.length > 0 ?
                                         (
                                             <>
                                                 <Grid container>
@@ -986,16 +1128,16 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                                                     </TableContainer>
                                                 </Grid>
                                                 <Grid container sx={{ mt: 3 }}>
-                                                    {fO ?
+                                                    {filterOnboarding.length > 0 ?
                                                         (
                                                             <>
                                                                 <Grid xs={9} className='total-events'>
-                                                                    <Typography sx={{ color: 'gray' }}>{fO.length} {fO.length == 1 ? 'Operator' : 'Operators'}</Typography>
+                                                                    <Typography sx={{ color: 'gray' }}>{filterOnboarding.length} {filterOnboarding.length == 1 ? 'Operator' : 'Operators'}</Typography>
                                                                 </Grid>
                                                                 <Grid xs={3} className='pagination'>
                                                                     <Stack spacing={2}>
                                                                         <Pagination
-                                                                            count={Math.ceil(fO.length / itemsPerPageLandowner)}
+                                                                            count={Math.ceil(filterOnboarding.length / itemsPerPageLandowner)}
                                                                             variant='outlined'
                                                                             page={pageLandowner}
                                                                             onChange={handleChangePageLandowner} />
@@ -1096,91 +1238,6 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                         }
 
 
-                        {/* {query && searchQuery ? (<>
-                    {searchedLandOwners.length > 0 ? (<>
-                        <Grid container>
-                            <TableContainer>
-                                <Table className='table' >
-                                    <TableBody >
-                                        <TableRow className='th'>
-                                            <TableCell className='tc' align='center'>Land Owners</TableCell>
-                                            <TableCell align='center'>ID</TableCell>
-                                            <TableCell align='center'>PassBook Ref No.</TableCell>
-                                            <TableCell align='center'>Contact No</TableCell>
-                                            <TableCell align='center'>Village</TableCell>
-                                            <TableCell align='center'>Crops</TableCell>
-                                            <TableCell align='center'>Actions</TableCell>
-                                        </TableRow>
-                                    </TableBody>
-
-                                    {generateSearchedLandOwners()}
-
-                                </Table>
-                            </TableContainer>
-                        </Grid>
-                        <Grid container sx={{ mt: 3 }} >
-                            {searchedLandOwners.length > 0 ? (<>
-                                <Grid xs={9} className='total-events'>
-                                    <Typography sx={{ color: 'gray' }}>{searchedLandOwners.length} {searchedLandOwners.length == 1 ? 'Operator' : 'Operators'}</Typography>
-                                </Grid>
-                                <Grid xs={3} className='pagination'>
-                                    <Stack spacing={2}>
-                                        <Pagination
-                                            count={Math.ceil(searchedLandOwners.length / itemsPerPageLandowner)}
-                                            variant='outlined'
-                                            page={pageLandowner}
-                                            onChange={handleChangePageLandowner} />
-
-                                    </Stack>
-                                </Grid>
-                            </>) : (<></>)}
-                        </Grid>
-                    </>) : (<></>)}
-
-                    {searchedOnboarding.length > 0 ? (<>
-                        <Grid container>
-                            <TableContainer>
-                                <Table className='table' >
-                                    <TableBody >
-                                        <TableRow className='th'>
-                                            <TableCell className='tc' align='center'>Land Owners</TableCell>
-                                            <TableCell align='center'>ID</TableCell>
-                                            <TableCell align='center'>PassBook Ref No.</TableCell>
-                                            <TableCell align='center'>Contact No</TableCell>
-                                            <TableCell align='center'>Village</TableCell>
-                                            <TableCell align='center'>Crops</TableCell>
-                                            <TableCell align='center'>Actions</TableCell>
-                                        </TableRow>
-                                    </TableBody>
-
-                                    {generateSearchedOnboarding()}
-
-                                </Table>
-                            </TableContainer>
-                        </Grid>
-                        <Grid container sx={{ mt: 3 }} >
-                            {searchedOnboarding.length > 0 ? (<>
-                                <Grid xs={9} className='total-events'>
-                                    <Typography sx={{ color: 'gray' }}>{searchedOnboarding.length} {searchedOnboarding.length == 1 ? 'Operator' : 'Operators'}</Typography>
-                                </Grid>
-                                <Grid xs={3} className='pagination'>
-                                    <Stack spacing={2}>
-                                        <Pagination
-                                            count={Math.ceil(searchedOnboarding.length / itemsPerPageLandowner)}
-                                            variant='outlined'
-                                            page={pageLandowner}
-                                            onChange={handleChangePageLandowner} />
-
-                                    </Stack>
-                                </Grid>
-                            </>) : (<></>)}
-                        </Grid>
-                    </>) : (<></>)}
-                </>) :
-                    (<>
-                        {generateTable()}
-                    </>)
-                } */}
                     </Box >
                 </>
             ) : (

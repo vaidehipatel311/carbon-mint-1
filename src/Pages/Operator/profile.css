@@ -123,6 +123,9 @@
 }
 
 @media screen and (max-width:2200px) {
+    .acc{
+        font-size: 100px !important;
+    }
     .cards3 {
         gap: 20px;
     }
@@ -149,7 +152,7 @@
     .contact .email-details,
     .contact .address-details,
     .documents .aadhar {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .profile-grid .n,
@@ -223,6 +226,9 @@
 }
 
 @media screen and (max-width:1920px) {
+    .acc{
+        font-size: 90px !important;
+    }
     .cards3 {
         gap: 20px;
     }
@@ -323,6 +329,9 @@
 }
 
 @media screen and (max-width:1660px) {
+    .acc{
+        font-size: 80px !important;
+    }
     .cards3 {
         gap: 20px;
     }
@@ -423,6 +432,9 @@
 }
 
 @media screen and (max-width:1520px) {
+    .acc{
+        font-size: 80px !important;
+    }
     .cards3 {
         gap: 20px;
     }
@@ -523,6 +535,9 @@
 }
 
 @media screen and (max-width:1440px) {
+    .acc{
+        font-size: 70px !important;
+    }
     .cards3 {
         gap: 15px;
     }
@@ -719,9 +734,16 @@
     .grid-lower-profile .crops-operators .no-of-events{
         margin-left: 10px;
     }
+    .acc{
+       width: 60px !important; 
+    }
+    
 }
 
 @media screen and (max-width:1280px) {
+    .acc{
+        font-size: 50px !important;
+    }
     .cards3 {
         gap: 15px;
     }
@@ -822,6 +844,9 @@
 }
 
 @media screen and (max-width:1120px) {
+    .acc{
+        font-size: 30px !important;
+    }
     .cards3 {
         gap: 10px;
     }

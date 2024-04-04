@@ -1,7 +1,7 @@
 .header {
     background: #F9F9F9;
     left: 276px;
-    height: 71px;
+    height: 61px;
     position: fixed;
     z-index: 1201;
     width: calc(100% - 300px);
@@ -177,7 +177,7 @@
 
     .contact .address-details,.actions .logout-details{
         & .MuiTypography-root {
-            font-size: 18px;
+            font-size: 20px;
         }
     }
     .actions .title{

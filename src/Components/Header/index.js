@@ -16,18 +16,31 @@ import { Avatar, Button, Typography, Grid } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import Slide from '@mui/material/Slide';
 
-import person from '../../assets/images/DashBoard/person.png';
 import { fetchUser, updateUserStatus } from '../../Services/Login/actions';
 import { connect } from 'react-redux'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useAuth } from '../../AuthProvider';
 import { auth } from '../../firebase';
 
+const Transition = React.forwardRef(function Transition(
+    props,
+    ref
+) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 function Header({ fetchUser, updateUserStatus }) {
     const [notificationDrawerOpen, setNotificationDrawerOpen] = useState(false);
     const [profileDrawerOpen, setProfileDrawerOpen] = useState(false);
     const [user, setUser] = useState([]);
+    const [open, setOpen] = React.useState(false);
+
     const navigate = useNavigate();
     const { currentUser } = useAuth();
 
@@ -55,13 +68,17 @@ function Header({ fetchUser, updateUserStatus }) {
         setProfileDrawerOpen(false);
     };
 
+    function handleClose() {
+        setOpen(false);
+    };
+
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#fff' : 'rgba(233, 233, 233, 0.425)',
         ...theme.typography.body2,
         color: theme.palette.text.secondary,
     }));
 
-    
+
 
     const handleLogout = (id, status) => {
         updateUserStatus(id, status);
@@ -211,6 +228,24 @@ function Header({ fetchUser, updateUserStatus }) {
                             </div>
                             <Button sx={{ color: 'black' }} onClick={() => handleLogout(user.id, "Logged_Out")}><ArrowForwardIosIcon className='arrowforward-icon' /></Button>
                         </div>
+                        <Dialog
+                            open={open}
+                            TransitionComponent={Transition}
+                            keepMounted
+                            onClose={handleClose}
+                            aria-describedby="alert-dialog-slide-description"
+                        >
+
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-slide-description">
+                                    <b>Are you sure you want to delete ?</b>
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose}>No</Button>
+                                <Button onClick={handleLogout}>Yes</Button>
+                            </DialogActions>
+                        </Dialog>
                     </Link>
                 </div>
 

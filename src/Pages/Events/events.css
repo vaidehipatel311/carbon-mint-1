@@ -694,6 +694,11 @@
             font-size: 14px;
         }
     }
+
+    .ev-close-img{
+        margin-left: -70px;
+        border-radius: 5px;
+    }
 }
 
 @media screen and (max-width:1280px) {

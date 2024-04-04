@@ -1320,8 +1320,8 @@
 
     .upcoming .year_month_img {
         top: 0px;
-        margin-left: 10px;
-        width: 20%;
+        margin-left: 5px;
+        width: 22%;
     }
 
     .crops-chart .states-dropdown {
@@ -1338,7 +1338,8 @@
     }
 
     .yield-chart .chart-img {
-        margin-bottom: 20px;
+        margin-top: 55px;
+        margin-bottom: 0px;
     }
 
     .crops-chart .chart-img {
@@ -1362,6 +1363,10 @@
         margin-left: 90px;
     }
 
+    .yield-chart .year_month_img{
+        width: 20%;
+    }
+
     .operator-chart .lists,
     .event-chart .lists,
     .status-chart .lists {
@@ -1381,8 +1386,9 @@
     }
 
     .yield-chart .lists {
-        font-size: 12px;
+        font-size: 10px;
         margin-left: 0px;
+        margin-top: 55px;
     }
 
     .status-chart .lists {
@@ -1392,11 +1398,20 @@
 
     .crops-chart .lists {
         font-size: 10px;
-        margin-bottom: 105px;
+        margin-bottom: 85px;
         margin-top: 80px;
         margin-left: 10px;
     }
-    
+    .event-chart .chart-img{
+        margin-top: 35px;
+    }
+    .operator-chart .year_month_img{
+        width: 20%;
+        margin-left: 10px;
+    }
+    .operator-chart .country-dropdown{
+        margin-left: 15px;
+    }
 
 
 }

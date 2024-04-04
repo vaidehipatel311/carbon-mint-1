@@ -500,10 +500,10 @@ function AddEvent({ addEvent, fetchAddedEvents, editEvent }) {
                               key={index}
                               src={base64data}
                               alt={`Preview ${index}`}
-                              style={{ width: '100px', height: '100px', marginRight: '40px', marginLeft: "40px" }}
+                              style={{ width: '100px', height: '100px', marginRight: '40px', marginLeft: "40px",border:'1px solid lightgray',borderRadius:'10px' }}
                               onClick={() => handleClickOpen(index)}
                             />
-                            <CloseIcon className='ev-close-img' onClick={() => handleDeleteFile(index)} />
+                            <CloseIcon className='ev-close-img' sx={{backgroundColor:'#FBE5D8',color:'black'}} onClick={() => handleDeleteFile(index)} />
                             <Dialog
                               open={open === index}
                               onClose={handleClose}

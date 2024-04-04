@@ -112,6 +112,11 @@ input {
     width: 20%;
   }
 
+  .events img:last-child{
+    margin-top: 15px;
+    width: 21%;
+  }
+
 }
 
 @media screen and (max-width:1920px) {
@@ -370,7 +375,17 @@ input {
     margin-left: 0px;
     height: 20%;
     width: 20%;
+    margin-top: 5px;
   }
+
+  .events img:last-child{
+    width: 25%;
+    margin-top: 10px;
+  }
+  .table .avatar_lp{
+    width: 30px;
+    height: 30px;
+}
 
 }
 
