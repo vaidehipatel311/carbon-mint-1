@@ -126,7 +126,7 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
                                                 <Typography variant='p' fontWeight='bold'>{owners.landparcels ? owners.landparcels : "-"}</Typography>
                                             </Grid>
                                             <Grid xs={4} className='n'>
-                                                <Typography variant='p' fontWeight='bold'>{owners.crops ? owners.crops : "-"}</Typography>
+                                                <Typography variant='p' fontWeight='bold'>{owners.crops.length ? owners.crops.length : "-"}</Typography>
                                             </Grid>
                                         </Grid>
 

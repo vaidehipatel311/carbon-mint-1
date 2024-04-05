@@ -110,7 +110,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
 
         fetchCrops()
             .then((data) => {
-                const c = landParcels.map((p)=>p.id);
+                const c = landParcels.map((p) => p.id);
 
                 const allFilteredCrops = [];
 
@@ -323,7 +323,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex',borderBottom:'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex', borderBottom: 'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
@@ -335,12 +335,12 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
                     <TableCell align='center'>{owners.village}</TableCell>
                     <TableCell>
                         <div style={{ display: "flex" }}>
-                            {crops.slice(0,1).map((crop, index) => (
+                            {crops.slice(0, 1).map((crop, index) => (
                                 <button className="grid-button" key={index}>{crop.crop_name}</button>
                             ))}
                             {crops.length >= 2 ? (
-                                <button className="grid-button" title={crops.slice(1).map((c)=>c.crop_name)}>+{crops.length - 1} more</button>
-                            ):(<></>)}
+                                <button className="grid-button" title={crops.slice(1).map((c) => c.crop_name)}>+{crops.length - 1} more</button>
+                            ) : (<></>)}
                         </div>
                     </TableCell>
                     <TableCell align='center'>
@@ -396,7 +396,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex',borderBottom:'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex', borderBottom: 'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
@@ -469,7 +469,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex',borderBottom:'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex', borderBottom: 'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
@@ -544,7 +544,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
             <Grid xs={3} key={owner.id} className='landparcel-grid'>
 
                 <Grid item xs={12}>
-                    <Paper className="grid-lower">
+                    <Paper className="grid-lower" onClick={()=>handleProfile(owner.id)}>
                         <Grid container xs={12} display='grid' textAlign='center'>
                             <Typography variant='p' fontWeight='bold'>{owner.name} - Sy.no.:{owner.SyNo}</Typography>
                             <Typography variant='body1' color='gray'>{owner.village}, {owner.district}</Typography>
@@ -575,7 +575,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
 
             <Grid xs={3} key={owner.id} className='landparcel-grid'>
                 <Grid item xs={12}>
-                    <Paper className="grid-lower">
+                    <Paper className="grid-lower" onClick={()=>handleProfile(owner.id)}>
                         <Grid container xs={12} display='grid' textAlign='center'>
                             <Typography variant='p' fontWeight='bold'>{owner.name} - Sy.no.:{owner.SyNo}</Typography>
                             <Typography variant='body1' color='gray'>{owner.village}, {owner.district}</Typography>
@@ -603,11 +603,12 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
 
     const generateFilterGridItems = () => {
         return fL.map((owner, index) => (
+            
 
             <Grid xs={3} key={owner.id} className='landparcel-grid'>
 
                 <Grid item xs={12}>
-                    <Paper className="grid-lower">
+                    <Paper className="grid-lower" onClick={()=>handleProfile(owner.id)}>
                         <Grid container xs={12} display='grid' textAlign='center'>
                             <Typography variant='p' fontWeight='bold'>{owner.name} - Sy.no.:{owner.SyNo}</Typography>
                             <Typography variant='body1' color='gray'>{owner.village}, {owner.district}</Typography>
@@ -638,7 +639,70 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
 
             <Grid xs={3} key={owner.id} className='landparcel-grid'>
                 <Grid item xs={12}>
-                    <Paper className="grid-lower">
+                    <Paper className="grid-lower" onClick={()=>handleProfile(owner.id)}>
+                        <Grid container xs={12} display='grid' textAlign='center'>
+                            <Typography variant='p' fontWeight='bold'>{owner.name} - Sy.no.:{owner.SyNo}</Typography>
+                            <Typography variant='body1' color='gray'>{owner.village}, {owner.district}</Typography>
+                            <Typography variant='body1' color='gray'>{owner.state}</Typography>
+                        </Grid><br />
+                        <Grid container spacing={2} sx={{ textAlign: 'center', justifyContent: 'space-between', display: 'flex' }}>
+                            <Grid item xs={4} className='num'><Typography variant='p' fontWeight="bold">{owner.acres}</Typography></Grid>
+                            <Grid item xs={4} className='num'><Typography variant='p' fontWeight="bold">{owner.area_owned}</Typography></Grid>
+                            <Grid item xs={4} className='num'><Typography variant='p' fontWeight="bold">{owner.crops.length}</Typography></Grid>
+                        </Grid>
+                        <Grid container sx={{ textAlign: 'center', justifyContent: 'space-between', display: 'flex', color: 'gray' }}>
+                            <Grid xs={4} className='text'>
+                                <Typography variant='p'>Acres</Typography></Grid>
+                            <Grid xs={4} className='text'>
+                                <Typography variant='p'>Area Owned</Typography></Grid>
+                            <Grid xs={4} className='text'>
+                                <Typography variant='p'>Crops</Typography></Grid >
+                        </Grid>
+                    </Paper >
+                </Grid>
+                <br></br>
+            </Grid >
+        ));
+    };
+
+    const generateSearchedGridItems = () => {
+        return searchedLandParcels.map((owner, index) => (
+
+            <Grid xs={3} key={owner.id} className='landparcel-grid'>
+
+                <Grid item xs={12}>
+                    <Paper className="grid-lower" onClick={()=>handleProfile(owner.id)}>
+                        <Grid container xs={12} display='grid' textAlign='center'>
+                            <Typography variant='p' fontWeight='bold'>{owner.name} - Sy.no.:{owner.SyNo}</Typography>
+                            <Typography variant='body1' color='gray'>{owner.village}, {owner.district}</Typography>
+                            <Typography variant='body1' color='gray'>{owner.state}</Typography>
+                        </Grid><br />
+                        <Grid container spacing={2} sx={{ textAlign: 'center', justifyContent: 'space-between', display: 'flex' }}>
+                            <Grid item xs={4} className='num'><Typography variant='p' fontWeight="bold">{owner.acres}</Typography></Grid>
+                            <Grid item xs={4} className='num'><Typography variant='p' fontWeight="bold">{owner.area_owned}</Typography></Grid>
+                            <Grid item xs={4} className='num'><Typography variant='p' fontWeight="bold">{owner.crops.length}</Typography></Grid>
+                        </Grid>
+                        <Grid container sx={{ textAlign: 'center', justifyContent: 'space-between', display: 'flex', color: 'gray' }}>
+                            <Grid xs={4} className='text'>
+                                <Typography variant='p'>Acres</Typography></Grid>
+                            <Grid xs={4} className='text'>
+                                <Typography variant='p'>Area Owned</Typography></Grid>
+                            <Grid xs={4} className='text'>
+                                <Typography variant='p'>Crops</Typography></Grid >
+                        </Grid>
+                    </Paper >
+                </Grid>
+                <br></br>
+            </Grid >
+        ));
+    };
+    const generateSearchedGridItemsOnboarding = () => {
+
+        return searchedOnboarding.map((owner, index) => (
+
+            <Grid xs={3} key={owner.id} className='landparcel-grid'>
+                <Grid item xs={12}>
+                    <Paper className="grid-lower" onClick={()=>handleProfile(owner.id)}>
                         <Grid container xs={12} display='grid' textAlign='center'>
                             <Typography variant='p' fontWeight='bold'>{owner.name} - Sy.no.:{owner.SyNo}</Typography>
                             <Typography variant='body1' color='gray'>{owner.village}, {owner.district}</Typography>
@@ -745,7 +809,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
                         <div style={{ marginTop: '20px' }}>
 
                             <Grid container>
-                                {filterCriteria.length > 0 ?
+                                {filterCriteria.length > 0 || (query && searchQuery) ? 
                                     (<>
                                         {filterCriteria.length > 0 ? (
                                             <Grid container>
@@ -771,21 +835,37 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
                                                 </Grid>
                                             </Grid>
                                         ) : (<></>)}
-                                        {fL.length > 0 && (
+                                        {fL.length > 0 ? (
                                             <>
                                                 <Typography variant='body1' fontWeight='bold'>Land Parcels</Typography>
                                                 <Grid container>
                                                     {generateFilterGridItems()}
                                                 </Grid>
-                                            </>)}<br/>
-                                        {fO.length > 0 && (
+                                            </>) : (<></>)}<br />
+                                        {fO.length > 0 ? (
                                             <>
                                                 <Typography variant='body1' fontWeight='bold' >Onboarding Land Parcels</Typography>
 
                                                 <Grid container>
                                                     {generateFilterGridItemsOnboarding()}
                                                 </Grid>
-                                            </>)}
+                                            </>) : (<></>)}
+
+                                        {searchedLandParcels.length > 0 ? (
+                                            <>
+                                                <Typography variant='body1' fontWeight='bold'>Land Parcels</Typography>
+                                                <Grid container>
+                                                    {generateSearchedGridItems()}
+                                                </Grid>
+                                            </>) : (<></>)}<br />
+                                        {searchedOnboarding.length > 0 ? (
+                                            <>
+                                                <Typography variant='body1' fontWeight='bold' >Onboarding Land Parcels</Typography>
+
+                                                <Grid container>
+                                                    {generateSearchedGridItemsOnboarding()}
+                                                </Grid>
+                                            </>) : (<></>)}
                                     </>) : (<>
                                         <Typography variant='body1' fontWeight='bold' >Land Parcels</Typography>
                                         <Grid container>
@@ -836,7 +916,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
                                     }} />
                             </Grid>
                             <Grid xs={0.5}>
-                                <Badge color='success' variant='dot' className='filter-icon'><FilterAltIcon onClick={handleClick} sx={{color:Boolean(anchorEl)?'lightgreen':'black',cursor:'pointer'}}/></Badge>
+                                <Badge color='success' variant='dot' className='filter-icon'><FilterAltIcon onClick={handleClick} sx={{ color: Boolean(anchorEl) ? 'lightgreen' : 'black', cursor: 'pointer' }} /></Badge>
                                 <Menu
                                     anchorEl={anchorEl}
                                     keepMounted
@@ -903,8 +983,8 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
                             </Grid>
                             <Grid xs={2}>
                                 <Link href='/landparcels/add-landparcel/0' style={{ textDecoration: "none", color: "black" }}>
-                                    <Button sx={{"&:hover":{color:'white'}}}
-                                     variant='contained' className='add-landowner-btn'>Add Land Parcel</Button>
+                                    <Button sx={{ "&:hover": { color: 'white' } }}
+                                        variant='contained' className='add-landowner-btn'>Add Land Parcel</Button>
                                 </Link>
                             </Grid>
 
@@ -959,7 +1039,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
                             </Grid>
 
                         </Grid>
-                        {(filterCriteria.length > 0 && showTable) || (query && searchQuery) ?
+                        {(filterCriteria.length > 0 && showTable) || (query && searchQuery && showTable) ?
                             (
                                 <>
                                     {filterCriteria.length > 0 ? (

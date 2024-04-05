@@ -96,6 +96,9 @@
 }
 
 @media screen and (max-width:2200px) {
+    .avatar_lo{
+        font-size: 100px !important;
+    }
     .table {
         & .MuiTableCell-root {
             font-size: 22px;
@@ -140,11 +143,15 @@
     .grid-item-card .contact{
         font-size: 22px;
         left: 0px;
-        position: relative;
+        text-align: center;
     }
+    
 }
 
 @media screen and (max-width:1920px) {
+    .avatar_lo{
+        font-size: 90px !important;
+    }
     .table {
         & .MuiTableCell-root {
             font-size: 20px;
@@ -185,6 +192,9 @@
 }
 
 @media screen and (max-width:1660px) {
+    .avatar_lo{
+        font-size: 80px !important;
+    }
     .table {
         & .MuiTableCell-root {
             font-size: 18px;
@@ -224,6 +234,9 @@
 }
 
 @media screen and (max-width:1520px) {
+    .avatar_lo{
+        font-size: 80px !important;
+    }
     .table {
         & .MuiTableCell-root {
             font-size: 16px;
@@ -263,6 +276,9 @@
 }
 
 @media screen and (max-width:1440px) {
+    .avatar_lo{
+        font-size: 70px !important;
+    }
     .table {
         & .MuiTableCell-root {
             font-size: 14px;
@@ -353,6 +369,10 @@
 }
 
 @media screen and (max-width:1280px) {
+    .avatar_lo{
+        font-size: 50px !important;
+        
+    }
     .table {
         & .MuiTableCell-root {
             font-size: 13px;
@@ -392,6 +412,10 @@
 }
 
 @media screen and (max-width:1120px) {
+    .avatar_lo{
+        font-size: 40px !important;
+        
+    }
     .table {
         & .MuiTableCell-root {
             font-size: 12px;

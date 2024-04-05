@@ -323,7 +323,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display:'flex',borderBottom:'none',cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex', borderBottom: 'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
 
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
@@ -401,7 +401,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex',borderBottom:'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex', borderBottom: 'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
 
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
@@ -498,7 +498,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex',borderBottom:'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex', borderBottom: 'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
 
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
@@ -595,7 +595,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
         return landOwners.map((owner, index) => (
 
             <Grid xs={3} key={owner.id} className='grid-item' justifyContent='center'>
-                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }} >
+                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }}  onClick={()=>handleProfile(owner.id)}>
                     <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Typography variant="p" className='typo1' >
                             #{owner.ownerID}
@@ -628,7 +628,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
         return onboarding.map((owner, index) => (
 
             <Grid xs={3} key={owner.id} className='grid-item'>
-                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }} >
+                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }}  onClick={()=>handleProfile(owner.id)}>
                     <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Typography variant="p" className='typo1' >
                             #{owner.ownerID}
@@ -661,7 +661,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
         return filterLandOwners.map((owner, index) => (
 
             <Grid xs={3} key={owner.id} className='grid-item' justifyContent='center'>
-                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }} >
+                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }}  onClick={()=>handleProfile(owner.id)}>
                     <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Typography variant="p" className='typo1' >
                             #{owner.ownerID}
@@ -694,7 +694,73 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
         return filterOnboarding.map((owner, index) => (
 
             <Grid xs={3} key={owner.id} className='grid-item'>
-                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }} >
+                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }}  onClick={()=>handleProfile(owner.id)}>
+                    <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Typography variant="p" className='typo1' >
+                            #{owner.ownerID}
+                        </Typography>
+                        <MoreVertIcon />
+                    </div>
+                    <Grid container xs={12} textAlign='center' display='grid'>
+                        <Grid container xs={12} justifyContent='center' display='grid'><AccountCircleIcon className='avatar_lo' /></Grid>
+                        <Typography variant="p" className='name'>
+                            {owner.name}
+                        </Typography>
+                        <Typography variant="body2" className='contact'>
+                            {owner.contact_number_1}
+                        </Typography>
+                        <div>
+                            <button className="grid-button" title={owner.crops}>
+                                {owner.crops.length} crops
+                            </button>
+                        </div>
+                    </Grid>
+                </Paper>
+                <br></br>
+            </Grid >
+
+        ));
+    };
+
+    const generateSearchedGridItems = () => {
+
+        return searchedLandOwners.map((owner, index) => (
+
+            <Grid xs={3} key={owner.id} className='grid-item' justifyContent='center'>
+                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }}  onClick={()=>handleProfile(owner.id)}>
+                    <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Typography variant="p" className='typo1' >
+                            #{owner.ownerID}
+                        </Typography>
+                        <MoreVertIcon />
+                    </div>
+                    <Grid container xs={12} textAlign='center' display='grid'>
+                        <Grid container xs={12} justifyContent='center' display='grid'><AccountCircleIcon className='avatar_lo' /></Grid>
+                        <Typography variant="p" className='name'>
+                            {owner.name}
+                        </Typography>
+                        <Typography variant="body2" className='contact'>
+                            {owner.contact_number_1}
+                        </Typography>
+                        <div>
+                            <button className="grid-button" title={owner.crops}>
+                                {owner.crops.length} crops
+                            </button>
+
+                        </div>
+                    </Grid>
+                </Paper>
+                <br></br>
+            </Grid >
+
+        ));
+    };
+    const generateSearchedGridItemsOnboarding = () => {
+
+        return searchedOnboarding.map((owner, index) => (
+
+            <Grid xs={3} key={owner.id} className='grid-item'>
+                <Paper className="grid-item-card" sx={{ backgroundColor: "rgb(245, 243, 243)" }} onClick={()=>handleProfile(owner.id)} >
                     <div style={{ height: "30px", display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <Typography variant="p" className='typo1' >
                             #{owner.ownerID}
@@ -822,7 +888,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                         <div style={{ marginTop: '20px' }}>
 
                             <Grid container>
-                                {filterCriteria.length > 0 ?
+                                {filterCriteria.length > 0 || (query && searchQuery) ?
 
                                     (<>
                                         {filterCriteria.length > 0 ? (
@@ -849,21 +915,41 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                                                 </Grid>
                                             </Grid>
                                         ) : (<></>)}
-                                        {filterLandOwners.length > 0 && (
+                                        {filterLandOwners.length > 0 ? (
                                             <>
                                                 <Typography variant='body1' fontWeight='bold'>Land Owners</Typography>
                                                 <Grid container>
                                                     {generateFilterGridItems()}
                                                 </Grid>
-                                            </>)}<br />
-                                        {filterOnboarding.length > 0 && (
+                                            </>):(<></>)}<br />
+                                        {filterOnboarding.length > 0 ? (
                                             <>
                                                 <Typography variant='body1' fontWeight='bold' >Onboarding Land Owners</Typography>
 
                                                 <Grid container>
                                                     {generateFilterGridItemsOnboarding()}
                                                 </Grid>
-                                            </>)}
+                                            </>):(<></>)}
+
+                                        {searchedLandOwners.length > 0 ? (
+                                            <>
+                                                <Typography variant='body1' fontWeight='bold'>Land Owners</Typography>
+                                                <Grid container>
+                                                    {generateSearchedGridItems()}
+                                                </Grid>
+                                            </>):(<></>)}<br />
+                                        {searchedOnboarding.length > 0? (
+                                            <>
+                                                <Typography variant='body1' fontWeight='bold' >Onboarding Land Owners</Typography>
+
+                                                <Grid container>
+                                                    {generateSearchedGridItemsOnboarding()}
+                                                </Grid>
+                                            </>):(<></>)}
+
+
+
+
                                     </>) : (<>
                                         <Typography variant='body1' fontWeight='bold' >Land Owners</Typography>
                                         <Grid container>
@@ -1037,7 +1123,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
                         </Grid>
 
 
-                        {(filterCriteria.length > 0 && showTable) || (query && searchQuery) ?
+                        {(filterCriteria.length > 0 && showTable) || (query && searchQuery && showTable) ?
                             (
                                 <>
                                     {filterCriteria.length > 0 ? (

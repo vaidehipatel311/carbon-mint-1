@@ -44,13 +44,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 120px;
+        margin-left: 0px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 22px;
-        left: 80px;
+        left: 0px;
         position: relative;
     }
     .landparcel-grid{
@@ -89,7 +89,7 @@
 
     }
     .grid-item .grid-item-card{
-        width: 90%;
+        width: 100%;
     }
     .grid-item-card .typo1{
         font-size: 20px;
@@ -97,13 +97,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 90px;
+        margin-left: 0px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 20px;
-        left: 65px;
+        left: 0px;
         position: relative;
     }
     .landparcel-grid{
@@ -140,7 +140,7 @@
 
     }
     .grid-item .grid-item-card{
-        width: 85%;
+        width: 100%;
     }
     .grid-item-card .typo1{
         font-size: 18px;
@@ -148,13 +148,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 50px;
+        margin-left: 0px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 18px;
-        left: 30px;
+        left: 0px;
         position: relative;
     }
     .landparcel-grid{
@@ -191,7 +191,7 @@
 
     }
     .grid-item .grid-item-card{
-        width: 85%;
+        width: 100%;
     }
     .grid-item-card .typo1{
         font-size: 16px;
@@ -199,13 +199,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 30px;
+        margin-left: 0px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 16px;
-        left: 30px;
+        left: 0px;
         position: relative;
     }
     .landparcel-grid{
@@ -242,7 +242,7 @@
 
     }
     .grid-item .grid-item-card{
-        width: 85%;
+        width: 100%;
     }
     .grid-item-card .typo1{
         font-size: 14px;
@@ -250,13 +250,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 20px;
+        margin-left: 0px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 14px;
-        left: 20px;
+        left: 0px;
         position: relative;
     }
     .landparcel-grid{
@@ -345,7 +345,7 @@
 
     }
     .grid-item .grid-item-card{
-        width: 80%;
+        width: 100%;
     }
     .grid-item-card .typo1{
         font-size: 14px;
@@ -353,13 +353,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: 5px;
+        margin-left: 0px;
     }
     .grid-item-card .name,
     .grid-item-card .grid-button,
     .grid-item-card .contact{
         font-size: 14px;
-        left: 5px;
+        left: 0px;
         position: relative;
     }
     .landparcel-grid{
@@ -399,7 +399,7 @@
 
     }
     .grid-item .grid-item-card{
-        width: 80%;
+        width: 100%;
     }
     .grid-item-card .typo1{
         font-size: 14px;
@@ -407,13 +407,13 @@
 
     .grid-item-card .avatar{
         
-        margin-left: -10px;
+        margin-left: 0px;
     }
     .grid-item-card .name,
     
     .grid-item-card .contact{
         font-size: 12px;
-        left: -10px;
+        left: 0px;
         position: relative;
     }
     .grid-item-card .grid-button{
