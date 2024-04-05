@@ -32,22 +32,33 @@ import Checkbox from '@mui/material/Checkbox';
 import SearchIcon from '@mui/icons-material/Search';
 import { fetchOperator, fetchCrops } from '../../Services/Operator/actions'
 import { fetchEvents } from '../../Services/Events/actions'
-import { useLocation } from 'react-router-dom';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import { fetchLandOwners } from '../../Services/LandOwners/actions'
+import { fetchLandParcel } from '../../Services/LandParcels/actions'
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../AuthProvider';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-function DashBoard({ fetchOperator, fetchCrops, fetchEvents }) {
-    const location = useLocation();
-    const [openAlert, setOpenAlert] = useState(false);
+function DashBoard({ fetchOperator, fetchCrops, fetchEvents, fetchLandOwners, fetchLandParcel }) {
+    const navigate = useNavigate()
     const [operator, setOperator] = useState([]);
     const [crops, setCrops] = useState([]);
     const [event, setEvent] = useState([]);
     const { currentUser } = useAuth();
+    const [onboarding, setOnboarding] = useState([]);
 
 
+    const fetchPendingRecords = async (fetchFunction, dataType) => {
+        try {
+            const data = await fetchFunction();
+            const filter = data.filter(p => p.status === "Pending");
+
+            const filteredWithDataType = filter.map(item => ({ ...item, type: dataType }));
+            setOnboarding(prevOnboarding => [...prevOnboarding, ...filteredWithDataType]);
+        } catch (error) {
+            console.error(`Error fetching ${dataType}:`, error);
+        }
+    };
     useEffect(() => {
         fetchOperator()
             .then((data) => {
@@ -71,29 +82,28 @@ function DashBoard({ fetchOperator, fetchCrops, fetchEvents }) {
             .catch(error => {
                 console.error('Error fetching total operator:', error);
             });
-        if (location.state && location.state.showAlert) {
-            setOpenAlert(true);
-        }
-    }, [location]);
 
-    const handleCloseAlert = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpenAlert(false);
-    };
+
+        fetchPendingRecords(fetchOperator, 'Operator');
+        fetchPendingRecords(fetchLandOwners, 'Land Owner');
+        fetchPendingRecords(fetchLandParcel, 'Land Parcel');
+
+    }, []);
+
+    
+
 
     const generateTablerows = () => {
-        return operator.map((data) => (
+        return onboarding.map((data) => (
             <TableBody>
                 <TableRow sx={{ fontSize: '10px' }}>
                     <TableCell component="th" scope="row" sx={{ display: 'flex', marginTop: '2px' }}>
                         <Avatar sx={{ background: 'none' }}><img src={corner_field} className='person-icon'></img></Avatar>
                         <Typography variant='p' sx={{ marginTop: '10px' }}>{data.name}</Typography>
                     </TableCell>
-                    <TableCell>Operator</TableCell>
+                    <TableCell>{data.type}</TableCell>
                     <TableCell sx={{ color: data.status === 'Approved' ? 'green' : 'orange' }}>{data.status}</TableCell>
-                    <TableCell><PreviewIcon /></TableCell>
+                    <TableCell><PreviewIcon/></TableCell>
                 </TableRow>
 
             </TableBody>
@@ -112,19 +122,15 @@ function DashBoard({ fetchOperator, fetchCrops, fetchEvents }) {
                     <Header />
                     <Sidebar />
                     <Box sx={{ margin: '100px 20px 50px 300px' }}>
-                        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
-                            <Alert sx={{ ml: 70, mt: -10 }} onClose={handleCloseAlert} severity="success">
-                                Submitted the Field Preparation event details successfully
-                            </Alert>
-                        </Snackbar>
+
                         <Grid container sx={{ width: '100%' }}>
                             <Grid xs={9}>
                                 <Typography className='title' variant='p'>Agent view</Typography>
                             </Grid>
-                            <Grid xs={3}>
+                            {/* <Grid xs={3}>
                                 <SearchIcon className='search-icon' />
                                 <input type='text' placeholder='Search..' />
-                            </Grid>
+                            </Grid> */}
 
                         </Grid>
 
@@ -492,7 +498,7 @@ function DashBoard({ fetchOperator, fetchCrops, fetchEvents }) {
 
                                                     <Typography className='title' variant='p' sx={{ color: 'rgb(52, 156, 52)' }}>View</Typography><br />
                                                     <b><Typography className='content' variant='p' sx={{ mt: 4 }}>{event.length}</Typography></b>
-                                                    
+
                                                 </div>
                                             </Grid>
                                         </Grid>
@@ -541,7 +547,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     fetchOperator: () => fetchOperator(),
     fetchCrops: () => fetchCrops(),
-    fetchEvents: () => fetchEvents()
+    fetchEvents: () => fetchEvents(),
+    fetchLandOwners: () => fetchLandOwners(),
+    fetchLandParcel: () => fetchLandParcel()
+
 
 }
 

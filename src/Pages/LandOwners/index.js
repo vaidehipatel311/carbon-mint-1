@@ -401,7 +401,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex',borderBottom:'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
 
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
@@ -498,7 +498,7 @@ function LandOwners({ fetchLandOwners, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex',borderBottom:'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
 
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>

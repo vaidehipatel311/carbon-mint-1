@@ -116,17 +116,17 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
                                     <div className='profile-grid'>
                                         
                                         <AccountCircleIcon className='acc'/>
-                                        <Typography variant='p' className='name'>{owners.name}</Typography>
-                                        <Typography variant='p' className='id'>{owners.ownerID}</Typography><br />
+                                        <Typography variant='p' className='name'>{owners.name ? owners.name : "-"}</Typography>
+                                        <Typography variant='p' className='id'>{owners.ownerID ? owners.ownerID : "-"}</Typography><br />
                                         <Grid container sx={{ mt: 3, textAlign: 'center' }}>
                                             <Grid xs={4} className='n'>
-                                                <Typography variant='p' fontWeight='bold'>{owners.acres}</Typography>
+                                                <Typography variant='p' fontWeight='bold'>{owners.acres ? owners.acres : "-"}</Typography>
                                             </Grid>
                                             <Grid xs={4} className='n'>
-                                                <Typography variant='p' fontWeight='bold'>{owners.landparcels}</Typography>
+                                                <Typography variant='p' fontWeight='bold'>{owners.landparcels ? owners.landparcels : "-"}</Typography>
                                             </Grid>
                                             <Grid xs={4} className='n'>
-                                                <Typography variant='p' fontWeight='bold'>{owners.crops.length}</Typography>
+                                                <Typography variant='p' fontWeight='bold'>{owners.crops ? owners.crops : "-"}</Typography>
                                             </Grid>
                                         </Grid>
 
@@ -152,21 +152,21 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
                                             <Button sx={{ color: 'black' }}><BusinessIcon /></Button>
                                             <div>
                                                 <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Address</Typography><br />
-                                                <Typography variant='p'>{owners.house_no}, {owners.village}, {owners.district}, {owners.state}, {owners.country} - {owners.postal_code}</Typography>
+                                                <Typography variant='p'>{owners.house_no ? owners.house_no : "-"}, {owners.village ? owners.village : "-"}, {owners.district ? owners.district : "-"}, {owners.state ? owners.state : "-"}, {owners.country ? owners.country : "-"} - {owners.postal_code ? owners.postal_code : "-"}</Typography>
                                             </div>
                                         </div>
                                         <div className='contact-details'>
                                             <Button sx={{ color: 'black' }}><SmartphoneIcon /></Button>
                                             <div>
                                                 <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Contact</Typography><br />
-                                                <Typography variant='p'>{owners.contact_number_1}</Typography>
+                                                <Typography variant='p'>{owners.contact_number_1 ? owners.contact_number_1 : "-"}</Typography>
                                             </div>
                                         </div>
                                         <div className='email-details'>
                                             <Button sx={{ color: 'black' }}><AlternateEmailIcon /></Button>
                                             <div>
                                                 <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Mail</Typography><br />
-                                                <Typography variant='p'>{owners.email_id}</Typography>
+                                                <Typography variant='p'>{owners.email_id ? owners.email_id : "-"}</Typography>
                                             </div>
                                         </div>
                                     </div>
@@ -178,11 +178,11 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
                                             <Button sx={{ color: 'black' }}><BadgeIcon /></Button>
                                             <div>
                                                 <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Aadhar</Typography><br />
-                                                <Typography variant='p'>{owners.aadhar_no}</Typography>
+                                                <Typography variant='p'>{owners.aadhar_no ? owners.aadhar_no : "-"}</Typography>
                                             </div>
                                             <div style={{ marginLeft: '30px' }}>
                                                 <Typography variant='p' sx={{ fontWeight: 'bold', fontSize: '15px' }}>Passbook Ref No.</Typography><br />
-                                                <Typography variant='p'>{owners.passbook_refno}</Typography>
+                                                <Typography variant='p'>{owners.passbook_refno ? owners.passbook_refno : "-"}</Typography>
                                             </div>
                                         </div>
 
@@ -193,17 +193,17 @@ function Profile({ fetchLandOwners, updateLandOwnerStatus }) {
                                         <Typography variant='p' className='title'>Details</Typography>
                                         <div className='fathername'>
                                             <Typography variant='p'>Father's name</Typography>
-                                            <b><Typography variant='p'>{owners.father_name}</Typography></b>
+                                            <b><Typography variant='p'>{owners.father_name ? owners.father_name : "-"}</Typography></b>
                                         </div>
 
                                         <div className='farming'>
                                             <Typography variant='p'>Total ex. in farming</Typography>
-                                            <b><Typography variant='p'>{owners.total_farming_exp_year} years</Typography></b>
+                                            <b><Typography variant='p'>{owners.total_farming_exp_year ? owners.total_farming_exp_year : "-"} years</Typography></b>
 
                                         </div>
                                         <div className='organic-farming'>
                                             <Typography variant='p'>Ex. in organic farming</Typography>
-                                            <b><Typography variant='p'>{owners.organic_farming_exp_year} years</Typography></b>
+                                            <b><Typography variant='p'>{owners.organic_farming_exp_year ? owners.organic_farming_exp_year : "-"} years</Typography></b>
 
                                         </div>
                                     </div>

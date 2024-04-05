@@ -110,7 +110,17 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
 
         fetchCrops()
             .then((data) => {
-                setCrops(data)
+                const c = landParcels.map((p)=>p.id);
+
+                const allFilteredCrops = [];
+
+                c.forEach((landParcelId) => {
+                    const filteredCrops = data.filter((crop) => crop.landparcel_id == landParcelId);
+                    allFilteredCrops.push(...filteredCrops);
+                });
+                setCrops(allFilteredCrops);
+                console.log(allFilteredCrops);
+                setCrops(allFilteredCrops)
             })
             .catch(error => {
                 console.error('Error fetching total operator:', error);
@@ -313,7 +323,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex',borderBottom:'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
@@ -323,7 +333,16 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
                     <TableCell align='center'>{owners.acres}</TableCell>
                     <TableCell align='center'>{owners.contact_number_1}</TableCell>
                     <TableCell align='center'>{owners.village}</TableCell>
-                    <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
+                    <TableCell>
+                        <div style={{ display: "flex" }}>
+                            {crops.slice(0,1).map((crop, index) => (
+                                <button className="grid-button" key={index}>{crop.crop_name}</button>
+                            ))}
+                            {crops.length >= 2 ? (
+                                <button className="grid-button" title={crops.slice(1).map((c)=>c.crop_name)}>+{crops.length - 1} more</button>
+                            ):(<></>)}
+                        </div>
+                    </TableCell>
                     <TableCell align='center'>
                         <Link href={'/landparcels/add-landparcel/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
                         <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
@@ -377,7 +396,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex',borderBottom:'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
@@ -387,7 +406,16 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
                     <TableCell align='center'>{owners.acres}</TableCell>
                     <TableCell align='center'>{owners.contact_number_1}</TableCell>
                     <TableCell align='center'>{owners.village}</TableCell>
-                    <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
+                    <TableCell>
+                        <div style={{ display: "flex" }}>
+                            {owners.crops.slice(0, 1).map((crop, index) => (
+                                <button className="grid-button" key={index}>{crop}</button>
+                            ))}
+                            {owners.crops.length >= 2 && (
+                                <button className="grid-button" title={owners.crops.slice(1)}>+{owners.crops.length - 1} more</button>
+                            )}
+                        </div>
+                    </TableCell>
                     <TableCell align='center'>
                         <Link href={'/landparcels/add-landparcel/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
                         <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
@@ -441,7 +469,7 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
             <TableBody>
                 <TableRow className='tr'>
 
-                    <TableCell align='center' sx={{ display: 'flex', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
+                    <TableCell align='center' sx={{ display: 'flex',borderBottom:'none', cursor: 'pointer' }} onClick={() => { handleProfile(owners.id) }}>
                         <Avatar className='avatar_lp'><AccountCircleIcon sx={{ width: '100%', height: '100%' }} /></Avatar>
                         <Typography variant='p'>{owners.name}</Typography>
                     </TableCell>
@@ -451,7 +479,16 @@ function LandParcels({ fetchLandParcel, fetchCrops, fetchEvents }) {
                     <TableCell align='center'>{owners.acres}</TableCell>
                     <TableCell align='center'>{owners.contact_number_1}</TableCell>
                     <TableCell align='center'>{owners.village}</TableCell>
-                    <TableCell align='center'><button className="grid-button" >{owners.crops[0]}</button><button className="grid-button" >{owners.crops[1]}</button></TableCell>
+                    <TableCell>
+                        <div style={{ display: "flex" }}>
+                            {owners.crops.slice(0, 1).map((crop, index) => (
+                                <button className="grid-button" key={index}>{crop}</button>
+                            ))}
+                            {owners.crops.length >= 2 && (
+                                <button className="grid-button" title={owners.crops.slice(1)}>+{owners.crops.length - 1} more</button>
+                            )}
+                        </div>
+                    </TableCell>
                     <TableCell align='center'>
                         <Link href={'/landparcels/add-landparcel/' + `${owners.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link>
                         <DeleteOutlineIcon onClick={handleClickOpen} sx={{ cursor: 'pointer', "&:hover": { color: 'red' } }} /></TableCell>
