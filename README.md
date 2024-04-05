@@ -20,8 +20,6 @@ VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=Thinker
 
 ### Then right click on public/data.json and start api mock server
 
-### Install @react-google-maps/api library  ( npm install @react-google-maps/api )
-
 ### `npm start`
 
 Runs the app in the development mode.\
