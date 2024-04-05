@@ -84,7 +84,7 @@ function Profile({ fetchOperator, fetchLandParcel, updateOperatorStatus, fetchCr
             })
             .catch(err => console.log(err))
 
-            fetchAddedEvents()
+        fetchAddedEvents()
             .then((data) => {
                 const c = crops.map((s) => s.id);
                 const allFilteredEvents = [];
@@ -214,6 +214,7 @@ function Profile({ fetchOperator, fetchLandParcel, updateOperatorStatus, fetchCr
                                 <Grid xs={2}>
                                     <Link href={'/operator/' + `${id}` + '/add-landparcel/0'}><Button variant='contained'
                                         sx={{
+                                            width: '90%',
                                             ml: 2,
                                             fontSize: '12px',
                                             height: '40px',

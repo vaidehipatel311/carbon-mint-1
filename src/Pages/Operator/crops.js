@@ -68,7 +68,7 @@ function Crops({ fetchAddedEvents, fetchCrops, fetchMaps }) {
                 setMaps(data);
             })
             .catch(err => console.log(err))
-        
+
     }, []);
 
     useEffect(() => {
@@ -83,7 +83,7 @@ function Crops({ fetchAddedEvents, fetchCrops, fetchMaps }) {
         }
         setOpenAlert(false);
     };
-    
+
     const generateGridEvents = () => {
         return addedevents.map((event, index) => (
             (event.crop_id === cropid ? (
@@ -110,8 +110,10 @@ function Crops({ fetchAddedEvents, fetchCrops, fetchMaps }) {
 
                     <img src={Banner_crops_2}></img>
                     <Typography variant='p' className='name'>{crop.crop_name}</Typography>
-                    <Typography variant='p' className='address'>{crop.landparcel_name}</Typography>
-                    <Link href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops/add-crops/' + `${crop.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer', ml: 20, mt: -8, position: 'absolute' }} /></Link>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography variant='p' className='address'>{crop.landparcel_name}</Typography>
+
+                        <Link href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops/add-crops/' + `${crop.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link></div>
                     <Grid container sx={{ mt: 3, textAlign: 'center' }}>
                         <Grid xs={4}>
                             <Typography variant='p' className='n'><b>{crop.acres}</b></Typography>
@@ -172,150 +174,138 @@ function Crops({ fetchAddedEvents, fetchCrops, fetchMaps }) {
         ))
     }
 
-    
+
 
 
     return (
         <>
-        {currentUser ? (
+            {currentUser ? (
                 <>
-            <Header />
-            <Sidebar />
-            <Box sx={{ margin: '100px 20px 50px 300px' }}>
-                <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
-                    <Alert sx={{ ml: 70, mt: -10 }} onClose={handleCloseAlert} severity="success">
-                        Submitted the Field Preparation event details successfully
-                    </Alert>
-                </Snackbar>
-                <Grid container>
-                    <Grid xs={10}>
-                        <Breadcrumbs sx={{
-                            textDecoration: 'none'
-                        }}
-                            separator={<NavigateNextIcon fontSize="small" />}
-                            aria-label="breadcrumb">
+                    <Header />
+                    <Sidebar />
+                    <Box sx={{ margin: '100px 20px 50px 300px' }}>
+                        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+                            <Alert sx={{ ml: 70, mt: -10 }} onClose={handleCloseAlert} severity="success">
+                                Submitted the Field Preparation event details successfully
+                            </Alert>
+                        </Snackbar>
+                        <Grid container>
+                            <Grid xs={10}>
+                                <Breadcrumbs sx={{
+                                    textDecoration: 'none'
+                                }}
+                                    separator={<NavigateNextIcon fontSize="small" />}
+                                    aria-label="breadcrumb">
 
-                            <Link underline='hover' color='inherit' href="/operator">Operator</Link>
-                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}`}>Profile</Link>
-                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}`}>Landparcel</Link>
-                            <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops'}>Crops</Link>
-
-
-                        </Breadcrumbs>
-                        <div className='title'>
-                            <Typography variant='p'>Chennaiah Polam</Typography>
-                        </div>
-                    </Grid>
-                    <Grid xs={2}>
-                        <Link href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops/' + `${cropid}` + '/add-event/0'} sx={{ textDecoration: 'none' }}>
-                            <Button variant='contained'
-                                sx={{
-
-                                    fontSize: '12px',
-                                    height: '40px',
-                                    color: 'black',
-                                    background: 'rgba(140, 216, 103, 1)',
-                                    border: '1px solid black',
-                                    borderRadius: '5px',
-                                    width: '100%',
-                                    "&:hover":{color:'white'}
-                                }}>Add Events</Button>
-                        </Link>
-                    </Grid>
-                </Grid>
+                                    <Link underline='hover' color='inherit' href="/operator">Operator</Link>
+                                    <Link underline='hover' color='inherit' href={'/operator/' + `${id}`}>Profile</Link>
+                                    <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}`}>Landparcel</Link>
+                                    <Link underline='hover' color='inherit' href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops'}>Crops</Link>
 
 
-                <Grid container sx={{ mt: 3 }}>
-                    <Grid xs={4.5} sx={{ mb: 5 }}>
-                        {generateCrops()}
-
-                    </Grid>
-                    <Grid xs={7.5}>
-                        {maps.slice(1).map((maps, index) => (
-                            <Grid xs={12} className='maps'>
-                                <div sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2, ml: 4 }}>
-                                    <div style={{ height: '300px', marginLeft: '20px' }}>
-
-                                        <LoadScript googleMapsApiKey={maps.api_key}>
-                                            <GoogleMap
-                                                mapContainerStyle={{ height: '100%', width: '100%' }}
-                                                center={{ lat: maps.center_lat, lng: maps.center_lng }}
-                                                zoom={6}
-                                                options={{ mapTypeId: 'satellite' }}
-                                            >
-                                                <Polygon
-                                                    path={maps.dots1.map(dot => ({ lat: dot.lat, lng: dot.lng }))}
-                                                    options={{
-                                                        strokeColor: 'yellow',
-                                                        strokeOpacity: 0.8,
-                                                        strokeWeight: 2,
-                                                    }}
-                                                />
-
-                                                {maps.dots1.map((dot, index) => (
-                                                    <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
-                                                ))}
-                                                <Polygon
-                                                    path={maps.dots2.map(dot => ({ lat: dot.lat, lng: dot.lng }))}
-                                                    options={{
-                                                        strokeColor: 'lightgreen',
-                                                        strokeOpacity: 0.8,
-                                                        strokeWeight: 2,
-                                                        fillColor: 'lightgreen',
-                                                        fillOpacity: 0.20
-                                                    }}
-                                                />
-
-                                                {maps.dots2.map((dot, index) => (
-                                                    <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
-                                                ))}
-                                                <Marker position={{
-                                                    lat: maps.dots2.reduce((sum, coord) => sum + coord.lat, 0) / maps.dots2.length,
-                                                    lng: maps.dots2.reduce((sum, coord) => sum + coord.lng, 0) / maps.dots2.length
-                                                }}
-                                                    label={{
-                                                        text: maps.text,
-                                                        color: 'black',
-                                                        fontWeight: 'bold',
-                                                        className: 'marker-label'
-                                                    }}
-                                                    icon={{ url: maps.url }}
-                                                />
-
-                                            </GoogleMap>
-                                        </LoadScript>
-                                    </div>
+                                </Breadcrumbs>
+                                <div className='title'>
+                                    <Typography variant='p'>Chennaiah Polam</Typography>
                                 </div>
                             </Grid>
-                        ))}
-                        <Grid xs={12}>
-                            <div className='crops-heading'><Typography variant='p'>Draft</Typography></div>
+                            <Grid xs={2}>
+                                <Link href={'/operator/' + `${id}` + '/landparcel/' + `${landparcelid}` + '/crops/' + `${cropid}` + '/add-event/0'} sx={{ textDecoration: 'none' }}>
+                                    <Button variant='contained'
+                                        sx={{
 
-                            <Grid container>
-                                <Grid xs={6}>
-                                    <Item className='irrigation'>
-                                        <div style={{ display: 'grid' }}>
-                                            <b><Typography variant='p'>Irrigation</Typography></b>
-                                            <Typography variant='p'>Last updated on 24/04/2022, 4:30pm</Typography>
+                                            fontSize: '12px',
+                                            height: '40px',
+                                            color: 'black',
+                                            background: 'rgba(140, 216, 103, 1)',
+                                            border: '1px solid black',
+                                            borderRadius: '5px',
+                                            width: '100%',
+                                            "&:hover": { color: 'white' }
+                                        }}>Add Events</Button>
+                                </Link>
+                            </Grid>
+                        </Grid>
+
+
+                        <Grid container sx={{ mt: 3 }}>
+                            <Grid xs={4.5} sx={{ mb: 5 }}>
+                                {generateCrops()}
+
+                            </Grid>
+                            <Grid xs={7.5}>
+                                {maps.slice(1).map((maps, index) => (
+                                    <Grid xs={12} className='maps'>
+                                        <div sx={{ boxShadow: '0px 0px 12px 0px #0000001F', paddingBottom: 2, ml: 4 }}>
+                                            <div style={{ height: '300px', marginLeft: '20px' }}>
+
+                                                <LoadScript googleMapsApiKey={maps.api_key}>
+                                                    <GoogleMap
+                                                        mapContainerStyle={{ height: '100%', width: '100%' }}
+                                                        center={{ lat: maps.center_lat, lng: maps.center_lng }}
+                                                        zoom={6}
+                                                        options={{ mapTypeId: 'satellite' }}
+                                                    >
+                                                        <Polygon
+                                                            path={maps.dots1.map(dot => ({ lat: dot.lat, lng: dot.lng }))}
+                                                            options={{
+                                                                strokeColor: 'yellow',
+                                                                strokeOpacity: 0.8,
+                                                                strokeWeight: 2,
+                                                            }}
+                                                        />
+
+                                                        {maps.dots1.map((dot, index) => (
+                                                            <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
+                                                        ))}
+                                                        <Polygon
+                                                            path={maps.dots2.map(dot => ({ lat: dot.lat, lng: dot.lng }))}
+                                                            options={{
+                                                                strokeColor: 'lightgreen',
+                                                                strokeOpacity: 0.8,
+                                                                strokeWeight: 2,
+                                                                fillColor: 'lightgreen',
+                                                                fillOpacity: 0.20
+                                                            }}
+                                                        />
+
+                                                        {maps.dots2.map((dot, index) => (
+                                                            <div key={index} position={{ lat: dot.lat, lng: dot.lng }} />
+                                                        ))}
+                                                        <Marker position={{
+                                                            lat: maps.dots2.reduce((sum, coord) => sum + coord.lat, 0) / maps.dots2.length,
+                                                            lng: maps.dots2.reduce((sum, coord) => sum + coord.lng, 0) / maps.dots2.length
+                                                        }}
+                                                            label={{
+                                                                text: maps.text,
+                                                                color: 'black',
+                                                                fontWeight: 'bold',
+                                                                className: 'marker-label'
+                                                            }}
+                                                            icon={{ url: maps.url }}
+                                                        />
+
+                                                    </GoogleMap>
+                                                </LoadScript>
+                                            </div>
                                         </div>
-                                        <img src={irrigation}></img>
-                                    </Item>
+                                    </Grid>
+                                ))}
+                                <Grid xs={12}>
+
+
+                                    <div className='submitted-events-title'><Typography variant='p'>Submitted Events</Typography></div>
+
+                                    <Grid container>
+                                        {generateGridEvents()}
+
+                                    </Grid>
                                 </Grid>
                             </Grid>
 
-                            <div className='submitted-events-title'><Typography variant='p'>Submitted Events</Typography></div>
 
-                            <Grid container>
-                                {generateGridEvents()}
-
-                            </Grid>
                         </Grid>
-                    </Grid>
-
-
-                </Grid>
-            </Box>
-            </>
+                    </Box>
+                </>
             ) : (
                 <ErrorPage />
             )}

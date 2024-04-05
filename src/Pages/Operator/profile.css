@@ -123,9 +123,10 @@
 }
 
 @media screen and (max-width:2200px) {
-    .acc{
+    .acc {
         font-size: 100px !important;
     }
+
     .cards3 {
         gap: 20px;
     }
@@ -152,7 +153,9 @@
     .contact .email-details,
     .contact .address-details,
     .documents .aadhar {
-        font-size: 20px;
+        & .MuiTypography-root {
+            font-size: 20px;
+        }
     }
 
     .profile-grid .n,
@@ -193,18 +196,18 @@
     }
 
     .landparcel {
-        margin-left: 50px;
+        margin-left: 10px;
         font-size: 22px;
     }
 
     .grid-upper-profile {
         width: 85%;
-        margin-left: 30px;
+        margin-left: 10px;
     }
 
     .grid-lower-profile {
         width: 80%;
-        margin-left: 50px;
+        margin-left: 10px;
         font-size: 22px;
     }
 
@@ -214,21 +217,27 @@
         padding: 10px;
         margin-top: 10px;
     }
-    
+
     .grid-lower-profile .crops-operators .text {
         font-size: 16px;
         margin-left: 10px;
         margin-top: -15px;
     }
-    .grid-lower-profile .crops-operators .no-of-events{
+
+    .grid-lower-profile .crops-operators .no-of-events {
         margin-left: 100px;
+    }
+
+    .right-part-landowner .add-landowner-btn {
+        width: 100%;
     }
 }
 
 @media screen and (max-width:1920px) {
-    .acc{
+    .acc {
         font-size: 90px !important;
     }
+
     .cards3 {
         gap: 20px;
     }
@@ -317,21 +326,23 @@
         padding: 10px;
         margin-top: 10px;
     }
-    
+
     .grid-lower-profile .crops-operators .text {
         font-size: 20px;
         margin-left: 0px;
         margin-top: -15px;
     }
-    .grid-lower-profile .crops-operators .no-of-events{
+
+    .grid-lower-profile .crops-operators .no-of-events {
         margin-left: 100px;
     }
 }
 
 @media screen and (max-width:1660px) {
-    .acc{
+    .acc {
         font-size: 80px !important;
     }
+
     .cards3 {
         gap: 20px;
     }
@@ -420,21 +431,23 @@
         padding: 10px;
         margin-top: 10px;
     }
-    
+
     .grid-lower-profile .crops-operators .text {
         font-size: 18px;
         margin-left: 0px;
         margin-top: -15px;
     }
-    .grid-lower-profile .crops-operators .no-of-events{
+
+    .grid-lower-profile .crops-operators .no-of-events {
         margin-left: 30px;
     }
 }
 
 @media screen and (max-width:1520px) {
-    .acc{
+    .acc {
         font-size: 80px !important;
     }
+
     .cards3 {
         gap: 20px;
     }
@@ -523,21 +536,23 @@
         padding: 10px;
         margin-top: 10px;
     }
-    
+
     .grid-lower-profile .crops-operators .text {
         font-size: 16px;
         margin-left: 0px;
         margin-top: -15px;
     }
-    .grid-lower-profile .crops-operators .no-of-events{
+
+    .grid-lower-profile .crops-operators .no-of-events {
         margin-left: 10px;
     }
 }
 
 @media screen and (max-width:1440px) {
-    .acc{
+    .acc {
         font-size: 70px !important;
     }
+
     .cards3 {
         gap: 15px;
     }
@@ -626,13 +641,14 @@
         padding: 10px;
         margin-top: 10px;
     }
-    
+
     .grid-lower-profile .crops-operators .text {
         font-size: 14px;
         margin-left: 0px;
         margin-top: -15px;
     }
-    .grid-lower-profile .crops-operators .no-of-events{
+
+    .grid-lower-profile .crops-operators .no-of-events {
         margin-left: 10px;
     }
 }
@@ -706,11 +722,12 @@
         font-size: 14px;
     }
 
-    .grid-upper-profile, .grid-upper-profile img{
+    .grid-upper-profile,
+    .grid-upper-profile img {
         width: 95%;
         margin-left: 5px;
     }
-    
+
 
     .grid-lower-profile {
         width: 81%;
@@ -725,25 +742,28 @@
         padding: 10px;
         margin-top: 10px;
     }
-    
+
     .grid-lower-profile .crops-operators .text {
         font-size: 14px;
         margin-left: 0px;
         margin-top: -15px;
     }
-    .grid-lower-profile .crops-operators .no-of-events{
+
+    .grid-lower-profile .crops-operators .no-of-events {
         margin-left: 10px;
     }
-    .acc{
-       width: 60px !important; 
+
+    .acc {
+        width: 60px !important;
     }
-    
+
 }
 
 @media screen and (max-width:1280px) {
-    .acc{
+    .acc {
         font-size: 50px !important;
     }
+
     .cards3 {
         gap: 15px;
     }
@@ -832,21 +852,23 @@
         padding: 10px;
         margin-top: 10px;
     }
-    
+
     .grid-lower-profile .crops-operators .text {
         font-size: 14px;
         margin-left: 0px;
         margin-top: -15px;
     }
-    .grid-lower-profile .crops-operators .no-of-events{
+
+    .grid-lower-profile .crops-operators .no-of-events {
         margin-left: 10px;
     }
 }
 
 @media screen and (max-width:1120px) {
-    .acc{
+    .acc {
         font-size: 30px !important;
     }
+
     .cards3 {
         gap: 10px;
     }
@@ -855,7 +877,8 @@
         width: 25%;
         height: 70%;
     }
-    .profile-grid .badge{
+
+    .profile-grid .badge {
         top: 55px;
     }
 
@@ -938,13 +961,14 @@
         padding: 10px;
         margin-top: 8px;
     }
-    
+
     .grid-lower-profile .crops-operators .text {
         font-size: 10px;
         margin-left: 0px;
         margin-top: -15px;
     }
-    .grid-lower-profile .crops-operators .no-of-events{
+
+    .grid-lower-profile .crops-operators .no-of-events {
         margin-left: 10px;
     }
 }

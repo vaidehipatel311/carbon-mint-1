@@ -179,8 +179,9 @@ function Landparcel({ fetchCrops, fetchLandParcel, fetchMaps }) {
                                         <div className='chennaiah-polam-details'>
                                             <img src={Banner}></img>
                                             <Typography variant='p' className='name'>{land.landparcel_name}</Typography>
-                                            <Typography variant='p' className='address'>{land.house_no}, {land.village}, {land.district}, {land.state}, {land.country} - {land.postal_code}</Typography>
-                                            <Link href={'/operator/' + `${id}` + '/add-landparcel/' + `${land.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer', ml: 20, mt: -8, position: 'absolute' }} /></Link>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <Typography variant='p' className='address'>{land.house_no}, {land.village}, {land.district}, {land.state}, {land.country} - {land.postal_code}</Typography>
+                                                <Link href={'/operator/' + `${id}` + '/add-landparcel/' + `${land.id}`} style={{ textDecoration: "none", color: "black" }}><EditIcon sx={{ "&:hover": { color: 'blue' }, cursor: 'pointer' }} /></Link></div>
                                             <Grid container sx={{ mt: 3, textAlign: 'center' }}>
                                                 <Grid xs={4}>
                                                     <Typography variant='p' className='n'><b>{land.acres}</b></Typography>
@@ -220,21 +221,8 @@ function Landparcel({ fetchCrops, fetchLandParcel, fetchMaps }) {
                                                 <b><Typography variant='p'>{land.neighbouring_farm}</Typography></b>
 
                                             </div>
-                                            <div className='content'>
-                                                <Typography variant='p'>Distance from the nearest service road</Typography>
-                                                <b><Typography variant='p'>{land.distance}</Typography></b>
 
-                                            </div>
-                                            <div className='content'>
-                                                <Typography variant='p'>Land under cultivation</Typography>
-                                                <b><Typography variant='p'>{land.land_under_cultivation}</Typography></b>
 
-                                            </div>
-                                            <div className='content'>
-                                                <Typography variant='p'>Cropping systems</Typography>
-                                                <b><Typography variant='p'>{land.cropping_systems}</Typography></b>
-
-                                            </div>
                                             <div className='content'>
                                                 <Typography variant='p'>Farming system</Typography>
                                                 <b><Typography variant='p'>{land.farming_system}</Typography></b>
