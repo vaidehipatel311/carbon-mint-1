@@ -9,12 +9,12 @@ In the project directory, you can run:
 ### npm install react-scripts (if needed)
 
 ### First you need to install Mock Server(v20.1.0) as an extension
-Name: Mock Server
-Id: Thinker.mock-server
-Description: Customize Your Own Dynamic Local Mock Server
-Version: 21.2.0
-Publisher: Thinker
-VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=Thinker.mock-server
+Name: Mock Server \
+Id: Thinker.mock-server \
+Description: Customize Your Own Dynamic Local Mock Server \
+Version: 21.2.0 \
+Publisher: Thinker \
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=Thinker.mock-server \
 
 ### Set the port by opening the json file and on right click set port to 5000.
 
